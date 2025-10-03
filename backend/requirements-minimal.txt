@@ -1,0 +1,26 @@
+# Minimal requirements with maximum compatibility
+# Use this if requirements.txt fails
+
+# Core Framework
+fastapi
+uvicorn[standard]
+pydantic
+python-multipart
+
+# Data Processing
+pandas
+numpy
+pyarrow
+numexpr
+
+# Machine Learning
+scikit-learn
+scipy
+joblib
+
+# Visualization
+plotly
+
+# Utilities
+python-dotenv
+aiofiles

@@ -1,0 +1,427 @@
+{
+  "id": "8071a1d6-a24a-44ce-bdec-4e3c8f1bebc1",
+  "name": "auto e moto",
+  "created_at": "2025-10-02T11:53:47.059299",
+  "metadata": {
+    "rows": 67,
+    "columns": [
+      "cilindrata",
+      "peso",
+      "cavalli",
+      "tipologia"
+    ],
+    "description": "un dataset di auto e moto con informazioni di cilindrata, peso e cavalli",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "cilindrata": "int64",
+      "peso": "int64",
+      "cavalli": "int64",
+      "tipologia": "object"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "cilindrata": 998,
+      "peso": 950,
+      "cavalli": 70,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1200,
+      "peso": 1100,
+      "cavalli": 85,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1500,
+      "peso": 1300,
+      "cavalli": 100,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 600,
+      "peso": 180,
+      "cavalli": 10,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 800,
+      "peso": 200,
+      "cavalli": 25,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 2500,
+      "peso": 1600,
+      "cavalli": 150,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 300,
+      "peso": 150,
+      "cavalli": 15,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 400,
+      "peso": 170,
+      "cavalli": 20,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1600,
+      "peso": 1400,
+      "cavalli": 120,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 2000,
+      "peso": 1500,
+      "cavalli": 130,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1300,
+      "peso": 1200,
+      "cavalli": 90,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1100,
+      "peso": 1150,
+      "cavalli": 75,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 350,
+      "peso": 160,
+      "cavalli": 30,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 450,
+      "peso": 180,
+      "cavalli": 35,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1800,
+      "peso": 1450,
+      "cavalli": 140,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 2200,
+      "peso": 1700,
+      "cavalli": 160,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1000,
+      "peso": 900,
+      "cavalli": 75,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 750,
+      "peso": 200,
+      "cavalli": 30,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 650,
+      "peso": 220,
+      "cavalli": 20,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1400,
+      "peso": 1250,
+      "cavalli": 110,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1700,
+      "peso": 1350,
+      "cavalli": 125,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 3000,
+      "peso": 1800,
+      "cavalli": 200,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 550,
+      "peso": 190,
+      "cavalli": 25,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 850,
+      "peso": 210,
+      "cavalli": 40,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1300,
+      "peso": 1100,
+      "cavalli": 95,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1600,
+      "peso": 1450,
+      "cavalli": 120,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 2400,
+      "peso": 1550,
+      "cavalli": 170,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 900,
+      "peso": 230,
+      "cavalli": 45,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1200,
+      "peso": 1250,
+      "cavalli": 85,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 300,
+      "peso": 160,
+      "cavalli": 15,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1000,
+      "peso": 1000,
+      "cavalli": 80,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1800,
+      "peso": 1400,
+      "cavalli": 135,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 650,
+      "peso": 190,
+      "cavalli": 30,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1600,
+      "peso": 1500,
+      "cavalli": 120,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1300,
+      "peso": 1150,
+      "cavalli": 95,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 950,
+      "peso": 900,
+      "cavalli": 65,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 500,
+      "peso": 170,
+      "cavalli": 20,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 700,
+      "peso": 180,
+      "cavalli": 25,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1500,
+      "peso": 1300,
+      "cavalli": 100,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 2500,
+      "peso": 1650,
+      "cavalli": 150,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 300,
+      "peso": 150,
+      "cavalli": 15,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 410,
+      "peso": 160,
+      "cavalli": 30,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1200,
+      "peso": 1100,
+      "cavalli": 90,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 800,
+      "peso": 190,
+      "cavalli": 35,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 3000,
+      "peso": 2000,
+      "cavalli": 210,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 900,
+      "peso": 220,
+      "cavalli": 40,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1300,
+      "peso": 1200,
+      "cavalli": 95,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1500,
+      "peso": 1350,
+      "cavalli": 110,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 750,
+      "peso": 210,
+      "cavalli": 30,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 600,
+      "peso": 180,
+      "cavalli": 20,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1800,
+      "peso": 1500,
+      "cavalli": 130,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 2200,
+      "peso": 1700,
+      "cavalli": 160,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 400,
+      "peso": 160,
+      "cavalli": 25,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 900,
+      "peso": 950,
+      "cavalli": 70,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 3000,
+      "peso": 1900,
+      "cavalli": 200,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1000,
+      "peso": 1000,
+      "cavalli": 80,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1200,
+      "peso": 1150,
+      "cavalli": 85,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1500,
+      "peso": 1300,
+      "cavalli": 110,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 500,
+      "peso": 180,
+      "cavalli": 20,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 400,
+      "peso": 170,
+      "cavalli": 20,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1600,
+      "peso": 1400,
+      "cavalli": 125,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 2200,
+      "peso": 1750,
+      "cavalli": 165,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 900,
+      "peso": 220,
+      "cavalli": 40,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 1300,
+      "peso": 1200,
+      "cavalli": 100,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 1500,
+      "peso": 1400,
+      "cavalli": 115,
+      "tipologia": "auto"
+    },
+    {
+      "cilindrata": 750,
+      "peso": 210,
+      "cavalli": 30,
+      "tipologia": "moto"
+    },
+    {
+      "cilindrata": 600,
+      "peso": 180,
+      "cavalli": 20,
+      "tipologia": "moto"
+    }
+  ]
+}

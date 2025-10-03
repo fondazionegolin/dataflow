@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#000000"/>
+  <g stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Nodo 1 -->
+    <circle cx="8" cy="8" r="3"/>
+    <!-- Nodo 2 -->
+    <circle cx="24" cy="8" r="3"/>
+    <!-- Nodo 3 -->
+    <circle cx="16" cy="24" r="3"/>
+    
+    <!-- Connessioni -->
+    <line x1="11" y1="8" x2="21" y2="8"/>
+    <line x1="10" y1="10" x2="14" y2="22"/>
+    <line x1="22" y1="10" x2="18" y2="22"/>
+  </g>
+</svg>

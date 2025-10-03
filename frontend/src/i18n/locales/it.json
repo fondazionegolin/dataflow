@@ -1,0 +1,316 @@
+{
+  "app": {
+    "title": "DataFlow Platform",
+    "subtitle": "Analisi Dati Visuale"
+  },
+  "toolbar": {
+    "hint": "Clicca \"Esegui\" su ogni nodo per eseguirlo",
+    "open": "Apri",
+    "export": "Esporta",
+    "clear": "Pulisci",
+    "settings": "Impostazioni",
+    "clearConfirm": "Sei sicuro di voler pulire il workflow?"
+  },
+  "palette": {
+    "title": "Palette Nodi",
+    "search": "Cerca nodi...",
+    "noResults": "Nessun nodo trovato",
+    "categories": {
+      "sources": "Sorgenti Dati",
+      "transform": "Trasformazione",
+      "visualization": "Visualizzazione",
+      "machine_learning": "Machine Learning"
+    }
+  },
+  "node": {
+    "run": "Esegui",
+    "runAgain": "Esegui di Nuovo",
+    "running": "In esecuzione...",
+    "generating": "Generazione...",
+    "config": "Configurazione",
+    "results": "Risultati",
+    "advanced": "Avanzate",
+    "noParams": "Nessun parametro",
+    "executeToSee": "Esegui per vedere l'anteprima",
+    "noPreview": "Nessuna anteprima disponibile",
+    "example": "Esempio",
+    "required": "Obbligatorio"
+  },
+  "preview": {
+    "normal": "Normale",
+    "large": "Grande",
+    "xlarge": "Molto Grande",
+    "selected": "Selezionati",
+    "rows": "righe",
+    "columns": "colonne"
+  },
+  "nodes": {
+    "ai.generate_dataset": {
+      "label": "Genera Dataset AI",
+      "description": "Genera dataset realistici usando OpenAI con descrizione in linguaggio naturale"
+    },
+    "ai.load_dataset": {
+      "label": "Carica Dataset AI",
+      "description": "Carica un dataset AI precedentemente salvato dal database"
+    },
+    "csv.synthetic": {
+      "label": "Genera Dati Sintetici",
+      "description": "Genera dataset sintetici per classificazione o regressione"
+    },
+    "data.select": {
+      "label": "Seleziona Colonne",
+      "description": "Seleziona o escludi colonne specifiche da una tabella"
+    },
+    "data.transform": {
+      "label": "Trasforma Colonne",
+      "description": "Applica trasformazioni ai dati (standardizzazione, normalizzazione, ecc.)"
+    },
+    "data.split": {
+      "label": "Dividi Train/Test",
+      "description": "Dividi dataset in set di training e test"
+    },
+    "plot.2d": {
+      "label": "Grafico 2D Scatter",
+      "description": "Crea grafico scatter 2D interattivo con mappatura colore e dimensione"
+    },
+    "plot.3d": {
+      "label": "Grafico 3D Scatter",
+      "description": "Crea grafico scatter 3D interattivo con rotazione e zoom"
+    },
+    "plot.histogram": {
+      "label": "Istogramma",
+      "description": "Crea istogramma per analisi distribuzione dati"
+    },
+    "ml.regression": {
+      "label": "Regressione",
+      "description": "Addestra modello di regressione (lineare, ridge, lasso, ecc.)"
+    },
+    "ml.predict": {
+      "label": "Predizione",
+      "description": "Predici valori usando modello addestrato"
+    },
+    "nlp.sentiment": {
+      "label": "Analisi Sentiment",
+      "description": "Analizza sentiment del testo (positivo/negativo/neutrale)"
+    },
+    "nlp.clean_text": {
+      "label": "Pulisci Testo",
+      "description": "Pulisci e normalizza testo (minuscole, rimuovi punteggiatura, ecc.)"
+    },
+    "ml.kmeans_clustering": {
+      "label": "K-Means Clustering",
+      "description": "Clustering K-Means con rilevamento automatico K ottimale"
+    }
+  },
+  "params": {
+    "columns": "Colonne",
+    "n_rows": "Numero di Righe",
+    "column_names": "Nomi Colonne",
+    "description": "Descrizione Dataset",
+    "seed": "Seed Casuale",
+    "force_regenerate": "Forza Rigenerazione",
+    "mode": "Modalità",
+    "n_samples": "Numero Campioni",
+    "n_features": "Numero Feature",
+    "n_classes": "Numero Classi",
+    "noise": "Rumore",
+    "random_state": "Stato Casuale",
+    "operation": "Operazione",
+    "target_columns": "Colonne Target",
+    "fill_value": "Valore Riempimento",
+    "method": "Metodo",
+    "test_size": "Dimensione Test",
+    "x_column": "Asse X",
+    "y_column": "Asse Y",
+    "z_column": "Asse Z",
+    "color_column": "Colora per",
+    "size_column": "Dimensiona per",
+    "title": "Titolo Grafico",
+    "opacity": "Opacità",
+    "marker_size": "Dimensione Marker",
+    "column": "Colonna",
+    "bins": "Numero Bin",
+    "color": "Colore",
+    "algorithm": "Algoritmo",
+    "target_column": "Colonna Target",
+    "feature_columns": "Colonne Feature",
+    "text_column": "Colonna Testo",
+    "output_column": "Nome Colonna Output",
+    "output_polarity": "Nome Colonna Polarità",
+    "output_label": "Nome Colonna Etichetta",
+    "neutral_threshold": "Soglia Neutrale",
+    "lowercase": "Converti in Minuscolo",
+    "remove_punctuation": "Rimuovi Punteggiatura",
+    "remove_numbers": "Rimuovi Numeri",
+    "remove_extra_spaces": "Rimuovi Spazi Extra",
+    "filter_expression": "Espressione Filtro",
+    "save_to_database": "Salva nel Database",
+    "dataset_name": "Nome Dataset",
+    "dataset_id": "Dataset",
+    "template": "Template",
+    "n_clusters": "Numero di Cluster (K)",
+    "auto_k": "Rileva K Automaticamente",
+    "max_k_search": "K Massimo per Ricerca Auto",
+    "normalize": "Normalizza Feature",
+    "plot_x": "Asse X Grafico",
+    "plot_y": "Asse Y Grafico",
+    "plot_z": "Asse Z Grafico (3D)"
+  },
+  "templates": {
+    "custom": "Personalizzato",
+    "classification_iris": "Classificazione: Fiori Iris",
+    "classification_customer_churn": "Classificazione: Abbandono Clienti",
+    "regression_house_prices": "Regressione: Prezzi Case",
+    "regression_car_performance": "Regressione: Prestazioni Auto",
+    "nlp_sentiment_reviews": "NLP: Sentiment Recensioni",
+    "nlp_spam_detection": "NLP: Rilevamento Spam",
+    "timeseries_sales": "Serie Temporali: Vendite",
+    "clustering_customer_segments": "Clustering: Segmenti Clienti"
+  },
+  "landing": {
+    "newWorkflow": "Nuovo Workflow",
+    "loading": "Caricamento...",
+    "noSessions": "Nessuna Sessione",
+    "createFirst": "Crea il tuo primo workflow per iniziare",
+    "nodes": "nodi",
+    "created": "Creato",
+    "delete": "Elimina",
+    "deleteConfirm": "Sei sicuro di voler eliminare questa sessione?"
+  },
+  "workflow": {
+    "backToSessions": "Torna alle Sessioni",
+    "saving": "Salvataggio...",
+    "saved": "Salvato"
+  },
+  "table": {
+    "view": "Controlla Tabella",
+    "save": "Salva",
+    "hint": "Doppio click su una cella per modificarla • Enter per salvare • Esc per annullare"
+  },
+  "paramDescriptions": {
+    "n_rows": "Numero di righe da generare",
+    "column_names": "Nomi colonne separati da virgola (es., 'cilindrata,consumo,potenza')",
+    "description": "Descrivi in linguaggio naturale cosa dovrebbe rappresentare il dataset e le relazioni tra le colonne",
+    "seed": "Seed per riproducibilità",
+    "force_regenerate": "Forza rigenerazione anche se in cache (costa crediti API)",
+    "columns": "Colonne da includere o escludere",
+    "operation": "Operazione da applicare",
+    "target_columns": "Colonne su cui applicare la trasformazione",
+    "fill_value": "media, mediana, moda, o un valore specifico",
+    "test_size": "Proporzione del dataset da usare per test (0.0-1.0)",
+    "x_column": "Colonna per asse X",
+    "y_column": "Colonna per asse Y",
+    "z_column": "Colonna per asse Z",
+    "color_column": "Colonna per colorare i punti (opzionale)",
+    "size_column": "Colonna per dimensionare i punti (opzionale)",
+    "opacity": "Opacità dei marker (0.1-1.0)",
+    "marker_size": "Dimensione dei marker (1-15)",
+    "bins": "Numero di bin per l'istogramma",
+    "target_column": "Colonna da predire",
+    "feature_columns": "Colonne da usare come feature (separare con virgola)",
+    "text_column": "Colonna contenente il testo da analizzare",
+    "output_polarity": "Nome per la colonna punteggio polarità (-1 a 1)",
+    "output_label": "Nome per la colonna etichetta sentiment (positivo/negativo/neutrale)",
+    "neutral_threshold": "Soglia per sentiment neutrale (±soglia)",
+    "filter_expression": "Espressione pandas per filtrare righe (es., 'age > 25 & city == \"NYC\"')",
+    "save_to_database": "Salva il dataset generato nel database per uso futuro",
+    "dataset_name": "Nome per il dataset salvato (obbligatorio se si salva nel database)",
+    "dataset_id": "Seleziona un dataset salvato da caricare"
+  },
+  "wiki": {
+    "title": "DataFlow Wiki",
+    "sections": {
+      "overview": "Panoramica",
+      "sources": "Sorgenti Dati",
+      "transform": "Trasformazione",
+      "visualization": "Visualizzazione",
+      "ml": "Machine Learning",
+      "nlp": "NLP",
+      "examples": "Esempi di Workflow"
+    },
+    "overview": {
+      "welcome": "Benvenuto in DataFlow",
+      "description": "DataFlow è una piattaforma visuale per l'analisi dati, machine learning e NLP. Costruisci pipeline complesse connettendo nodi in un'interfaccia drag-and-drop intuitiva.",
+      "gettingStarted": "Per Iniziare",
+      "steps": {
+        "1": "Trascina nodi dalla palette a sinistra",
+        "2": "Configura i parametri dei nodi",
+        "3": "Connetti i nodi trascinando dagli output agli input",
+        "4": "Esegui i nodi singolarmente o l'intero workflow",
+        "5": "Visualizza i risultati in tempo reale"
+      },
+      "categories": "Categorie di Nodi"
+    },
+    "nodeCategories": {
+      "sources": {
+        "title": "Sorgenti Dati",
+        "description": "Carica dati da file, database o genera dataset sintetici"
+      },
+      "transform": {
+        "title": "Trasformazione",
+        "description": "Pulisci, filtra, unisci e trasforma i tuoi dati"
+      },
+      "visualization": {
+        "title": "Visualizzazione",
+        "description": "Crea grafici 2D/3D interattivi"
+      },
+      "ml": {
+        "title": "Machine Learning",
+        "description": "Addestra e valuta modelli di classificazione e regressione"
+      },
+      "nlp": {
+        "title": "NLP",
+        "description": "Analisi testo, sentiment e topic modeling"
+      },
+      "clustering": {
+        "title": "Clustering",
+        "description": "Scopri pattern con K-Means e altri algoritmi"
+      }
+    },
+    "common": {
+      "inputs": "Input",
+      "outputs": "Output",
+      "parameters": "Parametri",
+      "example": "Esempio d'Uso",
+      "features": "Caratteristiche Principali",
+      "required": "obbligatorio",
+      "default": "default",
+      "options": "Opzioni"
+    },
+    "examples": {
+      "title": "Esempi di Workflow",
+      "cleaning": {
+        "title": "Pipeline di Pulizia Dati",
+        "description": "Pulisci e prepara dati grezzi per l'analisi",
+        "diagram": "CSV → Pulisci → Filtra → Seleziona → Output"
+      },
+      "visualization": {
+        "title": "Visualizzazione Dati",
+        "description": "Esplora e visualizza i tuoi dati",
+        "diagram": "Dataset → [Grafico 2D, Grafico 3D, Istogramma]"
+      },
+      "regression": {
+        "title": "Modello di Regressione",
+        "description": "Addestra un modello per predire valori continui",
+        "diagram": "CSV → Seleziona → Dividi → [Train → Regressione, Test] → Predici → Grafico"
+      },
+      "classification": {
+        "title": "Modello di Classificazione",
+        "description": "Classifica dati in categorie",
+        "diagram": "Dataset → Dividi → [Train → Classifica, Test] → Predici → Grafico"
+      },
+      "sentiment": {
+        "title": "Analisi Sentiment NLP",
+        "description": "Analizza il sentiment nei dati testuali",
+        "diagram": "CSV → Tokenizza → Sentiment → Filtra → Istogramma"
+      },
+      "clustering": {
+        "title": "Analisi Clustering",
+        "description": "Scopri gruppi naturali nei tuoi dati",
+        "diagram": "CSV → Seleziona → K-Means → [Grafico 2D, Grafico 3D]"
+      },
+      "steps": "Passaggi",
+      "tips": "Suggerimenti"
+    }
+  }
+}

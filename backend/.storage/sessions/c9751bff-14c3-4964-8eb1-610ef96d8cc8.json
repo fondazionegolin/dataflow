@@ -1,0 +1,1207 @@
+{
+  "id": "c9751bff-14c3-4964-8eb1-610ef96d8cc8",
+  "name": "ciccio",
+  "created_at": "2025-10-02T14:46:56.617046",
+  "updated_at": "2025-10-02T15:33:58.177180",
+  "workflow": {
+    "name": "ciccio",
+    "nodes": [
+      {
+        "id": "csv.synthetic-1759330007266",
+        "type": "customNode",
+        "position": {
+          "x": 528,
+          "y": 720
+        },
+        "data": {
+          "type": "csv.synthetic",
+          "label": "Generate Synthetic Data",
+          "spec": {
+            "type": "csv.synthetic",
+            "label": "Generate Synthetic Data",
+            "category": "sources",
+            "description": "Generate synthetic datasets with various distributions and patterns",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Table",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "metadata",
+                "type": "params",
+                "label": "Metadata",
+                "required": false,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "mode",
+                "type": "select",
+                "label": "Generation Mode",
+                "default": "classification",
+                "required": false,
+                "description": null,
+                "options": [
+                  "classification",
+                  "regression",
+                  "blobs",
+                  "moons",
+                  "circles",
+                  "custom"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_samples",
+                "type": "integer",
+                "label": "Number of Samples",
+                "default": 1000,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 10,
+                "max": 1000000,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_features",
+                "type": "integer",
+                "label": "Number of Features",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 100,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_classes",
+                "type": "integer",
+                "label": "Number of Classes (classification)",
+                "default": 2,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 2,
+                "max": 10,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_informative",
+                "type": "integer",
+                "label": "Informative Features",
+                "default": 3,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 100,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_redundant",
+                "type": "integer",
+                "label": "Redundant Features",
+                "default": 1,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": 50,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "noise",
+                "type": "slider",
+                "label": "Noise Level",
+                "default": 0.1,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": 1,
+                "step": 0.05,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "class_sep",
+                "type": "slider",
+                "label": "Class Separation",
+                "default": 1,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 5,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "nan_ratio",
+                "type": "slider",
+                "label": "Missing Value Ratio",
+                "default": 0,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": 0.5,
+                "step": 0.05,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "seed",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83c\udfb2",
+            "color": "#9C27B0"
+          },
+          "params": {
+            "mode": "classification",
+            "n_samples": 1000,
+            "n_features": 2,
+            "n_classes": 2,
+            "n_informative": 3,
+            "n_redundant": 1,
+            "noise": 0.1,
+            "class_sep": 1,
+            "nan_ratio": 0,
+            "seed": 42
+          },
+          "status": "success",
+          "executionTime": 0.0044400691986083984
+        },
+        "width": 304,
+        "height": 807,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 528,
+          "y": 720
+        },
+        "dragging": false
+      },
+      {
+        "id": "plot.2d-1759398840682",
+        "type": "customNode",
+        "position": {
+          "x": 2019.755334974791,
+          "y": 843.9300193911248
+        },
+        "data": {
+          "type": "plot.2d",
+          "label": "2D Scatter Plot",
+          "spec": {
+            "type": "plot.2d",
+            "label": "2D Scatter Plot",
+            "category": "visualization",
+            "description": "Create interactive 2D scatter plot with color and size mapping",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Data Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "plot",
+                "type": "params",
+                "label": "Plot Config",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "x_column",
+                "type": "column",
+                "label": "X Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "y_column",
+                "type": "column",
+                "label": "Y Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "color_column",
+                "type": "column",
+                "label": "Color By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "size_column",
+                "type": "column",
+                "label": "Size By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "label": "Plot Title",
+                "default": "2D Scatter Plot",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "opacity",
+                "type": "slider",
+                "label": "Opacity",
+                "default": 0.7,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 1,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "marker_size",
+                "type": "slider",
+                "label": "Marker Size",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 20,
+                "step": 1,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\ud83d\udcca",
+            "color": "#FF5722"
+          },
+          "params": {
+            "x_column": "cilindrata",
+            "y_column": "cavalli",
+            "color_column": "",
+            "size_column": "",
+            "title": "2D Scatter Plot",
+            "opacity": 0.7,
+            "marker_size": 5
+          },
+          "status": "error",
+          "error": "Failed to create 2D plot: Unable to convert data_frame of type <class 'dict'> to pandas DataFrame. Please provide a supported dataframe type or a type that can be passed to pd.DataFrame."
+        },
+        "width": 304,
+        "height": 594,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2019.755334974791,
+          "y": 843.9300193911248
+        },
+        "dragging": false
+      },
+      {
+        "id": "plot.3d-1759398860341",
+        "type": "customNode",
+        "position": {
+          "x": 1008,
+          "y": 1272
+        },
+        "data": {
+          "type": "plot.3d",
+          "label": "3D Scatter Plot",
+          "spec": {
+            "type": "plot.3d",
+            "label": "3D Scatter Plot",
+            "category": "visualization",
+            "description": "Create interactive 3D scatter plot with rotation and zoom",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Data Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "plot",
+                "type": "params",
+                "label": "Plot Config",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "x_column",
+                "type": "column",
+                "label": "X Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "y_column",
+                "type": "column",
+                "label": "Y Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "z_column",
+                "type": "column",
+                "label": "Z Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "color_column",
+                "type": "column",
+                "label": "Color By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "size_column",
+                "type": "column",
+                "label": "Size By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "label": "Plot Title",
+                "default": "3D Scatter Plot",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "opacity",
+                "type": "slider",
+                "label": "Opacity",
+                "default": 0.7,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 1,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "marker_size",
+                "type": "slider",
+                "label": "Marker Size",
+                "default": 3,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 15,
+                "step": 1,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\ud83c\udfaf",
+            "color": "#F44336"
+          },
+          "params": {
+            "x_column": "peso",
+            "y_column": "cilindrata",
+            "z_column": "cavalli",
+            "color_column": "",
+            "size_column": "",
+            "title": "3D Scatter Plot",
+            "opacity": 0.7,
+            "marker_size": 3
+          },
+          "status": "error",
+          "error": "Failed to create 3D plot: Value of 'x' is not the name of a column in 'data_frame'. Expected one of ['customer_id', 'age', 'annual_income_euros', 'spending_score', 'purchase_frequency', 'avg_transaction_euros', 'loyalty_years'] but received: peso"
+        },
+        "width": 304,
+        "height": 676,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1008,
+          "y": 1272
+        }
+      },
+      {
+        "id": "ml.classification-1759398986568",
+        "type": "customNode",
+        "position": {
+          "x": 2640,
+          "y": 1992
+        },
+        "data": {
+          "type": "ml.classification",
+          "label": "Classification",
+          "spec": {
+            "type": "ml.classification",
+            "label": "Classification",
+            "category": "machine_learning",
+            "description": "Train classification models (Logistic, RF, GBM, SVC, KNN, Naive Bayes)",
+            "inputs": [
+              {
+                "name": "train",
+                "type": "table",
+                "label": "Training Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "model",
+                "type": "model",
+                "label": "Trained Model",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "metrics",
+                "type": "metrics",
+                "label": "Metrics",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "predictions",
+                "type": "table",
+                "label": "Predictions",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "algorithm",
+                "type": "select",
+                "label": "Algorithm",
+                "default": "logistic",
+                "required": false,
+                "description": null,
+                "options": [
+                  "logistic",
+                  "random_forest",
+                  "gradient_boosting",
+                  "svc",
+                  "knn",
+                  "naive_bayes"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "target_column",
+                "type": "column",
+                "label": "Target Column",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "feature_columns",
+                "type": "multi_select",
+                "label": "Feature Columns (empty = all except target)",
+                "default": [],
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_estimators",
+                "type": "integer",
+                "label": "N Estimators (RF/GBM)",
+                "default": 100,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 10,
+                "max": 500,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "max_depth",
+                "type": "integer",
+                "label": "Max Depth (RF/GBM)",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 20,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "cv_folds",
+                "type": "integer",
+                "label": "Cross-Validation Folds",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 2,
+                "max": 10,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83c\udfaf",
+            "color": "#3F51B5"
+          },
+          "params": {
+            "algorithm": "random_forest",
+            "target_column": "tipologia",
+            "feature_columns": [
+              "cilindrata",
+              "peso",
+              "cavalli"
+            ],
+            "n_estimators": 100,
+            "max_depth": 5,
+            "cv_folds": 5
+          },
+          "status": "error",
+          "error": "Source node data.split-1759399103303 has not been executed"
+        },
+        "width": 304,
+        "height": 594,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2640,
+          "y": 1992
+        },
+        "dragging": false
+      },
+      {
+        "id": "ml.predict-1759399092939",
+        "type": "customNode",
+        "position": {
+          "x": 2976,
+          "y": 2976
+        },
+        "data": {
+          "type": "ml.predict",
+          "label": "Predict",
+          "spec": {
+            "type": "ml.predict",
+            "label": "Predict",
+            "category": "machine_learning",
+            "description": "Apply a trained model to make predictions on new data",
+            "inputs": [
+              {
+                "name": "model",
+                "type": "model",
+                "label": "Trained Model",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "data",
+                "type": "table",
+                "label": "Input Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "predictions",
+                "type": "table",
+                "label": "Predictions",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udd2e",
+            "color": "#009688"
+          },
+          "params": {},
+          "status": "error",
+          "error": "Source node ml.classification-1759398986568 has not been executed"
+        },
+        "width": 304,
+        "height": 193,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2976,
+          "y": 2976
+        },
+        "dragging": false
+      },
+      {
+        "id": "data.split-1759399103303",
+        "type": "customNode",
+        "position": {
+          "x": 1824,
+          "y": 2832
+        },
+        "data": {
+          "type": "data.split",
+          "label": "Train/Test Split",
+          "spec": {
+            "type": "data.split",
+            "label": "Train/Test Split",
+            "category": "transform",
+            "description": "Split dataset into training and testing sets",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "train",
+                "type": "table",
+                "label": "Training Set",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "test",
+                "type": "table",
+                "label": "Testing Set",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "test_size",
+                "type": "slider",
+                "label": "Test Size Ratio",
+                "default": 0.2,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 0.5,
+                "step": 0.05,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "stratify_column",
+                "type": "string",
+                "label": "Stratify by Column (optional)",
+                "default": "",
+                "required": false,
+                "description": "Column name for stratified split",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "seed",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\u2702\ufe0f",
+            "color": "#E91E63"
+          },
+          "params": {
+            "test_size": 0.2,
+            "stratify_column": "",
+            "seed": 42
+          },
+          "status": "error",
+          "error": "Required input 'table' is missing"
+        },
+        "width": 304,
+        "height": 300,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1824,
+          "y": 2832
+        }
+      },
+      {
+        "id": "ai.load_dataset-1759407852444",
+        "type": "customNode",
+        "position": {
+          "x": -120,
+          "y": 2136
+        },
+        "data": {
+          "type": "ai.load_dataset",
+          "label": "Load AI Dataset",
+          "spec": {
+            "type": "ai.load_dataset",
+            "label": "Load AI Dataset",
+            "category": "sources",
+            "description": "Load a previously saved AI-generated dataset from database",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Output Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "dataset_id",
+                "type": "select",
+                "label": "Dataset",
+                "default": null,
+                "required": true,
+                "description": "Select a saved dataset to load",
+                "options": [
+                  {
+                    "value": "8071a1d6-a24a-44ce-bdec-4e3c8f1bebc1",
+                    "label": "auto e moto (67 rows)"
+                  },
+                  {
+                    "value": "83211701-ffa5-4a03-81ce-cf7d53de6805",
+                    "label": "House Price Prediction (57 rows)"
+                  },
+                  {
+                    "value": "a79f88d5-276e-442e-9bb1-6d906d119392",
+                    "label": "Customer Segmentation (100 rows)"
+                  },
+                  {
+                    "value": "50dd8c95-f575-400e-9c4e-d924e9f6fd9a",
+                    "label": "Iris Flowers Classification (60 rows)"
+                  },
+                  {
+                    "value": "13e03095-c11e-43fd-bb0e-671ee213ec6e",
+                    "label": "Iris Flowers Classification (83 rows)"
+                  },
+                  {
+                    "value": "26e179c2-fc16-4f57-8f06-4b6338711c62",
+                    "label": "Monthly Sales Timeseries (72 rows)"
+                  }
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udcc2",
+            "color": "#4CAF50"
+          },
+          "params": {
+            "dataset_id": "a79f88d5-276e-442e-9bb1-6d906d119392"
+          },
+          "status": "success",
+          "executionTime": 0.0010952949523925781
+        },
+        "width": 304,
+        "height": 246,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -120,
+          "y": 2136
+        }
+      },
+      {
+        "id": "ml.kmeans_clustering-1759408087551",
+        "type": "customNode",
+        "position": {
+          "x": 1272,
+          "y": 2184
+        },
+        "data": {
+          "type": "ml.kmeans_clustering",
+          "label": "K-Means Clustering",
+          "spec": {
+            "type": "ml.kmeans_clustering",
+            "label": "K-Means Clustering",
+            "category": "machine_learning",
+            "description": "K-Means clustering with elbow method and silhouette analysis",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Clustered Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "feature_columns",
+                "type": "multi_select",
+                "label": "Feature Columns",
+                "default": null,
+                "required": true,
+                "description": "Columns to use for clustering",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_clusters",
+                "type": "slider",
+                "label": "Number of Clusters (K)",
+                "default": 3,
+                "required": false,
+                "description": "Number of clusters to create",
+                "options": null,
+                "min": 2,
+                "max": 10,
+                "step": 1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "auto_k",
+                "type": "boolean",
+                "label": "Auto-detect K",
+                "default": false,
+                "required": false,
+                "description": "Automatically find optimal K using elbow method",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "max_k_search",
+                "type": "integer",
+                "label": "Max K for Auto-search",
+                "default": 10,
+                "required": false,
+                "description": "Maximum K to test when auto-detecting",
+                "options": null,
+                "min": 3,
+                "max": 20,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "normalize",
+                "type": "boolean",
+                "label": "Normalize Features",
+                "default": true,
+                "required": false,
+                "description": "Standardize features before clustering",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "plot_x",
+                "type": "column",
+                "label": "Plot X-axis",
+                "default": null,
+                "required": false,
+                "description": "Column for X-axis in scatter plot (optional, uses first features if empty)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "plot_y",
+                "type": "column",
+                "label": "Plot Y-axis",
+                "default": null,
+                "required": false,
+                "description": "Column for Y-axis in scatter plot",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "plot_z",
+                "type": "column",
+                "label": "Plot Z-axis (3D)",
+                "default": null,
+                "required": false,
+                "description": "Column for Z-axis to create 3D plot (optional)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "random_state",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83c\udfaf",
+            "color": "#9C27B0"
+          },
+          "params": {
+            "feature_columns": [
+              "cilindrata",
+              "cavalli",
+              "peso",
+              "age",
+              "customer_id",
+              "annual_income_euros"
+            ],
+            "n_clusters": 3,
+            "auto_k": false,
+            "max_k_search": 10,
+            "normalize": true,
+            "plot_x": "cilindrata",
+            "plot_y": "peso",
+            "plot_z": "cavalli",
+            "random_state": 42
+          },
+          "status": "error",
+          "error": "Columns not found: {'peso', 'cilindrata', 'cavalli'}"
+        },
+        "width": 304,
+        "height": 990,
+        "selected": true,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1272,
+          "y": 2184
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "ml.classification-1759398986568",
+        "sourceHandle": "model",
+        "target": "ml.predict-1759399092939",
+        "targetHandle": "model",
+        "id": "ml.classification-1759398986568-model-ml.predict-1759399092939-model"
+      },
+      {
+        "source": "data.split-1759399103303",
+        "sourceHandle": "train",
+        "target": "ml.classification-1759398986568",
+        "targetHandle": "train",
+        "id": "data.split-1759399103303-train-ml.classification-1759398986568-train"
+      },
+      {
+        "source": "data.split-1759399103303",
+        "sourceHandle": "test",
+        "target": "ml.predict-1759399092939",
+        "targetHandle": "data",
+        "id": "data.split-1759399103303-test-ml.predict-1759399092939-data"
+      },
+      {
+        "source": "ai.load_dataset-1759407852444",
+        "sourceHandle": "table",
+        "target": "plot.3d-1759398860341",
+        "targetHandle": "table",
+        "id": "ai.load_dataset-1759407852444-table-plot.3d-1759398860341-table"
+      },
+      {
+        "source": "ai.load_dataset-1759407852444",
+        "sourceHandle": "table",
+        "target": "ml.kmeans_clustering-1759408087551",
+        "targetHandle": "table",
+        "id": "ai.load_dataset-1759407852444-table-ml.kmeans_clustering-1759408087551-table"
+      },
+      {
+        "source": "csv.synthetic-1759330007266",
+        "sourceHandle": "metadata",
+        "target": "plot.2d-1759398840682",
+        "targetHandle": "table",
+        "id": "csv.synthetic-1759330007266-metadata-plot.2d-1759398840682-table"
+      }
+    ],
+    "executionResults": {}
+  }
+}

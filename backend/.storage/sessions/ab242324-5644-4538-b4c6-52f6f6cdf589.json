@@ -1,0 +1,465 @@
+{
+  "id": "ab242324-5644-4538-b4c6-52f6f6cdf589",
+  "name": "LLM",
+  "created_at": "2025-10-03T14:39:29.680601",
+  "updated_at": "2025-10-03T16:00:17.196189",
+  "workflow": {
+    "name": "LLM",
+    "nodes": [
+      {
+        "id": "llm.dataset-1759497693611",
+        "type": "customNode",
+        "position": {
+          "x": 672,
+          "y": -96
+        },
+        "data": {
+          "type": "llm.dataset",
+          "label": "LLM Dataset",
+          "spec": {
+            "type": "llm.dataset",
+            "label": "LLM Dataset",
+            "category": "llm",
+            "description": "Generate conversational/instructional dataset for LLM fine-tuning",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "dataset",
+                "type": "table",
+                "label": "Training Dataset",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "format",
+                "type": "select",
+                "label": "Dataset Format",
+                "default": "conversation",
+                "required": false,
+                "description": "Type of dataset to generate",
+                "options": [
+                  "instruction",
+                  "conversation",
+                  "completion"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_samples",
+                "type": "integer",
+                "label": "Number of Samples",
+                "default": 100,
+                "required": false,
+                "description": "Number of training examples",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "domain",
+                "type": "select",
+                "label": "Domain",
+                "default": "general",
+                "required": false,
+                "description": "Domain for generated examples",
+                "options": [
+                  "general",
+                  "customer_support",
+                  "code",
+                  "creative_writing",
+                  "qa"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "language",
+                "type": "select",
+                "label": "Language",
+                "default": "italian",
+                "required": false,
+                "description": "Language for generated text",
+                "options": [
+                  "english",
+                  "italian"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "custom_prompt",
+                "type": "string",
+                "label": "Custom Prompt (Optional)",
+                "default": "",
+                "required": false,
+                "description": "Add custom instructions for generation",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "seed",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": "Seed for reproducibility",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udcac",
+            "color": "#FF6B6B"
+          },
+          "params": {
+            "format": "conversation",
+            "n_samples": 100,
+            "domain": "general",
+            "language": "italian",
+            "custom_prompt": "esempi di interazioni con un operatore di banca",
+            "seed": 42
+          },
+          "status": "success",
+          "executionTime": 0.0052297115325927734
+        },
+        "width": 704,
+        "height": 645,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 672,
+          "y": -96
+        }
+      },
+      {
+        "id": "llm.finetune-1759498372830",
+        "type": "customNode",
+        "position": {
+          "x": 1680,
+          "y": -24
+        },
+        "data": {
+          "type": "llm.finetune",
+          "label": "Fine-tune LLM",
+          "spec": {
+            "type": "llm.finetune",
+            "label": "Fine-tune LLM",
+            "category": "llm",
+            "description": "Fine-tune GPT-2 or DistilGPT-2 on custom dataset",
+            "inputs": [
+              {
+                "name": "dataset",
+                "type": "table",
+                "label": "Training Dataset",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "model",
+                "type": "model",
+                "label": "Fine-tuned Model",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "metrics",
+                "type": "metrics",
+                "label": "Training Metrics",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "loss_plot",
+                "type": "params",
+                "label": "Loss Plot",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "base_model",
+                "type": "select",
+                "label": "Base Model",
+                "default": "distilgpt2",
+                "required": false,
+                "description": "Pre-trained model to fine-tune",
+                "options": [
+                  "distilgpt2",
+                  "gpt2",
+                  "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "text_column",
+                "type": "column",
+                "label": "Text Column",
+                "default": null,
+                "required": true,
+                "description": "Column with text to train on",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "epochs",
+                "type": "integer",
+                "label": "Epochs",
+                "default": 3,
+                "required": false,
+                "description": "Number of training epochs",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "batch_size",
+                "type": "integer",
+                "label": "Batch Size",
+                "default": 4,
+                "required": false,
+                "description": "Training batch size",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "learning_rate",
+                "type": "number",
+                "label": "Learning Rate",
+                "default": 5e-05,
+                "required": false,
+                "description": "Learning rate for training",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "max_length",
+                "type": "integer",
+                "label": "Max Length",
+                "default": 128,
+                "required": false,
+                "description": "Maximum sequence length",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83c\udf93",
+            "color": "#4ECDC4"
+          },
+          "params": {
+            "base_model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+            "text_column": "text",
+            "epochs": 3,
+            "batch_size": 4,
+            "learning_rate": 5e-05,
+            "max_length": 128
+          },
+          "status": "success",
+          "executionTime": 91.25840091705322
+        },
+        "width": 704,
+        "height": 705,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1680,
+          "y": -24
+        }
+      },
+      {
+        "id": "llm.generate-1759498619061",
+        "type": "customNode",
+        "position": {
+          "x": 2616,
+          "y": -24
+        },
+        "data": {
+          "type": "llm.generate",
+          "label": "Text Generator",
+          "spec": {
+            "type": "llm.generate",
+            "label": "Text Generator",
+            "category": "llm",
+            "description": "Generate text using fine-tuned language model",
+            "inputs": [
+              {
+                "name": "model",
+                "type": "model",
+                "label": "Fine-tuned Model",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "generated",
+                "type": "table",
+                "label": "Generated Texts",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "prompt",
+                "type": "string",
+                "label": "Prompt",
+                "default": "Once upon a time",
+                "required": false,
+                "description": "Starting text for generation",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "max_length",
+                "type": "integer",
+                "label": "Max Length",
+                "default": 100,
+                "required": false,
+                "description": "Maximum tokens to generate",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "temperature",
+                "type": "slider",
+                "label": "Temperature",
+                "default": 0.7,
+                "required": false,
+                "description": "Sampling temperature (higher = more creative)",
+                "options": null,
+                "min": 0.1,
+                "max": 2,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "top_p",
+                "type": "slider",
+                "label": "Top P",
+                "default": 0.9,
+                "required": false,
+                "description": "Nucleus sampling threshold",
+                "options": null,
+                "min": 0.1,
+                "max": 1,
+                "step": 0.05,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "num_return_sequences",
+                "type": "integer",
+                "label": "Number of Generations",
+                "default": 3,
+                "required": false,
+                "description": "How many texts to generate",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\u2728",
+            "color": "#95E1D3"
+          },
+          "params": {
+            "prompt": "come si fa un bonifico?",
+            "max_length": 100,
+            "temperature": 0.7,
+            "top_p": 0.9,
+            "num_return_sequences": 3
+          },
+          "status": "success",
+          "executionTime": 3.8707032203674316
+        },
+        "width": 704,
+        "height": 617,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 2616,
+          "y": -24
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "llm.dataset-1759497693611",
+        "sourceHandle": "dataset",
+        "target": "llm.finetune-1759498372830",
+        "targetHandle": "dataset",
+        "id": "llm.dataset-1759497693611-dataset-llm.finetune-1759498372830-dataset"
+      },
+      {
+        "source": "llm.finetune-1759498372830",
+        "sourceHandle": "model",
+        "target": "llm.generate-1759498619061",
+        "targetHandle": "model",
+        "id": "llm.finetune-1759498372830-model-llm.generate-1759498619061-model"
+      }
+    ],
+    "executionResults": {}
+  }
+}

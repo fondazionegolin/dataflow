@@ -1,0 +1,92 @@
+{
+  "version": "0.1.0",
+  "name": "Classification Example",
+  "description": "A simple classification workflow with synthetic data",
+  "seed": 42,
+  "nodes": [
+    {
+      "id": "synthetic-1",
+      "type": "csv.synthetic",
+      "label": "Generate Synthetic Data",
+      "params": {
+        "mode": "classification",
+        "n_samples": 1000,
+        "n_features": 5,
+        "n_classes": 3,
+        "n_informative": 3,
+        "n_redundant": 1,
+        "noise": 0.1,
+        "class_sep": 1.5,
+        "seed": 42
+      },
+      "position": { "x": 100, "y": 100 }
+    },
+    {
+      "id": "split-1",
+      "type": "data.split",
+      "label": "Train/Test Split",
+      "params": {
+        "test_size": 0.2,
+        "stratify_column": "target",
+        "seed": 42
+      },
+      "position": { "x": 400, "y": 100 }
+    },
+    {
+      "id": "classify-1",
+      "type": "ml.classification",
+      "label": "Random Forest Classifier",
+      "params": {
+        "algorithm": "random_forest",
+        "target_column": "target",
+        "feature_columns": [],
+        "n_estimators": 100,
+        "max_depth": 5,
+        "cv_folds": 5
+      },
+      "position": { "x": 700, "y": 100 }
+    },
+    {
+      "id": "plot-1",
+      "type": "plot.2d",
+      "label": "Visualize Results",
+      "params": {
+        "x_column": "feature_0",
+        "y_column": "feature_1",
+        "color_column": "prediction",
+        "title": "Classification Results",
+        "opacity": 0.7,
+        "marker_size": 5
+      },
+      "position": { "x": 1000, "y": 100 }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source_node": "synthetic-1",
+      "source_port": "table",
+      "target_node": "split-1",
+      "target_port": "table"
+    },
+    {
+      "id": "e2",
+      "source_node": "split-1",
+      "source_port": "train",
+      "target_node": "classify-1",
+      "target_port": "train"
+    },
+    {
+      "id": "e3",
+      "source_node": "classify-1",
+      "source_port": "predictions",
+      "target_node": "plot-1",
+      "target_port": "table"
+    }
+  ],
+  "metadata": {
+    "created": "2025-09-30",
+    "author": "DataFlow Platform",
+    "tags": ["classification", "machine-learning", "example"]
+  }
+}

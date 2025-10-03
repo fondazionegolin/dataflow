@@ -1,0 +1,633 @@
+{
+  "id": "50dd8c95-f575-400e-9c4e-d924e9f6fd9a",
+  "name": "Iris Flowers Classification",
+  "created_at": "2025-10-01T15:01:00.779882",
+  "metadata": {
+    "rows": 60,
+    "columns": [
+      "engine_cc",
+      "cylinders",
+      "horsepower",
+      "weight_kg",
+      "fuel_type",
+      "transmission",
+      "acceleration_0_100",
+      "fuel_consumption_l_100km"
+    ],
+    "description": "Generate car performance dataset. Engine_cc (1000-6000), cylinders (3,4,6,8), horsepower (60-500), weight_kg (800-2500). Fuel_type: Gasoline, Diesel, Hybrid, Electric. Transmission: Manual, Automatic.",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "engine_cc": "int64",
+      "cylinders": "int64",
+      "horsepower": "int64",
+      "weight_kg": "int64",
+      "fuel_type": "object",
+      "transmission": "object",
+      "acceleration_0_100": "float64",
+      "fuel_consumption_l_100km": "float64"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "engine_cc": 2185,
+      "cylinders": 4,
+      "horsepower": 150,
+      "weight_kg": 1350,
+      "fuel_type": "Gasoline",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.5,
+      "fuel_consumption_l_100km": 7.8
+    },
+    {
+      "engine_cc": 3200,
+      "cylinders": 6,
+      "horsepower": 250,
+      "weight_kg": 1800,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 6.5,
+      "fuel_consumption_l_100km": 10.5
+    },
+    {
+      "engine_cc": 1500,
+      "cylinders": 4,
+      "horsepower": 120,
+      "weight_kg": 1100,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 10.5,
+      "fuel_consumption_l_100km": 5.0
+    },
+    {
+      "engine_cc": 4000,
+      "cylinders": 8,
+      "horsepower": 400,
+      "weight_kg": 2200,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.2,
+      "fuel_consumption_l_100km": 13.5
+    },
+    {
+      "engine_cc": 1800,
+      "cylinders": 4,
+      "horsepower": 140,
+      "weight_kg": 1300,
+      "fuel_type": "Gasoline",
+      "transmission": "Automatic",
+      "acceleration_0_100": 8.5,
+      "fuel_consumption_l_100km": 7.0
+    },
+    {
+      "engine_cc": 3000,
+      "cylinders": 6,
+      "horsepower": 260,
+      "weight_kg": 1700,
+      "fuel_type": "Diesel",
+      "transmission": "Manual",
+      "acceleration_0_100": 7.0,
+      "fuel_consumption_l_100km": 8.5
+    },
+    {
+      "engine_cc": 1200,
+      "cylinders": 3,
+      "horsepower": 90,
+      "weight_kg": 950,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 11.5,
+      "fuel_consumption_l_100km": 4.0
+    },
+    {
+      "engine_cc": 4500,
+      "cylinders": 8,
+      "horsepower": 450,
+      "weight_kg": 2300,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.7,
+      "fuel_consumption_l_100km": 15.0
+    },
+    {
+      "engine_cc": 1600,
+      "cylinders": 4,
+      "horsepower": 110,
+      "weight_kg": 1100,
+      "fuel_type": "Electric",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.0,
+      "fuel_consumption_l_100km": 0.0
+    },
+    {
+      "engine_cc": 2500,
+      "cylinders": 4,
+      "horsepower": 180,
+      "weight_kg": 1400,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 7.8,
+      "fuel_consumption_l_100km": 8.0
+    },
+    {
+      "engine_cc": 3700,
+      "cylinders": 6,
+      "horsepower": 320,
+      "weight_kg": 1900,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 6.2,
+      "fuel_consumption_l_100km": 9.5
+    },
+    {
+      "engine_cc": 1300,
+      "cylinders": 4,
+      "horsepower": 100,
+      "weight_kg": 900,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 10.0,
+      "fuel_consumption_l_100km": 4.5
+    },
+    {
+      "engine_cc": 3600,
+      "cylinders": 6,
+      "horsepower": 290,
+      "weight_kg": 1750,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 6.8,
+      "fuel_consumption_l_100km": 10.0
+    },
+    {
+      "engine_cc": 2100,
+      "cylinders": 4,
+      "horsepower": 160,
+      "weight_kg": 1300,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 8.5,
+      "fuel_consumption_l_100km": 6.5
+    },
+    {
+      "engine_cc": 4900,
+      "cylinders": 8,
+      "horsepower": 480,
+      "weight_kg": 2400,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.3,
+      "fuel_consumption_l_100km": 14.5
+    },
+    {
+      "engine_cc": 2200,
+      "cylinders": 4,
+      "horsepower": 175,
+      "weight_kg": 1450,
+      "fuel_type": "Gasoline",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.5,
+      "fuel_consumption_l_100km": 8.5
+    },
+    {
+      "engine_cc": 3800,
+      "cylinders": 6,
+      "horsepower": 310,
+      "weight_kg": 1850,
+      "fuel_type": "Diesel",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.9,
+      "fuel_consumption_l_100km": 10.0
+    },
+    {
+      "engine_cc": 1400,
+      "cylinders": 4,
+      "horsepower": 95,
+      "weight_kg": 1000,
+      "fuel_type": "Electric",
+      "transmission": "Automatic",
+      "acceleration_0_100": 10.2,
+      "fuel_consumption_l_100km": 0.0
+    },
+    {
+      "engine_cc": 5100,
+      "cylinders": 8,
+      "horsepower": 500,
+      "weight_kg": 2500,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.0,
+      "fuel_consumption_l_100km": 15.0
+    },
+    {
+      "engine_cc": 2700,
+      "cylinders": 4,
+      "horsepower": 200,
+      "weight_kg": 1500,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.0,
+      "fuel_consumption_l_100km": 9.0
+    },
+    {
+      "engine_cc": 1600,
+      "cylinders": 4,
+      "horsepower": 120,
+      "weight_kg": 1100,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.0,
+      "fuel_consumption_l_100km": 4.5
+    },
+    {
+      "engine_cc": 4000,
+      "cylinders": 6,
+      "horsepower": 350,
+      "weight_kg": 2000,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.5,
+      "fuel_consumption_l_100km": 12.0
+    },
+    {
+      "engine_cc": 3200,
+      "cylinders": 6,
+      "horsepower": 240,
+      "weight_kg": 1800,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 6.8,
+      "fuel_consumption_l_100km": 9.5
+    },
+    {
+      "engine_cc": 1500,
+      "cylinders": 4,
+      "horsepower": 110,
+      "weight_kg": 1000,
+      "fuel_type": "Electric",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.8,
+      "fuel_consumption_l_100km": 0.0
+    },
+    {
+      "engine_cc": 3300,
+      "cylinders": 6,
+      "horsepower": 270,
+      "weight_kg": 1750,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 6.4,
+      "fuel_consumption_l_100km": 10.5
+    },
+    {
+      "engine_cc": 2600,
+      "cylinders": 4,
+      "horsepower": 190,
+      "weight_kg": 1400,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.2,
+      "fuel_consumption_l_100km": 8.8
+    },
+    {
+      "engine_cc": 5000,
+      "cylinders": 8,
+      "horsepower": 480,
+      "weight_kg": 2400,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.5,
+      "fuel_consumption_l_100km": 14.5
+    },
+    {
+      "engine_cc": 1800,
+      "cylinders": 4,
+      "horsepower": 130,
+      "weight_kg": 1200,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.0,
+      "fuel_consumption_l_100km": 4.2
+    },
+    {
+      "engine_cc": 3500,
+      "cylinders": 6,
+      "horsepower": 320,
+      "weight_kg": 1900,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.8,
+      "fuel_consumption_l_100km": 11.0
+    },
+    {
+      "engine_cc": 2300,
+      "cylinders": 4,
+      "horsepower": 175,
+      "weight_kg": 1400,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.5,
+      "fuel_consumption_l_100km": 7.8
+    },
+    {
+      "engine_cc": 4200,
+      "cylinders": 8,
+      "horsepower": 460,
+      "weight_kg": 2300,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.2,
+      "fuel_consumption_l_100km": 14.0
+    },
+    {
+      "engine_cc": 1900,
+      "cylinders": 4,
+      "horsepower": 135,
+      "weight_kg": 1150,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.2,
+      "fuel_consumption_l_100km": 4.3
+    },
+    {
+      "engine_cc": 3700,
+      "cylinders": 6,
+      "horsepower": 295,
+      "weight_kg": 1800,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 6.6,
+      "fuel_consumption_l_100km": 10.5
+    },
+    {
+      "engine_cc": 2800,
+      "cylinders": 4,
+      "horsepower": 200,
+      "weight_kg": 1500,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.1,
+      "fuel_consumption_l_100km": 9.0
+    },
+    {
+      "engine_cc": 4500,
+      "cylinders": 8,
+      "horsepower": 490,
+      "weight_kg": 2450,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.1,
+      "fuel_consumption_l_100km": 15.0
+    },
+    {
+      "engine_cc": 1700,
+      "cylinders": 4,
+      "horsepower": 115,
+      "weight_kg": 1050,
+      "fuel_type": "Electric",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.7,
+      "fuel_consumption_l_100km": 0.0
+    },
+    {
+      "engine_cc": 3300,
+      "cylinders": 6,
+      "horsepower": 280,
+      "weight_kg": 1750,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 6.3,
+      "fuel_consumption_l_100km": 10.2
+    },
+    {
+      "engine_cc": 2600,
+      "cylinders": 4,
+      "horsepower": 190,
+      "weight_kg": 1400,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.4,
+      "fuel_consumption_l_100km": 8.9
+    },
+    {
+      "engine_cc": 5100,
+      "cylinders": 8,
+      "horsepower": 500,
+      "weight_kg": 2500,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.0,
+      "fuel_consumption_l_100km": 15.0
+    },
+    {
+      "engine_cc": 2000,
+      "cylinders": 4,
+      "horsepower": 150,
+      "weight_kg": 1300,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 8.8,
+      "fuel_consumption_l_100km": 4.5
+    },
+    {
+      "engine_cc": 3900,
+      "cylinders": 6,
+      "horsepower": 310,
+      "weight_kg": 1950,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.6,
+      "fuel_consumption_l_100km": 11.5
+    },
+    {
+      "engine_cc": 2400,
+      "cylinders": 4,
+      "horsepower": 180,
+      "weight_kg": 1450,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.3,
+      "fuel_consumption_l_100km": 8.5
+    },
+    {
+      "engine_cc": 3600,
+      "cylinders": 6,
+      "horsepower": 300,
+      "weight_kg": 1800,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 6.4,
+      "fuel_consumption_l_100km": 10.2
+    },
+    {
+      "engine_cc": 1800,
+      "cylinders": 4,
+      "horsepower": 140,
+      "weight_kg": 1300,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 8.5,
+      "fuel_consumption_l_100km": 4.7
+    },
+    {
+      "engine_cc": 3100,
+      "cylinders": 6,
+      "horsepower": 275,
+      "weight_kg": 1700,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 6.7,
+      "fuel_consumption_l_100km": 10.8
+    },
+    {
+      "engine_cc": 2300,
+      "cylinders": 4,
+      "horsepower": 160,
+      "weight_kg": 1350,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 8.0,
+      "fuel_consumption_l_100km": 7.0
+    },
+    {
+      "engine_cc": 4000,
+      "cylinders": 8,
+      "horsepower": 450,
+      "weight_kg": 2200,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.0,
+      "fuel_consumption_l_100km": 12.5
+    },
+    {
+      "engine_cc": 1500,
+      "cylinders": 4,
+      "horsepower": 115,
+      "weight_kg": 1000,
+      "fuel_type": "Electric",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.5,
+      "fuel_consumption_l_100km": 0.0
+    },
+    {
+      "engine_cc": 3500,
+      "cylinders": 6,
+      "horsepower": 330,
+      "weight_kg": 1850,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.4,
+      "fuel_consumption_l_100km": 11.0
+    },
+    {
+      "engine_cc": 2600,
+      "cylinders": 4,
+      "horsepower": 170,
+      "weight_kg": 1300,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 7.8,
+      "fuel_consumption_l_100km": 8.0
+    },
+    {
+      "engine_cc": 5200,
+      "cylinders": 8,
+      "horsepower": 490,
+      "weight_kg": 2400,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.4,
+      "fuel_consumption_l_100km": 15.0
+    },
+    {
+      "engine_cc": 2200,
+      "cylinders": 4,
+      "horsepower": 180,
+      "weight_kg": 1400,
+      "fuel_type": "Hybrid",
+      "transmission": "Automatic",
+      "acceleration_0_100": 8.2,
+      "fuel_consumption_l_100km": 4.2
+    },
+    {
+      "engine_cc": 3800,
+      "cylinders": 6,
+      "horsepower": 320,
+      "weight_kg": 1900,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.7,
+      "fuel_consumption_l_100km": 10.7
+    },
+    {
+      "engine_cc": 2900,
+      "cylinders": 4,
+      "horsepower": 200,
+      "weight_kg": 1500,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 6.9,
+      "fuel_consumption_l_100km": 9.3
+    },
+    {
+      "engine_cc": 4900,
+      "cylinders": 8,
+      "horsepower": 480,
+      "weight_kg": 2250,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.3,
+      "fuel_consumption_l_100km": 14.8
+    },
+    {
+      "engine_cc": 1700,
+      "cylinders": 4,
+      "horsepower": 135,
+      "weight_kg": 1200,
+      "fuel_type": "Electric",
+      "transmission": "Automatic",
+      "acceleration_0_100": 9.6,
+      "fuel_consumption_l_100km": 0.0
+    },
+    {
+      "engine_cc": 3600,
+      "cylinders": 6,
+      "horsepower": 290,
+      "weight_kg": 1850,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.9,
+      "fuel_consumption_l_100km": 11.2
+    },
+    {
+      "engine_cc": 2400,
+      "cylinders": 4,
+      "horsepower": 170,
+      "weight_kg": 1300,
+      "fuel_type": "Diesel",
+      "transmission": "Automatic",
+      "acceleration_0_100": 8.0,
+      "fuel_consumption_l_100km": 8.3
+    },
+    {
+      "engine_cc": 3800,
+      "cylinders": 6,
+      "horsepower": 330,
+      "weight_kg": 1900,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 5.6,
+      "fuel_consumption_l_100km": 11.0
+    },
+    {
+      "engine_cc": 4100,
+      "cylinders": 8,
+      "horsepower": 500,
+      "weight_kg": 2400,
+      "fuel_type": "Gasoline",
+      "transmission": "Manual",
+      "acceleration_0_100": 4.2,
+      "fuel_consumption_l_100km": 14.7
+    }
+  ]
+}

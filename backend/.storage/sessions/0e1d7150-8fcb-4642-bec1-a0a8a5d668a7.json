@@ -1,0 +1,236 @@
+{
+  "id": "0e1d7150-8fcb-4642-bec1-a0a8a5d668a7",
+  "name": "New Workflow",
+  "created_at": "2025-10-03T16:00:21.950696",
+  "updated_at": "2025-10-03T16:24:22.995560",
+  "workflow": {
+    "name": "New Workflow",
+    "nodes": [
+      {
+        "id": "image.model-1759500027535",
+        "type": "customNode",
+        "position": {
+          "x": 96,
+          "y": 384
+        },
+        "data": {
+          "type": "image.model",
+          "label": "Image Model",
+          "spec": {
+            "type": "image.model",
+            "label": "Image Model",
+            "category": "images",
+            "description": "Load Stable Diffusion, Flux, or other image generation models",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "model",
+                "type": "model",
+                "label": "Model",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "info",
+                "type": "params",
+                "label": "Model Info",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "model_name",
+                "type": "select",
+                "label": "Model",
+                "default": "stabilityai/stable-diffusion-xl-base-1.0",
+                "required": false,
+                "description": "Image generation model to use",
+                "options": [
+                  "stabilityai/stable-diffusion-3-medium",
+                  "black-forest-labs/FLUX.1-dev",
+                  "stabilityai/stable-diffusion-xl-base-1.0",
+                  "runwayml/stable-diffusion-v1-5",
+                  "Qwen/Qwen-VL"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "device",
+                "type": "select",
+                "label": "Device",
+                "default": "auto",
+                "required": false,
+                "description": "Device to run model on",
+                "options": [
+                  "auto",
+                  "cpu",
+                  "cuda",
+                  "mps"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "use_local",
+                "type": "boolean",
+                "label": "Use Local Model",
+                "default": false,
+                "required": false,
+                "description": "Load model from ./models directory",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83c\udfa8",
+            "color": "#FF6B9D"
+          },
+          "params": {
+            "model_name": "runwayml/stable-diffusion-v1-5",
+            "device": "auto",
+            "use_local": false
+          },
+          "status": "success",
+          "executionTime": 2.43631911277771
+        },
+        "width": 304,
+        "height": 403,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 96,
+          "y": 384
+        },
+        "dragging": false
+      },
+      {
+        "id": "image.prompt-1759500289601",
+        "type": "customNode",
+        "position": {
+          "x": 936,
+          "y": 360
+        },
+        "data": {
+          "type": "image.prompt",
+          "label": "Prompt",
+          "spec": {
+            "type": "image.prompt",
+            "label": "Prompt",
+            "category": "images",
+            "description": "Create detailed prompts for image generation",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "prompt",
+                "type": "params",
+                "label": "Prompt",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "negative_prompt",
+                "type": "params",
+                "label": "Negative Prompt",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "prompt",
+                "type": "string",
+                "label": "Prompt",
+                "default": "A beautiful landscape with mountains and a lake",
+                "required": false,
+                "description": "Describe what you want to generate",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "negative_prompt",
+                "type": "string",
+                "label": "Negative Prompt",
+                "default": "blurry, low quality, distorted",
+                "required": false,
+                "description": "What to avoid in the image",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "enhance_prompt",
+                "type": "boolean",
+                "label": "Enhance Prompt",
+                "default": true,
+                "required": false,
+                "description": "Add quality keywords automatically",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "language",
+                "type": "select",
+                "label": "Language",
+                "default": "english",
+                "required": false,
+                "description": "Prompt language",
+                "options": [
+                  "english",
+                  "italian"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udcac",
+            "color": "#C77DFF"
+          },
+          "params": {
+            "prompt": "A beautiful landscape with mountains and a lake",
+            "negative_prompt": "blurry, low quality, distorted",
+            "enhance_prompt": true,
+            "language": "english"
+          },
+          "status": "success",
+          "executionTime": 6.29425048828125e-05
+        },
+        "width": 304,
+        "height": 494,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 936,
+          "y": 360
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [],
+    "executionResults": {}
+  }
+}

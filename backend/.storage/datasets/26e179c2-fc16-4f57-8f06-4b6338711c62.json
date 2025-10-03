@@ -1,0 +1,605 @@
+{
+  "id": "26e179c2-fc16-4f57-8f06-4b6338711c62",
+  "name": "Monthly Sales Timeseries",
+  "created_at": "2025-10-01T14:42:32.391393",
+  "metadata": {
+    "rows": 72,
+    "columns": [
+      "date",
+      "product_category",
+      "units_sold",
+      "revenue_euros",
+      "marketing_spend",
+      "season"
+    ],
+    "description": "Generate monthly sales timeseries (24 months). Date: YYYY-MM format. Product_category: Electronics, Clothing, Food, Books. Units_sold (100-5000), revenue_euros (calculated from units with realistic pr",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "date": "object",
+      "product_category": "object",
+      "units_sold": "int64",
+      "revenue_euros": "int64",
+      "marketing_spend": "int64",
+      "season": "object"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "date": "2021-01",
+      "product_category": "Electronics",
+      "units_sold": 4325,
+      "revenue_euros": 648750,
+      "marketing_spend": 15000,
+      "season": "Winter"
+    },
+    {
+      "date": "2021-02",
+      "product_category": "Clothing",
+      "units_sold": 2764,
+      "revenue_euros": 415000,
+      "marketing_spend": 12000,
+      "season": "Winter"
+    },
+    {
+      "date": "2021-03",
+      "product_category": "Food",
+      "units_sold": 1920,
+      "revenue_euros": 38400,
+      "marketing_spend": 8000,
+      "season": "Spring"
+    },
+    {
+      "date": "2021-04",
+      "product_category": "Books",
+      "units_sold": 1540,
+      "revenue_euros": 23100,
+      "marketing_spend": 3000,
+      "season": "Spring"
+    },
+    {
+      "date": "2021-05",
+      "product_category": "Electronics",
+      "units_sold": 3521,
+      "revenue_euros": 528150,
+      "marketing_spend": 10000,
+      "season": "Spring"
+    },
+    {
+      "date": "2021-06",
+      "product_category": "Clothing",
+      "units_sold": 4850,
+      "revenue_euros": 727500,
+      "marketing_spend": 15000,
+      "season": "Summer"
+    },
+    {
+      "date": "2021-07",
+      "product_category": "Food",
+      "units_sold": 2920,
+      "revenue_euros": 58400,
+      "marketing_spend": 5000,
+      "season": "Summer"
+    },
+    {
+      "date": "2021-08",
+      "product_category": "Books",
+      "units_sold": 2100,
+      "revenue_euros": 31500,
+      "marketing_spend": 4000,
+      "season": "Summer"
+    },
+    {
+      "date": "2021-09",
+      "product_category": "Electronics",
+      "units_sold": 4100,
+      "revenue_euros": 615000,
+      "marketing_spend": 12000,
+      "season": "Fall"
+    },
+    {
+      "date": "2021-10",
+      "product_category": "Clothing",
+      "units_sold": 3700,
+      "revenue_euros": 555000,
+      "marketing_spend": 18000,
+      "season": "Fall"
+    },
+    {
+      "date": "2021-11",
+      "product_category": "Food",
+      "units_sold": 2200,
+      "revenue_euros": 44000,
+      "marketing_spend": 7000,
+      "season": "Fall"
+    },
+    {
+      "date": "2021-12",
+      "product_category": "Books",
+      "units_sold": 4800,
+      "revenue_euros": 72000,
+      "marketing_spend": 16000,
+      "season": "Winter"
+    },
+    {
+      "date": "2022-01",
+      "product_category": "Electronics",
+      "units_sold": 4500,
+      "revenue_euros": 675000,
+      "marketing_spend": 14000,
+      "season": "Winter"
+    },
+    {
+      "date": "2022-02",
+      "product_category": "Clothing",
+      "units_sold": 2800,
+      "revenue_euros": 420000,
+      "marketing_spend": 13000,
+      "season": "Winter"
+    },
+    {
+      "date": "2022-03",
+      "product_category": "Food",
+      "units_sold": 2000,
+      "revenue_euros": 40000,
+      "marketing_spend": 9000,
+      "season": "Spring"
+    },
+    {
+      "date": "2022-04",
+      "product_category": "Books",
+      "units_sold": 1600,
+      "revenue_euros": 24000,
+      "marketing_spend": 3500,
+      "season": "Spring"
+    },
+    {
+      "date": "2022-05",
+      "product_category": "Electronics",
+      "units_sold": 3600,
+      "revenue_euros": 540000,
+      "marketing_spend": 11000,
+      "season": "Spring"
+    },
+    {
+      "date": "2022-06",
+      "product_category": "Clothing",
+      "units_sold": 4900,
+      "revenue_euros": 735000,
+      "marketing_spend": 16000,
+      "season": "Summer"
+    },
+    {
+      "date": "2022-07",
+      "product_category": "Food",
+      "units_sold": 3000,
+      "revenue_euros": 60000,
+      "marketing_spend": 6000,
+      "season": "Summer"
+    },
+    {
+      "date": "2022-08",
+      "product_category": "Books",
+      "units_sold": 2300,
+      "revenue_euros": 34500,
+      "marketing_spend": 4500,
+      "season": "Summer"
+    },
+    {
+      "date": "2022-09",
+      "product_category": "Electronics",
+      "units_sold": 4200,
+      "revenue_euros": 630000,
+      "marketing_spend": 13000,
+      "season": "Fall"
+    },
+    {
+      "date": "2022-10",
+      "product_category": "Clothing",
+      "units_sold": 3800,
+      "revenue_euros": 570000,
+      "marketing_spend": 17000,
+      "season": "Fall"
+    },
+    {
+      "date": "2022-11",
+      "product_category": "Food",
+      "units_sold": 2400,
+      "revenue_euros": 48000,
+      "marketing_spend": 8000,
+      "season": "Fall"
+    },
+    {
+      "date": "2022-12",
+      "product_category": "Books",
+      "units_sold": 4900,
+      "revenue_euros": 73500,
+      "marketing_spend": 15000,
+      "season": "Winter"
+    },
+    {
+      "date": "2023-01",
+      "product_category": "Electronics",
+      "units_sold": 4600,
+      "revenue_euros": 690000,
+      "marketing_spend": 15000,
+      "season": "Winter"
+    },
+    {
+      "date": "2023-02",
+      "product_category": "Clothing",
+      "units_sold": 2900,
+      "revenue_euros": 435000,
+      "marketing_spend": 12000,
+      "season": "Winter"
+    },
+    {
+      "date": "2023-03",
+      "product_category": "Food",
+      "units_sold": 2100,
+      "revenue_euros": 42000,
+      "marketing_spend": 10000,
+      "season": "Spring"
+    },
+    {
+      "date": "2023-04",
+      "product_category": "Books",
+      "units_sold": 1700,
+      "revenue_euros": 25500,
+      "marketing_spend": 3000,
+      "season": "Spring"
+    },
+    {
+      "date": "2023-05",
+      "product_category": "Electronics",
+      "units_sold": 3700,
+      "revenue_euros": 555000,
+      "marketing_spend": 13000,
+      "season": "Spring"
+    },
+    {
+      "date": "2023-06",
+      "product_category": "Clothing",
+      "units_sold": 5000,
+      "revenue_euros": 750000,
+      "marketing_spend": 18000,
+      "season": "Summer"
+    },
+    {
+      "date": "2023-07",
+      "product_category": "Food",
+      "units_sold": 3100,
+      "revenue_euros": 62000,
+      "marketing_spend": 7000,
+      "season": "Summer"
+    },
+    {
+      "date": "2023-08",
+      "product_category": "Books",
+      "units_sold": 2400,
+      "revenue_euros": 36000,
+      "marketing_spend": 4000,
+      "season": "Summer"
+    },
+    {
+      "date": "2023-09",
+      "product_category": "Electronics",
+      "units_sold": 4300,
+      "revenue_euros": 645000,
+      "marketing_spend": 12000,
+      "season": "Fall"
+    },
+    {
+      "date": "2023-10",
+      "product_category": "Clothing",
+      "units_sold": 3900,
+      "revenue_euros": 585000,
+      "marketing_spend": 16000,
+      "season": "Fall"
+    },
+    {
+      "date": "2023-11",
+      "product_category": "Food",
+      "units_sold": 2500,
+      "revenue_euros": 50000,
+      "marketing_spend": 8000,
+      "season": "Fall"
+    },
+    {
+      "date": "2023-12",
+      "product_category": "Books",
+      "units_sold": 5000,
+      "revenue_euros": 75000,
+      "marketing_spend": 17000,
+      "season": "Winter"
+    },
+    {
+      "date": "2021-01",
+      "product_category": "Clothing",
+      "units_sold": 3100,
+      "revenue_euros": 465000,
+      "marketing_spend": 11000,
+      "season": "Winter"
+    },
+    {
+      "date": "2021-02",
+      "product_category": "Food",
+      "units_sold": 1800,
+      "revenue_euros": 36000,
+      "marketing_spend": 6000,
+      "season": "Winter"
+    },
+    {
+      "date": "2021-03",
+      "product_category": "Books",
+      "units_sold": 1300,
+      "revenue_euros": 19500,
+      "marketing_spend": 2500,
+      "season": "Spring"
+    },
+    {
+      "date": "2021-04",
+      "product_category": "Electronics",
+      "units_sold": 2900,
+      "revenue_euros": 435000,
+      "marketing_spend": 9000,
+      "season": "Spring"
+    },
+    {
+      "date": "2021-05",
+      "product_category": "Clothing",
+      "units_sold": 4500,
+      "revenue_euros": 675000,
+      "marketing_spend": 14000,
+      "season": "Spring"
+    },
+    {
+      "date": "2021-06",
+      "product_category": "Food",
+      "units_sold": 3600,
+      "revenue_euros": 72000,
+      "marketing_spend": 10000,
+      "season": "Summer"
+    },
+    {
+      "date": "2021-07",
+      "product_category": "Books",
+      "units_sold": 2000,
+      "revenue_euros": 30000,
+      "marketing_spend": 5000,
+      "season": "Summer"
+    },
+    {
+      "date": "2021-08",
+      "product_category": "Electronics",
+      "units_sold": 3100,
+      "revenue_euros": 465000,
+      "marketing_spend": 13000,
+      "season": "Summer"
+    },
+    {
+      "date": "2021-09",
+      "product_category": "Clothing",
+      "units_sold": 3700,
+      "revenue_euros": 555000,
+      "marketing_spend": 15000,
+      "season": "Fall"
+    },
+    {
+      "date": "2021-10",
+      "product_category": "Food",
+      "units_sold": 2200,
+      "revenue_euros": 44000,
+      "marketing_spend": 7000,
+      "season": "Fall"
+    },
+    {
+      "date": "2021-11",
+      "product_category": "Books",
+      "units_sold": 4800,
+      "revenue_euros": 72000,
+      "marketing_spend": 16000,
+      "season": "Fall"
+    },
+    {
+      "date": "2021-12",
+      "product_category": "Electronics",
+      "units_sold": 4300,
+      "revenue_euros": 645000,
+      "marketing_spend": 13000,
+      "season": "Winter"
+    },
+    {
+      "date": "2022-01",
+      "product_category": "Clothing",
+      "units_sold": 3200,
+      "revenue_euros": 480000,
+      "marketing_spend": 11000,
+      "season": "Winter"
+    },
+    {
+      "date": "2022-02",
+      "product_category": "Food",
+      "units_sold": 1900,
+      "revenue_euros": 38000,
+      "marketing_spend": 6000,
+      "season": "Winter"
+    },
+    {
+      "date": "2022-03",
+      "product_category": "Books",
+      "units_sold": 1400,
+      "revenue_euros": 21000,
+      "marketing_spend": 3000,
+      "season": "Spring"
+    },
+    {
+      "date": "2022-04",
+      "product_category": "Electronics",
+      "units_sold": 3000,
+      "revenue_euros": 450000,
+      "marketing_spend": 9000,
+      "season": "Spring"
+    },
+    {
+      "date": "2022-05",
+      "product_category": "Clothing",
+      "units_sold": 4600,
+      "revenue_euros": 690000,
+      "marketing_spend": 14000,
+      "season": "Spring"
+    },
+    {
+      "date": "2022-06",
+      "product_category": "Food",
+      "units_sold": 3700,
+      "revenue_euros": 74000,
+      "marketing_spend": 10000,
+      "season": "Summer"
+    },
+    {
+      "date": "2022-07",
+      "product_category": "Books",
+      "units_sold": 2100,
+      "revenue_euros": 31500,
+      "marketing_spend": 5000,
+      "season": "Summer"
+    },
+    {
+      "date": "2022-08",
+      "product_category": "Electronics",
+      "units_sold": 3200,
+      "revenue_euros": 480000,
+      "marketing_spend": 13000,
+      "season": "Summer"
+    },
+    {
+      "date": "2022-09",
+      "product_category": "Clothing",
+      "units_sold": 3800,
+      "revenue_euros": 570000,
+      "marketing_spend": 15000,
+      "season": "Fall"
+    },
+    {
+      "date": "2022-10",
+      "product_category": "Food",
+      "units_sold": 2300,
+      "revenue_euros": 46000,
+      "marketing_spend": 7000,
+      "season": "Fall"
+    },
+    {
+      "date": "2022-11",
+      "product_category": "Books",
+      "units_sold": 4900,
+      "revenue_euros": 73500,
+      "marketing_spend": 16000,
+      "season": "Fall"
+    },
+    {
+      "date": "2022-12",
+      "product_category": "Electronics",
+      "units_sold": 4400,
+      "revenue_euros": 660000,
+      "marketing_spend": 13000,
+      "season": "Winter"
+    },
+    {
+      "date": "2023-01",
+      "product_category": "Clothing",
+      "units_sold": 3300,
+      "revenue_euros": 495000,
+      "marketing_spend": 11000,
+      "season": "Winter"
+    },
+    {
+      "date": "2023-02",
+      "product_category": "Food",
+      "units_sold": 2000,
+      "revenue_euros": 40000,
+      "marketing_spend": 6000,
+      "season": "Winter"
+    },
+    {
+      "date": "2023-03",
+      "product_category": "Books",
+      "units_sold": 1500,
+      "revenue_euros": 22500,
+      "marketing_spend": 3000,
+      "season": "Spring"
+    },
+    {
+      "date": "2023-04",
+      "product_category": "Electronics",
+      "units_sold": 3100,
+      "revenue_euros": 465000,
+      "marketing_spend": 9000,
+      "season": "Spring"
+    },
+    {
+      "date": "2023-05",
+      "product_category": "Clothing",
+      "units_sold": 4700,
+      "revenue_euros": 705000,
+      "marketing_spend": 14000,
+      "season": "Spring"
+    },
+    {
+      "date": "2023-06",
+      "product_category": "Food",
+      "units_sold": 3800,
+      "revenue_euros": 76000,
+      "marketing_spend": 10000,
+      "season": "Summer"
+    },
+    {
+      "date": "2023-07",
+      "product_category": "Books",
+      "units_sold": 2200,
+      "revenue_euros": 33000,
+      "marketing_spend": 5000,
+      "season": "Summer"
+    },
+    {
+      "date": "2023-08",
+      "product_category": "Electronics",
+      "units_sold": 3300,
+      "revenue_euros": 495000,
+      "marketing_spend": 13000,
+      "season": "Summer"
+    },
+    {
+      "date": "2023-09",
+      "product_category": "Clothing",
+      "units_sold": 3900,
+      "revenue_euros": 585000,
+      "marketing_spend": 15000,
+      "season": "Fall"
+    },
+    {
+      "date": "2023-10",
+      "product_category": "Food",
+      "units_sold": 2400,
+      "revenue_euros": 48000,
+      "marketing_spend": 7000,
+      "season": "Fall"
+    },
+    {
+      "date": "2023-11",
+      "product_category": "Books",
+      "units_sold": 5000,
+      "revenue_euros": 75000,
+      "marketing_spend": 16000,
+      "season": "Fall"
+    },
+    {
+      "date": "2023-12",
+      "product_category": "Electronics",
+      "units_sold": 4600,
+      "revenue_euros": 690000,
+      "marketing_spend": 15000,
+      "season": "Winter"
+    }
+  ]
+}

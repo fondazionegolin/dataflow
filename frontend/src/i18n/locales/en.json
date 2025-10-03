@@ -1,0 +1,232 @@
+{
+  "app": {
+    "title": "DataFlow Platform",
+    "subtitle": "Visual Data Analysis"
+  },
+  "toolbar": {
+    "hint": "Click \"Run\" on each node to execute",
+    "open": "Open",
+    "export": "Export",
+    "clear": "Clear",
+    "settings": "Settings",
+    "clearConfirm": "Are you sure you want to clear the workflow?"
+  },
+  "palette": {
+    "title": "Node Palette",
+    "search": "Search nodes...",
+    "noResults": "No nodes found",
+    "categories": {
+      "sources": "Data Sources",
+      "transform": "Transform",
+      "visualization": "Visualization",
+      "machine_learning": "Machine Learning"
+    }
+  },
+  "node": {
+    "run": "Run",
+    "runAgain": "Run Again",
+    "running": "Running...",
+    "generating": "Generating...",
+    "config": "Configuration",
+    "results": "Results",
+    "advanced": "Advanced",
+    "noParams": "No parameters",
+    "executeToSee": "Execute to see preview",
+    "noPreview": "No preview available",
+    "example": "Example",
+    "required": "Required"
+  },
+  "preview": {
+    "normal": "Normal",
+    "large": "Large",
+    "xlarge": "X-Large",
+    "selected": "Selected",
+    "rows": "rows",
+    "columns": "columns"
+  },
+  "nodes": {
+    "ai.generate_dataset": {
+      "label": "AI Generate Dataset",
+      "description": "Generate realistic datasets using OpenAI based on natural language description"
+    },
+    "ai.load_dataset": {
+      "label": "Load AI Dataset",
+      "description": "Load a previously saved AI-generated dataset from database"
+    },
+    "csv.synthetic": {
+      "label": "Generate Synthetic Data",
+      "description": "Generate synthetic datasets for classification or regression"
+    },
+    "data.select": {
+      "label": "Select Columns",
+      "description": "Select or exclude specific columns from a table"
+    },
+    "data.transform": {
+      "label": "Transform Columns",
+      "description": "Apply transformations to data (standardization, normalization, etc.)"
+    },
+    "data.split": {
+      "label": "Train/Test Split",
+      "description": "Split dataset into training and test sets"
+    },
+    "plot.2d": {
+      "label": "2D Scatter Plot",
+      "description": "Create interactive 2D scatter plot with color and size mapping"
+    },
+    "plot.3d": {
+      "label": "3D Scatter Plot",
+      "description": "Create interactive 3D scatter plot with rotation and zoom"
+    },
+    "plot.histogram": {
+      "label": "Histogram",
+      "description": "Create histogram for data distribution analysis"
+    },
+    "ml.regression": {
+      "label": "Regression",
+      "description": "Train regression model (linear, ridge, lasso, etc.)"
+    },
+    "ml.predict": {
+      "label": "Predict",
+      "description": "Predict values using trained model"
+    },
+    "nlp.sentiment": {
+      "label": "Sentiment Analysis",
+      "description": "Analyze sentiment of text (positive/negative/neutral)"
+    },
+    "nlp.clean_text": {
+      "label": "Clean Text",
+      "description": "Clean and normalize text (lowercase, remove punctuation, etc.)"
+    },
+    "ml.kmeans_clustering": {
+      "label": "K-Means Clustering",
+      "description": "K-Means clustering with automatic optimal K detection"
+    }
+  },
+  "landing": {
+    "newWorkflow": "New Workflow",
+    "loading": "Loading...",
+    "noSessions": "No Sessions",
+    "createFirst": "Create your first workflow to get started",
+    "nodes": "nodes",
+    "created": "Created",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this session?"
+  },
+  "workflow": {
+    "backToSessions": "Back to Sessions",
+    "saving": "Saving...",
+    "saved": "Saved"
+  },
+  "table": {
+    "view": "View Table",
+    "save": "Save",
+    "hint": "Double click on a cell to edit • Enter to save • Esc to cancel"
+  },
+  "templates": {
+    "custom": "Custom",
+    "classification_iris": "Classification: Iris Flowers",
+    "classification_customer_churn": "Classification: Customer Churn",
+    "regression_house_prices": "Regression: House Prices",
+    "regression_car_performance": "Regression: Car Performance",
+    "nlp_sentiment_reviews": "NLP: Sentiment Reviews",
+    "nlp_spam_detection": "NLP: Spam Detection",
+    "timeseries_sales": "Time Series: Sales",
+    "clustering_customer_segments": "Clustering: Customer Segments"
+  },
+  "wiki": {
+    "title": "DataFlow Wiki",
+    "sections": {
+      "overview": "Overview",
+      "sources": "Data Sources",
+      "transform": "Transform",
+      "visualization": "Visualization",
+      "ml": "Machine Learning",
+      "nlp": "NLP",
+      "examples": "Workflow Examples"
+    },
+    "overview": {
+      "welcome": "Welcome to DataFlow",
+      "description": "DataFlow is a visual workflow platform for data analysis, machine learning, and NLP tasks. Build complex data pipelines by connecting nodes in an intuitive drag-and-drop interface.",
+      "gettingStarted": "Getting Started",
+      "steps": {
+        "1": "Drag nodes from the palette on the left",
+        "2": "Configure node parameters",
+        "3": "Connect nodes by dragging from output handles to input handles",
+        "4": "Execute nodes individually or run the entire workflow",
+        "5": "View results in real-time"
+      },
+      "categories": "Node Categories"
+    },
+    "nodeCategories": {
+      "sources": {
+        "title": "Data Sources",
+        "description": "Load data from files, databases, or generate synthetic datasets"
+      },
+      "transform": {
+        "title": "Transform",
+        "description": "Clean, filter, merge, and transform your data"
+      },
+      "visualization": {
+        "title": "Visualization",
+        "description": "Create interactive 2D/3D plots and charts"
+      },
+      "ml": {
+        "title": "Machine Learning",
+        "description": "Train and evaluate classification and regression models"
+      },
+      "nlp": {
+        "title": "NLP",
+        "description": "Text analysis, sentiment analysis, and topic modeling"
+      },
+      "clustering": {
+        "title": "Clustering",
+        "description": "Discover patterns with K-Means and other algorithms"
+      }
+    },
+    "common": {
+      "inputs": "Inputs",
+      "outputs": "Outputs",
+      "parameters": "Parameters",
+      "example": "Example Use Case",
+      "features": "Key Features",
+      "required": "required",
+      "default": "default",
+      "options": "Options"
+    },
+    "examples": {
+      "title": "Workflow Examples",
+      "cleaning": {
+        "title": "Data Cleaning Pipeline",
+        "description": "Clean and prepare raw data for analysis",
+        "diagram": "CSV → Clean → Filter → Select → Output"
+      },
+      "visualization": {
+        "title": "Data Visualization",
+        "description": "Explore and visualize your data",
+        "diagram": "Dataset → [2D Plot, 3D Plot, Histogram]"
+      },
+      "regression": {
+        "title": "Regression Model",
+        "description": "Train a model to predict continuous values",
+        "diagram": "CSV → Select → Split → [Train → Regression, Test] → Predict → Plot"
+      },
+      "classification": {
+        "title": "Classification Model",
+        "description": "Classify data into categories",
+        "diagram": "Dataset → Split → [Train → Classify, Test] → Predict → Plot"
+      },
+      "sentiment": {
+        "title": "NLP Sentiment Analysis",
+        "description": "Analyze sentiment in text data",
+        "diagram": "CSV → Tokenize → Sentiment → Filter → Histogram"
+      },
+      "clustering": {
+        "title": "Clustering Analysis",
+        "description": "Discover natural groups in your data",
+        "diagram": "CSV → Select → K-Means → [2D Plot, 3D Plot]"
+      },
+      "steps": "Steps",
+      "tips": "Tips"
+    }
+  }
+}

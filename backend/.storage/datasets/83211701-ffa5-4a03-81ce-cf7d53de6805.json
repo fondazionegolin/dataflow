@@ -1,0 +1,603 @@
+{
+  "id": "83211701-ffa5-4a03-81ce-cf7d53de6805",
+  "name": "House Price Prediction",
+  "created_at": "2025-10-01T15:36:30.708394",
+  "metadata": {
+    "rows": 57,
+    "columns": [
+      "square_meters",
+      "bedrooms",
+      "bathrooms",
+      "age_years",
+      "distance_center_km",
+      "garage",
+      "garden",
+      "price_euros"
+    ],
+    "description": "Generate house price dataset. Square_meters (50-300), bedrooms (1-5), bathrooms (1-3), age_years (0-50), distance_center_km (0-30). Garage: Yes/No, Garden: Yes/No. Price_euros should correlate positiv",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "square_meters": "int64",
+      "bedrooms": "int64",
+      "bathrooms": "int64",
+      "age_years": "int64",
+      "distance_center_km": "int64",
+      "garage": "object",
+      "garden": "object",
+      "price_euros": "int64"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "square_meters": 155,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 5,
+      "distance_center_km": 5,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 530000
+    },
+    {
+      "square_meters": 220,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 20,
+      "distance_center_km": 15,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 460000
+    },
+    {
+      "square_meters": 100,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 10,
+      "distance_center_km": 3,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 320000
+    },
+    {
+      "square_meters": 75,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 2,
+      "distance_center_km": 1,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 210000
+    },
+    {
+      "square_meters": 280,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "age_years": 15,
+      "distance_center_km": 25,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 740000
+    },
+    {
+      "square_meters": 135,
+      "bedrooms": 3,
+      "bathrooms": 1,
+      "age_years": 30,
+      "distance_center_km": 10,
+      "garage": "No",
+      "garden": "No",
+      "price_euros": 320000
+    },
+    {
+      "square_meters": 200,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 8,
+      "distance_center_km": 12,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 580000
+    },
+    {
+      "square_meters": 90,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 25,
+      "distance_center_km": 8,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 250000
+    },
+    {
+      "square_meters": 160,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 3,
+      "distance_center_km": 2,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 510000
+    },
+    {
+      "square_meters": 240,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "age_years": 18,
+      "distance_center_km": 20,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 680000
+    },
+    {
+      "square_meters": 110,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 12,
+      "distance_center_km": 7,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 330000
+    },
+    {
+      "square_meters": 150,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 10,
+      "distance_center_km": 6,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 470000
+    },
+    {
+      "square_meters": 70,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 5,
+      "distance_center_km": 4,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 220000
+    },
+    {
+      "square_meters": 130,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 15,
+      "distance_center_km": 9,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 395000
+    },
+    {
+      "square_meters": 180,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "age_years": 0,
+      "distance_center_km": 1,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 610000
+    },
+    {
+      "square_meters": 95,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 28,
+      "distance_center_km": 11,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 240000
+    },
+    {
+      "square_meters": 125,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 7,
+      "distance_center_km": 4,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 385000
+    },
+    {
+      "square_meters": 175,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 12,
+      "distance_center_km": 14,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 530000
+    },
+    {
+      "square_meters": 140,
+      "bedrooms": 3,
+      "bathrooms": 1,
+      "age_years": 20,
+      "distance_center_km": 10,
+      "garage": "No",
+      "garden": "No",
+      "price_euros": 350000
+    },
+    {
+      "square_meters": 60,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 2,
+      "distance_center_km": 3,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 190000
+    },
+    {
+      "square_meters": 250,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "age_years": 5,
+      "distance_center_km": 15,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 720000
+    },
+    {
+      "square_meters": 105,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 7,
+      "distance_center_km": 6,
+      "garage": "No",
+      "garden": "No",
+      "price_euros": 290000
+    },
+    {
+      "square_meters": 175,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "age_years": 3,
+      "distance_center_km": 2,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 600000
+    },
+    {
+      "square_meters": 90,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 15,
+      "distance_center_km": 5,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 240000
+    },
+    {
+      "square_meters": 140,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 10,
+      "distance_center_km": 7,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 400000
+    },
+    {
+      "square_meters": 220,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "age_years": 1,
+      "distance_center_km": 1,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 680000
+    },
+    {
+      "square_meters": 65,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 12,
+      "distance_center_km": 4,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 200000
+    },
+    {
+      "square_meters": 130,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 18,
+      "distance_center_km": 9,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 380000
+    },
+    {
+      "square_meters": 200,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 5,
+      "distance_center_km": 3,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 600000
+    },
+    {
+      "square_meters": 110,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 22,
+      "distance_center_km": 8,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 290000
+    },
+    {
+      "square_meters": 150,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 10,
+      "distance_center_km": 6,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 450000
+    },
+    {
+      "square_meters": 100,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 15,
+      "distance_center_km": 12,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 270000
+    },
+    {
+      "square_meters": 190,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "age_years": 4,
+      "distance_center_km": 2,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 650000
+    },
+    {
+      "square_meters": 80,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 30,
+      "distance_center_km": 15,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 220000
+    },
+    {
+      "square_meters": 170,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 8,
+      "distance_center_km": 5,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 520000
+    },
+    {
+      "square_meters": 90,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 28,
+      "distance_center_km": 10,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 240000
+    },
+    {
+      "square_meters": 130,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 12,
+      "distance_center_km": 6,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 385000
+    },
+    {
+      "square_meters": 250,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "age_years": 2,
+      "distance_center_km": 1,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 750000
+    },
+    {
+      "square_meters": 60,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 30,
+      "distance_center_km": 20,
+      "garage": "No",
+      "garden": "No",
+      "price_euros": 150000
+    },
+    {
+      "square_meters": 145,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 5,
+      "distance_center_km": 3,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 470000
+    },
+    {
+      "square_meters": 115,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 15,
+      "distance_center_km": 9,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 300000
+    },
+    {
+      "square_meters": 160,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "age_years": 8,
+      "distance_center_km": 12,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 580000
+    },
+    {
+      "square_meters": 100,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 11,
+      "distance_center_km": 8,
+      "garage": "No",
+      "garden": "No",
+      "price_euros": 280000
+    },
+    {
+      "square_meters": 175,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 6,
+      "distance_center_km": 6,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 610000
+    },
+    {
+      "square_meters": 85,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 25,
+      "distance_center_km": 10,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 230000
+    },
+    {
+      "square_meters": 135,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 12,
+      "distance_center_km": 4,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 400000
+    },
+    {
+      "square_meters": 55,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 40,
+      "distance_center_km": 25,
+      "garage": "No",
+      "garden": "No",
+      "price_euros": 140000
+    },
+    {
+      "square_meters": 125,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 9,
+      "distance_center_km": 5,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 370000
+    },
+    {
+      "square_meters": 210,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "age_years": 3,
+      "distance_center_km": 2,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 630000
+    },
+    {
+      "square_meters": 90,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "age_years": 10,
+      "distance_center_km": 7,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 260000
+    },
+    {
+      "square_meters": 175,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 1,
+      "distance_center_km": 1,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 620000
+    },
+    {
+      "square_meters": 120,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 5,
+      "distance_center_km": 3,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 390000
+    },
+    {
+      "square_meters": 140,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "age_years": 15,
+      "distance_center_km": 9,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 410000
+    },
+    {
+      "square_meters": 250,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "age_years": 10,
+      "distance_center_km": 20,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 730000
+    },
+    {
+      "square_meters": 160,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "age_years": 12,
+      "distance_center_km": 10,
+      "garage": "Yes",
+      "garden": "No",
+      "price_euros": 500000
+    },
+    {
+      "square_meters": 75,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "age_years": 20,
+      "distance_center_km": 15,
+      "garage": "No",
+      "garden": "Yes",
+      "price_euros": 210000
+    },
+    {
+      "square_meters": 180,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "age_years": 0,
+      "distance_center_km": 1,
+      "garage": "Yes",
+      "garden": "Yes",
+      "price_euros": 650000
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "version": "0.1.0",
+  "name": "Regression Example",
+  "description": "A regression workflow with synthetic data and evaluation",
+  "seed": 42,
+  "nodes": [
+    {
+      "id": "synthetic-1",
+      "type": "csv.synthetic",
+      "label": "Generate Data",
+      "params": {
+        "mode": "regression",
+        "n_samples": 500,
+        "n_features": 3,
+        "n_informative": 3,
+        "noise": 0.2,
+        "seed": 42
+      },
+      "position": { "x": 100, "y": 150 }
+    },
+    {
+      "id": "split-1",
+      "type": "data.split",
+      "label": "Split Data",
+      "params": {
+        "test_size": 0.25,
+        "seed": 42
+      },
+      "position": { "x": 400, "y": 150 }
+    },
+    {
+      "id": "regress-1",
+      "type": "ml.regression",
+      "label": "Train Model",
+      "params": {
+        "algorithm": "random_forest",
+        "target_column": "target",
+        "n_estimators": 50,
+        "max_depth": 5,
+        "cv_folds": 5
+      },
+      "position": { "x": 700, "y": 100 }
+    },
+    {
+      "id": "predict-1",
+      "type": "ml.predict",
+      "label": "Predict on Test",
+      "params": {},
+      "position": { "x": 1000, "y": 150 }
+    },
+    {
+      "id": "plot-1",
+      "type": "plot.2d",
+      "label": "Actual vs Predicted",
+      "params": {
+        "x_column": "target",
+        "y_column": "prediction",
+        "title": "Actual vs Predicted Values",
+        "opacity": 0.6,
+        "marker_size": 4
+      },
+      "position": { "x": 1300, "y": 150 }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source_node": "synthetic-1",
+      "source_port": "table",
+      "target_node": "split-1",
+      "target_port": "table"
+    },
+    {
+      "id": "e2",
+      "source_node": "split-1",
+      "source_port": "train",
+      "target_node": "regress-1",
+      "target_port": "train"
+    },
+    {
+      "id": "e3",
+      "source_node": "regress-1",
+      "source_port": "model",
+      "target_node": "predict-1",
+      "target_port": "model"
+    },
+    {
+      "id": "e4",
+      "source_node": "split-1",
+      "source_port": "test",
+      "target_node": "predict-1",
+      "target_port": "data"
+    },
+    {
+      "id": "e5",
+      "source_node": "predict-1",
+      "source_port": "predictions",
+      "target_node": "plot-1",
+      "target_port": "table"
+    }
+  ],
+  "metadata": {
+    "created": "2025-09-30",
+    "author": "DataFlow Platform",
+    "tags": ["regression", "machine-learning", "example"]
+  }
+}

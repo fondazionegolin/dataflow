@@ -1,0 +1,931 @@
+{
+  "id": "a79f88d5-276e-442e-9bb1-6d906d119392",
+  "name": "Customer Segmentation",
+  "created_at": "2025-10-01T15:11:04.185830",
+  "metadata": {
+    "rows": 100,
+    "columns": [
+      "customer_id",
+      "age",
+      "annual_income_euros",
+      "spending_score",
+      "purchase_frequency",
+      "avg_transaction_euros",
+      "loyalty_years"
+    ],
+    "description": "Generate customer segmentation dataset with distinct clusters. Age (18-70), annual_income_euros (15000-150000), spending_score (1-100), purchase_frequency (1-50 per year), avg_transaction_euros (20-50",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "customer_id": "int64",
+      "age": "int64",
+      "annual_income_euros": "int64",
+      "spending_score": "int64",
+      "purchase_frequency": "int64",
+      "avg_transaction_euros": "int64",
+      "loyalty_years": "int64"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "customer_id": 1,
+      "age": 22,
+      "annual_income_euros": 18000,
+      "spending_score": 45,
+      "purchase_frequency": 30,
+      "avg_transaction_euros": 25,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 2,
+      "age": 25,
+      "annual_income_euros": 22000,
+      "spending_score": 50,
+      "purchase_frequency": 35,
+      "avg_transaction_euros": 30,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 3,
+      "age": 19,
+      "annual_income_euros": 15000,
+      "spending_score": 40,
+      "purchase_frequency": 28,
+      "avg_transaction_euros": 20,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 4,
+      "age": 21,
+      "annual_income_euros": 21000,
+      "spending_score": 55,
+      "purchase_frequency": 32,
+      "avg_transaction_euros": 22,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 5,
+      "age": 20,
+      "annual_income_euros": 25000,
+      "spending_score": 60,
+      "purchase_frequency": 25,
+      "avg_transaction_euros": 27,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 6,
+      "age": 23,
+      "annual_income_euros": 30000,
+      "spending_score": 65,
+      "purchase_frequency": 40,
+      "avg_transaction_euros": 35,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 7,
+      "age": 18,
+      "annual_income_euros": 16000,
+      "spending_score": 42,
+      "purchase_frequency": 20,
+      "avg_transaction_euros": 18,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 8,
+      "age": 24,
+      "annual_income_euros": 23000,
+      "spending_score": 48,
+      "purchase_frequency": 38,
+      "avg_transaction_euros": 29,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 9,
+      "age": 26,
+      "annual_income_euros": 19000,
+      "spending_score": 54,
+      "purchase_frequency": 33,
+      "avg_transaction_euros": 31,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 10,
+      "age": 29,
+      "annual_income_euros": 28000,
+      "spending_score": 58,
+      "purchase_frequency": 29,
+      "avg_transaction_euros": 34,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 11,
+      "age": 35,
+      "annual_income_euros": 55000,
+      "spending_score": 80,
+      "purchase_frequency": 20,
+      "avg_transaction_euros": 400,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 12,
+      "age": 40,
+      "annual_income_euros": 75000,
+      "spending_score": 85,
+      "purchase_frequency": 15,
+      "avg_transaction_euros": 450,
+      "loyalty_years": 7
+    },
+    {
+      "customer_id": 13,
+      "age": 38,
+      "annual_income_euros": 68000,
+      "spending_score": 78,
+      "purchase_frequency": 18,
+      "avg_transaction_euros": 360,
+      "loyalty_years": 6
+    },
+    {
+      "customer_id": 14,
+      "age": 36,
+      "annual_income_euros": 72000,
+      "spending_score": 82,
+      "purchase_frequency": 17,
+      "avg_transaction_euros": 380,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 15,
+      "age": 42,
+      "annual_income_euros": 90000,
+      "spending_score": 90,
+      "purchase_frequency": 12,
+      "avg_transaction_euros": 500,
+      "loyalty_years": 8
+    },
+    {
+      "customer_id": 16,
+      "age": 45,
+      "annual_income_euros": 85000,
+      "spending_score": 88,
+      "purchase_frequency": 14,
+      "avg_transaction_euros": 470,
+      "loyalty_years": 9
+    },
+    {
+      "customer_id": 17,
+      "age": 47,
+      "annual_income_euros": 80000,
+      "spending_score": 87,
+      "purchase_frequency": 11,
+      "avg_transaction_euros": 460,
+      "loyalty_years": 10
+    },
+    {
+      "customer_id": 18,
+      "age": 50,
+      "annual_income_euros": 95000,
+      "spending_score": 92,
+      "purchase_frequency": 10,
+      "avg_transaction_euros": 480,
+      "loyalty_years": 12
+    },
+    {
+      "customer_id": 19,
+      "age": 60,
+      "annual_income_euros": 70000,
+      "spending_score": 75,
+      "purchase_frequency": 13,
+      "avg_transaction_euros": 350,
+      "loyalty_years": 11
+    },
+    {
+      "customer_id": 20,
+      "age": 65,
+      "annual_income_euros": 72000,
+      "spending_score": 80,
+      "purchase_frequency": 9,
+      "avg_transaction_euros": 390,
+      "loyalty_years": 13
+    },
+    {
+      "customer_id": 21,
+      "age": 68,
+      "annual_income_euros": 68000,
+      "spending_score": 74,
+      "purchase_frequency": 8,
+      "avg_transaction_euros": 370,
+      "loyalty_years": 14
+    },
+    {
+      "customer_id": 22,
+      "age": 70,
+      "annual_income_euros": 60000,
+      "spending_score": 72,
+      "purchase_frequency": 7,
+      "avg_transaction_euros": 340,
+      "loyalty_years": 15
+    },
+    {
+      "customer_id": 23,
+      "age": 29,
+      "annual_income_euros": 120000,
+      "spending_score": 65,
+      "purchase_frequency": 5,
+      "avg_transaction_euros": 490,
+      "loyalty_years": 3
+    },
+    {
+      "customer_id": 24,
+      "age": 30,
+      "annual_income_euros": 150000,
+      "spending_score": 70,
+      "purchase_frequency": 6,
+      "avg_transaction_euros": 500,
+      "loyalty_years": 4
+    },
+    {
+      "customer_id": 25,
+      "age": 27,
+      "annual_income_euros": 135000,
+      "spending_score": 68,
+      "purchase_frequency": 7,
+      "avg_transaction_euros": 450,
+      "loyalty_years": 3
+    },
+    {
+      "customer_id": 26,
+      "age": 32,
+      "annual_income_euros": 100000,
+      "spending_score": 77,
+      "purchase_frequency": 4,
+      "avg_transaction_euros": 450,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 27,
+      "age": 31,
+      "annual_income_euros": 90000,
+      "spending_score": 76,
+      "purchase_frequency": 5,
+      "avg_transaction_euros": 430,
+      "loyalty_years": 3
+    },
+    {
+      "customer_id": 28,
+      "age": 34,
+      "annual_income_euros": 120000,
+      "spending_score": 78,
+      "purchase_frequency": 6,
+      "avg_transaction_euros": 480,
+      "loyalty_years": 4
+    },
+    {
+      "customer_id": 29,
+      "age": 22,
+      "annual_income_euros": 18000,
+      "spending_score": 43,
+      "purchase_frequency": 31,
+      "avg_transaction_euros": 26,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 30,
+      "age": 25,
+      "annual_income_euros": 22000,
+      "spending_score": 51,
+      "purchase_frequency": 36,
+      "avg_transaction_euros": 31,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 31,
+      "age": 19,
+      "annual_income_euros": 15000,
+      "spending_score": 41,
+      "purchase_frequency": 20,
+      "avg_transaction_euros": 19,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 32,
+      "age": 21,
+      "annual_income_euros": 21000,
+      "spending_score": 54,
+      "purchase_frequency": 32,
+      "avg_transaction_euros": 23,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 33,
+      "age": 20,
+      "annual_income_euros": 25000,
+      "spending_score": 59,
+      "purchase_frequency": 27,
+      "avg_transaction_euros": 28,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 34,
+      "age": 23,
+      "annual_income_euros": 30000,
+      "spending_score": 64,
+      "purchase_frequency": 39,
+      "avg_transaction_euros": 33,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 35,
+      "age": 18,
+      "annual_income_euros": 16000,
+      "spending_score": 44,
+      "purchase_frequency": 21,
+      "avg_transaction_euros": 20,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 36,
+      "age": 24,
+      "annual_income_euros": 23000,
+      "spending_score": 49,
+      "purchase_frequency": 37,
+      "avg_transaction_euros": 30,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 37,
+      "age": 26,
+      "annual_income_euros": 19000,
+      "spending_score": 55,
+      "purchase_frequency": 34,
+      "avg_transaction_euros": 32,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 38,
+      "age": 29,
+      "annual_income_euros": 28000,
+      "spending_score": 57,
+      "purchase_frequency": 30,
+      "avg_transaction_euros": 36,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 39,
+      "age": 34,
+      "annual_income_euros": 60000,
+      "spending_score": 82,
+      "purchase_frequency": 22,
+      "avg_transaction_euros": 380,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 40,
+      "age": 39,
+      "annual_income_euros": 80000,
+      "spending_score": 84,
+      "purchase_frequency": 16,
+      "avg_transaction_euros": 420,
+      "loyalty_years": 6
+    },
+    {
+      "customer_id": 41,
+      "age": 37,
+      "annual_income_euros": 72000,
+      "spending_score": 81,
+      "purchase_frequency": 19,
+      "avg_transaction_euros": 400,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 42,
+      "age": 41,
+      "annual_income_euros": 85000,
+      "spending_score": 85,
+      "purchase_frequency": 12,
+      "avg_transaction_euros": 480,
+      "loyalty_years": 7
+    },
+    {
+      "customer_id": 43,
+      "age": 45,
+      "annual_income_euros": 90000,
+      "spending_score": 89,
+      "purchase_frequency": 11,
+      "avg_transaction_euros": 490,
+      "loyalty_years": 9
+    },
+    {
+      "customer_id": 44,
+      "age": 53,
+      "annual_income_euros": 75000,
+      "spending_score": 76,
+      "purchase_frequency": 14,
+      "avg_transaction_euros": 350,
+      "loyalty_years": 11
+    },
+    {
+      "customer_id": 45,
+      "age": 55,
+      "annual_income_euros": 70000,
+      "spending_score": 74,
+      "purchase_frequency": 13,
+      "avg_transaction_euros": 360,
+      "loyalty_years": 10
+    },
+    {
+      "customer_id": 46,
+      "age": 62,
+      "annual_income_euros": 80000,
+      "spending_score": 79,
+      "purchase_frequency": 9,
+      "avg_transaction_euros": 400,
+      "loyalty_years": 12
+    },
+    {
+      "customer_id": 47,
+      "age": 66,
+      "annual_income_euros": 85000,
+      "spending_score": 81,
+      "purchase_frequency": 8,
+      "avg_transaction_euros": 410,
+      "loyalty_years": 13
+    },
+    {
+      "customer_id": 48,
+      "age": 70,
+      "annual_income_euros": 60000,
+      "spending_score": 72,
+      "purchase_frequency": 7,
+      "avg_transaction_euros": 340,
+      "loyalty_years": 15
+    },
+    {
+      "customer_id": 49,
+      "age": 33,
+      "annual_income_euros": 150000,
+      "spending_score": 66,
+      "purchase_frequency": 5,
+      "avg_transaction_euros": 495,
+      "loyalty_years": 4
+    },
+    {
+      "customer_id": 50,
+      "age": 30,
+      "annual_income_euros": 130000,
+      "spending_score": 70,
+      "purchase_frequency": 6,
+      "avg_transaction_euros": 480,
+      "loyalty_years": 3
+    },
+    {
+      "customer_id": 51,
+      "age": 35,
+      "annual_income_euros": 140000,
+      "spending_score": 69,
+      "purchase_frequency": 7,
+      "avg_transaction_euros": 460,
+      "loyalty_years": 4
+    },
+    {
+      "customer_id": 52,
+      "age": 32,
+      "annual_income_euros": 125000,
+      "spending_score": 73,
+      "purchase_frequency": 6,
+      "avg_transaction_euros": 490,
+      "loyalty_years": 3
+    },
+    {
+      "customer_id": 53,
+      "age": 28,
+      "annual_income_euros": 145000,
+      "spending_score": 74,
+      "purchase_frequency": 5,
+      "avg_transaction_euros": 470,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 54,
+      "age": 29,
+      "annual_income_euros": 155000,
+      "spending_score": 71,
+      "purchase_frequency": 6,
+      "avg_transaction_euros": 460,
+      "loyalty_years": 3
+    },
+    {
+      "customer_id": 55,
+      "age": 38,
+      "annual_income_euros": 120000,
+      "spending_score": 76,
+      "purchase_frequency": 10,
+      "avg_transaction_euros": 450,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 56,
+      "age": 43,
+      "annual_income_euros": 100000,
+      "spending_score": 78,
+      "purchase_frequency": 8,
+      "avg_transaction_euros": 460,
+      "loyalty_years": 6
+    },
+    {
+      "customer_id": 57,
+      "age": 50,
+      "annual_income_euros": 95000,
+      "spending_score": 79,
+      "purchase_frequency": 9,
+      "avg_transaction_euros": 480,
+      "loyalty_years": 7
+    },
+    {
+      "customer_id": 58,
+      "age": 60,
+      "annual_income_euros": 85000,
+      "spending_score": 75,
+      "purchase_frequency": 10,
+      "avg_transaction_euros": 390,
+      "loyalty_years": 8
+    },
+    {
+      "customer_id": 59,
+      "age": 66,
+      "annual_income_euros": 60000,
+      "spending_score": 73,
+      "purchase_frequency": 8,
+      "avg_transaction_euros": 370,
+      "loyalty_years": 9
+    },
+    {
+      "customer_id": 60,
+      "age": 70,
+      "annual_income_euros": 65000,
+      "spending_score": 74,
+      "purchase_frequency": 7,
+      "avg_transaction_euros": 340,
+      "loyalty_years": 10
+    },
+    {
+      "customer_id": 61,
+      "age": 23,
+      "annual_income_euros": 19000,
+      "spending_score": 55,
+      "purchase_frequency": 28,
+      "avg_transaction_euros": 29,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 62,
+      "age": 26,
+      "annual_income_euros": 22000,
+      "spending_score": 52,
+      "purchase_frequency": 37,
+      "avg_transaction_euros": 33,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 63,
+      "age": 21,
+      "annual_income_euros": 18000,
+      "spending_score": 48,
+      "purchase_frequency": 30,
+      "avg_transaction_euros": 26,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 64,
+      "age": 22,
+      "annual_income_euros": 15000,
+      "spending_score": 44,
+      "purchase_frequency": 20,
+      "avg_transaction_euros": 25,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 65,
+      "age": 25,
+      "annual_income_euros": 24000,
+      "spending_score": 50,
+      "purchase_frequency": 35,
+      "avg_transaction_euros": 28,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 66,
+      "age": 28,
+      "annual_income_euros": 20000,
+      "spending_score": 49,
+      "purchase_frequency": 32,
+      "avg_transaction_euros": 29,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 67,
+      "age": 30,
+      "annual_income_euros": 25000,
+      "spending_score": 53,
+      "purchase_frequency": 31,
+      "avg_transaction_euros": 30,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 68,
+      "age": 29,
+      "annual_income_euros": 28000,
+      "spending_score": 52,
+      "purchase_frequency": 30,
+      "avg_transaction_euros": 32,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 69,
+      "age": 32,
+      "annual_income_euros": 60000,
+      "spending_score": 77,
+      "purchase_frequency": 20,
+      "avg_transaction_euros": 420,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 70,
+      "age": 36,
+      "annual_income_euros": 80000,
+      "spending_score": 83,
+      "purchase_frequency": 16,
+      "avg_transaction_euros": 440,
+      "loyalty_years": 6
+    },
+    {
+      "customer_id": 71,
+      "age": 40,
+      "annual_income_euros": 72000,
+      "spending_score": 80,
+      "purchase_frequency": 14,
+      "avg_transaction_euros": 410,
+      "loyalty_years": 7
+    },
+    {
+      "customer_id": 72,
+      "age": 44,
+      "annual_income_euros": 85000,
+      "spending_score": 85,
+      "purchase_frequency": 12,
+      "avg_transaction_euros": 450,
+      "loyalty_years": 8
+    },
+    {
+      "customer_id": 73,
+      "age": 48,
+      "annual_income_euros": 90000,
+      "spending_score": 90,
+      "purchase_frequency": 10,
+      "avg_transaction_euros": 480,
+      "loyalty_years": 9
+    },
+    {
+      "customer_id": 74,
+      "age": 52,
+      "annual_income_euros": 75000,
+      "spending_score": 78,
+      "purchase_frequency": 11,
+      "avg_transaction_euros": 370,
+      "loyalty_years": 10
+    },
+    {
+      "customer_id": 75,
+      "age": 58,
+      "annual_income_euros": 70000,
+      "spending_score": 76,
+      "purchase_frequency": 8,
+      "avg_transaction_euros": 350,
+      "loyalty_years": 11
+    },
+    {
+      "customer_id": 76,
+      "age": 61,
+      "annual_income_euros": 65000,
+      "spending_score": 74,
+      "purchase_frequency": 9,
+      "avg_transaction_euros": 340,
+      "loyalty_years": 12
+    },
+    {
+      "customer_id": 77,
+      "age": 67,
+      "annual_income_euros": 60000,
+      "spending_score": 72,
+      "purchase_frequency": 7,
+      "avg_transaction_euros": 330,
+      "loyalty_years": 13
+    },
+    {
+      "customer_id": 78,
+      "age": 70,
+      "annual_income_euros": 65000,
+      "spending_score": 71,
+      "purchase_frequency": 6,
+      "avg_transaction_euros": 320,
+      "loyalty_years": 14
+    },
+    {
+      "customer_id": 79,
+      "age": 72,
+      "annual_income_euros": 80000,
+      "spending_score": 79,
+      "purchase_frequency": 8,
+      "avg_transaction_euros": 410,
+      "loyalty_years": 15
+    },
+    {
+      "customer_id": 80,
+      "age": 73,
+      "annual_income_euros": 70000,
+      "spending_score": 77,
+      "purchase_frequency": 9,
+      "avg_transaction_euros": 390,
+      "loyalty_years": 14
+    },
+    {
+      "customer_id": 81,
+      "age": 74,
+      "annual_income_euros": 72000,
+      "spending_score": 75,
+      "purchase_frequency": 10,
+      "avg_transaction_euros": 360,
+      "loyalty_years": 13
+    },
+    {
+      "customer_id": 82,
+      "age": 23,
+      "annual_income_euros": 18000,
+      "spending_score": 45,
+      "purchase_frequency": 30,
+      "avg_transaction_euros": 25,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 83,
+      "age": 26,
+      "annual_income_euros": 22000,
+      "spending_score": 50,
+      "purchase_frequency": 35,
+      "avg_transaction_euros": 30,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 84,
+      "age": 19,
+      "annual_income_euros": 15000,
+      "spending_score": 40,
+      "purchase_frequency": 28,
+      "avg_transaction_euros": 20,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 85,
+      "age": 21,
+      "annual_income_euros": 21000,
+      "spending_score": 55,
+      "purchase_frequency": 32,
+      "avg_transaction_euros": 22,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 86,
+      "age": 20,
+      "annual_income_euros": 25000,
+      "spending_score": 60,
+      "purchase_frequency": 25,
+      "avg_transaction_euros": 27,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 87,
+      "age": 23,
+      "annual_income_euros": 30000,
+      "spending_score": 65,
+      "purchase_frequency": 40,
+      "avg_transaction_euros": 35,
+      "loyalty_years": 1
+    },
+    {
+      "customer_id": 88,
+      "age": 18,
+      "annual_income_euros": 16000,
+      "spending_score": 42,
+      "purchase_frequency": 20,
+      "avg_transaction_euros": 18,
+      "loyalty_years": 0
+    },
+    {
+      "customer_id": 89,
+      "age": 24,
+      "annual_income_euros": 23000,
+      "spending_score": 48,
+      "purchase_frequency": 38,
+      "avg_transaction_euros": 29,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 90,
+      "age": 26,
+      "annual_income_euros": 19000,
+      "spending_score": 54,
+      "purchase_frequency": 33,
+      "avg_transaction_euros": 31,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 91,
+      "age": 29,
+      "annual_income_euros": 28000,
+      "spending_score": 58,
+      "purchase_frequency": 29,
+      "avg_transaction_euros": 34,
+      "loyalty_years": 2
+    },
+    {
+      "customer_id": 92,
+      "age": 34,
+      "annual_income_euros": 60000,
+      "spending_score": 82,
+      "purchase_frequency": 22,
+      "avg_transaction_euros": 380,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 93,
+      "age": 39,
+      "annual_income_euros": 80000,
+      "spending_score": 84,
+      "purchase_frequency": 16,
+      "avg_transaction_euros": 420,
+      "loyalty_years": 6
+    },
+    {
+      "customer_id": 94,
+      "age": 37,
+      "annual_income_euros": 72000,
+      "spending_score": 81,
+      "purchase_frequency": 19,
+      "avg_transaction_euros": 400,
+      "loyalty_years": 5
+    },
+    {
+      "customer_id": 95,
+      "age": 41,
+      "annual_income_euros": 85000,
+      "spending_score": 85,
+      "purchase_frequency": 12,
+      "avg_transaction_euros": 480,
+      "loyalty_years": 7
+    },
+    {
+      "customer_id": 96,
+      "age": 45,
+      "annual_income_euros": 90000,
+      "spending_score": 89,
+      "purchase_frequency": 11,
+      "avg_transaction_euros": 490,
+      "loyalty_years": 9
+    },
+    {
+      "customer_id": 97,
+      "age": 53,
+      "annual_income_euros": 75000,
+      "spending_score": 76,
+      "purchase_frequency": 14,
+      "avg_transaction_euros": 350,
+      "loyalty_years": 11
+    },
+    {
+      "customer_id": 98,
+      "age": 55,
+      "annual_income_euros": 70000,
+      "spending_score": 74,
+      "purchase_frequency": 13,
+      "avg_transaction_euros": 360,
+      "loyalty_years": 10
+    },
+    {
+      "customer_id": 99,
+      "age": 62,
+      "annual_income_euros": 80000,
+      "spending_score": 79,
+      "purchase_frequency": 9,
+      "avg_transaction_euros": 400,
+      "loyalty_years": 12
+    },
+    {
+      "customer_id": 100,
+      "age": 66,
+      "annual_income_euros": 85000,
+      "spending_score": 81,
+      "purchase_frequency": 8,
+      "avg_transaction_euros": 410,
+      "loyalty_years": 13
+    }
+  ]
+}
