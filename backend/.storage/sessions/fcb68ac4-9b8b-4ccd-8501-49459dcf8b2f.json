@@ -2,7 +2,7 @@
   "id": "fcb68ac4-9b8b-4ccd-8501-49459dcf8b2f",
   "name": "testo",
   "created_at": "2025-10-03T11:27:25.926339",
-  "updated_at": "2025-10-03T14:25:40.661342",
+  "updated_at": "2025-10-04T16:19:21.466367",
   "workflow": {
     "name": "testo",
     "nodes": [
@@ -84,7 +84,7 @@
             "dataset_id": "eb06a671-0426-42f0-9d19-068cbc3e4512"
           },
           "status": "success",
-          "executionTime": 0.0033721923828125
+          "executionTime": 0.0012919902801513672
         },
         "width": 1104,
         "height": 441,
@@ -189,7 +189,7 @@
             "seed": 42
           },
           "status": "success",
-          "executionTime": 0.0006690025329589844
+          "executionTime": 0.0008823871612548828
         },
         "width": 704,
         "height": 300,
@@ -278,10 +278,10 @@
             ]
           },
           "status": "success",
-          "executionTime": 0.0003230571746826172
+          "executionTime": 0.0005066394805908203
         },
         "width": 704,
-        "height": 494,
+        "height": 496,
         "selected": false,
         "positionAbsolute": {
           "x": 96,
@@ -476,10 +476,10 @@
             "test_size": 0.2
           },
           "status": "success",
-          "executionTime": 0.014201641082763672
+          "executionTime": 0.020349979400634766
         },
         "width": 704,
-        "height": 759,
+        "height": 769,
         "selected": false,
         "positionAbsolute": {
           "x": 1728,
@@ -536,7 +536,7 @@
             "table_data": "{\"columns\":[\"body\"],\"data\":[{\"body\":\"Check the newsletter\"},{\"body\":\"Try this product!\"}]}"
           },
           "status": "success",
-          "executionTime": 0.0003352165222167969
+          "executionTime": 0.0004456043243408203
         },
         "width": 704,
         "height": 284,
@@ -626,10 +626,10 @@
             "target_column": "is_spam"
           },
           "status": "success",
-          "executionTime": 0.00269317626953125
+          "executionTime": 0.003871440887451172
         },
         "width": 904,
-        "height": 331,
+        "height": 335,
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
@@ -715,7 +715,7 @@
             "dataset_id": "a79f88d5-276e-442e-9bb1-6d906d119392"
           },
           "status": "success",
-          "executionTime": 0.0006639957427978516
+          "executionTime": 0.0008254051208496094
         },
         "width": 1104,
         "height": 359,
@@ -873,10 +873,10 @@
             "marker_size": 5
           },
           "status": "success",
-          "executionTime": 0.020495891571044922
+          "executionTime": 0.02869868278503418
         },
         "width": 704,
-        "height": 746,
+        "height": 748,
         "selected": false,
         "positionAbsolute": {
           "x": 624,
@@ -964,10 +964,10 @@
             ]
           },
           "status": "success",
-          "executionTime": 0.0003020763397216797
+          "executionTime": 0.0004451274871826172
         },
         "width": 904,
-        "height": 494,
+        "height": 496,
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
@@ -1148,10 +1148,10 @@
             "cv_folds": 5
           },
           "status": "success",
-          "executionTime": 0.01721811294555664
+          "executionTime": 0.024947643280029297
         },
         "width": 704,
-        "height": 771,
+        "height": 775,
         "selected": false,
         "positionAbsolute": {
           "x": 1752,
@@ -1253,7 +1253,7 @@
             "seed": 42
           },
           "status": "success",
-          "executionTime": 0.0009679794311523438
+          "executionTime": 0.0012080669403076172
         },
         "width": 704,
         "height": 300,
@@ -1307,7 +1307,7 @@
           },
           "params": {},
           "status": "success",
-          "executionTime": 0.0008502006530761719
+          "executionTime": 0.0014264583587646484
         },
         "width": 904,
         "height": 334,
@@ -2251,7 +2251,7 @@
             "is_spam": "object"
           }
         },
-        "execution_time": 0.0033721923828125
+        "execution_time": 0.0012919902801513672
       },
       "data.custom_input-1759488666035": {
         "outputs": {
@@ -2290,7 +2290,7 @@
           "editable": true,
           "message": "Click 'Edit Table' button to create/modify data"
         },
-        "execution_time": 0.0003352165222167969
+        "execution_time": 0.0004456043243408203
       },
       "ai.load_dataset-1759494075728": {
         "outputs": {
@@ -3144,7 +3144,7 @@
             "loyalty_years": "int64"
           }
         },
-        "execution_time": 0.0006639957427978516
+        "execution_time": 0.0008254051208496094
       },
       "data.select-1759488245795": {
         "outputs": {
@@ -3411,7 +3411,7 @@
             }
           ]
         },
-        "execution_time": 0.0003230571746826172
+        "execution_time": 0.0005066394805908203
       },
       "data.select-1759494097874": {
         "outputs": {
@@ -3904,7 +3904,7 @@
             }
           ]
         },
-        "execution_time": 0.0003020763397216797
+        "execution_time": 0.0004451274871826172
       },
       "data.split-1759485838564": {
         "outputs": {
@@ -4184,7 +4184,7 @@
             "is_spam"
           ]
         },
-        "execution_time": 0.0006690025329589844
+        "execution_time": 0.0008823871612548828
       },
       "plot.2d-1759494087563": {
         "outputs": {
@@ -4205,7 +4205,7 @@
           "n_points": 100,
           "plot_json": "{\"data\": [{\"hovertemplate\": \"age=%{x}<br>purchase_frequency=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": \"#636efa\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"i1\", \"bdata\": \"FhkTFRQXEhgaHSMoJiQqLS8yPEFERh0eGyAfIhYZExUUFxIYGh0iJyUpLTU3PkJGIR4jIBwdJisyPEJGFxoVFhkcHh0gJCgsMDQ6PUNGSElKFxoTFRQXEhgaHSInJSktNTc+Qg==\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"i1\", \"bdata\": \"HiMcIBkoFCYhHRQPEhEMDgsKDQkIBwUGBwQFBh8kFCAbJxUlIh4WEBMMCw4NCQgHBQYHBgUGCggJCggHHCUeFCMgHx4UEA4MCgsICQcGCAkKHiMcIBkoFCYhHRYQEwwLDg0JCA==\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"age\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"purchase_frequency\"}}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
         },
-        "execution_time": 0.020495891571044922
+        "execution_time": 0.02869868278503418
       },
       "data.split-1759494246622": {
         "outputs": {
@@ -4715,7 +4715,7 @@
             "purchase_frequency"
           ]
         },
-        "execution_time": 0.0009679794311523438
+        "execution_time": 0.0012080669403076172
       },
       "ml.text_classification-1759488432897": {
         "outputs": {
@@ -4757,7 +4757,7 @@
           "word_importance": null,
           "message": "\u2705 Model trained: 100.0% accuracy (64 train, 16 test)"
         },
-        "execution_time": 0.014201641082763672
+        "execution_time": 0.020349979400634766
       },
       "ml.text_predict-1759489176338": {
         "outputs": {
@@ -4771,11 +4771,11 @@
               "1": "Yes"
             },
             "prob_No": {
-              "0": 0.5455049379145767,
+              "0": 0.5455049379145772,
               "1": 0.3982156208285397
             },
             "prob_Yes": {
-              "0": 0.4544950620854232,
+              "0": 0.4544950620854228,
               "1": 0.6017843791714603
             }
           }
@@ -4795,8 +4795,8 @@
             {
               "body": "Check the newsletter",
               "predicted_class": "No",
-              "prob_No": 0.5455049379145767,
-              "prob_Yes": 0.4544950620854232
+              "prob_No": 0.5455049379145772,
+              "prob_Yes": 0.4544950620854228
             },
             {
               "body": "Try this product!",
@@ -4811,18 +4811,18 @@
           ],
           "message": "\u2705 Predicted 2 texts"
         },
-        "execution_time": 0.00269317626953125
+        "execution_time": 0.003871440887451172
       },
       "ml.regression-1759494233131": {
         "outputs": {
           "model": "<class 'sklearn.linear_model._base.LinearRegression'>",
           "metrics": {
-            "mae": 3.2518195299551294,
-            "mse": 21.03058335825391,
+            "mae": 3.2518195299551302,
+            "mse": 21.030583358253914,
             "rmse": 4.585911398866523,
             "r2": 0.83170821143317,
             "cv_r2_mean": 0.8193101542399394,
-            "cv_r2_std": 0.017595955864694715
+            "cv_r2_std": 0.017595955864694743
           },
           "predictions": {
             "age": {
@@ -5154,194 +5154,194 @@
               "99": 8
             },
             "prediction": {
-              "1": 29.982573729107713,
-              "2": 32.67443547495068,
-              "3": 31.634856316768023,
-              "5": 29.687895518243426,
-              "6": 32.863503047327434,
-              "7": 29.954127030043313,
-              "8": 30.543436764586353,
-              "9": 27.978064521897018,
-              "11": 16.276754230790722,
-              "13": 17.917667476262377,
-              "14": 12.786922990883703,
-              "15": 12.860893745888248,
-              "16": 13.281383105756099,
-              "17": 9.499411828846068,
-              "19": 9.336849267454571,
-              "20": 8.981476150671135,
-              "21": 9.98307574371918,
+              "1": 29.982573729107727,
+              "2": 32.67443547495069,
+              "3": 31.63485631676803,
+              "5": 29.687895518243437,
+              "6": 32.86350304732745,
+              "7": 29.954127030043324,
+              "8": 30.543436764586367,
+              "9": 27.978064521897025,
+              "11": 16.27675423079073,
+              "13": 17.91766747626238,
+              "14": 12.786922990883706,
+              "15": 12.860893745888252,
+              "16": 13.281383105756102,
+              "17": 9.499411828846071,
+              "19": 9.336849267454575,
+              "20": 8.981476150671138,
+              "21": 9.98307574371919,
               "23": 2.4952560569042035,
               "24": 6.440363037395102,
               "25": 12.88310597526172,
-              "26": 15.239163447872741,
-              "27": 8.116612462179386,
-              "28": 31.325662266482034,
-              "29": 30.036952296968003,
-              "32": 31.297192223824865,
-              "34": 32.972260183048014,
-              "35": 30.0085055979036,
-              "36": 30.597815332446643,
-              "37": 27.923685954036728,
-              "38": 21.043902754430352,
-              "40": 17.571148871399078,
-              "41": 13.866318190319411,
-              "42": 11.856124312014387,
-              "43": 11.989526639009021,
-              "46": 6.34530299380306,
-              "47": 9.98307574371918,
+              "26": 15.239163447872745,
+              "27": 8.11661246217939,
+              "28": 31.325662266482045,
+              "29": 30.036952296968014,
+              "32": 31.29719222382488,
+              "34": 32.97226018304803,
+              "35": 30.008505597903614,
+              "36": 30.597815332446654,
+              "37": 27.923685954036735,
+              "38": 21.04390275443036,
+              "40": 17.57114887139908,
+              "41": 13.866318190319419,
+              "42": 11.85612431201439,
+              "43": 11.989526639009025,
+              "46": 6.345302993803067,
+              "47": 9.98307574371919,
               "48": 1.4013216744540244,
               "49": 6.731848063840808,
-              "50": 3.09847330749718,
+              "50": 3.098473307497173,
               "51": 7.3698516951498085,
-              "52": 4.356198404085525,
+              "52": 4.356198404085532,
               "54": 6.839295178446783,
-              "55": 9.723944136088921,
-              "56": 8.79249044666231,
-              "57": 7.771871808659377,
+              "55": 9.723944136088924,
+              "56": 8.792490446662313,
+              "57": 7.77187180865938,
               "58": 11.206014459591504,
-              "59": 9.032684877705606,
-              "60": 31.474235443455665,
-              "61": 29.799190827825285,
-              "62": 31.889695142786486,
-              "63": 32.01552963538281,
-              "64": 29.558914528414057,
-              "65": 29.47543425093206,
-              "66": 28.049520446633053,
-              "67": 27.651793114735284,
-              "68": 21.356289989134925,
-              "69": 16.277409241348025,
-              "71": 12.98989807931039,
-              "72": 11.034082768865659,
-              "74": 11.587974455728133,
-              "75": 11.661945210732679,
+              "59": 9.032684877705616,
+              "60": 31.474235443455676,
+              "61": 29.799190827825296,
+              "62": 31.8896951427865,
+              "63": 32.015529635382826,
+              "64": 29.558914528414064,
+              "65": 29.47543425093207,
+              "66": 28.04952044663306,
+              "67": 27.65179311473529,
+              "68": 21.35628998913493,
+              "69": 16.277409241348032,
+              "71": 12.989898079310393,
+              "72": 11.034082768865655,
+              "74": 11.587974455728137,
+              "75": 11.661945210732682,
               "78": 5.5428536377985935,
               "79": 7.260252468543307,
-              "81": 31.142279365199606,
-              "82": 29.690433692104705,
-              "84": 31.634856316768023,
-              "85": 31.351570791685155,
-              "86": 29.687895518243426,
-              "87": 32.863503047327434,
-              "88": 29.954127030043313,
-              "89": 30.543436764586353,
-              "91": 21.043902754430352,
+              "81": 31.142279365199617,
+              "82": 29.69043369210472,
+              "84": 31.63485631676803,
+              "85": 31.351570791685166,
+              "86": 29.687895518243437,
+              "87": 32.86350304732745,
+              "88": 29.954127030043324,
+              "89": 30.543436764586367,
+              "91": 21.04390275443036,
               "92": 15.455367698199293,
-              "93": 17.571148871399078,
-              "94": 13.866318190319411,
-              "95": 11.856124312014387,
-              "96": 11.989526639009021,
-              "97": 12.355637431016575,
-              "98": 8.464254007828668,
-              "99": 6.34530299380306
+              "93": 17.57114887139908,
+              "94": 13.866318190319419,
+              "95": 11.85612431201439,
+              "96": 11.989526639009025,
+              "97": 12.355637431016579,
+              "98": 8.464254007828671,
+              "99": 6.345302993803067
             },
             "residual": {
-              "1": 5.017426270892287,
-              "2": -4.674435474950677,
-              "3": 0.36514368323197743,
-              "5": 10.312104481756574,
-              "6": -12.863503047327434,
-              "7": 8.045872969956687,
-              "8": 2.456563235413647,
-              "9": 1.0219354781029821,
-              "11": -1.276754230790722,
-              "13": -0.9176674762623769,
-              "14": -0.7869229908837028,
-              "15": 1.139106254111752,
-              "16": -2.281383105756099,
-              "17": 0.5005881711539324,
-              "19": -0.33684926745457133,
-              "20": -0.9814761506711349,
-              "21": -2.98307574371918,
+              "1": 5.0174262708922726,
+              "2": -4.674435474950691,
+              "3": 0.36514368323197033,
+              "5": 10.312104481756563,
+              "6": -12.863503047327448,
+              "7": 8.045872969956676,
+              "8": 2.4565632354136326,
+              "9": 1.021935478102975,
+              "11": -1.2767542307907291,
+              "13": -0.9176674762623804,
+              "14": -0.7869229908837063,
+              "15": 1.1391062541117485,
+              "16": -2.2813831057561025,
+              "17": 0.5005881711539288,
+              "19": -0.3368492674545749,
+              "20": -0.9814761506711385,
+              "21": -2.9830757437191906,
               "23": 3.5047439430957965,
               "24": 0.5596369626048983,
               "25": -8.88310597526172,
-              "26": -10.239163447872741,
-              "27": -2.1166124621793863,
-              "28": -0.3256622664820341,
-              "29": 5.963047703031997,
-              "32": -4.297192223824865,
-              "34": -11.972260183048014,
-              "35": 6.9914944020964,
-              "36": 3.4021846675533567,
-              "37": 2.0763140459632723,
-              "38": 0.9560972455696479,
-              "40": 1.4288511286009218,
-              "41": -1.8663181903194115,
-              "42": -0.8561243120143871,
-              "43": 2.0104733609909786,
-              "46": 1.6546970061969404,
-              "47": -2.98307574371918,
+              "26": -10.239163447872745,
+              "27": -2.11661246217939,
+              "28": -0.32566226648204477,
+              "29": 5.963047703031986,
+              "32": -4.297192223824879,
+              "34": -11.972260183048029,
+              "35": 6.991494402096386,
+              "36": 3.402184667553346,
+              "37": 2.076314045963265,
+              "38": 0.9560972455696408,
+              "40": 1.4288511286009182,
+              "41": -1.8663181903194186,
+              "42": -0.8561243120143907,
+              "43": 2.010473360990975,
+              "46": 1.6546970061969333,
+              "47": -2.9830757437191906,
               "48": 3.5986783255459756,
               "49": -0.7318480638408076,
-              "50": 3.90152669250282,
+              "50": 3.901526692502827,
               "51": -1.3698516951498085,
-              "52": 0.643801595914475,
+              "52": 0.6438015959144678,
               "54": 3.1607048215532174,
-              "55": -1.723944136088921,
-              "56": 0.20750955333769028,
-              "57": 2.2281281913406232,
+              "55": -1.7239441360889245,
+              "56": 0.20750955333768673,
+              "57": 2.2281281913406197,
               "58": -3.206014459591504,
-              "59": -2.0326848777056057,
-              "60": -3.4742354434556653,
-              "61": 7.200809172174715,
-              "62": -1.8896951427864863,
-              "63": -12.015529635382812,
-              "64": 5.441085471585943,
-              "65": 2.524565749067939,
-              "66": 2.9504795533669466,
-              "67": 2.348206885264716,
-              "68": -1.3562899891349254,
-              "69": -0.2774092413480247,
-              "71": -0.9898980793103895,
-              "72": -1.0340827688656589,
-              "74": -3.5879744557281334,
-              "75": -2.6619452107326786,
+              "59": -2.0326848777056163,
+              "60": -3.474235443455676,
+              "61": 7.200809172174704,
+              "62": -1.8896951427865005,
+              "63": -12.015529635382826,
+              "64": 5.441085471585936,
+              "65": 2.5245657490679285,
+              "66": 2.9504795533669395,
+              "67": 2.348206885264709,
+              "68": -1.356289989134929,
+              "69": -0.2774092413480318,
+              "71": -0.9898980793103931,
+              "72": -1.0340827688656553,
+              "74": -3.587974455728137,
+              "75": -2.661945210732682,
               "78": 2.4571463622014065,
               "79": 1.7397475314566933,
-              "81": -1.142279365199606,
-              "82": 5.309566307895295,
-              "84": 0.36514368323197743,
-              "85": -6.351570791685155,
-              "86": 10.312104481756574,
-              "87": -12.863503047327434,
-              "88": 8.045872969956687,
-              "89": 2.456563235413647,
-              "91": 0.9560972455696479,
+              "81": -1.1422793651996166,
+              "82": 5.309566307895281,
+              "84": 0.36514368323197033,
+              "85": -6.351570791685166,
+              "86": 10.312104481756563,
+              "87": -12.863503047327448,
+              "88": 8.045872969956676,
+              "89": 2.4565632354136326,
+              "91": 0.9560972455696408,
               "92": 0.5446323018007071,
-              "93": 1.4288511286009218,
-              "94": -1.8663181903194115,
-              "95": -0.8561243120143871,
-              "96": 2.0104733609909786,
-              "97": 0.6443625689834249,
-              "98": 0.5357459921713321,
-              "99": 1.6546970061969404
+              "93": 1.4288511286009182,
+              "94": -1.8663181903194186,
+              "95": -0.8561243120143907,
+              "96": 2.010473360990975,
+              "97": 0.6443625689834214,
+              "98": 0.5357459921713286,
+              "99": 1.6546970061969333
             }
           }
         },
         "metadata": {
-          "mae": 3.2518195299551294,
-          "mse": 21.03058335825391,
+          "mae": 3.2518195299551302,
+          "mse": 21.030583358253914,
           "rmse": 4.585911398866523,
           "r2": 0.83170821143317,
           "cv_r2_mean": 0.8193101542399394,
-          "cv_r2_std": 0.017595955864694715
+          "cv_r2_std": 0.017595955864694743
         },
         "preview": {
           "algorithm": "linear",
           "metrics": {
-            "mae": 3.2518195299551294,
-            "mse": 21.03058335825391,
+            "mae": 3.2518195299551302,
+            "mse": 21.030583358253914,
             "rmse": 4.585911398866523,
             "r2": 0.83170821143317,
             "cv_r2_mean": 0.8193101542399394,
-            "cv_r2_std": 0.017595955864694715
+            "cv_r2_std": 0.017595955864694743
           },
           "n_samples": 80,
           "n_features": 3,
-          "residual_plot": "{\"data\":[{\"marker\":{\"color\":\"blue\",\"opacity\":0.6},\"mode\":\"markers\",\"name\":\"Residuals\",\"x\":{\"dtype\":\"f8\",\"bdata\":\"CkRJzqhyI0ABREarQfQ9QCgGpqFzei5AGNMC7VW2J0CsMsNKBEcwQIjXpxDHuClAbc77zzaSMUAMIVI8o\\u002fonQPLsvm9i+jtAMEXzS3MRJkCaRoJd2UYwQI6HMbRV9yNAPoQciwBaP0DiFDCaXlM\\u002fQG3O+882kjFApeux6xmwPUC0xTpfrQw8QMYmHw+2eT1AMtRAbC0CPkAcvUlyEZAqQEhZL5Rp7RpAdbKMBXN8QEABREarQfQ9QBjTAu1VtidAprvuoLQ7IEBCzNaBd6wiQI5tpGtsJD9AdE1ldybEKUCSrZUPw+M\\u002fQFcmd0Hs6jFAsOovh+7CGUB8LY7xhaI\\u002fQEJCQOiy\\u002fyJAkXv+NT0LNUCqV\\u002furHos+QDhw89LhKxZAQyKSRIduQEAyzMQFFY89QNzn9WwKmT5Aqlf7qx6LPkA2nc1OwZUhQFBhphuXYRlASHr8MXBbG0AMIVI8o\\u002fonQLDVmV+syQhAyIvf6dumO0BQYaYbl2EZQAk6G9I1WzVA1MUkxZfMPUA45v4bFrYoQBhjhJ9\\u002fCh1AHLTODo67K0Cy5Sy6emkmQMBLr0bQa\\u002fY\\u002fdlKJs7LtIEDolTuQZRYfQG6uj3vqUidADPQhyhRMP0ActM4OjrsrQICjgRK8ECJAQwsG4PwBQEB8LY7xhaI\\u002fQMBcxK527DtAWv2qtHUJPkAobbDzifs9QCi9QUa\\u002fbBFAjocxtFX3I0BzFtLmU1ZAQFBlvM5I9gNAQyKSRIduQECRe\\u002f41PQs1QLJ45PwKLSdApeux6xmwPUBwpS9DwLA9QHzfwQqE9iFAAz94fmd5P0DOBcrr0\\u002fopQMyh\\u002fJHnkilAbtd29CXpLkCEJxxnunodQA==\"},\"y\":{\"dtype\":\"f8\",\"bdata\":\"UCBKckaV+7\\u002f+d3OpfBcgQCgGpqFzeiTAgDEt0F5l678Aq8ywEsHRv8BDwXrHOfI\\u002fMBlDAJPc9j\\u002fQe7cOcxUAQOAwEQTZWfA\\u002fgCmaX5qL8L+gaSTYlW30vzgextBW3QfA+BByLAJoGcCAOAWMptfUvzAZQwCT3PY\\u002ftiicKMyfJEBg0ikGlZoHQNDJBodPMgRAOK\\u002f8Tkr3G0Bw9CbJRUACwEDKeqFMa+e\\u002f1MkyFszxJ8D+d3OpfBcgQIAxLdBeZeu\\u002fmO66g9LuAMBAiNk68I7Vv+DYRrrGRvK\\u002fdE1ldybEIcAg2Vr5MDz+v+DK5C6IXe2\\u002fgKqAxovo4T8AoXScg17XP+Db+3vRBOA\\u002f4I0wQFmY7j+wQiWgCqcDQJAfGVo8qANADIlIEh26KcA4z+zoq8MVQCDBUJisNwtAsEIloAqnA0CAsphMrI\\u002fKP8B6ZpGjefo\\u002fcAsHnB9JCUDQe7cOcxUAQFAqZqBTNg9AwKEDsSDJAkDAemaRo3n6P5CgsyFds\\u002fW\\u002fsOhs66DNHECAnBFAnp7kP6Bz7oEB1vs\\u002f4KB1dnDc\\u002fb\\u002fIlrPo6qUJwCBaqNwXygxAoNhqx9Qk4T8w1IjfNNMBQLi5Pu6pSwXAMNCHKFMwEcDgoHV2cNz9vwCOBkrwQgDADC0YgPMHKMAAoXScg17XPwAa3YlKnABAmApULSnaF0BgSz4x2BEUQMAW8s0FmuQ\\u002fOB7G0FbdB8CYs5A2n7ISwLCaQzG3CQxADIlIEh26KcDgjTBAWZjuP8jikfMrtAzAtiicKMyfJEBAakHz\\u002fjwVQMD3HaxAaO+\\u002fGPjB8zvLC8DgXKC8Pq3vv8Acyh95Lum\\u002fIImSuKBt4T8QnnCc6er1vw==\"},\"type\":\"scatter\"}],\"layout\":{\"template\":{\"data\":{\"barpolar\":[{\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"barpolar\"}],\"bar\":[{\"error_x\":{\"color\":\"#2a3f5f\"},\"error_y\":{\"color\":\"#2a3f5f\"},\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"bar\"}],\"carpet\":[{\"aaxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"baxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"type\":\"carpet\"}],\"choropleth\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"choropleth\"}],\"contourcarpet\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"contourcarpet\"}],\"contour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"contour\"}],\"heatmap\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"heatmap\"}],\"histogram2dcontour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2dcontour\"}],\"histogram2d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2d\"}],\"histogram\":[{\"marker\":{\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"histogram\"}],\"mesh3d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"mesh3d\"}],\"parcoords\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"parcoords\"}],\"pie\":[{\"automargin\":true,\"type\":\"pie\"}],\"scatter3d\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatter3d\"}],\"scattercarpet\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattercarpet\"}],\"scattergeo\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergeo\"}],\"scattergl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergl\"}],\"scattermapbox\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermapbox\"}],\"scattermap\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermap\"}],\"scatterpolargl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolargl\"}],\"scatterpolar\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolar\"}],\"scatter\":[{\"fillpattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2},\"type\":\"scatter\"}],\"scatterternary\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterternary\"}],\"surface\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"surface\"}],\"table\":[{\"cells\":{\"fill\":{\"color\":\"#EBF0F8\"},\"line\":{\"color\":\"white\"}},\"header\":{\"fill\":{\"color\":\"#C8D4E3\"},\"line\":{\"color\":\"white\"}},\"type\":\"table\"}]},\"layout\":{\"annotationdefaults\":{\"arrowcolor\":\"#2a3f5f\",\"arrowhead\":0,\"arrowwidth\":1},\"autotypenumbers\":\"strict\",\"coloraxis\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"colorscale\":{\"diverging\":[[0,\"#8e0152\"],[0.1,\"#c51b7d\"],[0.2,\"#de77ae\"],[0.3,\"#f1b6da\"],[0.4,\"#fde0ef\"],[0.5,\"#f7f7f7\"],[0.6,\"#e6f5d0\"],[0.7,\"#b8e186\"],[0.8,\"#7fbc41\"],[0.9,\"#4d9221\"],[1,\"#276419\"]],\"sequential\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"sequentialminus\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]]},\"colorway\":[\"#636efa\",\"#EF553B\",\"#00cc96\",\"#ab63fa\",\"#FFA15A\",\"#19d3f3\",\"#FF6692\",\"#B6E880\",\"#FF97FF\",\"#FECB52\"],\"font\":{\"color\":\"#2a3f5f\"},\"geo\":{\"bgcolor\":\"white\",\"lakecolor\":\"white\",\"landcolor\":\"white\",\"showlakes\":true,\"showland\":true,\"subunitcolor\":\"#C8D4E3\"},\"hoverlabel\":{\"align\":\"left\"},\"hovermode\":\"closest\",\"mapbox\":{\"style\":\"light\"},\"paper_bgcolor\":\"white\",\"plot_bgcolor\":\"white\",\"polar\":{\"angularaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"radialaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"}},\"scene\":{\"xaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"yaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"zaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"}},\"shapedefaults\":{\"line\":{\"color\":\"#2a3f5f\"}},\"ternary\":{\"aaxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"baxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"caxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"}},\"title\":{\"x\":0.05},\"xaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2},\"yaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2}}},\"shapes\":[{\"line\":{\"color\":\"red\",\"dash\":\"dash\"},\"type\":\"line\",\"x0\":0,\"x1\":1,\"xref\":\"x domain\",\"y0\":0,\"y1\":0,\"yref\":\"y\"}],\"title\":{\"text\":\"Residual Plot\"},\"xaxis\":{\"title\":{\"text\":\"Predicted Values\"}},\"yaxis\":{\"title\":{\"text\":\"Residuals\"}}}}"
+          "residual_plot": "{\"data\":[{\"marker\":{\"color\":\"blue\",\"opacity\":0.6},\"mode\":\"markers\",\"name\":\"Residuals\",\"x\":{\"dtype\":\"f8\",\"bdata\":\"DERJzqhyI0AEREarQfQ9QCoGpqFzei5AGtMC7VW2J0CuMsNKBEcwQIrXpxDHuClAbs77zzaSMUAOIVI8o\\u002fonQPTsvm9i+jtALkXzS3MRJkCcRoJd2UYwQJSHMbRV9yNAQYQciwBaP0DlFDCaXlM\\u002fQG7O+882kjFAqOux6xmwPUC2xTpfrQw8QMkmHw+2eT1ANtRAbC0CPkAevUlyEZAqQEhZL5Rp7RpAd7KMBXN8QEAEREarQfQ9QBrTAu1VtidAqLvuoLQ7IEBEzNaBd6wiQJFtpGtsJD9AdE1ldybEKUCWrZUPw+M\\u002fQFgmd0Hs6jFAsOovh+7CGUB+LY7xhaI\\u002fQERCQOiy\\u002fyJAk3v+NT0LNUCuV\\u002furHos+QDhw89LhKxZARSKSRIduQEA0zMQFFY89QN\\u002fn9WwKmT5Arlf7qx6LPkA4nc1OwZUhQFhhphuXYRlASHr8MXBbG0AOIVI8o\\u002fonQKDVmV+syQhAyovf6dumO0BYYaYbl2EZQAo6G9I1WzVA18UkxZfMPUA65v4bFrYoQBhjhJ9\\u002fCh1AILTODo67K0Cy5Sy6emkmQMBLr0bQa\\u002fY\\u002feFKJs7LtIEDslTuQZRYfQHCuj3vqUidAEPQhyhRMP0AgtM4OjrsrQIajgRK8ECJARQsG4PwBQEB+LY7xhaI\\u002fQMJcxK527DtAXf2qtHUJPkAsbbDzifs9QDC9QUa\\u002fbBFAlIcxtFX3I0B1FtLmU1ZAQFBlvM5I9gNARSKSRIduQECTe\\u002f41PQs1QLR45PwKLSdAqOux6xmwPUB0pS9DwLA9QH7fwQqE9iFABj94fmd5P0DQBcrr0\\u002fopQM6h\\u002fJHnkilAbtd29CXpLkCEJxxnunodQA==\"},\"y\":{\"dtype\":\"f8\",\"bdata\":\"YCBKckaV+7\\u002f4d3OpfBcgQCoGpqFzeiTAoDEt0F5l67+Aq8ywEsHRv7BDwXrHOfI\\u002fIBlDAJPc9j\\u002fIe7cOcxUAQMAwEQTZWfA\\u002fcCmaX5qL8L\\u002fAaSTYlW30v1AextBW3QfABBFyLAJoGcBAOQWMptfUvyAZQwCT3PY\\u002fsCicKMyfJEBQ0ikGlZoHQLjJBodPMgRAKK\\u002f8Tkr3G0B49CbJRUACwEDKeqFMa+e\\u002f3MkyFszxJ8D4d3OpfBcgQKAxLdBeZeu\\u002foO66g9LuAMCAiNk68I7VvxDZRrrGRvK\\u002fdE1ldybEIcBg2Vr5MDz+vwDL5C6IXe2\\u002fgKqAxovo4T+AoHScg17XP8Db+3vRBOA\\u002foI0wQFmY7j+QQiWgCqcDQJAfGVo8qANAFIlIEh26KcAwz+zoq8MVQAjBUJisNwtAkEIloAqnA0AAsphMrI\\u002fKP6B6ZpGjefo\\u002fcAsHnB9JCUDIe7cOcxUAQGAqZqBTNg9AsKEDsSDJAkCgemaRo3n6P6CgsyFds\\u002fW\\u002fpOhs66DNHEBgnBFAnp7kP6Bz7oEB1vs\\u002fAKF1dnDc\\u002fb\\u002fIlrPo6qUJwCBaqNwXygxAgNhqx9Qk4T8o1IjfNNMBQMC5Pu6pSwXAQNCHKFMwEcAAoXV2cNz9vxiOBkrwQgDAFC0YgPMHKMCAoHScg17XP\\u002fAZ3YlKnABAjApULSnaF0BQSz4x2BEUQIAW8s0FmuQ\\u002fUB7G0FbdB8Cos5A2n7ISwLCaQzG3CQxAFIlIEh26KcCgjTBAWZjuP9DikfMrtAzAsCicKMyfJEAwakHz\\u002fjwVQOD3HaxAaO+\\u002fMPjB8zvLC8AAXaC8Pq3vv+Acyh95Lum\\u002fIImSuKBt4T8QnnCc6er1vw==\"},\"type\":\"scatter\"}],\"layout\":{\"template\":{\"data\":{\"barpolar\":[{\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"barpolar\"}],\"bar\":[{\"error_x\":{\"color\":\"#2a3f5f\"},\"error_y\":{\"color\":\"#2a3f5f\"},\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"bar\"}],\"carpet\":[{\"aaxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"baxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"type\":\"carpet\"}],\"choropleth\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"choropleth\"}],\"contourcarpet\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"contourcarpet\"}],\"contour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"contour\"}],\"heatmap\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"heatmap\"}],\"histogram2dcontour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2dcontour\"}],\"histogram2d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2d\"}],\"histogram\":[{\"marker\":{\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"histogram\"}],\"mesh3d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"mesh3d\"}],\"parcoords\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"parcoords\"}],\"pie\":[{\"automargin\":true,\"type\":\"pie\"}],\"scatter3d\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatter3d\"}],\"scattercarpet\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattercarpet\"}],\"scattergeo\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergeo\"}],\"scattergl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergl\"}],\"scattermapbox\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermapbox\"}],\"scattermap\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermap\"}],\"scatterpolargl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolargl\"}],\"scatterpolar\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolar\"}],\"scatter\":[{\"fillpattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2},\"type\":\"scatter\"}],\"scatterternary\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterternary\"}],\"surface\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"surface\"}],\"table\":[{\"cells\":{\"fill\":{\"color\":\"#EBF0F8\"},\"line\":{\"color\":\"white\"}},\"header\":{\"fill\":{\"color\":\"#C8D4E3\"},\"line\":{\"color\":\"white\"}},\"type\":\"table\"}]},\"layout\":{\"annotationdefaults\":{\"arrowcolor\":\"#2a3f5f\",\"arrowhead\":0,\"arrowwidth\":1},\"autotypenumbers\":\"strict\",\"coloraxis\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"colorscale\":{\"diverging\":[[0,\"#8e0152\"],[0.1,\"#c51b7d\"],[0.2,\"#de77ae\"],[0.3,\"#f1b6da\"],[0.4,\"#fde0ef\"],[0.5,\"#f7f7f7\"],[0.6,\"#e6f5d0\"],[0.7,\"#b8e186\"],[0.8,\"#7fbc41\"],[0.9,\"#4d9221\"],[1,\"#276419\"]],\"sequential\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"sequentialminus\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]]},\"colorway\":[\"#636efa\",\"#EF553B\",\"#00cc96\",\"#ab63fa\",\"#FFA15A\",\"#19d3f3\",\"#FF6692\",\"#B6E880\",\"#FF97FF\",\"#FECB52\"],\"font\":{\"color\":\"#2a3f5f\"},\"geo\":{\"bgcolor\":\"white\",\"lakecolor\":\"white\",\"landcolor\":\"white\",\"showlakes\":true,\"showland\":true,\"subunitcolor\":\"#C8D4E3\"},\"hoverlabel\":{\"align\":\"left\"},\"hovermode\":\"closest\",\"mapbox\":{\"style\":\"light\"},\"paper_bgcolor\":\"white\",\"plot_bgcolor\":\"white\",\"polar\":{\"angularaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"radialaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"}},\"scene\":{\"xaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"yaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"zaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"}},\"shapedefaults\":{\"line\":{\"color\":\"#2a3f5f\"}},\"ternary\":{\"aaxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"baxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"caxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"}},\"title\":{\"x\":0.05},\"xaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2},\"yaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2}}},\"shapes\":[{\"line\":{\"color\":\"red\",\"dash\":\"dash\"},\"type\":\"line\",\"x0\":0,\"x1\":1,\"xref\":\"x domain\",\"y0\":0,\"y1\":0,\"yref\":\"y\"}],\"title\":{\"text\":\"Residual Plot\"},\"xaxis\":{\"title\":{\"text\":\"Predicted Values\"}},\"yaxis\":{\"title\":{\"text\":\"Residuals\"}}}}"
         },
-        "execution_time": 0.01721811294555664
+        "execution_time": 0.024947643280029297
       },
       "ml.predict-1759494306488": {
         "outputs": {
@@ -5435,26 +5435,26 @@
               "90": 29
             },
             "prediction": {
-              "0": 31.434419402202614,
-              "4": 31.351570791685155,
-              "10": 21.702153583440918,
-              "12": 17.963191532202526,
-              "18": 10.949315813861823,
-              "22": 8.87039126501067,
-              "30": 32.72881404281097,
-              "31": 31.580477748907732,
-              "33": 29.63351695038314,
+              "0": 31.43441940220262,
+              "4": 31.351570791685166,
+              "10": 21.702153583440925,
+              "12": 17.96319153220253,
+              "18": 10.949315813861833,
+              "22": 8.870391265010674,
+              "30": 32.72881404281098,
+              "31": 31.580477748907743,
+              "33": 29.633516950383147,
               "39": 15.455367698199293,
-              "44": 12.355637431016575,
-              "45": 8.464254007828668,
+              "44": 12.355637431016579,
+              "45": 8.464254007828671,
               "53": 1.7826266600333511,
-              "70": 16.64035019252977,
-              "73": 12.390423811732607,
-              "76": 10.859495854728205,
-              "77": 8.869549174124739,
+              "70": 16.640350192529773,
+              "73": 12.39042381173261,
+              "76": 10.859495854728209,
+              "77": 8.86954917412475,
               "80": 6.435696095126055,
-              "83": 32.67443547495068,
-              "90": 27.978064521897018
+              "83": 32.67443547495069,
+              "90": 27.978064521897025
             }
           }
         },
@@ -5469,7 +5469,7 @@
               "annual_income_euros": 15000,
               "spending_score": 40,
               "purchase_frequency": 28,
-              "prediction": 32.67443547495068
+              "prediction": 32.67443547495069
             },
             {
               "age": 29,
@@ -5483,21 +5483,21 @@
               "annual_income_euros": 72000,
               "spending_score": 80,
               "purchase_frequency": 14,
-              "prediction": 16.64035019252977
+              "prediction": 16.640350192529773
             },
             {
               "age": 62,
               "annual_income_euros": 80000,
               "spending_score": 79,
               "purchase_frequency": 9,
-              "prediction": 8.464254007828668
+              "prediction": 8.464254007828671
             },
             {
               "age": 55,
               "annual_income_euros": 70000,
               "spending_score": 74,
               "purchase_frequency": 13,
-              "prediction": 12.355637431016575
+              "prediction": 12.355637431016579
             },
             {
               "age": 39,
@@ -5511,7 +5511,7 @@
               "annual_income_euros": 120000,
               "spending_score": 65,
               "purchase_frequency": 5,
-              "prediction": 8.87039126501067
+              "prediction": 8.870391265010674
             },
             {
               "age": 74,
@@ -5525,18 +5525,18 @@
               "annual_income_euros": 55000,
               "spending_score": 80,
               "purchase_frequency": 20,
-              "prediction": 21.702153583440918
+              "prediction": 21.702153583440925
             },
             {
               "age": 22,
               "annual_income_euros": 18000,
               "spending_score": 45,
               "purchase_frequency": 30,
-              "prediction": 31.434419402202614
+              "prediction": 31.43441940220262
             }
           ]
         },
-        "execution_time": 0.0008502006530761719
+        "execution_time": 0.0014264583587646484
       }
     }
   }

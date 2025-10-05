@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 import { NodeSpec } from '@/types';
-import { Search, ChevronDown, ChevronRight } from 'lucide-react';
+import { Search, ChevronDown, ChevronRight, Database, Shuffle, BarChart2, Brain, Sparkles, Image, MessageSquare, GitBranch, Calculator } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface NodePaletteProps {
@@ -60,11 +60,28 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
     return t(`palette.categories.${category}`, category);
   };
 
-  const categoryColors: Record<string, { bg: string; text: string; icon: string }> = {
-    sources: { bg: 'bg-gradient-to-br from-green-500 to-green-600', text: 'text-white', icon: '◉' },
-    transform: { bg: 'bg-gradient-to-br from-blue-500 to-blue-600', text: 'text-white', icon: '◈' },
-    visualization: { bg: 'bg-gradient-to-br from-orange-500 to-orange-600', text: 'text-white', icon: '◐' },
-    machine_learning: { bg: 'bg-gradient-to-br from-purple-500 to-purple-600', text: 'text-white', icon: '◆' },
+  const categoryIcons: Record<string, React.ComponentType<any>> = {
+    sources: Database,
+    ai_sources: Sparkles,
+    transform: Shuffle,
+    visualization: BarChart2,
+    machine_learning: Brain,
+    nlp: MessageSquare,
+    clustering: GitBranch,
+    images: Image,
+    mathematics: Calculator,
+  };
+
+  const categoryColors: Record<string, { bg: string; text: string }> = {
+    sources: { bg: 'bg-gradient-to-br from-green-500 to-green-600', text: 'text-white' },
+    ai_sources: { bg: 'bg-gradient-to-br from-pink-500 to-pink-600', text: 'text-white' },
+    transform: { bg: 'bg-gradient-to-br from-blue-500 to-blue-600', text: 'text-white' },
+    visualization: { bg: 'bg-gradient-to-br from-orange-500 to-orange-600', text: 'text-white' },
+    machine_learning: { bg: 'bg-gradient-to-br from-purple-500 to-purple-600', text: 'text-white' },
+    nlp: { bg: 'bg-gradient-to-br from-indigo-500 to-indigo-600', text: 'text-white' },
+    clustering: { bg: 'bg-gradient-to-br from-teal-500 to-teal-600', text: 'text-white' },
+    images: { bg: 'bg-gradient-to-br from-rose-500 to-rose-600', text: 'text-white' },
+    mathematics: { bg: 'bg-gradient-to-br from-yellow-400 to-yellow-500', text: 'text-black/80' },
   };
 
   const getNodeLabel = (spec: NodeSpec) => {
@@ -103,7 +120,10 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
               onClick={() => toggleCategory(category)}
               className="w-full flex items-center justify-between px-2 py-1.5 hover:bg-gray-100 rounded text-sm font-medium text-gray-700"
             >
-              <span>{getCategoryLabel(category)}</span>
+              <div className="flex items-center gap-2">
+                {React.createElement(categoryIcons[category] || Database, { className: 'w-4 h-4 text-gray-700' })}
+                <span>{getCategoryLabel(category)}</span>
+              </div>
               {expandedCategories.has(category) ? (
                 <ChevronDown className="w-4 h-4" />
               ) : (
@@ -115,7 +135,8 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
             {expandedCategories.has(category) && (
               <div className="mt-1 space-y-1">
                 {nodes.map((spec) => {
-                  const colors = categoryColors[category] || { bg: 'bg-gray-500', text: 'text-white', icon: '📦' };
+                  const colors = categoryColors[category] || { bg: 'bg-gray-500', text: 'text-white' };
+                  const IconComponent = categoryIcons[category] || Database;
                   return (
                     <div
                       key={spec.type}
@@ -126,7 +147,7 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 flex items-center justify-center bg-white/20 rounded-lg backdrop-blur-sm">
-                          <span className="text-white text-xl font-light">{colors.icon}</span>
+                          <IconComponent className="w-5 h-5 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className={`text-sm font-semibold ${colors.text} truncate`}>

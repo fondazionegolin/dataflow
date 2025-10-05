@@ -318,9 +318,9 @@ class FineTuneLLMNode(NodeExecutor):
                     name="base_model",
                     type=ParamType.SELECT,
                     label="Base Model",
-                    options=["distilgpt2", "gpt2", "TinyLlama/TinyLlama-1.1B-Chat-v1.0"],
+                    options=["distilgpt2", "gpt2", "gpt2-medium"],
                     default="distilgpt2",
-                    description="Pre-trained model to fine-tune"
+                    description="Pre-trained model to fine-tune (distilgpt2 is smallest)"
                 ),
                 ParamSpec(
                     name="text_column",
@@ -340,8 +340,29 @@ class FineTuneLLMNode(NodeExecutor):
                     name="batch_size",
                     type=ParamType.INTEGER,
                     label="Batch Size",
+                    default=1,
+                    description="Training batch size (use 1 for low memory)"
+                ),
+                ParamSpec(
+                    name="gradient_accumulation_steps",
+                    type=ParamType.INTEGER,
+                    label="Gradient Accumulation Steps",
                     default=4,
-                    description="Training batch size"
+                    description="Accumulate gradients over N steps (simulates larger batch)"
+                ),
+                ParamSpec(
+                    name="use_cpu",
+                    type=ParamType.BOOLEAN,
+                    label="Use CPU Only",
+                    default=False,
+                    description="Train on CPU instead of GPU (slower but no memory issues)"
+                ),
+                ParamSpec(
+                    name="fp16",
+                    type=ParamType.BOOLEAN,
+                    label="Use FP16 (Half Precision)",
+                    default=False,
+                    description="Use 16-bit precision to save memory (requires GPU)"
                 ),
                 ParamSpec(
                     name="learning_rate",
@@ -354,8 +375,15 @@ class FineTuneLLMNode(NodeExecutor):
                     name="max_length",
                     type=ParamType.INTEGER,
                     label="Max Length",
-                    default=128,
-                    description="Maximum sequence length"
+                    default=64,
+                    description="Maximum sequence length (lower = less memory)"
+                ),
+                ParamSpec(
+                    name="max_samples",
+                    type=ParamType.INTEGER,
+                    label="Max Training Samples",
+                    default=0,
+                    description="Limit training samples (0 = use all)"
                 )
             ],
             cache_policy=CachePolicy.MANUAL
@@ -381,14 +409,36 @@ class FineTuneLLMNode(NodeExecutor):
             base_model = context.params.get("base_model", "distilgpt2")
             text_col = context.params.get("text_column")
             epochs = int(context.params.get("epochs", 3))
-            batch_size = int(context.params.get("batch_size", 4))
+            batch_size = int(context.params.get("batch_size", 1))
+            grad_accum = int(context.params.get("gradient_accumulation_steps", 4))
+            use_cpu = context.params.get("use_cpu", False)
+            use_fp16 = context.params.get("fp16", False)
             lr = float(context.params.get("learning_rate", 5e-5))
-            max_length = int(context.params.get("max_length", 128))
+            max_length = int(context.params.get("max_length", 64))
+            max_samples = int(context.params.get("max_samples", 0))
+            
+            # Limit dataset size if specified
+            if max_samples > 0 and len(df) > max_samples:
+                df = df.head(max_samples)
             
             # Load model and tokenizer
             tokenizer = AutoTokenizer.from_pretrained(base_model)
             tokenizer.pad_token = tokenizer.eos_token
-            model = AutoModelForCausalLM.from_pretrained(base_model)
+            
+            # Load model with memory optimization
+            model = AutoModelForCausalLM.from_pretrained(
+                base_model,
+                torch_dtype=torch.float16 if use_fp16 and not use_cpu else torch.float32,
+                low_cpu_mem_usage=True
+            )
+            
+            # Move to device
+            device = "cpu" if use_cpu else ("cuda" if torch.cuda.is_available() else "cpu")
+            if not use_cpu and torch.cuda.is_available():
+                # Clear CUDA cache before training
+                torch.cuda.empty_cache()
+            
+            model = model.to(device)
             
             # Prepare dataset
             texts = df[text_col].tolist()
@@ -404,16 +454,23 @@ class FineTuneLLMNode(NodeExecutor):
             
             tokenized_dataset = dataset.map(tokenize_function, batched=True)
             
-            # Training arguments
+            # Training arguments with memory optimization
             training_args = TrainingArguments(
                 output_dir="./llm_output",
                 num_train_epochs=epochs,
                 per_device_train_batch_size=batch_size,
+                gradient_accumulation_steps=grad_accum,
                 learning_rate=lr,
                 logging_steps=5,
                 save_strategy="no",
                 report_to="none",
-                logging_dir="./llm_logs"
+                logging_dir="./llm_logs",
+                fp16=use_fp16 and not use_cpu,
+                no_cuda=use_cpu,
+                dataloader_pin_memory=False,
+                gradient_checkpointing=True if not use_cpu else False,  # Save memory
+                optim="adamw_torch",
+                max_grad_norm=1.0
             )
             
             # Data collator
@@ -443,8 +500,13 @@ class FineTuneLLMNode(NodeExecutor):
                 callbacks=[LossCallback()]
             )
             
-            # Train
-            train_result = trainer.train()
+            # Train with memory cleanup
+            try:
+                train_result = trainer.train()
+            finally:
+                # Clean up GPU memory after training
+                if not use_cpu and torch.cuda.is_available():
+                    torch.cuda.empty_cache()
             
             # Metrics
             final_loss = float(train_result.training_loss) if hasattr(train_result, 'training_loss') else (loss_history[-1]['loss'] if loss_history else 0)
@@ -453,7 +515,11 @@ class FineTuneLLMNode(NodeExecutor):
                 "epochs": epochs,
                 "samples": len(df),
                 "base_model": base_model,
-                "total_steps": len(loss_history)
+                "total_steps": len(loss_history),
+                "device": device,
+                "batch_size": batch_size,
+                "grad_accum_steps": grad_accum,
+                "effective_batch_size": batch_size * grad_accum
             }
             
             # Loss plot with history

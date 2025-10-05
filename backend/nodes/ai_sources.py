@@ -156,6 +156,7 @@ class OpenAIDatasetNode(NodeExecutor):
         return templates.get(template)
     
     async def run(self, context: NodeContext) -> NodeResult:
+        print("[AIDataset] Starting AI dataset generation...")
         template = context.params.get("template", "custom")
         n_rows = context.params.get("n_rows", 100)
         columns_str = context.params.get("columns", "cilindrata,consumo")
@@ -163,6 +164,9 @@ class OpenAIDatasetNode(NodeExecutor):
         seed = context.params.get("seed", 42)
         force_regenerate = context.params.get("force_regenerate", False)
         dataset_name = context.params.get("dataset_name", "")
+        
+        print(f"[AIDataset] Template: {template}, Rows: {n_rows}, Columns: {columns_str}")
+        print(f"[AIDataset] Description: {description[:100] if description else 'EMPTY'}")
         
         # Apply template if selected
         if template != "custom":
@@ -178,12 +182,17 @@ class OpenAIDatasetNode(NodeExecutor):
         
         # Parse column names
         columns = [col.strip() for col in columns_str.split(",") if col.strip()]
+        print(f"[AIDataset] Parsed columns: {columns}")
         
         if not columns:
+            print("[AIDataset] ERROR: No columns specified")
             return NodeResult(error="No columns specified")
         
         if not description:
+            print("[AIDataset] ERROR: No description provided")
             return NodeResult(error="No description provided")
+        
+        print("[AIDataset] Validation passed, checking cache...")
         
         # Create cache key from parameters
         cache_key_str = f"{columns_str}_{n_rows}_{seed}_{description}"
@@ -220,11 +229,14 @@ class OpenAIDatasetNode(NodeExecutor):
                 # Continue to regeneration if cache read fails
         
         # Check for OpenAI API key
+        print("[AIDataset] Checking for OpenAI API key...")
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
+            print("[AIDataset] ERROR: OpenAI API key not found")
             return NodeResult(
                 error="OpenAI API key not found. Please set OPENAI_API_KEY in backend/.env file"
             )
+        print(f"[AIDataset] API key found: {api_key[:10]}...")
         
         # Log start of generation
         print(f"\n{'='*60}")

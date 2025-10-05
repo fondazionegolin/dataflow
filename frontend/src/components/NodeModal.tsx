@@ -7,7 +7,7 @@ import { X, Settings, Table2, BarChart3, Check, Search, Maximize2 } from 'lucide
 import { Node } from 'reactflow';
 import { NodeData, ParamType } from '@/types';
 import { useWorkflowStore } from '@/store/workflowStore';
-import { api } from '@/lib/api';
+import { api } from '@/api';
 import Plot from 'react-plotly.js';
 
 interface NodeModalProps {

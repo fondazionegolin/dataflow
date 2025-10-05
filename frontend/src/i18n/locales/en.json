@@ -19,7 +19,8 @@
       "sources": "Data Sources",
       "transform": "Transform",
       "visualization": "Visualization",
-      "machine_learning": "Machine Learning"
+      "machine_learning": "Machine Learning",
+      "mathematics": "Mathematics"
     }
   },
   "node": {

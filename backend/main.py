@@ -6,11 +6,38 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, List, Optional, Any
 import uvicorn
+import numpy as np
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+print(f"[Startup] Loaded .env file, OPENAI_API_KEY present: {'OPENAI_API_KEY' in os.environ}")
 
 from core.types import Workflow, NodeInstance, NodeSpec
 from core.registry import registry
 from core.executor import ExecutionEngine
 from storage.sessions import SessionStorage, DatasetStorage
+
+
+def clean_for_json(obj: Any) -> Any:
+    """Recursively clean object for JSON serialization by replacing inf/nan with None."""
+    if isinstance(obj, dict):
+        return {k: clean_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_for_json(item) for item in obj]
+    elif isinstance(obj, tuple):
+        return tuple(clean_for_json(item) for item in obj)
+    elif isinstance(obj, float):
+        if np.isnan(obj) or np.isinf(obj):
+            return None
+        return obj
+    elif isinstance(obj, (np.floating, np.integer)):
+        val = float(obj)
+        if np.isnan(val) or np.isinf(val):
+            return None
+        return val
+    return obj
 
 # Import all node modules to register them
 import nodes.sources
@@ -22,6 +49,8 @@ import nodes.nlp  # NLP and sentiment analysis
 import nodes.clustering  # Clustering algorithms
 import nodes.llm  # Large Language Models
 import nodes.images  # Image generation
+import nodes.math  # Mathematical operations
+import nodes.control_flow  # Control flow and logic
 
 # Configure logging
 logging.basicConfig(
@@ -150,7 +179,9 @@ async def get_node_full_data(node_id: str):
         # Convert DataFrame to dict
         import pandas as pd
         if isinstance(table_data, pd.DataFrame):
-            full_data = table_data.to_dict(orient='records')
+            # Replace inf/nan before converting
+            clean_df = table_data.replace([np.inf, -np.inf], np.nan).fillna(value=None)
+            full_data = clean_df.to_dict(orient='records')
             columns = table_data.columns.tolist()
         elif isinstance(table_data, list):
             full_data = table_data
@@ -162,11 +193,11 @@ async def get_node_full_data(node_id: str):
         else:
             raise HTTPException(status_code=500, detail=f"Unsupported data type: {type(table_data)}")
         
-        return {
+        return clean_for_json({
             "data": full_data,
             "columns": columns,
             "rows": len(full_data)
-        }
+        })
     except HTTPException:
         raise
     except Exception as e:
@@ -242,14 +273,14 @@ async def execute_workflow(request: ExecuteWorkflowRequest):
                 
                 response_results[node_id] = {
                     "outputs": serialized_outputs,
-                    "metadata": result.metadata,
-                    "preview": result.preview,
+                    "metadata": clean_for_json(result.metadata),
+                    "preview": clean_for_json(result.preview),
                     "execution_time": result.execution_time
                 }
         
         return {
             "success": len(errors) == 0,
-            "results": response_results,
+            "results": clean_for_json(response_results),
             "errors": errors
         }
         

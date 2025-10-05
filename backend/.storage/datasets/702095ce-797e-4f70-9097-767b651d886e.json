@@ -1,0 +1,79 @@
+{
+  "id": "702095ce-797e-4f70-9097-767b651d886e",
+  "name": "AI_Dataset_2025-10-05_15-43-02",
+  "created_at": "2025-10-05T15:43:02.883617",
+  "metadata": {
+    "rows": 20,
+    "columns": [
+      "prompt"
+    ],
+    "description": "descrizioni di pokemon",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "prompt": "object"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "prompt": "Pikachu: A small, yellow, electric-type Pok\u00e9mon known for its adorable appearance and powerful electric attacks."
+    },
+    {
+      "prompt": "Charmander: A fire-type Pok\u00e9mon resembling a small lizard with a flame on its tail, known for its loyalty."
+    },
+    {
+      "prompt": "Bulbasaur: A grass/poison-type Pok\u00e9mon with a plant bulb on its back, known for its ability to absorb sunlight."
+    },
+    {
+      "prompt": "Squirtle: A water-type turtle Pok\u00e9mon with a playful nature, popular for its shell and water-based abilities."
+    },
+    {
+      "prompt": "Jigglypuff: A round, pink Pok\u00e9mon with the ability to put others to sleep by singing a lullaby."
+    },
+    {
+      "prompt": "Meowth: A feline Pok\u00e9mon that can walk on two legs, famous for its ability to speak human language."
+    },
+    {
+      "prompt": "Psyduck: A water-type Pok\u00e9mon that often suffers from headaches, which can lead to powerful psychic abilities."
+    },
+    {
+      "prompt": "Gengar: A ghost/poison-type Pok\u00e9mon known for its mischievous nature and ability to blend into shadows."
+    },
+    {
+      "prompt": "Eevee: A versatile Pok\u00e9mon capable of evolving into multiple different forms, depending on various factors."
+    },
+    {
+      "prompt": "Snorlax: A large, sleepy Pok\u00e9mon known for blocking paths and its insatiable appetite for food."
+    },
+    {
+      "prompt": "Machamp: A fighting-type Pok\u00e9mon with four arms, recognized for its incredible strength and fighting prowess."
+    },
+    {
+      "prompt": "Lapras: A gentle water/ice-type Pok\u00e9mon known for its ability to ferry people across bodies of water."
+    },
+    {
+      "prompt": "Alakazam: A psychic-type Pok\u00e9mon with a high IQ, known for its telekinetic powers and quick thinking."
+    },
+    {
+      "prompt": "Rattata: A small, purple rodent Pok\u00e9mon that is agile and often found in urban areas scavenging for food."
+    },
+    {
+      "prompt": "Onix: A rock/ground-type Pok\u00e9mon resembling a giant snake made of boulders, known for its strength."
+    },
+    {
+      "prompt": "Ditto: A unique Pok\u00e9mon with the ability to transform into any other Pok\u00e9mon, copying their abilities."
+    },
+    {
+      "prompt": "Articuno: A legendary ice-type Pok\u00e9mon resembling a large bird, known for its grace and control over frost."
+    },
+    {
+      "prompt": "Zapdos: A legendary electric-type Pok\u00e9mon that resembles a bird, known for its speed and thunderous attacks."
+    },
+    {
+      "prompt": "Mewtwo: A powerful psychic-type Pok\u00e9mon created through genetic engineering, known for its intelligence and strength."
+    },
+    {
+      "prompt": "Scyther: A bug/flying-type Pok\u00e9mon with sharp scythe-like arms, recognized for its speed and agility."
+    }
+  ]
+}

@@ -1,0 +1,887 @@
+{
+  "id": "cc851cec-46b1-4872-b8d6-24f70fcc1b64",
+  "name": "matematica",
+  "created_at": "2025-10-05T13:29:12.612366",
+  "updated_at": "2025-10-05T20:09:28.884937",
+  "workflow": {
+    "name": "matematica",
+    "nodes": [
+      {
+        "id": "math.numeric_input-1759676636978",
+        "type": "customNode",
+        "position": {
+          "x": -3048,
+          "y": -2064
+        },
+        "data": {
+          "type": "math.numeric_input",
+          "label": "Numeric Input",
+          "spec": {
+            "type": "math.numeric_input",
+            "label": "Numeric Input",
+            "category": "mathematics",
+            "description": "Enter a numeric value to use in calculations",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Value",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "value",
+                "type": "number",
+                "label": "Value",
+                "default": 0,
+                "required": false,
+                "description": "Numeric value to output",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "label",
+                "type": "string",
+                "label": "Label",
+                "default": "",
+                "required": false,
+                "description": "Optional label for this value",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udd22",
+            "color": "#4ECDC4"
+          },
+          "params": {
+            "value": 34,
+            "label": ""
+          },
+          "status": "success",
+          "executionTime": 0.0003533363342285156
+        },
+        "width": 704,
+        "height": 345,
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "math.numeric_input-1759676644355",
+        "type": "customNode",
+        "position": {
+          "x": -3072,
+          "y": -1632
+        },
+        "data": {
+          "type": "math.numeric_input",
+          "label": "Numeric Input",
+          "spec": {
+            "type": "math.numeric_input",
+            "label": "Numeric Input",
+            "category": "mathematics",
+            "description": "Enter a numeric value to use in calculations",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Value",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "value",
+                "type": "number",
+                "label": "Value",
+                "default": 0,
+                "required": false,
+                "description": "Numeric value to output",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "label",
+                "type": "string",
+                "label": "Label",
+                "default": "",
+                "required": false,
+                "description": "Optional label for this value",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udd22",
+            "color": "#4ECDC4"
+          },
+          "params": {
+            "value": 12,
+            "label": ""
+          },
+          "status": "success",
+          "executionTime": 0.00013184547424316406
+        },
+        "width": 704,
+        "height": 345,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -3072,
+          "y": -1632
+        },
+        "dragging": false
+      },
+      {
+        "id": "math.numeric_input-1759676657004",
+        "type": "customNode",
+        "position": {
+          "x": -3072,
+          "y": -1248
+        },
+        "data": {
+          "type": "math.numeric_input",
+          "label": "Numeric Input",
+          "spec": {
+            "type": "math.numeric_input",
+            "label": "Numeric Input",
+            "category": "mathematics",
+            "description": "Enter a numeric value to use in calculations",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Value",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "value",
+                "type": "number",
+                "label": "Value",
+                "default": 0,
+                "required": false,
+                "description": "Numeric value to output",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "label",
+                "type": "string",
+                "label": "Label",
+                "default": "",
+                "required": false,
+                "description": "Optional label for this value",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udd22",
+            "color": "#4ECDC4"
+          },
+          "params": {
+            "value": 12,
+            "label": ""
+          },
+          "status": "success",
+          "executionTime": 0.00014019012451171875
+        },
+        "width": 704,
+        "height": 345,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -3072,
+          "y": -1248
+        },
+        "dragging": false
+      },
+      {
+        "id": "math.operation-1759676683305",
+        "type": "customNode",
+        "position": {
+          "x": -2088,
+          "y": -2016
+        },
+        "data": {
+          "type": "math.operation",
+          "label": "Math Operation",
+          "spec": {
+            "type": "math.operation",
+            "label": "Math Operation",
+            "category": "mathematics",
+            "description": "Perform mathematical operations: addition, subtraction, multiplication, division, power, root, percentage, etc.",
+            "inputs": [
+              {
+                "name": "input_a",
+                "type": "any",
+                "label": "Input A",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "input_b",
+                "type": "any",
+                "label": "Input B",
+                "required": false,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "result",
+                "type": "any",
+                "label": "Result",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "operation",
+                "type": "select",
+                "label": "Operation",
+                "default": "add",
+                "required": true,
+                "description": null,
+                "options": [
+                  {
+                    "value": "add",
+                    "label": "Addition (+)"
+                  },
+                  {
+                    "value": "subtract",
+                    "label": "Subtraction (-)"
+                  },
+                  {
+                    "value": "multiply",
+                    "label": "Multiplication (\u00d7)"
+                  },
+                  {
+                    "value": "divide",
+                    "label": "Division (\u00f7)"
+                  },
+                  {
+                    "value": "power",
+                    "label": "Power (^)"
+                  },
+                  {
+                    "value": "root",
+                    "label": "Root (\u221a)"
+                  },
+                  {
+                    "value": "modulo",
+                    "label": "Modulo (%)"
+                  },
+                  {
+                    "value": "percentage",
+                    "label": "Percentage"
+                  },
+                  {
+                    "value": "absolute",
+                    "label": "Absolute Value"
+                  },
+                  {
+                    "value": "negate",
+                    "label": "Negate"
+                  },
+                  {
+                    "value": "reciprocal",
+                    "label": "Reciprocal (1/x)"
+                  },
+                  {
+                    "value": "square",
+                    "label": "Square (x\u00b2)"
+                  },
+                  {
+                    "value": "cube",
+                    "label": "Cube (x\u00b3)"
+                  },
+                  {
+                    "value": "sqrt",
+                    "label": "Square Root"
+                  },
+                  {
+                    "value": "exp",
+                    "label": "Exponential (e^x)"
+                  },
+                  {
+                    "value": "log",
+                    "label": "Natural Log (ln)"
+                  },
+                  {
+                    "value": "log10",
+                    "label": "Log Base 10"
+                  },
+                  {
+                    "value": "sin",
+                    "label": "Sine"
+                  },
+                  {
+                    "value": "cos",
+                    "label": "Cosine"
+                  },
+                  {
+                    "value": "tan",
+                    "label": "Tangent"
+                  },
+                  {
+                    "value": "floor",
+                    "label": "Floor"
+                  },
+                  {
+                    "value": "ceil",
+                    "label": "Ceiling"
+                  },
+                  {
+                    "value": "round",
+                    "label": "Round"
+                  }
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "decimal_places",
+                "type": "integer",
+                "label": "Decimal Places",
+                "default": 2,
+                "required": false,
+                "description": "Number of decimal places for rounding",
+                "options": null,
+                "min": 0,
+                "max": 10,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udd22",
+            "color": "#FF6B6B"
+          },
+          "params": {
+            "operation": "add",
+            "decimal_places": 2
+          },
+          "status": "success",
+          "executionTime": 0.0002315044403076172
+        },
+        "width": 704,
+        "height": 340,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -2088,
+          "y": -2016
+        },
+        "dragging": false
+      },
+      {
+        "id": "math.operation-1759676705981",
+        "type": "customNode",
+        "position": {
+          "x": -1152,
+          "y": -1680
+        },
+        "data": {
+          "type": "math.operation",
+          "label": "Math Operation",
+          "spec": {
+            "type": "math.operation",
+            "label": "Math Operation",
+            "category": "mathematics",
+            "description": "Perform mathematical operations: addition, subtraction, multiplication, division, power, root, percentage, etc.",
+            "inputs": [
+              {
+                "name": "input_a",
+                "type": "any",
+                "label": "Input A",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "input_b",
+                "type": "any",
+                "label": "Input B",
+                "required": false,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "result",
+                "type": "any",
+                "label": "Result",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "operation",
+                "type": "select",
+                "label": "Operation",
+                "default": "add",
+                "required": true,
+                "description": null,
+                "options": [
+                  {
+                    "value": "add",
+                    "label": "Addition (+)"
+                  },
+                  {
+                    "value": "subtract",
+                    "label": "Subtraction (-)"
+                  },
+                  {
+                    "value": "multiply",
+                    "label": "Multiplication (\u00d7)"
+                  },
+                  {
+                    "value": "divide",
+                    "label": "Division (\u00f7)"
+                  },
+                  {
+                    "value": "power",
+                    "label": "Power (^)"
+                  },
+                  {
+                    "value": "root",
+                    "label": "Root (\u221a)"
+                  },
+                  {
+                    "value": "modulo",
+                    "label": "Modulo (%)"
+                  },
+                  {
+                    "value": "percentage",
+                    "label": "Percentage"
+                  },
+                  {
+                    "value": "absolute",
+                    "label": "Absolute Value"
+                  },
+                  {
+                    "value": "negate",
+                    "label": "Negate"
+                  },
+                  {
+                    "value": "reciprocal",
+                    "label": "Reciprocal (1/x)"
+                  },
+                  {
+                    "value": "square",
+                    "label": "Square (x\u00b2)"
+                  },
+                  {
+                    "value": "cube",
+                    "label": "Cube (x\u00b3)"
+                  },
+                  {
+                    "value": "sqrt",
+                    "label": "Square Root"
+                  },
+                  {
+                    "value": "exp",
+                    "label": "Exponential (e^x)"
+                  },
+                  {
+                    "value": "log",
+                    "label": "Natural Log (ln)"
+                  },
+                  {
+                    "value": "log10",
+                    "label": "Log Base 10"
+                  },
+                  {
+                    "value": "sin",
+                    "label": "Sine"
+                  },
+                  {
+                    "value": "cos",
+                    "label": "Cosine"
+                  },
+                  {
+                    "value": "tan",
+                    "label": "Tangent"
+                  },
+                  {
+                    "value": "floor",
+                    "label": "Floor"
+                  },
+                  {
+                    "value": "ceil",
+                    "label": "Ceiling"
+                  },
+                  {
+                    "value": "round",
+                    "label": "Round"
+                  }
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "decimal_places",
+                "type": "integer",
+                "label": "Decimal Places",
+                "default": 2,
+                "required": false,
+                "description": "Number of decimal places for rounding",
+                "options": null,
+                "min": 0,
+                "max": 10,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udd22",
+            "color": "#FF6B6B"
+          },
+          "params": {
+            "operation": "divide",
+            "decimal_places": 2
+          },
+          "status": "success",
+          "executionTime": 0.00018739700317382812
+        },
+        "width": 704,
+        "height": 340,
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "control.repeat-1759676997547",
+        "type": "customNode",
+        "position": {
+          "x": -1248,
+          "y": -2160
+        },
+        "data": {
+          "type": "control.repeat",
+          "label": "Ripeti",
+          "spec": {
+            "type": "control.repeat",
+            "label": "Ripeti",
+            "category": "control",
+            "description": "Ripete l'esecuzione N volte, passando il contatore di iterazione",
+            "inputs": [
+              {
+                "name": "input",
+                "type": "any",
+                "label": "Input",
+                "required": false,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "output",
+                "type": "any",
+                "label": "Output",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "iteration",
+                "type": "params",
+                "label": "Iterazione",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "results",
+                "type": "any",
+                "label": "Tutti i Risultati",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "iterations",
+                "type": "integer",
+                "label": "Numero Iterazioni",
+                "default": 10,
+                "required": false,
+                "description": "Quante volte ripetere",
+                "options": null,
+                "min": 1,
+                "max": 10000,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "collect_results",
+                "type": "boolean",
+                "label": "Raccogli Risultati",
+                "default": true,
+                "required": false,
+                "description": "Raccoglie tutti i risultati in una lista",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\ud83d\udd01",
+            "color": "#F59E0B"
+          },
+          "params": {
+            "iterations": 10,
+            "collect_results": true
+          },
+          "status": "success",
+          "executionTime": 4.601478576660156e-05
+        },
+        "width": 704,
+        "height": 329,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -1248,
+          "y": -2160
+        },
+        "dragging": false
+      },
+      {
+        "id": "math.result-1759677047005",
+        "type": "customNode",
+        "position": {
+          "x": -240,
+          "y": -2400
+        },
+        "data": {
+          "type": "math.result",
+          "label": "Math Result",
+          "spec": {
+            "type": "math.result",
+            "label": "Math Result",
+            "category": "mathematics",
+            "description": "Extract and display numeric results from calculations",
+            "inputs": [
+              {
+                "name": "input",
+                "type": "any",
+                "label": "Input",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Value",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Table",
+                "required": false,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "extract_mode",
+                "type": "select",
+                "label": "Extract Mode",
+                "default": "first",
+                "required": false,
+                "description": null,
+                "options": [
+                  {
+                    "value": "first",
+                    "label": "First Value"
+                  },
+                  {
+                    "value": "last",
+                    "label": "Last Value"
+                  },
+                  {
+                    "value": "mean",
+                    "label": "Mean"
+                  },
+                  {
+                    "value": "sum",
+                    "label": "Sum"
+                  },
+                  {
+                    "value": "min",
+                    "label": "Minimum"
+                  },
+                  {
+                    "value": "max",
+                    "label": "Maximum"
+                  },
+                  {
+                    "value": "median",
+                    "label": "Median"
+                  },
+                  {
+                    "value": "std",
+                    "label": "Standard Deviation"
+                  },
+                  {
+                    "value": "all",
+                    "label": "All Values"
+                  }
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "column",
+                "type": "string",
+                "label": "Column",
+                "default": "",
+                "required": false,
+                "description": "Column to extract (leave empty for auto-detect)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udcca",
+            "color": "#95E1D3"
+          },
+          "params": {
+            "extract_mode": "first",
+            "column": ""
+          },
+          "status": "error",
+          "error": "Result extraction failed: Must specify a fill 'value' or 'method'."
+        },
+        "width": 304,
+        "height": 354,
+        "selected": true,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -240,
+          "y": -2400
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "math.numeric_input-1759676636978",
+        "sourceHandle": "value",
+        "target": "math.operation-1759676683305",
+        "targetHandle": "input_a",
+        "id": "math.numeric_input-1759676636978-value-math.operation-1759676683305-input_a",
+        "data": {
+          "targetCategory": "mathematics"
+        },
+        "className": "edge-mathematics"
+      },
+      {
+        "source": "math.numeric_input-1759676644355",
+        "sourceHandle": "value",
+        "target": "math.operation-1759676683305",
+        "targetHandle": "input_b",
+        "id": "math.numeric_input-1759676644355-value-math.operation-1759676683305-input_b",
+        "data": {
+          "targetCategory": "mathematics"
+        },
+        "className": "edge-mathematics"
+      },
+      {
+        "source": "math.operation-1759676683305",
+        "sourceHandle": "result",
+        "target": "math.operation-1759676705981",
+        "targetHandle": "input_a",
+        "id": "math.operation-1759676683305-result-math.operation-1759676705981-input_a",
+        "data": {
+          "targetCategory": "mathematics"
+        },
+        "className": "edge-mathematics"
+      },
+      {
+        "source": "math.numeric_input-1759676657004",
+        "sourceHandle": "value",
+        "target": "math.operation-1759676705981",
+        "targetHandle": "input_b",
+        "id": "math.numeric_input-1759676657004-value-math.operation-1759676705981-input_b",
+        "data": {
+          "targetCategory": "mathematics"
+        },
+        "className": "edge-mathematics"
+      },
+      {
+        "source": "math.operation-1759676683305",
+        "sourceHandle": "result",
+        "target": "control.repeat-1759676997547",
+        "targetHandle": "input",
+        "id": "math.operation-1759676683305-result-control.repeat-1759676997547-input",
+        "data": {
+          "targetCategory": "control"
+        },
+        "className": "edge-control"
+      },
+      {
+        "source": "control.repeat-1759676997547",
+        "sourceHandle": "output",
+        "target": "math.result-1759677047005",
+        "targetHandle": "input",
+        "id": "control.repeat-1759676997547-output-math.result-1759677047005-input",
+        "data": {
+          "targetCategory": "mathematics"
+        },
+        "className": "edge-mathematics"
+      }
+    ],
+    "executionResults": {}
+  }
+}

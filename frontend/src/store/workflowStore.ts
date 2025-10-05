@@ -4,8 +4,8 @@
 
 import { create } from 'zustand';
 import { Node, Edge, Connection, addEdge, applyNodeChanges, applyEdgeChanges } from 'reactflow';
-import { NodeSpec, NodeStatus, Workflow } from '@/types';
-import { api } from '@/lib/api';
+import { NodeSpec, NodeStatus, Workflow, ExecuteWorkflowResponse } from '@/types';
+import { api } from '@/api';
 
 export type LogLevel = 'info' | 'success' | 'warning' | 'error';
 
@@ -62,7 +62,7 @@ interface WorkflowState {
   loadNodeSpecs: () => Promise<void>;
   
   // Execution
-  executeWorkflow: () => Promise<void>;
+  executeWorkflow: () => Promise<ExecuteWorkflowResponse>;
   executeNode: (nodeId: string) => Promise<void>;
   updateExecutionResult: (nodeId: string, result: any) => void;
   
@@ -102,7 +102,20 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
 
   // Node/Edge management
   setNodes: (nodes) => set({ nodes }),
-  setEdges: (edges) => set({ edges }),
+  setEdges: (edges) => {
+    // Apply category classes to edges
+    const nodesMap = get().nodes;
+    const updatedEdges = edges.map(edge => {
+      const targetNode = nodesMap.find(n => n.id === edge.target);
+      const targetCategory = targetNode?.data.spec.category || 'default';
+      return {
+        ...edge,
+        data: { ...edge.data, targetCategory },
+        className: `edge-${targetCategory}`,
+      };
+    });
+    set({ edges: updatedEdges });
+  },
   
   onNodesChange: (changes) => {
     set({
@@ -120,11 +133,16 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
     const sourceNode = get().nodes.find(n => n.id === connection.source);
     const targetNode = get().nodes.find(n => n.id === connection.target);
     
+    // Determine edge color based on target node category
+    const targetCategory = targetNode?.data.spec.category || 'default';
+    
     set({
       edges: addEdge(
         {
           ...connection,
           id: `${connection.source}-${connection.sourceHandle}-${connection.target}-${connection.targetHandle}`,
+          data: { targetCategory },
+          className: `edge-${targetCategory}`,
         },
         get().edges
       ),
@@ -384,13 +402,20 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
       };
     });
     
-    const edges: Edge[] = workflow.edges.map((edge) => ({
-      id: edge.id,
-      source: edge.source_node,
-      target: edge.target_node,
-      sourceHandle: edge.source_port,
-      targetHandle: edge.target_port,
-    }));
+    const edges: Edge[] = workflow.edges.map((edge) => {
+      const targetNode = nodes.find(n => n.id === edge.target_node);
+      const targetCategory = targetNode?.data.spec.category || 'default';
+      
+      return {
+        id: edge.id,
+        source: edge.source_node,
+        target: edge.target_node,
+        sourceHandle: edge.source_port,
+        targetHandle: edge.target_port,
+        data: { targetCategory },
+        className: `edge-${targetCategory}`,
+      };
+    });
     
     set({
       workflowName: workflow.name,

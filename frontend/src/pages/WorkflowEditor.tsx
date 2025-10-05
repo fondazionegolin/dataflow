@@ -17,15 +17,17 @@ import { LogPanel } from '../components/LogPanel';
 import { ItalyFlag, UKFlag } from '../components/FlatFlags';
 import { ArrowLeft, Save, Check, FolderOpen, Download, Trash2, Settings, BookOpen } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
 
 const nodeTypes = {
   customNode: ExpandableNode,
 };
 
-export const WorkflowEditor: React.FC = () => {
+const WorkflowEditorContent: React.FC = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { darkMode, setDarkMode } = useTheme();
   
   const {
     nodes,
@@ -54,6 +56,18 @@ export const WorkflowEditor: React.FC = () => {
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const [hasChanges, setHasChanges] = useState(false);
+  
+  const PROXIMITY_RADIUS = 50; // pixels
+
+  // Apply dark mode class to body
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    return () => document.body.classList.remove('dark-mode');
+  }, [darkMode]);
 
   // Load node specs on mount
   useEffect(() => {
@@ -63,6 +77,33 @@ export const WorkflowEditor: React.FC = () => {
   }, [nodeSpecsLoaded, loadNodeSpecs]);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // Global proximity detection for all handles
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const handles = document.querySelectorAll('.react-flow__handle');
+      
+      handles.forEach((handle) => {
+        const rect = handle.getBoundingClientRect();
+        const handleCenterX = rect.left + rect.width / 2;
+        const handleCenterY = rect.top + rect.height / 2;
+        
+        const distance = Math.sqrt(
+          Math.pow(e.clientX - handleCenterX, 2) + 
+          Math.pow(e.clientY - handleCenterY, 2)
+        );
+        
+        if (distance < PROXIMITY_RADIUS) {
+          handle.classList.add('handle-active');
+        } else {
+          handle.classList.remove('handle-active');
+        }
+      });
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // Load session on mount
   useEffect(() => {
@@ -333,8 +374,13 @@ export const WorkflowEditor: React.FC = () => {
           </div>
           
           <button
-            className="p-2 text-gray-600 hover:bg-gray-100/80 rounded-xl transition-all"
-            title={t('toolbar.settings')}
+            onClick={() => setDarkMode(!darkMode)}
+            className={`p-2 rounded-xl transition-all ${
+              darkMode 
+                ? 'bg-gray-800 text-white hover:bg-gray-700' 
+                : 'text-gray-600 hover:bg-gray-100/80'
+            }`}
+            title={darkMode ? 'Light Mode' : 'Dark Mode'}
           >
             <Settings className="w-5 h-5" />
           </button>
@@ -360,10 +406,25 @@ export const WorkflowEditor: React.FC = () => {
             maxZoom={2}
             snapToGrid={true}
             snapGrid={[24, 24]}
+            style={{
+              backgroundColor: darkMode ? '#1a1a1a' : '#ffffff'
+            }}
           >
-            <Background gap={24} size={2} color="#94a3b8" />
+            <Background 
+              gap={24} 
+              size={2} 
+              color={darkMode ? '#404040' : '#94a3b8'}
+              style={{
+                backgroundColor: darkMode ? '#1a1a1a' : '#ffffff'
+              }}
+            />
             <Controls />
-            <MiniMap />
+            <MiniMap 
+              style={{
+                backgroundColor: darkMode ? '#2a2a2a' : '#ffffff'
+              }}
+              maskColor={darkMode ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.1)'}
+            />
           </ReactFlow>
           
           {/* Log Panel */}
@@ -373,6 +434,12 @@ export const WorkflowEditor: React.FC = () => {
     </div>
   );
 };
+
+export const WorkflowEditor: React.FC = () => (
+  <ThemeProvider>
+    <WorkflowEditorContent />
+  </ThemeProvider>
+);
 
 export const WorkflowEditorWithProvider: React.FC = () => (
   <ReactFlowProvider>

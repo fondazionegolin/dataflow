@@ -45,7 +45,7 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 220 15% 20%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -83,17 +83,232 @@
 }
 
 .react-flow__node.selected {
-  @apply ring-2 ring-primary;
+  /* Removed default ring, will use custom glow per node */
 }
 
 .react-flow__handle {
-  @apply w-3 h-3 rounded-full border-2 border-white;
+  @apply w-4 h-4 rounded-full border-2 border-white;
+  transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  z-index: 10;
+  box-shadow: 0 0 0 0px rgba(99, 102, 241, 1);
+}
+
+.react-flow__handle.handle-active {
+  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.6), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  z-index: 100;
 }
 
 .react-flow__edge-path {
-  @apply stroke-2;
+  stroke-width: 2;
+  transition: stroke 0.3s ease;
 }
 
 .react-flow__edge.selected .react-flow__edge-path {
   @apply stroke-primary;
+}
+
+/* Edge colors based on target node category */
+.react-flow__edge.edge-sources .react-flow__edge-path {
+  stroke: #22c55e;
+}
+
+.react-flow__edge.edge-ai_sources .react-flow__edge-path {
+  stroke: #ec4899;
+}
+
+.react-flow__edge.edge-transform .react-flow__edge-path {
+  stroke: #3b82f6;
+}
+
+.react-flow__edge.edge-visualization .react-flow__edge-path {
+  stroke: #f97316;
+}
+
+.react-flow__edge.edge-machine_learning .react-flow__edge-path {
+  stroke: #a855f7;
+}
+
+.react-flow__edge.edge-nlp .react-flow__edge-path {
+  stroke: #6366f1;
+}
+
+.react-flow__edge.edge-clustering .react-flow__edge-path {
+  stroke: #14b8a6;
+}
+
+.react-flow__edge.edge-llm .react-flow__edge-path {
+  stroke: #8b5cf6;
+}
+
+.react-flow__edge.edge-images .react-flow__edge-path {
+  stroke: #f43f5e;
+}
+
+.react-flow__edge.edge-mathematics .react-flow__edge-path {
+  stroke: #eab308;
+}
+
+/* Dark Mode Styles - ComfyUI Style */
+body.dark-mode {
+  background-color: #2a2a2a !important;
+}
+
+body.dark-mode .react-flow__pane {
+  background-color: #2a2a2a !important;
+}
+
+/* Dark mode - lighter dots for better visibility */
+body.dark-mode .react-flow__background {
+  background-color: #2a2a2a !important;
+}
+
+body.dark-mode .react-flow__background-pattern.dots,
+body.dark-mode .react-flow__background circle {
+  fill: #606060 !important;
+  stroke: #606060 !important;
+}
+
+body.dark-mode svg.react-flow__background path {
+  stroke: #505050 !important;
+}
+
+body.dark-mode .react-flow__node {
+  background-color: #3a3a3a !important;
+  color: #cccccc;
+  border-radius: 8px !important;
+  border: none !important;
+}
+
+body.dark-mode .react-flow__node > div {
+  background-color: #3a3a3a !important;
+  border: none !important;
+}
+
+/* Keep header colors vibrant in dark mode - no filter */
+body.dark-mode .react-flow__node .font-medium,
+body.dark-mode .react-flow__node .font-semibold {
+  color: #ffffff !important;
+}
+
+/* Input fields - dark style */
+body.dark-mode .react-flow__node input,
+body.dark-mode .react-flow__node select,
+body.dark-mode .react-flow__node textarea {
+  background-color: #1e1e1e !important;
+  color: #cccccc !important;
+  border-color: #404040 !important;
+}
+
+body.dark-mode .react-flow__node input:focus,
+body.dark-mode .react-flow__node select:focus,
+body.dark-mode .react-flow__node textarea:focus {
+  border-color: #505050 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .react-flow__node input::placeholder {
+  color: #666666 !important;
+}
+
+/* Hide number input spinners completely in dark mode */
+body.dark-mode .react-flow__node input[type="number"]::-webkit-inner-spin-button,
+body.dark-mode .react-flow__node input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: none !important;
+  margin: 0 !important;
+}
+
+body.dark-mode .react-flow__node input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+/* Text colors */
+body.dark-mode .react-flow__node .text-gray-700,
+body.dark-mode .react-flow__node .text-gray-600,
+body.dark-mode .react-flow__node .text-gray-500 {
+  color: #999999 !important;
+}
+
+body.dark-mode .react-flow__node .text-gray-800,
+body.dark-mode .react-flow__node .text-gray-900 {
+  color: #cccccc !important;
+}
+
+/* Background colors */
+body.dark-mode .react-flow__node .bg-gray-100 {
+  background-color: #1e1e1e !important;
+}
+
+body.dark-mode .react-flow__node .bg-gray-50 {
+  background-color: #252525 !important;
+}
+
+body.dark-mode .react-flow__node .bg-white {
+  background-color: #3a3a3a !important;
+}
+
+/* Borders */
+body.dark-mode .react-flow__node .border-gray-200,
+body.dark-mode .react-flow__node .border-gray-300 {
+  border-color: #404040 !important;
+}
+
+/* Buttons */
+body.dark-mode .react-flow__node button {
+  background-color: #1e1e1e !important;
+  color: #cccccc !important;
+  border-color: #404040 !important;
+}
+
+body.dark-mode .react-flow__node button:hover {
+  background-color: #353535 !important;
+}
+
+/* Shadows */
+body.dark-mode .react-flow__node {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Handle labels - white in dark mode */
+body.dark-mode .react-flow__node .text-xs.text-gray-600 {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Mathematics nodes - black text with transparency on yellow background */
+[data-category="mathematics"] .text-white {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-category="mathematics"] .text-white\/70 {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-category="mathematics"] .font-medium.text-sm.text-white {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+[data-category="mathematics"] .text-xs.text-white\/70 {
+  color: rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Mathematics nodes - buttons with white text - override dark mode */
+body.dark-mode [data-category="mathematics"] button,
+[data-category="mathematics"] button {
+  color: white !important;
+  background-color: inherit !important;
+}
+
+body.dark-mode [data-category="mathematics"] button.bg-blue-500,
+[data-category="mathematics"] button.bg-blue-500 {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+body.dark-mode [data-category="mathematics"] button.bg-green-500,
+[data-category="mathematics"] button.bg-green-500 {
+  background-color: #10b981 !important;
+  color: white !important;
 }

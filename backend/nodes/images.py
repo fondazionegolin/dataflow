@@ -34,8 +34,8 @@ class ImageModelNode(NodeExecutor):
             color="#FF6B9D",
             inputs=[],
             outputs=[
-                PortSpec(name="model", type=PortType.MODEL, label="Model"),
-                PortSpec(name="info", type=PortType.PARAMS, label="Model Info")
+                PortSpec(name="model", type=PortType.ANY, label="Model"),
+                PortSpec(name="info", type=PortType.ANY, label="Model Info")
             ],
             params=[
                 ParamSpec(
@@ -73,6 +73,7 @@ class ImageModelNode(NodeExecutor):
     
     async def run(self, context: NodeContext) -> NodeResult:
         """Load image generation model."""
+        print("[ImageModel] Starting model load...")
         try:
             # Check dependencies
             try:
@@ -82,6 +83,8 @@ class ImageModelNode(NodeExecutor):
                 return NodeResult(
                     error="Missing dependencies. Install: pip install diffusers transformers torch accelerate"
                 )
+            
+            print("[ImageModel] Dependencies loaded")
             
             model_name = context.params.get("model_name")
             device = context.params.get("device", "auto")
@@ -105,31 +108,71 @@ class ImageModelNode(NodeExecutor):
                 )
             
             # Load pipeline
-            pipeline = DiffusionPipeline.from_pretrained(
-                str(model_path) if use_local else model_name,
-                torch_dtype=torch.float16 if device != "cpu" else torch.float32,
-                use_safetensors=True
-            )
-            pipeline = pipeline.to(device)
+            print(f"[ImageModel] Loading pipeline from {model_name}...")
+            
+            # Workaround for transformers/diffusers compatibility issue
+            # Monkey-patch to prevent offload_state_dict from being passed
+            import transformers.modeling_utils as modeling_utils
+            original_from_pretrained = modeling_utils.PreTrainedModel.from_pretrained
+            
+            @classmethod
+            def patched_from_pretrained(cls, *args, **kwargs):
+                # Remove offload_state_dict if present
+                kwargs.pop('offload_state_dict', None)
+                return original_from_pretrained.__func__(cls, *args, **kwargs)
+            
+            modeling_utils.PreTrainedModel.from_pretrained = patched_from_pretrained
+            
+            try:
+                load_kwargs = {}
+                if device != "cpu":
+                    load_kwargs["torch_dtype"] = torch.float16
+                
+                pipeline = DiffusionPipeline.from_pretrained(
+                    str(model_path) if use_local else model_name,
+                    **load_kwargs
+                )
+            finally:
+                # Restore original method
+                modeling_utils.PreTrainedModel.from_pretrained = original_from_pretrained
+            
+            # Move to device with memory management
+            try:
+                if device == "cuda":
+                    # Enable CPU offloading for large models to save GPU memory
+                    print(f"[ImageModel] Enabling CPU offloading for memory efficiency...")
+                    pipeline.enable_model_cpu_offload()
+                else:
+                    pipeline = pipeline.to(device)
+                print(f"[ImageModel] Pipeline loaded successfully on {device}")
+            except torch.cuda.OutOfMemoryError:
+                print(f"[ImageModel] CUDA OOM, falling back to CPU offloading...")
+                pipeline.enable_model_cpu_offload()
+                device = "cuda (with CPU offload)"
             
             # Store in cache
             model_id = f"image_model_{id(pipeline)}"
-            _model_cache[model_id] = {
-                "pipeline": pipeline,
-                "model_name": model_name,
-                "device": device
-            }
+            _model_cache[model_id] = pipeline
             
             info = {
                 "model_name": model_name,
                 "device": device,
                 "dtype": "float16" if device != "cpu" else "float32",
-                "local": use_local
+                "local": use_local,
+                "model_id": model_id
             }
             
-            return NodeResult(
+            # Create a simple dict to represent the model (serializable)
+            model_ref = {
+                "model_id": model_id,
+                "model_name": model_name,
+                "device": device
+            }
+            
+            # Return the model reference (serializable) instead of the pipeline object
+            result = NodeResult(
                 outputs={
-                    "model": model_id,
+                    "model": model_ref,  # Return serializable reference
                     "info": info
                 },
                 metadata=info,
@@ -140,7 +183,16 @@ class ImageModelNode(NodeExecutor):
                 }
             )
             
+            # Debug: print what we're returning
+            print(f"[ImageModel] Returning outputs: {list(result.outputs.keys())}")
+            print(f"[ImageModel] Model output value: {result.outputs['model']}")
+            
+            return result
+            
         except Exception as e:
+            print(f"[ImageModel] ERROR: {str(e)}")
+            import traceback
+            traceback.print_exc()
             return NodeResult(error=f"Failed to load model: {str(e)}")
 
 
@@ -390,9 +442,9 @@ class GenerateImageNode(NodeExecutor):
             icon="✨",
             color="#9D4EDD",
             inputs=[
-                PortSpec(name="model", type=PortType.MODEL, label="Model"),
-                PortSpec(name="prompt", type=PortType.PARAMS, label="Prompt"),
-                PortSpec(name="negative_prompt", type=PortType.PARAMS, label="Negative Prompt", required=False)
+                PortSpec(name="model", type=PortType.ANY, label="Model"),
+                PortSpec(name="prompt", type=PortType.ANY, label="Prompt (text or table)"),
+                PortSpec(name="negative_prompt", type=PortType.ANY, label="Negative Prompt", required=False)
             ],
             outputs=[
                 PortSpec(name="images", type=PortType.PARAMS, label="Generated Images"),
@@ -454,17 +506,41 @@ class GenerateImageNode(NodeExecutor):
         """Generate images."""
         try:
             import torch
+            import pandas as pd
             
-            model_id = context.inputs.get("model")
-            prompt = context.inputs.get("prompt", "")
+            model_input = context.inputs.get("model")
+            prompt_input = context.inputs.get("prompt", "")
             negative_prompt = context.inputs.get("negative_prompt", "")
+            
+            # Extract model_id from input (could be dict or string)
+            if isinstance(model_input, dict):
+                model_id = model_input.get("model_id")
+            else:
+                model_id = model_input
             
             # Get model from cache
             if model_id not in _model_cache:
-                return NodeResult(error="Model not found. Please run Image Model node first.")
+                return NodeResult(error=f"Model not found in cache. Please run Image Model node first. Available: {list(_model_cache.keys())}")
             
-            model_data = _model_cache[model_id]
-            pipeline = model_data["pipeline"]
+            pipeline = _model_cache[model_id]
+            
+            # Get device from pipeline
+            device = str(pipeline.device)
+            
+            # Handle prompt input - can be string or DataFrame
+            prompts = []
+            if isinstance(prompt_input, pd.DataFrame):
+                # Extract prompts from DataFrame - look for 'prompt' column or first text column
+                if 'prompt' in prompt_input.columns:
+                    prompts = prompt_input['prompt'].tolist()
+                else:
+                    # Use first column
+                    prompts = prompt_input.iloc[:, 0].tolist()
+                print(f"[ImageGenerate] Batch mode: {len(prompts)} prompts from table")
+            elif isinstance(prompt_input, str):
+                prompts = [prompt_input]
+            else:
+                prompts = [str(prompt_input)]
             
             # Parameters
             num_images = int(context.params.get("num_images", 1))
@@ -474,42 +550,68 @@ class GenerateImageNode(NodeExecutor):
             guidance = float(context.params.get("guidance_scale", 7.5))
             seed = int(context.params.get("seed", -1))
             
-            # Set seed
-            if seed == -1:
-                seed = torch.randint(0, 2**32, (1,)).item()
-            generator = torch.Generator(device=model_data["device"]).manual_seed(seed)
+            # Generate images for all prompts
+            all_images = []
+            all_seeds = []
             
-            # Generate images
-            images = pipeline(
-                prompt=prompt,
-                negative_prompt=negative_prompt if negative_prompt else None,
-                num_images_per_prompt=num_images,
-                width=width,
-                height=height,
-                num_inference_steps=steps,
-                guidance_scale=guidance,
-                generator=generator
-            ).images
+            for prompt_idx, prompt in enumerate(prompts):
+                # Set seed (different for each prompt if -1)
+                if seed == -1:
+                    current_seed = torch.randint(0, 2**32, (1,)).item()
+                else:
+                    current_seed = seed + prompt_idx
+                
+                generator = torch.Generator(device=device).manual_seed(current_seed)
+                
+                print(f"[ImageGenerate] Generating image {prompt_idx + 1}/{len(prompts)}: {prompt[:50]}...")
+                
+                # Generate images
+                images = pipeline(
+                    prompt=prompt,
+                    negative_prompt=negative_prompt if negative_prompt else None,
+                    num_images_per_prompt=num_images,
+                    width=width,
+                    height=height,
+                    num_inference_steps=steps,
+                    guidance_scale=guidance,
+                    generator=generator
+                ).images
+                
+                all_images.extend(images)
+                all_seeds.extend([current_seed] * len(images))
             
-            # Save images temporarily
+            # Save images temporarily and convert to base64 for preview
+            import base64
+            from io import BytesIO
+            
             image_paths = []
+            image_base64_list = []
             output_dir = Path("./outputs/images")
             output_dir.mkdir(parents=True, exist_ok=True)
             
-            for i, img in enumerate(images):
-                path = output_dir / f"generated_{seed}_{i}.png"
+            for i, (img, img_seed) in enumerate(zip(all_images, all_seeds)):
+                # Save to file
+                path = output_dir / f"generated_{img_seed}_{i}.png"
                 img.save(path)
                 image_paths.append(str(path))
+                
+                # Convert to base64 for preview (limit to first 5 for performance)
+                if i < 5:
+                    buffered = BytesIO()
+                    img.save(buffered, format="PNG")
+                    img_base64 = base64.b64encode(buffered.getvalue()).decode()
+                    image_base64_list.append(f"data:image/png;base64,{img_base64}")
             
             metadata = {
-                "prompt": prompt,
+                "prompts": prompts if len(prompts) > 1 else prompts[0],
                 "negative_prompt": negative_prompt,
-                "num_images": len(images),
+                "num_images": len(all_images),
+                "num_prompts": len(prompts),
                 "width": width,
                 "height": height,
                 "steps": steps,
                 "guidance_scale": guidance,
-                "seed": seed,
+                "seeds": all_seeds if len(all_seeds) <= 10 else f"{len(all_seeds)} seeds",
                 "paths": image_paths
             }
             
@@ -520,9 +622,11 @@ class GenerateImageNode(NodeExecutor):
                 },
                 metadata=metadata,
                 preview={
-                    "type": "metrics",
+                    "type": "images",
+                    "images": image_base64_list,
                     "data": metadata,
-                    "message": f"✅ Generated {len(images)} image(s)"
+                    "message": f"✅ Generated {len(all_images)} image(s) from {len(prompts)} prompt(s)" + 
+                               (f" (showing first 5)" if len(all_images) > 5 else "")
                 }
             )
             

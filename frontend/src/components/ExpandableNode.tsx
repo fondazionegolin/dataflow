@@ -3,13 +3,15 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Handle, Position, NodeProps } from 'reactflow';
-import { ChevronDown, ChevronUp, Settings, Table2, BarChart3, HelpCircle, Eye } from 'lucide-react';
+import { ChevronDown, ChevronUp, Settings, Table2, BarChart3, HelpCircle, Eye, Copy as CopyIcon, Trash2 } from 'lucide-react';
 import { NodeData, ParamType } from '@/types';
 import { useWorkflowStore } from '@/store/workflowStore';
 import Plot from 'react-plotly.js';
 import { useTranslation } from 'react-i18next';
 import { TableEditor } from './TableEditor';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, selected }) => {
   const [isExpanded, setIsExpanded] = useState(true); // Aperto di default
@@ -23,11 +25,13 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
   const [showRegressionLine, setShowRegressionLine] = useState(false);
   const [regressionType, setRegressionType] = useState<'linear' | 'polynomial' | 'exponential'>('linear');
   const [availableColumns, setAvailableColumns] = useState<string[]>([]);
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
   
-  const { updateNodeParams, edges, executionResults } = useWorkflowStore();
+  const { updateNodeParams, edges, executionResults, nodes, setNodes } = useWorkflowStore();
   const { spec, params, status } = data;
   const result = executionResults[id];
   const { t } = useTranslation();
+  const { darkMode } = useTheme();
   
   // Get sessionId from URL
   const sessionId = window.location.pathname.split('/').pop();
@@ -234,6 +238,12 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
         bg: 'bg-purple-50',
         gradient: 'from-purple-500 to-purple-600',
         hex: '#a855f7'
+      },
+      mathematics: { 
+        border: 'border-yellow-400', 
+        bg: 'bg-yellow-50',
+        gradient: 'from-yellow-400 to-yellow-500',
+        hex: '#facc15'
       },
     };
     
@@ -759,13 +769,42 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
       }
     }
 
+    // Render images
+    if (result.preview?.type === 'images' && result.preview?.images) {
+      return (
+        <div className="p-4 space-y-3">
+          <div className="grid grid-cols-1 gap-3">
+            {result.preview.images.map((imgSrc: string, idx: number) => (
+              <div key={idx} className="relative">
+                <img 
+                  src={imgSrc} 
+                  alt={`Generated ${idx + 1}`}
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
+                {result.preview.data && (
+                  <div className="mt-2 text-xs text-gray-600 space-y-1">
+                    {result.preview.data.prompt && (
+                      <div><strong>Prompt:</strong> {result.preview.data.prompt}</div>
+                    )}
+                    {result.preview.data.seed && (
+                      <div><strong>Seed:</strong> {result.preview.data.seed}</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
     // Render data table
     if (result.preview?.head && result.preview.head.length > 0) {
       const columns = Object.keys(result.preview.head[0]);
-      const rows = result.preview.head.slice(0, 5);
+      const rows = result.preview.head; // Show all rows, not just first 5
 
       return (
-        <div className="overflow-auto max-h-64">
+        <div className="overflow-auto max-h-96">
           <table className="min-w-full divide-y divide-gray-200 text-xs">
             <thead className="bg-gray-50 sticky top-0">
               <tr>
@@ -865,13 +904,75 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
     return getCategoryColor().hex;
   };
 
+  // Context menu handlers
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const menuWidth = 150;
+    const menuHeight = 100;
+    
+    // Use the native event for accurate coordinates
+    const x = e.nativeEvent.clientX;
+    const y = e.nativeEvent.clientY;
+    
+    // Adjust if menu would go off screen
+    let finalX = x;
+    let finalY = y;
+    
+    if (x + menuWidth > window.innerWidth) {
+      finalX = x - menuWidth;
+    }
+    if (y + menuHeight > window.innerHeight) {
+      finalY = y - menuHeight;
+    }
+    
+    setContextMenu({ x: finalX, y: finalY });
+  };
+
+  const handleDuplicateNode = () => {
+    const nodeToDuplicate = nodes.find(n => n.id === id);
+    if (nodeToDuplicate) {
+      const newNode = {
+        ...nodeToDuplicate,
+        id: `${nodeToDuplicate.data.spec.type}-${Date.now()}`,
+        position: {
+          x: nodeToDuplicate.position.x + 100,
+          y: nodeToDuplicate.position.y + 100,
+        },
+        selected: false,
+      };
+      setNodes([...nodes, newNode]);
+    }
+    setContextMenu(null);
+  };
+
+  const handleDeleteNode = () => {
+    setNodes(nodes.filter(n => n.id !== id));
+    setContextMenu(null);
+  };
+
+  // Close context menu on click outside
+  useEffect(() => {
+    const handleClick = () => setContextMenu(null);
+    if (contextMenu) {
+      document.addEventListener('click', handleClick);
+      return () => document.removeEventListener('click', handleClick);
+    }
+  }, [contextMenu]);
+
   return (
-    <div className={`${getNodeWidth()} rounded-lg relative`}>
+    <>
+    <div 
+      className={`${getNodeWidth()} rounded-lg relative`} 
+      data-category={spec.category}
+      onContextMenu={handleContextMenu}
+    >
       {/* Thick draggable border overlay */}
       <div 
         className={`absolute inset-0 rounded-lg pointer-events-none`}
         style={{
-          border: `12px solid ${getBorderColor()}`,
+          border: `16px solid ${getBorderColor()}`,
         }}
       />
       
@@ -879,19 +980,22 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
       <div 
         className="absolute inset-0 rounded-lg pointer-events-auto cursor-move"
         style={{
-          padding: '12px',
-          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 12px 12px, 12px calc(100% - 12px), calc(100% - 12px) calc(100% - 12px), calc(100% - 12px) 12px, 12px 12px)'
+          padding: '16px',
+          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 16px 16px, 16px calc(100% - 16px), calc(100% - 16px) calc(100% - 16px), calc(100% - 16px) 16px, 16px 16px)'
         }}
       />
       
       {/* Main content area - no dragging */}
       <div 
-        className={`relative rounded-lg ${getStatusColor()} ${selected ? 'ring-2 ring-primary' : ''}`}
+        className={`relative rounded-lg ${getStatusColor()}`}
         style={{
           pointerEvents: 'auto',
-          borderWidth: '12px',
+          borderWidth: '16px',
           borderStyle: 'solid',
           borderColor: getBorderColor(),
+          boxShadow: selected 
+            ? `0 0 0 5px ${darkMode ? '#ffffff' : '#000000'}`
+            : undefined,
         }}
       >
       {/* Input Handles */}
@@ -900,7 +1004,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           key={input.name}
           style={{
             position: 'absolute',
-            left: -20,
+            left: -32, // Outside, tangent to outer edge of colored border (border 16px + handle 16px = -32)
             top: `${((idx + 1) * 100) / (spec.inputs.length + 1)}%`,
             transform: 'translateY(-50%)',
           }}
@@ -911,11 +1015,12 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
             id={input.name}
             style={{
               position: 'relative',
-              background: '#6366f1',
+              background: getCategoryColor().hex,
               width: 16,
               height: 16,
               border: '3px solid white',
               boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+              padding: '12px', // Invisible clickable area
             }}
           />
           <div 
@@ -930,7 +1035,10 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
       ))}
 
       {/* Node Header - Draggable */}
-      <div className="px-3 py-2">
+      <div 
+        className="px-3 py-2"
+        style={{ backgroundColor: getBorderColor() }}
+      >
         <div className="flex items-center justify-between">
           <div
             className="cursor-pointer flex items-center gap-2 flex-1"
@@ -942,8 +1050,8 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           >
             <span className="text-lg">{spec.icon || '📦'}</span>
             <div>
-              <div className="font-medium text-sm">{t(`nodes.${spec.type}.label`, data.label)}</div>
-              <div className="text-xs text-gray-500">{t(`palette.categories.${spec.category}`, spec.category)}</div>
+              <div className="font-medium text-sm text-white">{t(`nodes.${spec.type}.label`, data.label)}</div>
+              <div className="text-xs text-white/70">{t(`palette.categories.${spec.category}`, spec.category)}</div>
             </div>
           </div>
           <div className="flex items-center gap-1">
@@ -951,10 +1059,10 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
               <button
                 onMouseEnter={() => setShowTooltip(true)}
                 onMouseLeave={() => setShowTooltip(false)}
-                className="p-1 hover:bg-gray-100 rounded transition-colors"
+                className="p-1.5 hover:bg-white/20 rounded-full transition-colors"
                 onClick={(e) => e.stopPropagation()}
               >
-                <HelpCircle className="w-4 h-4 text-gray-400" />
+                <HelpCircle className="w-4 h-4 text-white" />
               </button>
               {showTooltip && (
                 <div className="absolute right-0 top-6 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg shadow-xl z-50">
@@ -968,12 +1076,12 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
             </div>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1"
+              className="p-1.5 hover:bg-white/20 rounded-full transition-colors"
             >
               {isExpanded ? (
-                <ChevronUp className="w-4 h-4 text-gray-400" />
+                <ChevronUp className="w-4 h-4 text-white" />
               ) : (
-                <ChevronDown className="w-4 h-4 text-gray-400" />
+                <ChevronDown className="w-4 h-4 text-white" />
               )}
             </button>
           </div>
@@ -1124,8 +1232,36 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
                     <span className="text-xs font-medium text-gray-700">{t('node.results')}</span>
                   </div>
                   
-                  {/* View Full Table Button */}
-                  {result.preview?.head && (
+                  {/* Edit Table Button for Custom Table only */}
+                  {spec.type === 'data.custom_input' && result.preview?.head && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowTableEditor(true);
+                      }}
+                      className="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors flex items-center gap-1"
+                    >
+                      <Table2 className="w-3 h-3" />
+                      Modifica Tabella
+                    </button>
+                  )}
+                  
+                  {/* View Full Table Button - Open Modal */}
+                  {!result.preview?.editable && result.preview?.head && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowTableEditor(true);
+                      }}
+                      className="px-2 py-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded transition-colors flex items-center gap-1"
+                    >
+                      <Table2 className="w-3 h-3" />
+                      Controlla Tabella
+                    </button>
+                  )}
+                  
+                  {/* OLD: View Full Table Button in new window - DISABLED */}
+                  {false && !result.preview?.editable && result.preview?.head && (
                     <button
                       onClick={async () => {
                         // Fetch full data from backend
@@ -1497,7 +1633,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           key={output.name}
           style={{
             position: 'absolute',
-            right: -20,
+            right: -32, // Outside, tangent to outer edge of colored border (border 16px + handle 16px = -32)
             top: `${((idx + 1) * 100) / (spec.outputs.length + 1)}%`,
             transform: 'translateY(-50%)',
           }}
@@ -1508,11 +1644,12 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
             id={output.name}
             style={{
               position: 'relative',
-              background: '#6366f1',
+              background: getCategoryColor().hex,
               width: 16,
               height: 16,
               border: '3px solid white',
               boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+              padding: '12px', // Invisible clickable area
             }}
           />
           <div 
@@ -1548,5 +1685,37 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
       )}
       </div>
     </div>
+
+    {/* Context Menu - Portal to body to avoid transform issues */}
+    {contextMenu && createPortal(
+      <div
+        className="fixed bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-1"
+        style={{
+          left: `${contextMenu.x}px`,
+          top: `${contextMenu.y}px`,
+          zIndex: 9999,
+          position: 'fixed',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={handleDuplicateNode}
+          className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+        >
+          <CopyIcon className="w-4 h-4" />
+          Duplica
+        </button>
+        <div className="border-t border-gray-200 dark:border-gray-700 my-1" />
+        <button
+          onClick={handleDeleteNode}
+          className="w-full px-4 py-2 text-left text-sm hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 flex items-center gap-2"
+        >
+          <Trash2 className="w-4 h-4" />
+          Cancella
+        </button>
+      </div>,
+      document.body
+    )}
+    </>
   );
 };

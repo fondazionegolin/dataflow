@@ -1,0 +1,541 @@
+{
+  "id": "e36669ef-9537-4749-9f7d-dee4cb4645bb",
+  "name": "cicli",
+  "created_at": "2025-10-05T20:09:32.668393",
+  "updated_at": "2025-10-05T21:38:46.496565",
+  "workflow": {
+    "name": "cicli",
+    "nodes": [
+      {
+        "id": "math.numeric_input-1759688158655",
+        "type": "customNode",
+        "position": {
+          "x": -1344,
+          "y": 1128
+        },
+        "data": {
+          "type": "math.numeric_input",
+          "label": "Numeric Input",
+          "spec": {
+            "type": "math.numeric_input",
+            "label": "Numeric Input",
+            "category": "mathematics",
+            "description": "Enter a numeric value to use in calculations",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Value",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "value",
+                "type": "number",
+                "label": "Value",
+                "default": 0,
+                "required": false,
+                "description": "Numeric value to output",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "label",
+                "type": "string",
+                "label": "Label",
+                "default": "",
+                "required": false,
+                "description": "Optional label for this value",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udd22",
+            "color": "#4ECDC4"
+          },
+          "params": {
+            "value": 2,
+            "label": ""
+          },
+          "status": "success",
+          "executionTime": 0.00031113624572753906
+        },
+        "width": 704,
+        "height": 345,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -1344,
+          "y": 1128
+        }
+      },
+      {
+        "id": "math.numeric_input-1759688160627",
+        "type": "customNode",
+        "position": {
+          "x": -1344,
+          "y": 1584
+        },
+        "data": {
+          "type": "math.numeric_input",
+          "label": "Numeric Input",
+          "spec": {
+            "type": "math.numeric_input",
+            "label": "Numeric Input",
+            "category": "mathematics",
+            "description": "Enter a numeric value to use in calculations",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Value",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "value",
+                "type": "number",
+                "label": "Value",
+                "default": 0,
+                "required": false,
+                "description": "Numeric value to output",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "label",
+                "type": "string",
+                "label": "Label",
+                "default": "",
+                "required": false,
+                "description": "Optional label for this value",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udd22",
+            "color": "#4ECDC4"
+          },
+          "params": {
+            "value": 2,
+            "label": ""
+          },
+          "status": "success",
+          "executionTime": 0.00015854835510253906
+        },
+        "width": 704,
+        "height": 345,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -1344,
+          "y": 1584
+        }
+      },
+      {
+        "id": "math.operation-1759688166515",
+        "type": "customNode",
+        "position": {
+          "x": -480,
+          "y": 1392
+        },
+        "data": {
+          "type": "math.operation",
+          "label": "Math Operation",
+          "spec": {
+            "type": "math.operation",
+            "label": "Math Operation",
+            "category": "mathematics",
+            "description": "Perform mathematical operations: addition, subtraction, multiplication, division, power, root, percentage, etc.",
+            "inputs": [
+              {
+                "name": "input_a",
+                "type": "any",
+                "label": "Input A",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "input_b",
+                "type": "any",
+                "label": "Input B",
+                "required": false,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "result",
+                "type": "any",
+                "label": "Result",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "operation",
+                "type": "select",
+                "label": "Operation",
+                "default": "add",
+                "required": true,
+                "description": null,
+                "options": [
+                  {
+                    "value": "add",
+                    "label": "Addition (+)"
+                  },
+                  {
+                    "value": "subtract",
+                    "label": "Subtraction (-)"
+                  },
+                  {
+                    "value": "multiply",
+                    "label": "Multiplication (\u00d7)"
+                  },
+                  {
+                    "value": "divide",
+                    "label": "Division (\u00f7)"
+                  },
+                  {
+                    "value": "power",
+                    "label": "Power (^)"
+                  },
+                  {
+                    "value": "root",
+                    "label": "Root (\u221a)"
+                  },
+                  {
+                    "value": "modulo",
+                    "label": "Modulo (%)"
+                  },
+                  {
+                    "value": "percentage",
+                    "label": "Percentage"
+                  },
+                  {
+                    "value": "absolute",
+                    "label": "Absolute Value"
+                  },
+                  {
+                    "value": "negate",
+                    "label": "Negate"
+                  },
+                  {
+                    "value": "reciprocal",
+                    "label": "Reciprocal (1/x)"
+                  },
+                  {
+                    "value": "square",
+                    "label": "Square (x\u00b2)"
+                  },
+                  {
+                    "value": "cube",
+                    "label": "Cube (x\u00b3)"
+                  },
+                  {
+                    "value": "sqrt",
+                    "label": "Square Root"
+                  },
+                  {
+                    "value": "exp",
+                    "label": "Exponential (e^x)"
+                  },
+                  {
+                    "value": "log",
+                    "label": "Natural Log (ln)"
+                  },
+                  {
+                    "value": "log10",
+                    "label": "Log Base 10"
+                  },
+                  {
+                    "value": "sin",
+                    "label": "Sine"
+                  },
+                  {
+                    "value": "cos",
+                    "label": "Cosine"
+                  },
+                  {
+                    "value": "tan",
+                    "label": "Tangent"
+                  },
+                  {
+                    "value": "floor",
+                    "label": "Floor"
+                  },
+                  {
+                    "value": "ceil",
+                    "label": "Ceiling"
+                  },
+                  {
+                    "value": "round",
+                    "label": "Round"
+                  }
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "decimal_places",
+                "type": "integer",
+                "label": "Decimal Places",
+                "default": 2,
+                "required": false,
+                "description": "Number of decimal places for rounding",
+                "options": null,
+                "min": 0,
+                "max": 10,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udd22",
+            "color": "#FF6B6B"
+          },
+          "params": {
+            "operation": "add",
+            "decimal_places": 2
+          },
+          "status": "success",
+          "executionTime": 0.0002536773681640625
+        },
+        "width": 704,
+        "height": 340,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -480,
+          "y": 1392
+        },
+        "dragging": false
+      },
+      {
+        "id": "data.custom_input-1759693115247",
+        "type": "customNode",
+        "position": {
+          "x": 384,
+          "y": 1296
+        },
+        "data": {
+          "type": "data.custom_input",
+          "label": "Custom Table",
+          "spec": {
+            "type": "data.custom_input",
+            "label": "Custom Table",
+            "category": "sources",
+            "description": "Create table data visually - click 'Edit Table' to start. Numeric inputs are written to the first available columns (Input 1 \u2192 Column 1, Input 2 \u2192 Column 2, etc.). Each execution adds a new row.",
+            "inputs": [
+              {
+                "name": "input_1",
+                "type": "any",
+                "label": "Input 1",
+                "required": false,
+                "description": null
+              },
+              {
+                "name": "input_2",
+                "type": "any",
+                "label": "Input 2",
+                "required": false,
+                "description": null
+              },
+              {
+                "name": "input_3",
+                "type": "any",
+                "label": "Input 3",
+                "required": false,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "table_data",
+                "type": "string",
+                "label": "Table Data (Internal)",
+                "default": "{\"columns\":[\"Column1\",\"Column2\",\"Column3\"],\"data\":[]}",
+                "required": false,
+                "description": "Internal storage for table data",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\u270f\ufe0f",
+            "color": "#FF9800"
+          },
+          "params": {
+            "table_data": "{\"columns\":[\"Column1\",\"Column2\",\"Column3\"],\"data\":[]}"
+          },
+          "status": "error",
+          "error": "Failed to create custom table: Must specify a fill 'value' or 'method'."
+        },
+        "width": 304,
+        "height": 257,
+        "selected": true,
+        "positionAbsolute": {
+          "x": 384,
+          "y": 1296
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "math.numeric_input-1759688158655",
+        "sourceHandle": "value",
+        "target": "math.operation-1759688166515",
+        "targetHandle": "input_a",
+        "id": "math.numeric_input-1759688158655-value-math.operation-1759688166515-input_a",
+        "data": {
+          "targetCategory": "mathematics"
+        },
+        "className": "edge-mathematics"
+      },
+      {
+        "source": "math.numeric_input-1759688160627",
+        "sourceHandle": "value",
+        "target": "math.operation-1759688166515",
+        "targetHandle": "input_b",
+        "id": "math.numeric_input-1759688160627-value-math.operation-1759688166515-input_b",
+        "data": {
+          "targetCategory": "mathematics"
+        },
+        "className": "edge-mathematics"
+      },
+      {
+        "source": "math.operation-1759688166515",
+        "sourceHandle": "result",
+        "target": "data.custom_input-1759693115247",
+        "targetHandle": "input_1",
+        "id": "math.operation-1759688166515-result-data.custom_input-1759693115247-input_1",
+        "data": {
+          "targetCategory": "sources"
+        },
+        "className": "edge-sources"
+      }
+    ],
+    "executionResults": {
+      "math.numeric_input-1759688158655": {
+        "outputs": {
+          "value": {
+            "value": {
+              "0": 2
+            }
+          }
+        },
+        "metadata": {
+          "value": 2,
+          "label": "",
+          "type": "numeric_input"
+        },
+        "preview": {
+          "type": "scalar",
+          "value": 2,
+          "label": "",
+          "head": [
+            {
+              "value": 2
+            }
+          ]
+        },
+        "execution_time": 0.00031113624572753906
+      },
+      "math.numeric_input-1759688160627": {
+        "outputs": {
+          "value": {
+            "value": {
+              "0": 2
+            }
+          }
+        },
+        "metadata": {
+          "value": 2,
+          "label": "",
+          "type": "numeric_input"
+        },
+        "preview": {
+          "type": "scalar",
+          "value": 2,
+          "label": "",
+          "head": [
+            {
+              "value": 2
+            }
+          ]
+        },
+        "execution_time": 0.00015854835510253906
+      },
+      "math.operation-1759688166515": {
+        "outputs": {
+          "result": {
+            "result": {
+              "0": 4
+            }
+          }
+        },
+        "metadata": {
+          "operation": "add",
+          "result_type": "float",
+          "shape": [
+            1,
+            1
+          ]
+        },
+        "preview": {
+          "type": "scalar",
+          "value": 4,
+          "operation": "add",
+          "head": [
+            {
+              "result": 4
+            }
+          ]
+        },
+        "execution_time": 0.0002536773681640625
+      }
+    }
+  }
+}

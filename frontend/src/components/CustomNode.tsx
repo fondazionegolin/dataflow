@@ -2,7 +2,7 @@
  * Custom node component for React Flow
  */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { NodeData, NodeStatus, PortType } from '@/types';
 import { Loader2, CheckCircle2, XCircle, Clock } from 'lucide-react';
@@ -43,14 +43,52 @@ const getStatusIcon = (status: NodeStatus) => {
 
 export const CustomNode: React.FC<NodeProps<NodeData>> = ({ data, selected }) => {
   const { spec, status, error, executionTime } = data;
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const [activeHandles, setActiveHandles] = useState<Set<string>>(new Set());
+  const PROXIMITY_RADIUS = 50; // pixels
   
   const getBorderColor = () => {
     if (status === NodeStatus.ERROR) return '#ef4444';
     return spec.color || '#666';
   };
+
+  // Track mouse position and update handle states
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!nodeRef.current) return;
+
+      const handles = nodeRef.current.querySelectorAll('.react-flow__handle');
+      const newActiveHandles = new Set<string>();
+
+      handles.forEach((handle) => {
+        const rect = handle.getBoundingClientRect();
+        const handleCenterX = rect.left + rect.width / 2;
+        const handleCenterY = rect.top + rect.height / 2;
+        
+        const distance = Math.sqrt(
+          Math.pow(e.clientX - handleCenterX, 2) + 
+          Math.pow(e.clientY - handleCenterY, 2)
+        );
+
+        const handleId = handle.getAttribute('data-handleid') || '';
+        
+        if (distance < PROXIMITY_RADIUS) {
+          newActiveHandles.add(handleId);
+          handle.classList.add('handle-active');
+        } else {
+          handle.classList.remove('handle-active');
+        }
+      });
+
+      setActiveHandles(newActiveHandles);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, []);
   
   return (
-    <div className="relative min-w-[200px] rounded-lg">
+    <div ref={nodeRef} className="relative min-w-[200px] rounded-lg">
       {/* Thick draggable border overlay */}
       <div 
         className="absolute inset-0 rounded-lg pointer-events-none"
@@ -88,7 +126,8 @@ export const CustomNode: React.FC<NodeProps<NodeData>> = ({ data, selected }) =>
             type="target"
             position={Position.Left}
             id={input.name}
-            className={`${getPortColor(input.type)} !w-3 !h-3`}
+            data-handleid={`input-${input.name}`}
+            className={`${getPortColor(input.type)}`}
             style={{
               top: `${((index + 1) * 100) / (spec.inputs.length + 1)}%`,
             }}
@@ -103,7 +142,8 @@ export const CustomNode: React.FC<NodeProps<NodeData>> = ({ data, selected }) =>
             type="source"
             position={Position.Right}
             id={output.name}
-            className={`${getPortColor(output.type)} !w-3 !h-3`}
+            data-handleid={`output-${output.name}`}
+            className={`${getPortColor(output.type)}`}
             style={{
               top: `${((index + 1) * 100) / (spec.outputs.length + 1)}%`,
             }}

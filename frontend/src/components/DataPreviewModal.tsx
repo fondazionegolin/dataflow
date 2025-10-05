@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { X, Check, Search, Filter, Eye } from 'lucide-react';
-import { api } from '@/lib/api';
+import { api } from '@/api';
 
 interface DataPreviewModalProps {
   isOpen: boolean;

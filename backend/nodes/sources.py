@@ -351,10 +351,14 @@ class CustomInputNode(NodeExecutor):
             type="data.custom_input",
             label="Custom Table",
             category="sources",
-            description="Create table data visually - click 'Edit Table' to start",
+            description="Create table data visually - click 'Edit Table' to start. Numeric inputs are written to the first available columns (Input 1 → Column 1, Input 2 → Column 2, etc.). Each execution adds a new row.",
             icon="✏️",
             color="#FF9800",
-            inputs=[],
+            inputs=[
+                PortSpec(name="input_1", type=PortType.ANY, label="Input 1", required=False),
+                PortSpec(name="input_2", type=PortType.ANY, label="Input 2", required=False),
+                PortSpec(name="input_3", type=PortType.ANY, label="Input 3", required=False),
+            ],
             outputs=[
                 PortSpec(name="table", type=PortType.TABLE, label="Table")
             ],
@@ -363,31 +367,87 @@ class CustomInputNode(NodeExecutor):
                     name="table_data",
                     type=ParamType.STRING,
                     label="Table Data (Internal)",
-                    default='{"columns":["Column1","Column2","Column3"],"data":[{"Column1":"","Column2":"","Column3":""}]}',
+                    default='{"columns":["Column1","Column2","Column3"],"data":[]}',
                     description="Internal storage for table data"
+                ),
+                ParamSpec(
+                    name="reset_on_execute",
+                    type=ParamType.BOOLEAN,
+                    label="Reset on Execute",
+                    default=False,
+                    description="Clear accumulated data when workflow is executed"
                 )
             ],
-            cache_policy=CachePolicy.MANUAL
+            cache_policy=CachePolicy.NEVER
         ))
+        self.accumulated_data = {}  # Store accumulated data per node instance
     
     async def run(self, context: NodeContext) -> NodeResult:
-        """Create custom table from stored data."""
+        """Create custom table from stored data and optional inputs."""
         try:
             import json
             
+            node_id = id(self)  # Use object id as key
             table_data_str = context.params.get("table_data", '{"columns":["Column1","Column2","Column3"],"data":[]}')
+            reset_on_execute = context.params.get("reset_on_execute", False)
             
             # Parse stored data
             table_data = json.loads(table_data_str)
             columns = table_data.get("columns", ["Column1", "Column2", "Column3"])
-            data = table_data.get("data", [])
+            base_data = table_data.get("data", [])
             
-            # Create DataFrame
-            if not data:
+            # Initialize or reset accumulated data
+            if node_id not in self.accumulated_data or reset_on_execute:
+                # Start with base data from table_data parameter
+                self.accumulated_data[node_id] = base_data.copy() if base_data else []
+            
+            # Process input connections - extract numeric values
+            input_values = []
+            for input_key in ["input_1", "input_2", "input_3"]:
+                if input_key in context.inputs:
+                    input_data = context.inputs[input_key]
+                    # Extract value from input
+                    if isinstance(input_data, pd.DataFrame):
+                        # Get first value from first numeric column
+                        numeric_cols = input_data.select_dtypes(include=[np.number]).columns
+                        if len(numeric_cols) > 0:
+                            value = float(input_data[numeric_cols[0]].iloc[0])
+                            # Replace inf/nan with None
+                            if np.isinf(value) or np.isnan(value):
+                                value = None
+                            input_values.append(value)
+                    elif isinstance(input_data, (int, float)):
+                        value = float(input_data)
+                        # Replace inf/nan with None
+                        if np.isinf(value) or np.isnan(value):
+                            value = None
+                        input_values.append(value)
+            
+            # Add input values as a new row to accumulated data
+            if input_values:
+                # Use the first N columns for the N input values
+                target_columns = columns[:len(input_values)]
+                
+                # Create a new row with input values in the first N columns
+                new_row = {}
+                for i, value in enumerate(input_values):
+                    if i < len(target_columns):
+                        new_row[target_columns[i]] = value
+                
+                # Fill remaining columns with empty values
+                for col in columns:
+                    if col not in new_row:
+                        new_row[col] = ""
+                
+                # Add to accumulated data
+                self.accumulated_data[node_id].append(new_row)
+            
+            # Create DataFrame from accumulated data
+            if not self.accumulated_data[node_id] or len(self.accumulated_data[node_id]) == 0:
                 # Create empty DataFrame with one row for editing
                 df = pd.DataFrame([{col: "" for col in columns}], columns=columns)
             else:
-                df = pd.DataFrame(data, columns=columns)
+                df = pd.DataFrame(self.accumulated_data[node_id], columns=columns)
             
             # Auto-convert numeric types
             for col in df.columns:
@@ -399,11 +459,12 @@ class CustomInputNode(NodeExecutor):
                 except:
                     pass
             
-            # Preview
+            # Preview - replace NaN/inf with None for JSON
+            preview_df = df.head(100).replace([np.inf, -np.inf], np.nan).fillna(value=None)
             preview = {
                 "type": "table",
                 "columns": list(df.columns),
-                "head": df.head(100).to_dict(orient="records"),
+                "head": preview_df.to_dict(orient="records"),
                 "shape": df.shape,
                 "editable": True,  # Flag to show edit button
                 "message": "Click 'Edit Table' button to create/modify data"
