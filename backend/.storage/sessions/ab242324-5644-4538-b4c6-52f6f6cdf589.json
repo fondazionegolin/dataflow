@@ -2,7 +2,7 @@
   "id": "ab242324-5644-4538-b4c6-52f6f6cdf589",
   "name": "LLM",
   "created_at": "2025-10-03T14:39:29.680601",
-  "updated_at": "2025-10-03T16:00:17.196189",
+  "updated_at": "2025-10-08T09:30:03.992517",
   "workflow": {
     "name": "LLM",
     "nodes": [
@@ -10,8 +10,8 @@
         "id": "llm.dataset-1759497693611",
         "type": "customNode",
         "position": {
-          "x": 672,
-          "y": -96
+          "x": 720,
+          "y": 120
         },
         "data": {
           "type": "llm.dataset",
@@ -143,23 +143,23 @@
             "seed": 42
           },
           "status": "success",
-          "executionTime": 0.0052297115325927734
+          "executionTime": 0.0019307136535644531
         },
-        "width": 704,
-        "height": 645,
+        "width": 300,
+        "height": 633,
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
-          "x": 672,
-          "y": -96
+          "x": 720,
+          "y": 120
         }
       },
       {
-        "id": "llm.finetune-1759498372830",
+        "id": "llm.finetune-1759823365419",
         "type": "customNode",
         "position": {
-          "x": 1680,
-          "y": -24
+          "x": 1632,
+          "y": -96
         },
         "data": {
           "type": "llm.finetune",
@@ -199,6 +199,13 @@
                 "label": "Loss Plot",
                 "required": true,
                 "description": null
+              },
+              {
+                "name": "loss_history",
+                "type": "table",
+                "label": "Loss History Table",
+                "required": true,
+                "description": null
               }
             ],
             "params": [
@@ -206,13 +213,30 @@
                 "name": "base_model",
                 "type": "select",
                 "label": "Base Model",
-                "default": "distilgpt2",
+                "default": "microsoft/phi-2",
                 "required": false,
-                "description": "Pre-trained model to fine-tune",
+                "description": "Pre-trained model to fine-tune. Phi-2 (2.7B) is recommended for RTX 4090",
                 "options": [
                   "distilgpt2",
                   "gpt2",
-                  "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+                  "gpt2-medium",
+                  "meta-llama/Llama-3.2-1B",
+                  "meta-llama/Llama-3.2-3B",
+                  "meta-llama/Llama-3.1-8B",
+                  "mistralai/Mistral-7B-v0.3",
+                  "mistralai/Mistral-7B-Instruct-v0.3",
+                  "microsoft/phi-2",
+                  "microsoft/Phi-3-mini-4k-instruct",
+                  "microsoft/Phi-3.5-mini-instruct",
+                  "google/gemma-2b",
+                  "google/gemma-7b",
+                  "google/gemma-2-9b",
+                  "Qwen/Qwen2-1.5B",
+                  "Qwen/Qwen2-7B",
+                  "Qwen/Qwen2.5-7B",
+                  "stabilityai/stablelm-2-1_6b",
+                  "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+                  "HuggingFaceTB/SmolLM-1.7B"
                 ],
                 "min": null,
                 "max": null,
@@ -252,9 +276,51 @@
                 "name": "batch_size",
                 "type": "integer",
                 "label": "Batch Size",
+                "default": 1,
+                "required": false,
+                "description": "Training batch size (use 1 for low memory)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "gradient_accumulation_steps",
+                "type": "integer",
+                "label": "Gradient Accumulation Steps",
                 "default": 4,
                 "required": false,
-                "description": "Training batch size",
+                "description": "Accumulate gradients over N steps (simulates larger batch)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "use_cpu",
+                "type": "boolean",
+                "label": "Use CPU Only",
+                "default": false,
+                "required": false,
+                "description": "Train on CPU instead of GPU (slower but no memory issues)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "fp16",
+                "type": "boolean",
+                "label": "Use FP16 (Half Precision)",
+                "default": false,
+                "required": false,
+                "description": "Use 16-bit precision to save memory (requires GPU)",
                 "options": null,
                 "min": null,
                 "max": null,
@@ -280,9 +346,23 @@
                 "name": "max_length",
                 "type": "integer",
                 "label": "Max Length",
-                "default": 128,
+                "default": 64,
                 "required": false,
-                "description": "Maximum sequence length",
+                "description": "Maximum sequence length (lower = less memory)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "max_samples",
+                "type": "integer",
+                "label": "Max Training Samples",
+                "default": 0,
+                "required": false,
+                "description": "Limit training samples (0 = use all)",
                 "options": null,
                 "min": null,
                 "max": null,
@@ -296,31 +376,35 @@
             "color": "#4ECDC4"
           },
           "params": {
-            "base_model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+            "base_model": "Qwen/Qwen2.5-7B",
             "text_column": "text",
             "epochs": 3,
-            "batch_size": 4,
+            "batch_size": 1,
+            "gradient_accumulation_steps": 4,
+            "use_cpu": false,
+            "fp16": false,
             "learning_rate": 5e-05,
-            "max_length": 128
+            "max_length": 64,
+            "max_samples": 0
           },
-          "status": "success",
-          "executionTime": 91.25840091705322
+          "status": "error",
+          "error": "Failed to fine-tune LLM: CUDA out of memory. Tried to allocate 26.00 MiB. GPU 0 has a total capacity of 23.51 GiB of which 39.31 MiB is free. Including non-PyTorch memory, this process has 22.18 GiB memory in use. Of the allocated memory 21.68 GiB is allocated by PyTorch, and 31.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
         },
-        "width": 704,
-        "height": 705,
-        "selected": false,
+        "width": 300,
+        "height": 1104,
+        "selected": true,
         "dragging": false,
         "positionAbsolute": {
-          "x": 1680,
-          "y": -24
+          "x": 1632,
+          "y": -96
         }
       },
       {
-        "id": "llm.generate-1759498619061",
+        "id": "llm.generate-1759823670317",
         "type": "customNode",
         "position": {
-          "x": 2616,
-          "y": -24
+          "x": 2208,
+          "y": 48
         },
         "data": {
           "type": "llm.generate",
@@ -425,22 +509,22 @@
             "color": "#95E1D3"
           },
           "params": {
-            "prompt": "come si fa un bonifico?",
+            "prompt": "Once upon a time",
             "max_length": 100,
             "temperature": 0.7,
             "top_p": 0.9,
             "num_return_sequences": 3
           },
-          "status": "success",
-          "executionTime": 3.8707032203674316
+          "status": "error",
+          "error": "Source port model not found in node llm.finetune-1759823365419"
         },
-        "width": 704,
-        "height": 617,
+        "width": 300,
+        "height": 621,
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
-          "x": 2616,
-          "y": -24
+          "x": 2208,
+          "y": 48
         }
       }
     ],
@@ -448,16 +532,24 @@
       {
         "source": "llm.dataset-1759497693611",
         "sourceHandle": "dataset",
-        "target": "llm.finetune-1759498372830",
+        "target": "llm.finetune-1759823365419",
         "targetHandle": "dataset",
-        "id": "llm.dataset-1759497693611-dataset-llm.finetune-1759498372830-dataset"
+        "id": "llm.dataset-1759497693611-dataset-llm.finetune-1759823365419-dataset",
+        "data": {
+          "targetCategory": "llm"
+        },
+        "className": "edge-llm"
       },
       {
-        "source": "llm.finetune-1759498372830",
+        "source": "llm.finetune-1759823365419",
         "sourceHandle": "model",
-        "target": "llm.generate-1759498619061",
+        "target": "llm.generate-1759823670317",
         "targetHandle": "model",
-        "id": "llm.finetune-1759498372830-model-llm.generate-1759498619061-model"
+        "id": "llm.finetune-1759823365419-model-llm.generate-1759823670317-model",
+        "data": {
+          "targetCategory": "llm"
+        },
+        "className": "edge-llm"
       }
     ],
     "executionResults": {}

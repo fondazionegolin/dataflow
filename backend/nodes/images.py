@@ -136,18 +136,49 @@ class ImageModelNode(NodeExecutor):
                 # Restore original method
                 modeling_utils.PreTrainedModel.from_pretrained = original_from_pretrained
             
-            # Move to device with memory management
+            # Move to device with aggressive memory management
             try:
                 if device == "cuda":
+                    # Clear CUDA cache before loading
+                    torch.cuda.empty_cache()
+                    import gc
+                    gc.collect()
+                    
+                    # Enable memory efficient attention (xformers or flash attention)
+                    try:
+                        pipeline.enable_xformers_memory_efficient_attention()
+                        print(f"[ImageModel] Enabled xformers memory efficient attention")
+                    except Exception as e:
+                        print(f"[ImageModel] xformers not available: {e}")
+                        try:
+                            # Try flash attention as fallback
+                            pipeline.enable_attention_slicing(slice_size="auto")
+                            print(f"[ImageModel] Enabled attention slicing")
+                        except:
+                            pass
+                    
+                    # Enable VAE slicing for large images
+                    try:
+                        pipeline.enable_vae_slicing()
+                        print(f"[ImageModel] Enabled VAE slicing")
+                    except:
+                        pass
+                    
                     # Enable CPU offloading for large models to save GPU memory
-                    print(f"[ImageModel] Enabling CPU offloading for memory efficiency...")
-                    pipeline.enable_model_cpu_offload()
+                    print(f"[ImageModel] Enabling sequential CPU offloading for memory efficiency...")
+                    pipeline.enable_sequential_cpu_offload()
+                    
+                    # Set memory efficient mode
+                    if hasattr(pipeline, 'enable_vae_tiling'):
+                        pipeline.enable_vae_tiling()
+                        print(f"[ImageModel] Enabled VAE tiling")
                 else:
                     pipeline = pipeline.to(device)
                 print(f"[ImageModel] Pipeline loaded successfully on {device}")
             except torch.cuda.OutOfMemoryError:
-                print(f"[ImageModel] CUDA OOM, falling back to CPU offloading...")
-                pipeline.enable_model_cpu_offload()
+                print(f"[ImageModel] CUDA OOM, falling back to aggressive CPU offloading...")
+                torch.cuda.empty_cache()
+                pipeline.enable_sequential_cpu_offload()
                 device = "cuda (with CPU offload)"
             
             # Store in cache
@@ -555,30 +586,58 @@ class GenerateImageNode(NodeExecutor):
             all_seeds = []
             
             for prompt_idx, prompt in enumerate(prompts):
+                # Clear CUDA cache before each generation to prevent fragmentation
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                    import gc
+                    gc.collect()
+                
                 # Set seed (different for each prompt if -1)
                 if seed == -1:
                     current_seed = torch.randint(0, 2**32, (1,)).item()
                 else:
                     current_seed = seed + prompt_idx
                 
-                generator = torch.Generator(device=device).manual_seed(current_seed)
+                # Use CPU for generator to save GPU memory
+                generator = torch.Generator(device="cpu").manual_seed(current_seed)
                 
                 print(f"[ImageGenerate] Generating image {prompt_idx + 1}/{len(prompts)}: {prompt[:50]}...")
+                print(f"[ImageGenerate] GPU Memory: {torch.cuda.memory_allocated() / 1024**3:.2f}GB / {torch.cuda.max_memory_allocated() / 1024**3:.2f}GB")
                 
-                # Generate images
-                images = pipeline(
-                    prompt=prompt,
-                    negative_prompt=negative_prompt if negative_prompt else None,
-                    num_images_per_prompt=num_images,
-                    width=width,
-                    height=height,
-                    num_inference_steps=steps,
-                    guidance_scale=guidance,
-                    generator=generator
-                ).images
+                # Generate images with memory-efficient settings
+                try:
+                    images = pipeline(
+                        prompt=prompt,
+                        negative_prompt=negative_prompt if negative_prompt else None,
+                        num_images_per_prompt=num_images,
+                        width=width,
+                        height=height,
+                        num_inference_steps=steps,
+                        guidance_scale=guidance,
+                        generator=generator
+                    ).images
+                except torch.cuda.OutOfMemoryError as e:
+                    print(f"[ImageGenerate] CUDA OOM during generation. Clearing cache and retrying...")
+                    torch.cuda.empty_cache()
+                    gc.collect()
+                    # Retry with reduced batch size
+                    images = pipeline(
+                        prompt=prompt,
+                        negative_prompt=negative_prompt if negative_prompt else None,
+                        num_images_per_prompt=1,  # Reduce to 1 image at a time
+                        width=width,
+                        height=height,
+                        num_inference_steps=steps,
+                        guidance_scale=guidance,
+                        generator=generator
+                    ).images
                 
                 all_images.extend(images)
                 all_seeds.extend([current_seed] * len(images))
+                
+                # Clear cache after each image
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
             
             # Save images temporarily and convert to base64 for preview
             import base64

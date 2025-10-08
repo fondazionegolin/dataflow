@@ -238,18 +238,28 @@ const WorkflowEditorContent: React.FC = () => {
   return (
     <div className="flex flex-col h-screen">
       {/* Unified Top Bar */}
-      <div className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+      <div className={`px-4 py-3 flex items-center justify-between border-b ${
+        darkMode 
+          ? 'border-gray-700' 
+          : 'bg-white border-gray-200'
+      }`} style={darkMode ? { backgroundColor: '#2d2d2d' } : {}}>
         {/* Left: DataFlow + Workflow Name */}
         <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold text-gray-800">{t('app.title')}</h1>
+          <h1 className={`text-xl font-bold ${
+            darkMode ? 'text-gray-100' : 'text-gray-800'
+          }`}>{t('app.title')}</h1>
           
-          <div className="w-px h-6 bg-gray-300" />
+          <div className={`w-px h-6 ${
+            darkMode ? 'bg-gray-600' : 'bg-gray-300'
+          }`} />
           
           <input
             type="text"
             value={workflowName}
             onChange={(e) => setWorkflowName(e.target.value)}
-            className="text-lg font-semibold text-gray-800 bg-transparent border-0 focus:outline-none focus:ring-0 min-w-[200px]"
+            className={`text-lg font-semibold bg-transparent border-0 focus:outline-none focus:ring-0 min-w-[200px] ${
+              darkMode ? 'text-gray-100' : 'text-gray-800'
+            }`}
             placeholder="Workflow Name"
           />
         </div>
@@ -258,7 +268,11 @@ const WorkflowEditorContent: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:bg-gray-100/80 rounded-xl transition-all"
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+              darkMode 
+                ? 'text-gray-300 hover:bg-[#3d3d3d]' 
+                : 'text-gray-600 hover:bg-gray-100/80'
+            }`}
           >
             <ArrowLeft className="w-4 h-4" />
             Home
@@ -266,7 +280,11 @@ const WorkflowEditorContent: React.FC = () => {
 
           <button
             onClick={() => navigate('/wiki')}
-            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:bg-gray-100/80 rounded-xl transition-all"
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+              darkMode 
+                ? 'text-gray-300 hover:bg-[#3d3d3d]' 
+                : 'text-gray-600 hover:bg-gray-100/80'
+            }`}
           >
             <BookOpen className="w-4 h-4" />
             Wiki
@@ -294,7 +312,11 @@ const WorkflowEditorContent: React.FC = () => {
               };
               input.click();
             }}
-            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:bg-gray-100/80 rounded-xl transition-all"
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+              darkMode 
+                ? 'text-gray-300 hover:bg-[#3d3d3d]' 
+                : 'text-gray-600 hover:bg-gray-100/80'
+            }`}
           >
             <FolderOpen className="w-4 h-4" />
             {t('toolbar.open')}
@@ -314,7 +336,11 @@ const WorkflowEditorContent: React.FC = () => {
               URL.revokeObjectURL(url);
               addLog('success', 'Workflow exported', `${workflowName}.flow.json`);
             }}
-            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:bg-gray-100/80 rounded-xl transition-all"
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+              darkMode 
+                ? 'text-gray-300 hover:bg-[#3d3d3d]' 
+                : 'text-gray-600 hover:bg-gray-100/80'
+            }`}
           >
             <Download className="w-4 h-4" />
             {t('toolbar.export')}
@@ -327,7 +353,11 @@ const WorkflowEditorContent: React.FC = () => {
                 addLog('warning', 'Workflow cleared', 'All nodes removed');
               }
             }}
-            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:bg-gray-100/80 rounded-xl transition-all"
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+              darkMode 
+                ? 'text-gray-300 hover:bg-[#3d3d3d]' 
+                : 'text-gray-600 hover:bg-gray-100/80'
+            }`}
           >
             <Trash2 className="w-4 h-4" />
             {t('toolbar.clear')}
@@ -338,25 +368,35 @@ const WorkflowEditorContent: React.FC = () => {
         <div className="flex items-center gap-3">
           {/* Save Indicator */}
           {isSaving ? (
-            <div className="flex items-center gap-2 text-sm text-blue-600">
+            <div className={`flex items-center gap-2 text-sm ${
+              darkMode ? 'text-blue-400' : 'text-blue-600'
+            }`}>
               <Save className="w-4 h-4 animate-pulse" />
               <span>{t('workflow.saving')}</span>
             </div>
           ) : lastSaved ? (
-            <div className="flex items-center gap-2 text-sm text-green-600">
+            <div className={`flex items-center gap-2 text-sm ${
+              darkMode ? 'text-green-400' : 'text-green-600'
+            }`}>
               <Check className="w-4 h-4" />
               <span>{t('workflow.saved')}</span>
             </div>
           ) : null}
           
-          <div className="w-px h-6 bg-gray-300" />
+          <div className={`w-px h-6 ${
+            darkMode ? 'bg-gray-600' : 'bg-gray-300'
+          }`} />
           
           {/* Language Switcher */}
           <div className="flex items-center gap-1">
             <button
               onClick={() => i18n.changeLanguage('it')}
               className={`px-2 py-1.5 rounded-xl transition-all ${
-                i18n.language === 'it' ? 'bg-blue-500/10 ring-2 ring-blue-400/30' : 'hover:bg-gray-100/80'
+                i18n.language === 'it' 
+                  ? 'bg-blue-500/10 ring-2 ring-blue-400/30' 
+                  : darkMode 
+                    ? 'hover:bg-gray-700' 
+                    : 'hover:bg-gray-100/80'
               }`}
               title="Italiano"
             >
@@ -365,7 +405,11 @@ const WorkflowEditorContent: React.FC = () => {
             <button
               onClick={() => i18n.changeLanguage('en')}
               className={`px-2 py-1.5 rounded-xl transition-all ${
-                i18n.language === 'en' ? 'bg-blue-500/10 ring-2 ring-blue-400/30' : 'hover:bg-gray-100/80'
+                i18n.language === 'en' 
+                  ? 'bg-blue-500/10 ring-2 ring-blue-400/30' 
+                  : darkMode 
+                    ? 'hover:bg-gray-700' 
+                    : 'hover:bg-gray-100/80'
               }`}
               title="English"
             >
@@ -377,7 +421,7 @@ const WorkflowEditorContent: React.FC = () => {
             onClick={() => setDarkMode(!darkMode)}
             className={`p-2 rounded-xl transition-all ${
               darkMode 
-                ? 'bg-gray-800 text-white hover:bg-gray-700' 
+                ? 'bg-[#3d3d3d] text-gray-100 hover:bg-[#4d4d4d]' 
                 : 'text-gray-600 hover:bg-gray-100/80'
             }`}
             title={darkMode ? 'Light Mode' : 'Dark Mode'}
@@ -388,7 +432,7 @@ const WorkflowEditorContent: React.FC = () => {
       </div>
 
       <div className="flex flex-1 overflow-hidden relative">
-        <NodePalette nodeSpecs={nodeSpecs} />
+        <NodePalette nodeSpecs={nodeSpecs} darkMode={darkMode} />
 
         <div className="flex-1 relative" ref={reactFlowWrapper}>
           <ReactFlow

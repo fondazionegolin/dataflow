@@ -88,34 +88,14 @@ export const CustomNode: React.FC<NodeProps<NodeData>> = ({ data, selected }) =>
   }, []);
   
   return (
-    <div ref={nodeRef} className="relative min-w-[200px] rounded-lg">
-      {/* Thick draggable border overlay */}
-      <div 
-        className="absolute inset-0 rounded-lg pointer-events-none"
-        style={{
-          border: `12px solid ${getBorderColor()}`,
-        }}
-      />
-      
-      {/* Draggable border areas - only these areas allow dragging */}
-      <div 
-        className="absolute inset-0 rounded-lg pointer-events-auto cursor-move"
-        style={{
-          padding: '12px',
-          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 12px 12px, 12px calc(100% - 12px), calc(100% - 12px) calc(100% - 12px), calc(100% - 12px) 12px, 12px 12px)'
-        }}
-      />
-      
-      {/* Main content area */}
+    <div ref={nodeRef} className="relative min-w-[200px]">
+      {/* Main content area without border */}
       <div
         className={`
-          relative bg-white rounded-lg shadow-lg
+          relative rounded-lg overflow-hidden shadow-lg
           ${selected ? 'ring-2 ring-primary/20' : ''}
         `}
         style={{ 
-          borderWidth: '12px',
-          borderStyle: 'solid',
-          borderColor: getBorderColor(),
           pointerEvents: 'auto'
         }}
       >
@@ -153,8 +133,12 @@ export const CustomNode: React.FC<NodeProps<NodeData>> = ({ data, selected }) =>
 
         {/* Header */}
         <div
-          className="px-4 py-2 rounded-t-lg text-white font-semibold flex items-center justify-between"
-          style={{ backgroundColor: spec.color || '#666' }}
+          className="px-4 py-2 text-white font-semibold flex items-center justify-between"
+          style={{ 
+            backgroundColor: spec.color || '#666',
+            borderTopLeftRadius: 'inherit',
+            borderTopRightRadius: 'inherit'
+          }}
         >
           <div className="flex items-center gap-2">
             {spec.icon && <span className="text-lg">{spec.icon}</span>}
@@ -165,7 +149,7 @@ export const CustomNode: React.FC<NodeProps<NodeData>> = ({ data, selected }) =>
 
         {/* Body - Prevent dragging from body */}
         <div 
-          className="px-4 py-3 text-xs text-gray-600"
+          className="px-4 py-3 text-xs text-gray-600 bg-white"
           onMouseDown={(e) => {
             // Prevent dragging when clicking on body content
             e.stopPropagation();

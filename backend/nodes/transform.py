@@ -417,3 +417,97 @@ class DropNANode(NodeExecutor):
             
         except Exception as e:
             return NodeResult(error=f"Failed to drop NA: {str(e)}")
+
+
+@register_node
+class SliceRowsNode(NodeExecutor):
+    """Select a range of rows by index."""
+    
+    def __init__(self):
+        super().__init__(NodeSpec(
+            type="data.slice",
+            label="Slice Rows",
+            category="transform",
+            description="Select rows by index range (e.g., rows 10-20)",
+            icon="✂️",
+            color="#9C27B0",
+            inputs=[
+                PortSpec(name="table", type=PortType.TABLE, label="Input Table")
+            ],
+            outputs=[
+                PortSpec(name="table", type=PortType.TABLE, label="Sliced Table")
+            ],
+            params=[
+                ParamSpec(
+                    name="start",
+                    type=ParamType.INTEGER,
+                    label="Start Row",
+                    default=0,
+                    min=0,
+                    description="First row to include (0-indexed)"
+                ),
+                ParamSpec(
+                    name="end",
+                    type=ParamType.INTEGER,
+                    label="End Row",
+                    default=10,
+                    min=1,
+                    description="Last row to include (exclusive, like Python slicing)"
+                ),
+                ParamSpec(
+                    name="step",
+                    type=ParamType.INTEGER,
+                    label="Step",
+                    default=1,
+                    min=1,
+                    description="Take every Nth row (1 = all rows)"
+                )
+            ],
+            cache_policy=CachePolicy.AUTO
+        ))
+    
+    async def run(self, context: NodeContext) -> NodeResult:
+        """Slice rows by index."""
+        df = context.inputs.get("table")
+        start = context.params.get("start", 0)
+        end = context.params.get("end", 10)
+        step = context.params.get("step", 1)
+        
+        try:
+            # Validate parameters
+            if start < 0:
+                start = 0
+            if end > len(df):
+                end = len(df)
+            if start >= end:
+                return NodeResult(error=f"Start row ({start}) must be less than end row ({end})")
+            
+            # Slice the dataframe
+            result_df = df.iloc[start:end:step].copy()
+            
+            print(f"\n✂️ Sliced Rows:")
+            print(f"   Original rows: {len(df)}")
+            print(f"   Range: {start} to {end} (step {step})")
+            print(f"   Selected rows: {len(result_df)}")
+            
+            preview = {
+                "shape": result_df.shape,
+                "head": result_df.head(10).to_dict(orient="records"),
+                "original_rows": len(df),
+                "selected_rows": len(result_df)
+            }
+            
+            return NodeResult(
+                outputs={"table": result_df},
+                metadata={
+                    "original_rows": len(df),
+                    "selected_rows": len(result_df),
+                    "start": start,
+                    "end": end,
+                    "step": step
+                },
+                preview=preview
+            )
+            
+        except Exception as e:
+            return NodeResult(error=f"Failed to slice rows: {str(e)}")

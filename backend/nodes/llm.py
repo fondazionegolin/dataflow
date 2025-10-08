@@ -311,16 +311,37 @@ class FineTuneLLMNode(NodeExecutor):
             outputs=[
                 PortSpec(name="model", type=PortType.MODEL, label="Fine-tuned Model"),
                 PortSpec(name="metrics", type=PortType.METRICS, label="Training Metrics"),
-                PortSpec(name="loss_plot", type=PortType.PARAMS, label="Loss Plot")
+                PortSpec(name="loss_plot", type=PortType.PARAMS, label="Loss Plot"),
+                PortSpec(name="loss_history", type=PortType.TABLE, label="Loss History Table")
             ],
             params=[
                 ParamSpec(
                     name="base_model",
                     type=ParamType.SELECT,
                     label="Base Model",
-                    options=["distilgpt2", "gpt2", "gpt2-medium"],
-                    default="distilgpt2",
-                    description="Pre-trained model to fine-tune (distilgpt2 is smallest)"
+                    options=[
+                        # Small models (< 1GB VRAM) - NO AUTH REQUIRED
+                        "distilgpt2",
+                        "gpt2",
+                        "gpt2-medium",
+                        
+                        # Phi models (Microsoft) - Very efficient - NO AUTH REQUIRED
+                        "microsoft/phi-2",
+                        
+                        # Qwen models (Alibaba) - Excellent for Italian - NO AUTH REQUIRED
+                        "Qwen/Qwen2-1.5B",
+                        "Qwen/Qwen2-7B",
+                        "Qwen/Qwen2.5-1.5B",
+                        "Qwen/Qwen2.5-7B",
+                        
+                        # Other efficient models - NO AUTH REQUIRED
+                        "stabilityai/stablelm-2-1_6b",
+                        "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+                        "HuggingFaceTB/SmolLM-1.7B",
+                        "HuggingFaceTB/SmolLM-360M"
+                    ],
+                    default="microsoft/phi-2",
+                    description="Pre-trained model to fine-tune. All models are open access (no HF login required). Phi-2 (2.7B) recommended for RTX 4090"
                 ),
                 ParamSpec(
                     name="text_column",
@@ -422,23 +443,71 @@ class FineTuneLLMNode(NodeExecutor):
                 df = df.head(max_samples)
             
             # Load model and tokenizer
-            tokenizer = AutoTokenizer.from_pretrained(base_model)
-            tokenizer.pad_token = tokenizer.eos_token
+            print(f"[FineTuneLLM] Loading {base_model}...")
+            tokenizer = AutoTokenizer.from_pretrained(base_model, trust_remote_code=True)
             
-            # Load model with memory optimization
-            model = AutoModelForCausalLM.from_pretrained(
-                base_model,
-                torch_dtype=torch.float16 if use_fp16 and not use_cpu else torch.float32,
-                low_cpu_mem_usage=True
-            )
+            # Set pad token (different models use different tokens)
+            if tokenizer.pad_token is None:
+                tokenizer.pad_token = tokenizer.eos_token
             
-            # Move to device
+            # Determine device and dtype
             device = "cpu" if use_cpu else ("cuda" if torch.cuda.is_available() else "cpu")
-            if not use_cpu and torch.cuda.is_available():
-                # Clear CUDA cache before training
-                torch.cuda.empty_cache()
             
-            model = model.to(device)
+            # Auto-enable fp16 for large models on GPU
+            if not use_cpu and torch.cuda.is_available():
+                # Enable fp16 automatically for models > 2B parameters
+                if any(x in base_model.lower() for x in ['7b', '8b', '9b', 'mistral', 'llama-3']):
+                    use_fp16 = True
+                    print(f"[FineTuneLLM] Auto-enabled FP16 for large model")
+            
+            # Clear CUDA cache before loading
+            if device == "cuda":
+                torch.cuda.empty_cache()
+                import gc
+                gc.collect()
+            
+            # Load model with aggressive memory optimization
+            print(f"[FineTuneLLM] Loading model on {device} (FP16: {use_fp16})...")
+            
+            load_kwargs = {
+                "low_cpu_mem_usage": True,
+                "trust_remote_code": True
+            }
+            
+            if device == "cuda" and use_fp16:
+                load_kwargs["torch_dtype"] = torch.float16
+            
+            # For very large models, use device_map for automatic sharding
+            model_size_gb = 0
+            if '7b' in base_model.lower() or '8b' in base_model.lower():
+                model_size_gb = 7
+            elif '9b' in base_model.lower():
+                model_size_gb = 9
+            elif '3b' in base_model.lower():
+                model_size_gb = 3
+            
+            # Use device_map for models > 5GB
+            if model_size_gb > 5 and device == "cuda":
+                load_kwargs["device_map"] = "auto"
+                print(f"[FineTuneLLM] Using automatic device mapping for {model_size_gb}B model")
+            
+            try:
+                model = AutoModelForCausalLM.from_pretrained(base_model, **load_kwargs)
+            except Exception as e:
+                print(f"[FineTuneLLM] Failed to load with device_map, trying standard load: {e}")
+                load_kwargs.pop("device_map", None)
+                model = AutoModelForCausalLM.from_pretrained(base_model, **load_kwargs)
+            
+            # Move to device if not using device_map
+            if "device_map" not in load_kwargs:
+                model = model.to(device)
+            
+            print(f"[FineTuneLLM] Model loaded successfully")
+            
+            # Enable gradient checkpointing for large models to save memory
+            if model_size_gb > 2:
+                model.gradient_checkpointing_enable()
+                print(f"[FineTuneLLM] Enabled gradient checkpointing")
             
             # Prepare dataset
             texts = df[text_col].tolist()
@@ -567,11 +636,22 @@ class FineTuneLLMNode(NodeExecutor):
                 "base_model": base_model
             }
             
+            # Create loss history DataFrame for plotting
+            if loss_history:
+                loss_df = pd.DataFrame(loss_history)
+            else:
+                # Fallback to single point
+                loss_df = pd.DataFrame({
+                    'step': [0],
+                    'loss': [final_loss]
+                })
+            
             return NodeResult(
                 outputs={
                     "model": model_id,  # Return ID instead of model object
                     "metrics": metrics,
-                    "loss_plot": json.dumps(fig.to_dict())
+                    "loss_plot": json.dumps(fig.to_dict()),
+                    "loss_history": loss_df
                 },
                 metadata=metrics,
                 preview={
@@ -817,3 +897,301 @@ class LLMEvaluatorNode(NodeExecutor):
             
         except Exception as e:
             return NodeResult(error=f"Failed to evaluate: {str(e)}")
+
+
+# Global cache for loaded models (not serializable)
+_MODEL_CACHE = {}
+
+@register_node
+class LLMModelLoaderNode(NodeExecutor):
+    """Load pre-trained LLM for inference."""
+    
+    def __init__(self):
+        super().__init__(NodeSpec(
+            type="llm.model_loader",
+            label="LLM Model",
+            category="llm",
+            description="Load pre-trained language model for chat and text generation",
+            icon="🤖",
+            color="#6366F1",
+            inputs=[],
+            outputs=[
+                PortSpec(name="model", type=PortType.MODEL, label="Loaded Model")
+            ],
+            params=[
+                ParamSpec(
+                    name="model_name",
+                    type=ParamType.SELECT,
+                    label="Model",
+                    options=[
+                        # Recommended models for chat
+                        "microsoft/phi-2",
+                        "Qwen/Qwen2.5-1.5B",
+                        "Qwen/Qwen2.5-7B",
+                        "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+                        "HuggingFaceTB/SmolLM-1.7B",
+                        # Smaller models
+                        "gpt2",
+                        "distilgpt2",
+                    ],
+                    default="microsoft/phi-2",
+                    description="Pre-trained model to load. Phi-2 recommended for RTX 4090"
+                ),
+                ParamSpec(
+                    name="use_4bit",
+                    type=ParamType.BOOLEAN,
+                    label="Use 4-bit Quantization",
+                    default=True,
+                    description="Load model in 4-bit to save VRAM (requires bitsandbytes)"
+                ),
+                ParamSpec(
+                    name="use_8bit",
+                    type=ParamType.BOOLEAN,
+                    label="Use 8-bit Quantization",
+                    default=False,
+                    description="Load model in 8-bit (alternative to 4-bit)"
+                ),
+                ParamSpec(
+                    name="device",
+                    type=ParamType.SELECT,
+                    label="Device",
+                    options=["auto", "cuda", "cpu"],
+                    default="auto",
+                    description="Device to load model on"
+                )
+            ],
+            cache_policy=CachePolicy.MANUAL
+        ))
+    
+    async def run(self, context: NodeContext) -> NodeResult:
+        """Load LLM model."""
+        try:
+            from transformers import AutoModelForCausalLM, AutoTokenizer
+            import torch
+            
+            model_name = context.params.get("model_name", "microsoft/phi-2")
+            use_4bit = context.params.get("use_4bit", True)
+            use_8bit = context.params.get("use_8bit", False)
+            device = context.params.get("device", "auto")
+            
+            print(f"\n🤖 Loading LLM Model: {model_name}")
+            
+            # Check if bitsandbytes is available
+            quantization_config = None
+            quantization_type = "full"
+            try:
+                if use_4bit or use_8bit:
+                    from transformers import BitsAndBytesConfig
+                    
+                    if use_4bit:
+                        quantization_config = BitsAndBytesConfig(
+                            load_in_4bit=True,
+                            bnb_4bit_compute_dtype=torch.float16,
+                            bnb_4bit_use_double_quant=True,
+                            bnb_4bit_quant_type="nf4"
+                        )
+                        quantization_type = "4-bit"
+                    elif use_8bit:
+                        quantization_config = BitsAndBytesConfig(
+                            load_in_8bit=True
+                        )
+                        quantization_type = "8-bit"
+            except ImportError:
+                print("⚠️  bitsandbytes not installed, loading in full precision")
+                print("   Install with: pip install bitsandbytes")
+                quantization_config = None
+                quantization_type = "full"
+            
+            print(f"   Quantization: {quantization_type}")
+            print(f"   Device: {device}")
+            
+            # Load tokenizer
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
+            if tokenizer.pad_token is None:
+                tokenizer.pad_token = tokenizer.eos_token
+            
+            # Load model
+            model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                quantization_config=quantization_config,
+                device_map=device if device != "auto" else "auto",
+                trust_remote_code=True,
+                torch_dtype=torch.float16 if not (use_4bit or use_8bit) else None
+            )
+            
+            model.eval()
+            
+            # Get model info
+            total_params = sum(p.numel() for p in model.parameters())
+            trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+            
+            print(f"✅ Model loaded successfully!")
+            print(f"   Total parameters: {total_params:,}")
+            print(f"   Trainable parameters: {trainable_params:,}")
+            
+            # Store model in global cache (not serializable)
+            model_id = f"{context.node_id}_{model_name}"
+            _MODEL_CACHE[model_id] = {
+                "model": model,
+                "tokenizer": tokenizer,
+                "model_name": model_name,
+                "quantization": quantization_type
+            }
+            
+            # Return only serializable model reference
+            model_reference = {
+                "model_id": model_id,
+                "model_name": model_name,
+                "quantization": quantization_type,
+                "total_params": int(total_params)
+            }
+            
+            return NodeResult(
+                outputs={"model": model_reference},
+                metadata={
+                    "model_name": model_name,
+                    "total_params": int(total_params),
+                    "trainable_params": int(trainable_params),
+                    "quantization": quantization_type,
+                    "device": str(model.device),
+                    "model_id": model_id
+                },
+                preview={
+                    "type": "model_info",
+                    "model_name": model_name,
+                    "parameters": f"{total_params:,}",
+                    "quantization": quantization_type
+                }
+            )
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return NodeResult(error=f"Failed to load model: {str(e)}")
+
+
+@register_node  
+class ChatNode(NodeExecutor):
+    """Interactive chat with LLM."""
+    
+    def __init__(self):
+        super().__init__(NodeSpec(
+            type="llm.chat",
+            label="Chat",
+            category="llm",
+            description="Interactive chat interface with loaded LLM model",
+            icon="💬",
+            color="#8B5CF6",
+            inputs=[
+                PortSpec(name="model", type=PortType.MODEL, label="LLM Model"),
+                PortSpec(name="context", type=PortType.TABLE, label="Context Data", required=False)
+            ],
+            outputs=[
+                PortSpec(name="conversation", type=PortType.TABLE, label="Chat History")
+            ],
+            params=[
+                ParamSpec(
+                    name="system_prompt",
+                    type=ParamType.STRING,
+                    label="System Prompt",
+                    default="You are a helpful AI assistant.",
+                    description="System instructions for the model"
+                ),
+                ParamSpec(
+                    name="temperature",
+                    type=ParamType.SLIDER,
+                    label="Temperature",
+                    default=0.7,
+                    min=0.1,
+                    max=2.0,
+                    step=0.1,
+                    description="Sampling temperature (higher = more creative)"
+                ),
+                ParamSpec(
+                    name="max_new_tokens",
+                    type=ParamType.INTEGER,
+                    label="Max New Tokens",
+                    default=512,
+                    min=50,
+                    max=2048,
+                    description="Maximum tokens to generate in response"
+                ),
+                ParamSpec(
+                    name="top_p",
+                    type=ParamType.SLIDER,
+                    label="Top P",
+                    default=0.9,
+                    min=0.1,
+                    max=1.0,
+                    step=0.05,
+                    description="Nucleus sampling threshold"
+                ),
+                ParamSpec(
+                    name="chat_history",
+                    type=ParamType.STRING,
+                    label="Chat History (Internal)",
+                    default="[]",
+                    description="Internal storage for conversation history"
+                )
+            ],
+            cache_policy=CachePolicy.NEVER
+        ))
+        self.conversations = {}  # Store conversations per node instance
+    
+    async def run(self, context: NodeContext) -> NodeResult:
+        """Generate chat response."""
+        try:
+            import torch
+            import json
+            
+            # Get model reference from input
+            model_reference = context.inputs.get("model")
+            if not model_reference or not isinstance(model_reference, dict):
+                return NodeResult(error="No model connected. Connect an LLM Model node.")
+            
+            # Retrieve actual model from cache
+            model_id = model_reference.get("model_id")
+            if not model_id or model_id not in _MODEL_CACHE:
+                return NodeResult(error=f"Model not found in cache. Please re-run the LLM Model node.")
+            
+            model_package = _MODEL_CACHE[model_id]
+            model = model_package["model"]
+            tokenizer = model_package["tokenizer"]
+            model_name = model_package.get("model_name", "unknown")
+            
+            # Get parameters
+            system_prompt = context.params.get("system_prompt", "You are a helpful AI assistant.")
+            temperature = float(context.params.get("temperature", 0.7))
+            max_new_tokens = int(context.params.get("max_new_tokens", 512))
+            top_p = float(context.params.get("top_p", 0.9))
+            
+            # Load chat history
+            node_id = context.node_id
+            if node_id not in self.conversations:
+                self.conversations[node_id] = []
+            
+            # For now, return empty conversation (will be populated by frontend)
+            # The actual chat interaction will happen through a separate API endpoint
+            
+            return NodeResult(
+                outputs={"conversation": pd.DataFrame(self.conversations[node_id])},
+                metadata={
+                    "model_name": model_name,
+                    "system_prompt": system_prompt,
+                    "temperature": temperature,
+                    "max_new_tokens": max_new_tokens,
+                    "messages_count": len(self.conversations[node_id])
+                },
+                preview={
+                    "type": "chat",
+                    "model_name": model_name,
+                    "system_prompt": system_prompt,
+                    "conversation": self.conversations[node_id],
+                    "editable": True  # Flag to show chat interface
+                }
+            )
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return NodeResult(error=f"Chat failed: {str(e)}")

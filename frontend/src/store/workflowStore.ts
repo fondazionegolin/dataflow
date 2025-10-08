@@ -62,7 +62,7 @@ interface WorkflowState {
   loadNodeSpecs: () => Promise<void>;
   
   // Execution
-  executeWorkflow: () => Promise<ExecuteWorkflowResponse>;
+  executeWorkflow: (changedNodes?: string[]) => Promise<ExecuteWorkflowResponse>;
   executeNode: (nodeId: string) => Promise<void>;
   updateExecutionResult: (nodeId: string, result: any) => void;
   
@@ -233,13 +233,21 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
   },
 
   // Execute workflow
-  executeWorkflow: async () => {
+  executeWorkflow: async (changedNodes?: string[]) => {
     set({ isExecuting: true });
-    get().addLog('info', 'Executing workflow...', `${get().nodes.length} nodes to process`);
+    const logMessage = changedNodes 
+      ? `Executing node and dependencies...` 
+      : `Executing workflow... ${get().nodes.length} nodes to process`;
+    get().addLog('info', logMessage, changedNodes ? `Changed: ${changedNodes.join(', ')}` : '');
     
     try {
       const workflow = get().exportWorkflow();
-      const response = await api.executeWorkflow(workflow);
+      // Add changed_nodes to the request if specified
+      const requestBody: any = { workflow };
+      if (changedNodes && changedNodes.length > 0) {
+        requestBody.changed_nodes = changedNodes;
+      }
+      const response = await api.executeWorkflow(requestBody.workflow, requestBody.changed_nodes);
       
       // Count successes and errors
       const successCount = Object.keys(response.results).length;
@@ -324,8 +332,8 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
     });
 
     try {
-      // Execute the entire workflow (backend will handle dependencies)
-      await get().executeWorkflow();
+      // Execute only this node and its dependencies
+      await get().executeWorkflow([nodeId]);
     } catch (error) {
       // Set node to error state
       set({

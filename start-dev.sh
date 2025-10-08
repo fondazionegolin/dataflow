@@ -25,10 +25,17 @@ if [ ! -d "frontend/node_modules" ]; then
     cd ..
 fi
 
-# Start backend in background
-echo "Starting backend server..."
+# Start backend in background with GPU optimizations
+echo "Starting backend server with GPU optimizations..."
 cd backend
 source venv/bin/activate
+
+# Set GPU optimization environment variables
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+export CUDA_LAUNCH_BLOCKING=0
+export TORCH_CUDNN_V8_API_ENABLED=1
+echo "  ✅ GPU optimizations enabled (expandable_segments:True)"
+
 PYTHONPATH=. python main.py &
 BACKEND_PID=$!
 cd ..

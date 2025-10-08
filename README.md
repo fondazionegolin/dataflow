@@ -43,24 +43,55 @@ dataflow-platform/
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.11+
 - Node.js 18+
-- Rust (for Tauri)
+- NVIDIA GPU with CUDA support (recommended for image generation)
 
-### Installation
+### Quick Start
 
+**Option 1: Web App Mode (Recommended)**
 ```bash
-# Install Python dependencies
-cd backend
-pip install -r requirements.txt
+./start-dev.sh
+```
+This starts both backend and frontend. Open http://localhost:1420 in your browser.
 
-# Install frontend dependencies
-cd ../frontend
-npm install
-
-# Run development server
+**Option 2: Desktop App Mode (with Tauri)**
+```bash
+cd frontend
 npm run tauri dev
 ```
+
+### First Time Setup
+
+1. **Install Backend Dependencies**
+```bash
+cd backend
+python3.11 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Optional: Install xformers for 40% memory reduction in image generation
+pip install xformers
+```
+
+2. **Install Frontend Dependencies**
+```bash
+cd frontend
+npm install
+```
+
+3. **Start the Application**
+```bash
+# From project root
+./start-dev.sh
+```
+
+### GPU Optimization (for Image Generation)
+
+If you have an NVIDIA GPU and want to generate images:
+- The `start-dev.sh` script automatically enables GPU optimizations
+- See `GPU_OPTIMIZATION.md` for detailed configuration
+- Install xformers: `pip install xformers` (highly recommended)
 
 ## Node Categories
 

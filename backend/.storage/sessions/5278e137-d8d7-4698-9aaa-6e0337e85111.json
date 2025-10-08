@@ -1,0 +1,612 @@
+{
+  "id": "5278e137-d8d7-4698-9aaa-6e0337e85111",
+  "name": "sentiment",
+  "created_at": "2025-10-08T16:26:04.607719",
+  "updated_at": "2025-10-08T17:10:52.986770",
+  "workflow": {
+    "name": "sentiment",
+    "nodes": [
+      {
+        "id": "ai.generate_dataset-1759933571730",
+        "type": "customNode",
+        "position": {
+          "x": -168,
+          "y": 816
+        },
+        "data": {
+          "type": "ai.generate_dataset",
+          "label": "AI Generate Dataset",
+          "spec": {
+            "type": "ai.generate_dataset",
+            "label": "AI Generate Dataset",
+            "category": "sources",
+            "description": "Generate realistic dataset using OpenAI based on natural language description",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Generated Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "template",
+                "type": "select",
+                "label": "Template (optional)",
+                "default": "custom",
+                "required": false,
+                "description": "Select a predefined template or use custom",
+                "options": [
+                  "custom",
+                  "classification_iris",
+                  "classification_customer_churn",
+                  "regression_house_prices",
+                  "regression_car_performance",
+                  "nlp_sentiment_reviews",
+                  "nlp_spam_detection",
+                  "timeseries_sales",
+                  "clustering_customer_segments"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_rows",
+                "type": "integer",
+                "label": "Number of Rows",
+                "default": 100,
+                "required": false,
+                "description": "Number of rows to generate",
+                "options": null,
+                "min": 10,
+                "max": 10000,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "columns",
+                "type": "string",
+                "label": "Column Names",
+                "default": "cilindrata,consumo",
+                "required": false,
+                "description": "Comma-separated column names (e.g., 'cilindrata,consumo,potenza')",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "description",
+                "type": "string",
+                "label": "Dataset Description",
+                "default": "",
+                "required": false,
+                "description": "Describe in natural language what the dataset should represent and the relationships between columns",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "seed",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": "Seed for reproducibility",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "dataset_name",
+                "type": "string",
+                "label": "Dataset Name (optional)",
+                "default": "",
+                "required": false,
+                "description": "Custom name for saved dataset (auto-generated if empty)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "force_regenerate",
+                "type": "boolean",
+                "label": "Force Regenerate",
+                "default": false,
+                "required": false,
+                "description": "Force regeneration even if cached (costs API credits)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83e\udd16",
+            "color": "#10B981"
+          },
+          "params": {
+            "template": "custom",
+            "n_rows": 100,
+            "columns": "recensione, sentiment",
+            "description": "un dataset nlp per sentiment analysis di recensioni di uno spettacolo",
+            "seed": 42,
+            "dataset_name": "NLP - spettacolo",
+            "force_regenerate": false
+          },
+          "status": "success",
+          "executionTime": 0.0004780292510986328
+        },
+        "width": 700,
+        "height": 687,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -168,
+          "y": 816
+        }
+      },
+      {
+        "id": "nlp.sentiment-1759933758233",
+        "type": "customNode",
+        "position": {
+          "x": 912,
+          "y": 384
+        },
+        "data": {
+          "type": "nlp.sentiment",
+          "label": "Sentiment Analysis",
+          "spec": {
+            "type": "nlp.sentiment",
+            "label": "Sentiment Analysis",
+            "category": "transform",
+            "description": "Analyze sentiment of text (positive/negative/neutral)",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Output Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "text_column",
+                "type": "column",
+                "label": "Text Column",
+                "default": null,
+                "required": true,
+                "description": "Column containing text to analyze",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "output_polarity",
+                "type": "string",
+                "label": "Polarity Column Name",
+                "default": "sentiment_polarity",
+                "required": false,
+                "description": "Name for polarity score column (-1 to 1)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "output_label",
+                "type": "string",
+                "label": "Label Column Name",
+                "default": "sentiment_label",
+                "required": false,
+                "description": "Name for sentiment label column (positive/negative/neutral)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "neutral_threshold",
+                "type": "slider",
+                "label": "Neutral Threshold",
+                "default": 0.1,
+                "required": false,
+                "description": "Threshold for neutral sentiment (\u00b1threshold)",
+                "options": null,
+                "min": 0,
+                "max": 0.5,
+                "step": 0.05,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udcac",
+            "color": "#9C27B0"
+          },
+          "params": {
+            "text_column": "recensione",
+            "output_polarity": "sentiment",
+            "output_label": "sentiment",
+            "neutral_threshold": "0"
+          },
+          "status": "success",
+          "executionTime": 0.0055997371673583984
+        },
+        "width": 700,
+        "height": 556,
+        "selected": true,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 912,
+          "y": 384
+        }
+      },
+      {
+        "id": "data.custom_input-1759933902834",
+        "type": "customNode",
+        "position": {
+          "x": 312,
+          "y": 768
+        },
+        "data": {
+          "type": "data.custom_input",
+          "label": "Custom Table",
+          "spec": {
+            "type": "data.custom_input",
+            "label": "Custom Table",
+            "category": "sources",
+            "description": "Create table data visually - click 'Edit Table' to start. Numeric inputs are written to the first available columns (Input 1 \u2192 Column 1, Input 2 \u2192 Column 2, etc.). Each execution adds a new row.",
+            "inputs": [
+              {
+                "name": "input_1",
+                "type": "any",
+                "label": "Input 1",
+                "required": false,
+                "description": null
+              },
+              {
+                "name": "input_2",
+                "type": "any",
+                "label": "Input 2",
+                "required": false,
+                "description": null
+              },
+              {
+                "name": "input_3",
+                "type": "any",
+                "label": "Input 3",
+                "required": false,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "table_data",
+                "type": "string",
+                "label": "Table Data (Internal)",
+                "default": "{\"columns\":[\"Column1\",\"Column2\",\"Column3\"],\"data\":[]}",
+                "required": false,
+                "description": "Internal storage for table data",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "reset_on_execute",
+                "type": "boolean",
+                "label": "Reset on Execute",
+                "default": false,
+                "required": false,
+                "description": "Clear accumulated data when workflow is executed",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\u270f\ufe0f",
+            "color": "#FF9800"
+          },
+          "params": {
+            "table_data": "{\"columns\":[\"recensione\"],\"data\":[{\"recensione\":\"che brutto spettacolo!\"}]}",
+            "reset_on_execute": false
+          },
+          "status": "success",
+          "executionTime": 0.0006146430969238281
+        },
+        "width": 300,
+        "height": 309,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 312,
+          "y": 768
+        },
+        "dragging": false
+      },
+      {
+        "id": "ai.load_dataset-1759934621543",
+        "type": "customNode",
+        "position": {
+          "x": 312,
+          "y": 456
+        },
+        "data": {
+          "type": "ai.load_dataset",
+          "label": "Load AI Dataset",
+          "spec": {
+            "type": "ai.load_dataset",
+            "label": "Load AI Dataset",
+            "category": "sources",
+            "description": "Load a previously saved AI-generated dataset from database",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Output Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "dataset_id",
+                "type": "select",
+                "label": "Dataset",
+                "default": null,
+                "required": true,
+                "description": "Select a saved dataset to load",
+                "options": [
+                  {
+                    "value": "54f13998-d91a-40ba-a39b-8418aa1b6b52",
+                    "label": "NLP - spettacolo (86 rows)"
+                  },
+                  {
+                    "value": "19cc522d-391d-4461-a6e9-a53e77cb201f",
+                    "label": "sexy (20 rows)"
+                  },
+                  {
+                    "value": "21d60b74-3749-4405-803a-9bc28bf46d31",
+                    "label": "cellule (100 rows)"
+                  },
+                  {
+                    "value": "702095ce-797e-4f70-9097-767b651d886e",
+                    "label": "AI_Dataset_2025-10-05_15-43-02 (20 rows)"
+                  },
+                  {
+                    "value": "eb06a671-0426-42f0-9d19-068cbc3e4512",
+                    "label": "Email Spam Detection (100 rows)"
+                  },
+                  {
+                    "value": "8071a1d6-a24a-44ce-bdec-4e3c8f1bebc1",
+                    "label": "auto e moto (67 rows)"
+                  },
+                  {
+                    "value": "83211701-ffa5-4a03-81ce-cf7d53de6805",
+                    "label": "House Price Prediction (57 rows)"
+                  },
+                  {
+                    "value": "a79f88d5-276e-442e-9bb1-6d906d119392",
+                    "label": "Customer Segmentation (100 rows)"
+                  },
+                  {
+                    "value": "50dd8c95-f575-400e-9c4e-d924e9f6fd9a",
+                    "label": "Iris Flowers Classification (60 rows)"
+                  },
+                  {
+                    "value": "13e03095-c11e-43fd-bb0e-671ee213ec6e",
+                    "label": "Iris Flowers Classification (83 rows)"
+                  },
+                  {
+                    "value": "26e179c2-fc16-4f57-8f06-4b6338711c62",
+                    "label": "Monthly Sales Timeseries (72 rows)"
+                  }
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udcc2",
+            "color": "#4CAF50"
+          },
+          "params": {
+            "dataset_id": null
+          },
+          "status": "error",
+          "error": "No dataset selected"
+        },
+        "width": 300,
+        "height": 218,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 312,
+          "y": 456
+        }
+      },
+      {
+        "id": "ml.text_predict-1759934923150",
+        "type": "customNode",
+        "position": {
+          "x": 960,
+          "y": 1008
+        },
+        "data": {
+          "type": "ml.text_predict",
+          "label": "Text Predict",
+          "spec": {
+            "type": "ml.text_predict",
+            "label": "Text Predict",
+            "category": "machine_learning",
+            "description": "Train on training data, predict on new data",
+            "inputs": [
+              {
+                "name": "train",
+                "type": "table",
+                "label": "Training Data",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "predict",
+                "type": "table",
+                "label": "Data to Predict",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "predictions",
+                "type": "table",
+                "label": "Predictions",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "text_column",
+                "type": "column",
+                "label": "Text Column",
+                "default": null,
+                "required": true,
+                "description": "Column with text to classify",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "target_column",
+                "type": "column",
+                "label": "Target Column (training only)",
+                "default": null,
+                "required": true,
+                "description": "Column with labels in training data",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udd2e",
+            "color": "#E91E63"
+          },
+          "params": {
+            "text_column": "recensione",
+            "target_column": "sentiment"
+          },
+          "status": "success",
+          "executionTime": 0.0032317638397216797
+        },
+        "width": 900,
+        "height": 303,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 960,
+          "y": 1008
+        },
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "ai.generate_dataset-1759933571730",
+        "sourceHandle": "table",
+        "target": "nlp.sentiment-1759933758233",
+        "targetHandle": "table",
+        "id": "ai.generate_dataset-1759933571730-table-nlp.sentiment-1759933758233-table",
+        "data": {
+          "targetCategory": "transform"
+        },
+        "className": "edge-transform"
+      },
+      {
+        "source": "ai.generate_dataset-1759933571730",
+        "sourceHandle": "table",
+        "target": "ml.text_predict-1759934923150",
+        "targetHandle": "train",
+        "id": "ai.generate_dataset-1759933571730-table-ml.text_predict-1759934923150-train",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
+      },
+      {
+        "source": "data.custom_input-1759933902834",
+        "sourceHandle": "table",
+        "target": "ml.text_predict-1759934923150",
+        "targetHandle": "predict",
+        "id": "data.custom_input-1759933902834-table-ml.text_predict-1759934923150-predict",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
+      }
+    ],
+    "executionResults": {}
+  }
+}

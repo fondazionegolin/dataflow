@@ -458,7 +458,7 @@ class PredictNode(NodeExecutor):
             return NodeResult(error=f"Failed to make predictions: {str(e)}")
 
 
-@register_node
+# @register_node  # HIDDEN: Use ML Classification instead (works for both numeric and text)
 class TextClassificationNode(NodeExecutor):
     """Text classification with automatic vectorization."""
     

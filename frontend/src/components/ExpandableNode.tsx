@@ -968,33 +968,13 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
       data-category={spec.category}
       onContextMenu={handleContextMenu}
     >
-      {/* Thick draggable border overlay */}
+      {/* Main content area - no border */}
       <div 
-        className={`absolute inset-0 rounded-lg pointer-events-none`}
-        style={{
-          border: `16px solid ${getBorderColor()}`,
-        }}
-      />
-      
-      {/* Draggable border areas - only these areas allow dragging */}
-      <div 
-        className="absolute inset-0 rounded-lg pointer-events-auto cursor-move"
-        style={{
-          padding: '16px',
-          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 16px 16px, 16px calc(100% - 16px), calc(100% - 16px) calc(100% - 16px), calc(100% - 16px) 16px, 16px 16px)'
-        }}
-      />
-      
-      {/* Main content area - no dragging */}
-      <div 
-        className={`relative rounded-lg ${getStatusColor()}`}
+        className={`relative rounded-lg ${getStatusColor()} shadow-lg`}
         style={{
           pointerEvents: 'auto',
-          borderWidth: '16px',
-          borderStyle: 'solid',
-          borderColor: getBorderColor(),
           boxShadow: selected 
-            ? `0 0 0 5px ${darkMode ? '#ffffff' : '#000000'}`
+            ? `0 0 0 3px ${darkMode ? '#ffffff' : '#000000'}`
             : undefined,
         }}
       >
@@ -1037,7 +1017,11 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
       {/* Node Header - Draggable */}
       <div 
         className="px-3 py-2"
-        style={{ backgroundColor: getBorderColor() }}
+        style={{ 
+          backgroundColor: getBorderColor(),
+          borderTopLeftRadius: '0.5rem',
+          borderTopRightRadius: '0.5rem'
+        }}
       >
         <div className="flex items-center justify-between">
           <div
@@ -1138,7 +1122,13 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="border-t border-gray-200 bg-white">
+        <div 
+          className="border-t border-gray-200 bg-white"
+          style={{
+            borderBottomLeftRadius: '0.5rem',
+            borderBottomRightRadius: '0.5rem'
+          }}
+        >
           <div className={`flex ${showPreview ? 'divide-x divide-gray-200' : ''}`}>
             {/* Config Section - Always visible */}
             <div 
@@ -1674,6 +1664,16 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
             if (result) {
               result.preview.head = newData;
               result.preview.columns = newColumns;
+              
+              // Update the table_data parameter for Custom Table nodes
+              if (spec.type === 'data.custom_input') {
+                const tableData = JSON.stringify({
+                  columns: newColumns,
+                  data: newData
+                });
+                updateNodeParams(id, { table_data: tableData });
+              }
+              
               // Trigger re-render
               setShowTableEditor(false);
             }

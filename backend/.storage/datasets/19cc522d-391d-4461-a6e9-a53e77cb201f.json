@@ -1,0 +1,79 @@
+{
+  "id": "19cc522d-391d-4461-a6e9-a53e77cb201f",
+  "name": "sexy",
+  "created_at": "2025-10-08T15:21:58.753989",
+  "metadata": {
+    "rows": 20,
+    "columns": [
+      "prompt"
+    ],
+    "description": "descrizione di ragazze gotiche in pose sexy",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "prompt": "object"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "prompt": "Una ragazza gotica con capelli lunghi neri, vestita in un corsetto di pizzo, che si appoggia a un albero in un bosco oscuro."
+    },
+    {
+      "prompt": "Una giovane donna con trucco pesante e labbra rosse, sdraiata su un letto di rose nere, indossando un vestito attillato."
+    },
+    {
+      "prompt": "Ragazza con orecchini a cerchio e collana di perle, seduta su un muro di mattoni, indossando una giacca di pelle."
+    },
+    {
+      "prompt": "Una figura femminile con capelli corti e blu, vestita con una gonna di tulle, in posa su una scala in un edificio abbandonato."
+    },
+    {
+      "prompt": "Ragazza gotica con accessori in argento, in piedi davanti a un grande specchio antico, indossando un abito lungo e scuro."
+    },
+    {
+      "prompt": "Una giovane donna con eyeliner drammatico e capelli ricci, seduta su una sedia di legno, avvolta in un mantello nero."
+    },
+    {
+      "prompt": "Ragazza con tatuaggi visibili, vestita con un top di rete e pantaloni di pelle, mentre si appoggia a una moto."
+    },
+    {
+      "prompt": "Una figura femminile con capelli rossi e trucco gotico, sdraiata su un tappeto di foglie secche, vestita in abiti vintage."
+    },
+    {
+      "prompt": "Una giovane donna con un trucco audace e accessori goth, in posa su una terrazza con vista sulla citt\u00e0 al tramonto."
+    },
+    {
+      "prompt": "Ragazza con un vestito di velluto e stivali alti, che gioca con un gatto nero, in un'atmosfera misteriosa."
+    },
+    {
+      "prompt": "Una giovane donna con un cappello a tesa larga, vestita in un abito di chiffon, mentre guarda pensierosa fuori da una finestra."
+    },
+    {
+      "prompt": "Ragazza con capelli bianchi e occhi scuri, in posa in un cimitero, indossando un vestito lungo e fluttuante."
+    },
+    {
+      "prompt": "Una figura femminile con labbra viola, in piedi su un ponte di legno, vestita con un abito di pelle e accessori metallici."
+    },
+    {
+      "prompt": "Ragazza gotica con un trucco elaborato, sdraiata su un divano antico, circondata da candele e libri rari."
+    },
+    {
+      "prompt": "Una giovane donna in abiti di pizzo, in posa accanto a un lampione in una strada deserta, sotto la luna."
+    },
+    {
+      "prompt": "Ragazza con un vestito di seta nera, che danza sotto la pioggia, con un'espressione di libert\u00e0 sul viso."
+    },
+    {
+      "prompt": "Una figura femminile con un trucco che ricorda un teschio, in piedi davanti a un murale colorato in una via urbana."
+    },
+    {
+      "prompt": "Ragazza con capelli lunghi e lisci, vestita in un abito di chiffon, mentre si muove elegantemente in un giardino fiorito."
+    },
+    {
+      "prompt": "Una giovane donna con piercing e capelli a strati, seduta su una roccia in riva al mare, indossando un top corto."
+    },
+    {
+      "prompt": "Ragazza con un vestito di raso e accessori gotici, in posa su una scalinata di un antico castello."
+    }
+  ]
+}

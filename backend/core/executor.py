@@ -223,6 +223,11 @@ class ExecutionEngine:
             
             # Execute nodes in topological order
             for node_id in sorted_nodes:
+                # Skip nodes that don't need execution
+                if changed_nodes and node_id not in nodes_to_execute:
+                    logger.info(f"Skipping node {node_id} (not in execution set)")
+                    continue
+                
                 node = next((n for n in workflow.nodes if n.id == node_id), None)
                 if not node:
                     continue

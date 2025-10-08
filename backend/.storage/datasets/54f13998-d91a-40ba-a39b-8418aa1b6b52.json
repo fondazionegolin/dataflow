@@ -1,0 +1,365 @@
+{
+  "id": "54f13998-d91a-40ba-a39b-8418aa1b6b52",
+  "name": "NLP - spettacolo",
+  "created_at": "2025-10-08T16:28:06.616890",
+  "metadata": {
+    "rows": 86,
+    "columns": [
+      "recensione",
+      "sentiment"
+    ],
+    "description": "un dataset nlp per sentiment analysis di recensioni di uno spettacolo",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "recensione": "object",
+      "sentiment": "object"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "recensione": "Uno spettacolo incredibile! Gli attori erano fantastici e la scenografia mozzafiato.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non mi \u00e8 piaciuto affatto. La trama era noiosa e i dialoghi deboli.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza indimenticabile, mi sono divertito tantissimo!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Sinceramente, non valeva il prezzo del biglietto. Deluso.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Ottima performance! La musica era coinvolgente e toccante.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Lentissimo e poco coinvolgente. Non lo consiglierei.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un mix perfetto di comicit\u00e0 e dramma! Davvero ben fatto.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non capisco perch\u00e9 sia cos\u00ec apprezzato. Pessima regia.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Le emozioni che ho provato sono indescrivibili. Bellissimo!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Troppo lungo e noioso. Ho guardato l'orologio pi\u00f9 volte.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un capolavoro! Ogni attore ha dato il massimo.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Purtroppo, mi aspettavo di pi\u00f9. Non \u00e8 all'altezza delle aspettative.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "La danza era sublime, ho apprezzato ogni momento.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Mi ha lasciato indifferente. Non lo rivedrei.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Una serata fantastica, la squadra ha fatto un lavoro eccezionale.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non riesco a credere che abbia ricevuto cos\u00ec tanti premi. Non merita.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "La sceneggiatura \u00e8 stata brillante, mi ha tenuto incollato!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Un disastro totale. Non ci torner\u00f2 mai pi\u00f9.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Mi sono divertito cos\u00ec tanto, lo consiglio a tutti!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "L'interpretazione principale era sotto tono, non mi ha convinto.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Una vera gioia per gli occhi! Ogni scena era spettacolare.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Un flop totale. Non merita il tempo e il denaro.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Ho riso e pianto. Un'esperienza completa.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ci sono stati colpi di scena. Molto prevedibile.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un grande omaggio alla cultura! Molto ben fatto.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Difficile da seguire e poco interessante. Non lo consiglio.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Semplicemente stupendo! Non ci sono parole.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "La recitazione era mediocre e la storia poco convincente.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un viaggio emozionante che non dimenticher\u00f2 mai.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Ho trovato l'intero spettacolo imbarazzante.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "La musica dal vivo ha reso tutto ancora pi\u00f9 magico.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non c'era chimica tra gli attori, sembrava forzato.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza che consiglio a tutti, merita!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ho capito il messaggio. Sconclusionato.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Ogni attore ha brillato sul palco, un vero spettacolo!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Troppo pesante e lungo. Non riuscivo a concentrarmi.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Ho amato la messa in scena e la direzione artistica.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Senza dubbio una delle esperienze peggiori che abbia mai avuto.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Emozioni intense e un messaggio profondo. Bellissimo!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non mi ha lasciato nulla. Una perdita di tempo.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'opera d'arte dal vivo! La consiglio vivamente.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Molto deludente. Non ha rispettato le mie aspettative.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "La coreografia era eccezionale, mi ha colpito!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ho trovato alcun motivo per apprezzarlo.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza che ti fa riflettere e emozionare.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Il finale \u00e8 stato un vero disastro. Mi ha lasciato interdetto.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Tutto \u00e8 stato perfetto! Ritorner\u00f2 sicuramente.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non so come abbia fatto a durare cos\u00ec tanto. Noioso.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Una serata incantevole, mi sono sentito coinvolto.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Senza anima, l'intero spettacolo non ha ritmo.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza che tocca il cuore. Consigliato!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non c'era alcuna emozione. Ho perso interesse.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Ho adorato ogni secondo. Un vero spettacolo!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Difficile da seguire. Non lo rifarei.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Le performance sono state straordinarie, molto toccanti.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ci sono state sorprese. Deludente.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza teatrale indimenticabile, ci torner\u00f2!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Lentissimo e irritante. Non l'ho apprezzato.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Tutti dovrebbero vedere questo spettacolo! Davvero toccante.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ha rispettato le aspettative. Poca sostanza.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un viaggio emozionante attraverso la musica e la danza.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Ho trovato tutto poco credibile. Non mi \u00e8 piaciuto.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza da vivere almeno una volta nella vita.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Davvero deludente. Non ci torner\u00f2 mai pi\u00f9.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "La bravura degli attori \u00e8 stata straordinaria!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Senza ombra di dubbio, una delle peggiori performance.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Una serata fantastica, ho riso e pianto!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ho sentito alcun legame con la storia.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza che rimarr\u00e0 nel mio cuore per sempre.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "La trama era confusa e poco interessante.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un grande spettacolo, davvero coinvolgente!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Mi aspettavo di pi\u00f9. Poca azione e dinamismo.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'opera d'arte! Ogni scena era un capolavoro.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ha colpito nel segno. Molto deludente.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "La performance \u00e8 stata emozionante e coinvolgente.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non mi \u00e8 piaciuto. Troppo lungo e noioso.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Ho amato ogni minuto! Un'esperienza unica.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ci ho trovato nulla di speciale. Deludente.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Una serata indimenticabile, lo consiglio a tutti!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non ha rispettato le mie aspettative. Sconsigliato.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un'esperienza che mi ha toccato profondamente.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Non riuscivo a seguire la trama, confuso.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Un grande spettacolo! Ogni attore ha brillato.",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Molto poco coinvolgente. Non lo rifarei.",
+      "sentiment": "negativo"
+    },
+    {
+      "recensione": "Una performance straordinaria, assolutamente da vedere!",
+      "sentiment": "positivo"
+    },
+    {
+      "recensione": "Un grande flop. Non mi \u00e8 piaciuto affatto.",
+      "sentiment": "negativo"
+    }
+  ]
+}

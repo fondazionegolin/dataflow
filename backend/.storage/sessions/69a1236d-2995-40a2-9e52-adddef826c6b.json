@@ -2,7 +2,7 @@
   "id": "69a1236d-2995-40a2-9e52-adddef826c6b",
   "name": "dati case",
   "created_at": "2025-10-02T15:34:12.561766",
-  "updated_at": "2025-10-03T10:52:25.978534",
+  "updated_at": "2025-10-08T10:42:27.986656",
   "workflow": {
     "name": "dati case",
     "nodes": [
@@ -10,8 +10,8 @@
         "id": "ai.load_dataset-1759412081583",
         "type": "customNode",
         "position": {
-          "x": 744,
-          "y": 816
+          "x": 528,
+          "y": 792
         },
         "data": {
           "type": "ai.load_dataset",
@@ -80,23 +80,23 @@
             "dataset_id": "13e03095-c11e-43fd-bb0e-671ee213ec6e"
           },
           "status": "success",
-          "executionTime": 0.004183053970336914
+          "executionTime": 0.0008482933044433594
         },
-        "width": 904,
-        "height": 359,
-        "selected": true,
+        "width": 900,
+        "height": 452,
+        "selected": false,
         "dragging": false,
         "positionAbsolute": {
-          "x": 744,
-          "y": 816
+          "x": 528,
+          "y": 792
         }
       },
       {
         "id": "data.split-1759412151544",
         "type": "customNode",
         "position": {
-          "x": 2304,
-          "y": 504
+          "x": 1968,
+          "y": 672
         },
         "data": {
           "type": "data.split",
@@ -185,23 +185,23 @@
             "seed": 42
           },
           "status": "success",
-          "executionTime": 0.0011508464813232422
+          "executionTime": 0.0008378028869628906
         },
-        "width": 704,
-        "height": 300,
+        "width": 700,
+        "height": 272,
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
-          "x": 2304,
-          "y": 504
+          "x": 1968,
+          "y": 672
         }
       },
       {
         "id": "plot.3d-1759412173603",
         "type": "customNode",
         "position": {
-          "x": 3240,
-          "y": 1032
+          "x": 3024,
+          "y": 984
         },
         "data": {
           "type": "plot.3d",
@@ -360,13 +360,13 @@
           "status": "error",
           "error": "Failed to create 3D plot: Value of 'x' is not the name of a column in 'data_frame'. Expected one of ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'] but received: square_meters"
         },
-        "width": 304,
-        "height": 591,
+        "width": 300,
+        "height": 563,
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
-          "x": 3240,
-          "y": 1032
+          "x": 3024,
+          "y": 984
         }
       },
       {
@@ -534,7 +534,9 @@
             "feature_columns": [
               "square_meters",
               "bedrooms",
-              "bathrooms"
+              "bathrooms",
+              "sepal_width",
+              "sepal_length"
             ],
             "alpha": 1,
             "n_estimators": 100,
@@ -542,11 +544,11 @@
             "cv_folds": 5
           },
           "status": "error",
-          "error": "Failed to train regression model: \"None of [Index(['square_meters', 'bedrooms', 'bathrooms'], dtype='object')] are in the [columns]\""
+          "error": "Failed to train regression model: \"['square_meters', 'bedrooms', 'bathrooms'] not in index\""
         },
-        "width": 304,
-        "height": 803,
-        "selected": false,
+        "width": 300,
+        "height": 775,
+        "selected": true,
         "positionAbsolute": {
           "x": 3240,
           "y": -432
@@ -615,8 +617,8 @@
         "id": "plot.3d-1759413628460",
         "type": "customNode",
         "position": {
-          "x": 2280,
-          "y": 1920
+          "x": 1872,
+          "y": 1848
         },
         "data": {
           "type": "plot.3d",
@@ -773,12 +775,16 @@
             "marker_size": 3
           },
           "status": "success",
-          "executionTime": 0.02995610237121582
+          "executionTime": 0.019218921661376953
         },
-        "width": 704,
-        "height": 673,
+        "width": 700,
+        "height": 645,
         "selected": false,
-        "dragging": false
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1872,
+          "y": 1848
+        }
       },
       {
         "id": "plot.2d-1759413769008",
@@ -927,10 +933,10 @@
             "marker_size": 5
           },
           "status": "success",
-          "executionTime": 0.022835969924926758
+          "executionTime": 0.01805400848388672
         },
-        "width": 704,
-        "height": 705,
+        "width": 700,
+        "height": 677,
         "selected": false,
         "dragging": false,
         "positionAbsolute": {
@@ -945,49 +951,77 @@
         "sourceHandle": "table",
         "target": "data.split-1759412151544",
         "targetHandle": "table",
-        "id": "ai.load_dataset-1759412081583-table-data.split-1759412151544-table"
+        "id": "ai.load_dataset-1759412081583-table-data.split-1759412151544-table",
+        "data": {
+          "targetCategory": "transform"
+        },
+        "className": "edge-transform"
       },
       {
         "source": "data.split-1759412151544",
         "sourceHandle": "train",
         "target": "plot.3d-1759412173603",
         "targetHandle": "table",
-        "id": "data.split-1759412151544-train-plot.3d-1759412173603-table"
+        "id": "data.split-1759412151544-train-plot.3d-1759412173603-table",
+        "data": {
+          "targetCategory": "visualization"
+        },
+        "className": "edge-visualization"
       },
       {
         "source": "data.split-1759412151544",
         "sourceHandle": "train",
         "target": "ml.regression-1759412452869",
         "targetHandle": "train",
-        "id": "data.split-1759412151544-train-ml.regression-1759412452869-train"
+        "id": "data.split-1759412151544-train-ml.regression-1759412452869-train",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
       },
       {
         "source": "ml.regression-1759412452869",
         "sourceHandle": "model",
         "target": "ml.predict-1759412566767",
         "targetHandle": "model",
-        "id": "ml.regression-1759412452869-model-ml.predict-1759412566767-model"
+        "id": "ml.regression-1759412452869-model-ml.predict-1759412566767-model",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
       },
       {
         "source": "data.split-1759412151544",
         "sourceHandle": "test",
         "target": "ml.predict-1759412566767",
         "targetHandle": "data",
-        "id": "data.split-1759412151544-test-ml.predict-1759412566767-data"
+        "id": "data.split-1759412151544-test-ml.predict-1759412566767-data",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
       },
       {
         "source": "ai.load_dataset-1759412081583",
         "sourceHandle": "table",
         "target": "plot.3d-1759413628460",
         "targetHandle": "table",
-        "id": "ai.load_dataset-1759412081583-table-plot.3d-1759413628460-table"
+        "id": "ai.load_dataset-1759412081583-table-plot.3d-1759413628460-table",
+        "data": {
+          "targetCategory": "visualization"
+        },
+        "className": "edge-visualization"
       },
       {
         "source": "ai.load_dataset-1759412081583",
         "sourceHandle": "table",
         "target": "plot.2d-1759413769008",
         "targetHandle": "table",
-        "id": "ai.load_dataset-1759412081583-table-plot.2d-1759413769008-table"
+        "id": "ai.load_dataset-1759412081583-table-plot.2d-1759413769008-table",
+        "data": {
+          "targetCategory": "visualization"
+        },
+        "className": "edge-visualization"
       }
     ],
     "executionResults": {
@@ -1528,7 +1562,7 @@
             "species": "object"
           }
         },
-        "execution_time": 0.004183053970336914
+        "execution_time": 0.0008482933044433594
       },
       "data.split-1759412151544": {
         "outputs": {
@@ -2068,7 +2102,7 @@
             "species"
           ]
         },
-        "execution_time": 0.0011508464813232422
+        "execution_time": 0.0008378028869628906
       },
       "plot.3d-1759413628460": {
         "outputs": {
@@ -2091,7 +2125,7 @@
           "n_points": 83,
           "plot_json": "{\"data\":[{\"hovertemplate\":\"sepal_length=%{x}\\u003cbr\\u003esepal_width=%{y}\\u003cbr\\u003epetal_length=%{z}\\u003cextra\\u003e\\u003c\\u002fextra\\u003e\",\"legendgroup\":\"\",\"marker\":{\"color\":\"#636efa\",\"opacity\":0.7,\"symbol\":\"circle\",\"size\":3.0},\"mode\":\"markers\",\"name\":\"\",\"scene\":\"scene\",\"showlegend\":false,\"x\":{\"dtype\":\"f8\",\"bdata\":\"ZmZmZmZmFECamZmZmZkTQM3MzMzMzBJAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRVAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRFAZmZmZmZmFEAAAAAAAAAcQJqZmZmZmRlAmpmZmZmZG0AAAAAAAAAWQAAAAAAAABpAzczMzMzMFkAzMzMzMzMZQJqZmZmZmRNAZmZmZmZmGkDNzMzMzMwUQM3MzMzMzBxAMzMzMzMzG0CamZmZmZkdQJqZmZmZmR9AMzMzMzMzGUAAAAAAAAAaQGZmZmZmZhxAmpmZmZmZGUDNzMzMzMwcQAAAAAAAABhAmpmZmZmZF0AzMzMzMzMXQGZmZmZmZhhAAAAAAAAAFEAzMzMzMzMVQM3MzMzMzBpAMzMzMzMzF0CamZmZmZkZQAAAAAAAABZAzczMzMzMGEBmZmZmZmYeQDMzMzMzMxlAzczMzMzMHEBmZmZmZmYcQDMzMzMzMxtAAAAAAAAAGkBmZmZmZmYYQJqZmZmZmRVAMzMzMzMzGUAAAAAAAAAUQAAAAAAAABhAzczMzMzMFkDNzMzMzMwYQJqZmZmZmRVAMzMzMzMzHUAAAAAAAAAYQJqZmZmZmRlAMzMzMzMzF0BmZmZmZmYcQAAAAAAAABZAmpmZmZmZE0DNzMzMzMwYQGZmZmZmZhRAmpmZmZmZFUDNzMzMzMwaQDMzMzMzMxdAMzMzMzMzGUAAAAAAAAAUQM3MzMzMzBZAZmZmZmZmGEAAAAAAAAAYQM3MzMzMzBRAmpmZmZmZGUCamZmZmZkZQGZmZmZmZhZAAAAAAAAAGEAzMzMzMzMfQJqZmZmZmRdAmpmZmZmZFUAzMzMzMzMbQM3MzMzMzBZAAAAAAAAAGkAzMzMzMzMXQA==\"},\"y\":{\"dtype\":\"f8\",\"bdata\":\"AAAAAAAADEAAAAAAAAAIQJqZmZmZmQlAzczMzMzMCEDNzMzMzMwMQDMzMzMzMw9AMzMzMzMzC0AzMzMzMzMLQDMzMzMzMwdAAAAAAAAADECamZmZmZkJQJqZmZmZmQlAzczMzMzMCEBmZmZmZmYCQGZmZmZmZgZAZmZmZmZmBkBmZmZmZmYKQAAAAAAAAARAMzMzMzMzB0AAAAAAAAAMQM3MzMzMzAxAmpmZmZmZCUBmZmZmZmYGQGZmZmZmZg5AZmZmZmZmCkAAAAAAAAAIQAAAAAAAAAhAZmZmZmZmBkDNzMzMzMwMQDMzMzMzMwtAAAAAAAAACECamZmZmZkFQDMzMzMzMwdAAAAAAAAACECamZmZmZkNQM3MzMzMzAhAzczMzMzMBECamZmZmZkJQAAAAAAAAARAMzMzMzMzC0AAAAAAAAAIQGZmZmZmZgpAzczMzMzMDEAAAAAAAAAIQGZmZmZmZgZAAAAAAAAACEBmZmZmZmYGQDMzMzMzMwtAZmZmZmZmCkAAAAAAAAAMQJqZmZmZmQFAZmZmZmZmBkAzMzMzMzMLQDMzMzMzMw9AMzMzMzMzB0AAAAAAAAAIQDMzMzMzMwdAzczMzMzMBEAAAAAAAAAIQDMzMzMzMwNAzczMzMzMCEAzMzMzMzMLQAAAAAAAAAxAMzMzMzMzD0DNzMzMzMwIQJqZmZmZmQVAAAAAAAAABEAAAAAAAAAIQGZmZmZmZgZAAAAAAAAACECamZmZmZkFQAAAAAAAAAxAZmZmZmZmBkCamZmZmZkJQDMzMzMzMwdAmpmZmZmZAUAAAAAAAAAIQAAAAAAAAAhAMzMzMzMzC0AAAAAAAAAIQGZmZmZmZgZAAAAAAAAACEDNzMzMzMwEQA==\"},\"z\":{\"dtype\":\"f8\",\"bdata\":\"ZmZmZmZm9j9mZmZmZmb2P83MzMzMzPQ\\u002fAAAAAAAA+D9mZmZmZmb2PzMzMzMzM\\u002fs\\u002fZmZmZmZm9j8AAAAAAAD4P2ZmZmZmZvY\\u002fAAAAAAAA+D\\u002fNzMzMzMwSQAAAAAAAABJAmpmZmZmZE0AAAAAAAAAQQGZmZmZmZhJAAAAAAAAAEkDNzMzMzMwSQAAAAAAAABJAZmZmZmZmEkAAAAAAAAAQQGZmZmZmZhhAmpmZmZmZF0CamZmZmZkZQJqZmZmZmRlAAAAAAAAAGEAzMzMzMzMXQJqZmZmZmRdAZmZmZmZmFkBmZmZmZmYYQGZmZmZmZhZAZmZmZmZmFEBmZmZmZmYQQM3MzMzMzBJAmpmZmZmZ+T8AAAAAAAD4P83MzMzMzBJAAAAAAAAAEEAAAAAAAAASQAAAAAAAABBAmpmZmZmZFUBmZmZmZmYaQAAAAAAAABhAZmZmZmZmGECamZmZmZkXQGZmZmZmZhZAMzMzMzMzF0DNzMzMzMwSQAAAAAAAAPg\\u002fzczMzMzMEkDNzMzMzMz0PwAAAAAAABBAZmZmZmZmEECamZmZmZkVQDMzMzMzM\\u002fs\\u002fMzMzMzMzGUAzMzMzMzMTQDMzMzMzMxFAAAAAAAAAEECamZmZmZkXQGZmZmZmZg5AAAAAAAAA+D+amZmZmZkVQGZmZmZmZvY\\u002fMzMzMzMz+z\\u002fNzMzMzMwSQGZmZmZmZhBAmpmZmZmZE0CamZmZmZn5PwAAAAAAABJAZmZmZmZmEkBmZmZmZmYUQAAAAAAAAPg\\u002fZmZmZmZmFkAAAAAAAAASQM3MzMzMzAxAAAAAAAAAEEDNzMzMzMwYQGZmZmZmZhRAAAAAAAAA+D8AAAAAAAAWQAAAAAAAABJAzczMzMzMFEAAAAAAAAAQQA==\"},\"type\":\"scatter3d\"}],\"layout\":{\"template\":{\"data\":{\"barpolar\":[{\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"barpolar\"}],\"bar\":[{\"error_x\":{\"color\":\"#2a3f5f\"},\"error_y\":{\"color\":\"#2a3f5f\"},\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"bar\"}],\"carpet\":[{\"aaxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"baxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"type\":\"carpet\"}],\"choropleth\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"choropleth\"}],\"contourcarpet\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"contourcarpet\"}],\"contour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"contour\"}],\"heatmap\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"heatmap\"}],\"histogram2dcontour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2dcontour\"}],\"histogram2d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2d\"}],\"histogram\":[{\"marker\":{\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"histogram\"}],\"mesh3d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"mesh3d\"}],\"parcoords\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"parcoords\"}],\"pie\":[{\"automargin\":true,\"type\":\"pie\"}],\"scatter3d\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatter3d\"}],\"scattercarpet\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattercarpet\"}],\"scattergeo\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergeo\"}],\"scattergl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergl\"}],\"scattermapbox\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermapbox\"}],\"scattermap\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermap\"}],\"scatterpolargl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolargl\"}],\"scatterpolar\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolar\"}],\"scatter\":[{\"fillpattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2},\"type\":\"scatter\"}],\"scatterternary\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterternary\"}],\"surface\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"surface\"}],\"table\":[{\"cells\":{\"fill\":{\"color\":\"#EBF0F8\"},\"line\":{\"color\":\"white\"}},\"header\":{\"fill\":{\"color\":\"#C8D4E3\"},\"line\":{\"color\":\"white\"}},\"type\":\"table\"}]},\"layout\":{\"annotationdefaults\":{\"arrowcolor\":\"#2a3f5f\",\"arrowhead\":0,\"arrowwidth\":1},\"autotypenumbers\":\"strict\",\"coloraxis\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"colorscale\":{\"diverging\":[[0,\"#8e0152\"],[0.1,\"#c51b7d\"],[0.2,\"#de77ae\"],[0.3,\"#f1b6da\"],[0.4,\"#fde0ef\"],[0.5,\"#f7f7f7\"],[0.6,\"#e6f5d0\"],[0.7,\"#b8e186\"],[0.8,\"#7fbc41\"],[0.9,\"#4d9221\"],[1,\"#276419\"]],\"sequential\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"sequentialminus\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]]},\"colorway\":[\"#636efa\",\"#EF553B\",\"#00cc96\",\"#ab63fa\",\"#FFA15A\",\"#19d3f3\",\"#FF6692\",\"#B6E880\",\"#FF97FF\",\"#FECB52\"],\"font\":{\"color\":\"#2a3f5f\"},\"geo\":{\"bgcolor\":\"white\",\"lakecolor\":\"white\",\"landcolor\":\"white\",\"showlakes\":true,\"showland\":true,\"subunitcolor\":\"#C8D4E3\"},\"hoverlabel\":{\"align\":\"left\"},\"hovermode\":\"closest\",\"mapbox\":{\"style\":\"light\"},\"paper_bgcolor\":\"white\",\"plot_bgcolor\":\"white\",\"polar\":{\"angularaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"radialaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"}},\"scene\":{\"xaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"yaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"zaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"}},\"shapedefaults\":{\"line\":{\"color\":\"#2a3f5f\"}},\"ternary\":{\"aaxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"baxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"caxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"}},\"title\":{\"x\":0.05},\"xaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2},\"yaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2}}},\"scene\":{\"domain\":{\"x\":[0.0,1.0],\"y\":[0.0,1.0]},\"xaxis\":{\"title\":{\"text\":\"sepal_length\"}},\"yaxis\":{\"title\":{\"text\":\"sepal_width\"}},\"zaxis\":{\"title\":{\"text\":\"petal_length\"}}},\"legend\":{\"tracegroupgap\":0},\"title\":{\"text\":\"3D Scatter Plot\"}}}"
         },
-        "execution_time": 0.02995610237121582
+        "execution_time": 0.019218921661376953
       },
       "plot.2d-1759413769008": {
         "outputs": {
@@ -2112,7 +2146,7 @@
           "n_points": 83,
           "plot_json": "{\"data\": [{\"hovertemplate\": \"sepal_length=%{x}<br>sepal_width=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": \"#636efa\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"f8\", \"bdata\": \"ZmZmZmZmFECamZmZmZkTQM3MzMzMzBJAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRVAZmZmZmZmEkAAAAAAAAAUQJqZmZmZmRFAZmZmZmZmFEAAAAAAAAAcQJqZmZmZmRlAmpmZmZmZG0AAAAAAAAAWQAAAAAAAABpAzczMzMzMFkAzMzMzMzMZQJqZmZmZmRNAZmZmZmZmGkDNzMzMzMwUQM3MzMzMzBxAMzMzMzMzG0CamZmZmZkdQJqZmZmZmR9AMzMzMzMzGUAAAAAAAAAaQGZmZmZmZhxAmpmZmZmZGUDNzMzMzMwcQAAAAAAAABhAmpmZmZmZF0AzMzMzMzMXQGZmZmZmZhhAAAAAAAAAFEAzMzMzMzMVQM3MzMzMzBpAMzMzMzMzF0CamZmZmZkZQAAAAAAAABZAzczMzMzMGEBmZmZmZmYeQDMzMzMzMxlAzczMzMzMHEBmZmZmZmYcQDMzMzMzMxtAAAAAAAAAGkBmZmZmZmYYQJqZmZmZmRVAMzMzMzMzGUAAAAAAAAAUQAAAAAAAABhAzczMzMzMFkDNzMzMzMwYQJqZmZmZmRVAMzMzMzMzHUAAAAAAAAAYQJqZmZmZmRlAMzMzMzMzF0BmZmZmZmYcQAAAAAAAABZAmpmZmZmZE0DNzMzMzMwYQGZmZmZmZhRAmpmZmZmZFUDNzMzMzMwaQDMzMzMzMxdAMzMzMzMzGUAAAAAAAAAUQM3MzMzMzBZAZmZmZmZmGEAAAAAAAAAYQM3MzMzMzBRAmpmZmZmZGUCamZmZmZkZQGZmZmZmZhZAAAAAAAAAGEAzMzMzMzMfQJqZmZmZmRdAmpmZmZmZFUAzMzMzMzMbQM3MzMzMzBZAAAAAAAAAGkAzMzMzMzMXQA==\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"f8\", \"bdata\": \"AAAAAAAADEAAAAAAAAAIQJqZmZmZmQlAzczMzMzMCEDNzMzMzMwMQDMzMzMzMw9AMzMzMzMzC0AzMzMzMzMLQDMzMzMzMwdAAAAAAAAADECamZmZmZkJQJqZmZmZmQlAzczMzMzMCEBmZmZmZmYCQGZmZmZmZgZAZmZmZmZmBkBmZmZmZmYKQAAAAAAAAARAMzMzMzMzB0AAAAAAAAAMQM3MzMzMzAxAmpmZmZmZCUBmZmZmZmYGQGZmZmZmZg5AZmZmZmZmCkAAAAAAAAAIQAAAAAAAAAhAZmZmZmZmBkDNzMzMzMwMQDMzMzMzMwtAAAAAAAAACECamZmZmZkFQDMzMzMzMwdAAAAAAAAACECamZmZmZkNQM3MzMzMzAhAzczMzMzMBECamZmZmZkJQAAAAAAAAARAMzMzMzMzC0AAAAAAAAAIQGZmZmZmZgpAzczMzMzMDEAAAAAAAAAIQGZmZmZmZgZAAAAAAAAACEBmZmZmZmYGQDMzMzMzMwtAZmZmZmZmCkAAAAAAAAAMQJqZmZmZmQFAZmZmZmZmBkAzMzMzMzMLQDMzMzMzMw9AMzMzMzMzB0AAAAAAAAAIQDMzMzMzMwdAzczMzMzMBEAAAAAAAAAIQDMzMzMzMwNAzczMzMzMCEAzMzMzMzMLQAAAAAAAAAxAMzMzMzMzD0DNzMzMzMwIQJqZmZmZmQVAAAAAAAAABEAAAAAAAAAIQGZmZmZmZgZAAAAAAAAACECamZmZmZkFQAAAAAAAAAxAZmZmZmZmBkCamZmZmZkJQDMzMzMzMwdAmpmZmZmZAUAAAAAAAAAIQAAAAAAAAAhAMzMzMzMzC0AAAAAAAAAIQGZmZmZmZgZAAAAAAAAACEDNzMzMzMwEQA==\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"sepal_length\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"sepal_width\"}}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
         },
-        "execution_time": 0.022835969924926758
+        "execution_time": 0.01805400848388672
       }
     }
   }

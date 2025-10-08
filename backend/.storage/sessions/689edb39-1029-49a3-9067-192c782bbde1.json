@@ -1,0 +1,3598 @@
+{
+  "id": "689edb39-1029-49a3-9067-192c782bbde1",
+  "name": "dati_cellule",
+  "created_at": "2025-10-08T10:45:00.682036",
+  "updated_at": "2025-10-08T16:25:38.998945",
+  "workflow": {
+    "name": "dati_cellule",
+    "nodes": [
+      {
+        "id": "ai.generate_dataset-1759913103017",
+        "type": "customNode",
+        "position": {
+          "x": -1992,
+          "y": -144
+        },
+        "data": {
+          "type": "ai.generate_dataset",
+          "label": "AI Generate Dataset",
+          "spec": {
+            "type": "ai.generate_dataset",
+            "label": "AI Generate Dataset",
+            "category": "sources",
+            "description": "Generate realistic dataset using OpenAI based on natural language description",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Generated Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "template",
+                "type": "select",
+                "label": "Template (optional)",
+                "default": "custom",
+                "required": false,
+                "description": "Select a predefined template or use custom",
+                "options": [
+                  "custom",
+                  "classification_iris",
+                  "classification_customer_churn",
+                  "regression_house_prices",
+                  "regression_car_performance",
+                  "nlp_sentiment_reviews",
+                  "nlp_spam_detection",
+                  "timeseries_sales",
+                  "clustering_customer_segments"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_rows",
+                "type": "integer",
+                "label": "Number of Rows",
+                "default": 100,
+                "required": false,
+                "description": "Number of rows to generate",
+                "options": null,
+                "min": 10,
+                "max": 10000,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "columns",
+                "type": "string",
+                "label": "Column Names",
+                "default": "cilindrata,consumo",
+                "required": false,
+                "description": "Comma-separated column names (e.g., 'cilindrata,consumo,potenza')",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "description",
+                "type": "string",
+                "label": "Dataset Description",
+                "default": "",
+                "required": false,
+                "description": "Describe in natural language what the dataset should represent and the relationships between columns",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "seed",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": "Seed for reproducibility",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "dataset_name",
+                "type": "string",
+                "label": "Dataset Name (optional)",
+                "default": "",
+                "required": false,
+                "description": "Custom name for saved dataset (auto-generated if empty)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "force_regenerate",
+                "type": "boolean",
+                "label": "Force Regenerate",
+                "default": false,
+                "required": false,
+                "description": "Force regeneration even if cached (costs API credits)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83e\udd16",
+            "color": "#10B981"
+          },
+          "params": {
+            "template": "custom",
+            "n_rows": 100,
+            "columns": "numero_cellule, tempo",
+            "description": "crea un dataset di crescita cellulare nel tempo, che tenga in consiuderazione che la curva di crescita tender\u00e0 ad un plateau",
+            "seed": 42,
+            "dataset_name": "cellule",
+            "force_regenerate": false
+          },
+          "status": "success",
+          "executionTime": 0.00046563148498535156
+        },
+        "width": 700,
+        "height": 687,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -1992,
+          "y": -144
+        }
+      },
+      {
+        "id": "plot.2d-1759913216609",
+        "type": "customNode",
+        "position": {
+          "x": 1008,
+          "y": 0
+        },
+        "data": {
+          "type": "plot.2d",
+          "label": "2D Scatter Plot",
+          "spec": {
+            "type": "plot.2d",
+            "label": "2D Scatter Plot",
+            "category": "visualization",
+            "description": "Create interactive 2D scatter plot with color and size mapping",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Data Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "plot",
+                "type": "params",
+                "label": "Plot Config",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "x_column",
+                "type": "column",
+                "label": "X Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "y_column",
+                "type": "column",
+                "label": "Y Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "color_column",
+                "type": "column",
+                "label": "Color By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "size_column",
+                "type": "column",
+                "label": "Size By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "label": "Plot Title",
+                "default": "2D Scatter Plot",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "opacity",
+                "type": "slider",
+                "label": "Opacity",
+                "default": 0.7,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 1,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "marker_size",
+                "type": "slider",
+                "label": "Marker Size",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 20,
+                "step": 1,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\ud83d\udcca",
+            "color": "#FF5722"
+          },
+          "params": {
+            "x_column": "tempo",
+            "y_column": "numero_cellule",
+            "color_column": "",
+            "size_column": "",
+            "title": "2D Scatter Plot",
+            "opacity": 0.7,
+            "marker_size": 5
+          },
+          "status": "success",
+          "executionTime": 0.018018007278442383
+        },
+        "width": 700,
+        "height": 677,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1008,
+          "y": 0
+        }
+      },
+      {
+        "id": "ml.kmeans_clustering-1759913356894",
+        "type": "customNode",
+        "position": {
+          "x": 1680,
+          "y": 1272
+        },
+        "data": {
+          "type": "ml.kmeans_clustering",
+          "label": "K-Means Clustering",
+          "spec": {
+            "type": "ml.kmeans_clustering",
+            "label": "K-Means Clustering",
+            "category": "machine_learning",
+            "description": "K-Means clustering with elbow method and silhouette analysis",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Clustered Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "feature_columns",
+                "type": "multi_select",
+                "label": "Feature Columns",
+                "default": null,
+                "required": true,
+                "description": "Columns to use for clustering",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_clusters",
+                "type": "slider",
+                "label": "Number of Clusters (K)",
+                "default": 3,
+                "required": false,
+                "description": "Number of clusters to create",
+                "options": null,
+                "min": 2,
+                "max": 10,
+                "step": 1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "auto_k",
+                "type": "boolean",
+                "label": "Auto-detect K",
+                "default": false,
+                "required": false,
+                "description": "Automatically find optimal K using elbow method",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "max_k_search",
+                "type": "integer",
+                "label": "Max K for Auto-search",
+                "default": 10,
+                "required": false,
+                "description": "Maximum K to test when auto-detecting",
+                "options": null,
+                "min": 3,
+                "max": 20,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "normalize",
+                "type": "boolean",
+                "label": "Normalize Features",
+                "default": true,
+                "required": false,
+                "description": "Standardize features before clustering",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "plot_x",
+                "type": "column",
+                "label": "Plot X-axis",
+                "default": null,
+                "required": false,
+                "description": "Column for X-axis in scatter plot (optional, uses first features if empty)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "plot_y",
+                "type": "column",
+                "label": "Plot Y-axis",
+                "default": null,
+                "required": false,
+                "description": "Column for Y-axis in scatter plot",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "plot_z",
+                "type": "column",
+                "label": "Plot Z-axis (3D)",
+                "default": null,
+                "required": false,
+                "description": "Column for Z-axis to create 3D plot (optional)",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "random_state",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83c\udfaf",
+            "color": "#9C27B0"
+          },
+          "params": {
+            "feature_columns": [
+              "numero_cellule",
+              "tempo"
+            ],
+            "n_clusters": 3,
+            "auto_k": false,
+            "max_k_search": 10,
+            "normalize": true,
+            "plot_x": null,
+            "plot_y": null,
+            "plot_z": null,
+            "random_state": 42
+          },
+          "status": "success",
+          "executionTime": 0.024300575256347656
+        },
+        "width": 700,
+        "height": 1021,
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "id": "ml.regression-1759913394836",
+        "type": "customNode",
+        "position": {
+          "x": 2280,
+          "y": -984
+        },
+        "data": {
+          "type": "ml.regression",
+          "label": "Regression",
+          "spec": {
+            "type": "ml.regression",
+            "label": "Regression",
+            "category": "machine_learning",
+            "description": "Train regression models (Linear, Ridge, Lasso, RF, GBM, SVR)",
+            "inputs": [
+              {
+                "name": "train",
+                "type": "table",
+                "label": "Training Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "model",
+                "type": "model",
+                "label": "Trained Model",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "metrics",
+                "type": "metrics",
+                "label": "Metrics",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "predictions",
+                "type": "table",
+                "label": "Predictions",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "algorithm",
+                "type": "select",
+                "label": "Algorithm",
+                "default": "linear",
+                "required": false,
+                "description": null,
+                "options": [
+                  "linear",
+                  "ridge",
+                  "lasso",
+                  "random_forest",
+                  "gradient_boosting",
+                  "svr",
+                  "knn"
+                ],
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "target_column",
+                "type": "column",
+                "label": "Target Column",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "feature_columns",
+                "type": "multi_select",
+                "label": "Feature Columns (empty = all except target)",
+                "default": [],
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "alpha",
+                "type": "slider",
+                "label": "Alpha (Ridge/Lasso)",
+                "default": 1,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.01,
+                "max": 10,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "n_estimators",
+                "type": "integer",
+                "label": "N Estimators (RF/GBM)",
+                "default": 100,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 10,
+                "max": 500,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "max_depth",
+                "type": "integer",
+                "label": "Max Depth (RF/GBM)",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 20,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "cv_folds",
+                "type": "integer",
+                "label": "Cross-Validation Folds",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 2,
+                "max": 10,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udcc9",
+            "color": "#673AB7"
+          },
+          "params": {
+            "algorithm": "linear",
+            "target_column": "numero_cellule",
+            "feature_columns": [
+              "tempo"
+            ],
+            "alpha": 1,
+            "n_estimators": 100,
+            "max_depth": 5,
+            "cv_folds": 5
+          },
+          "status": "success",
+          "executionTime": 0.015702486038208008
+        },
+        "width": 700,
+        "height": 679,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 2280,
+          "y": -984
+        },
+        "dragging": false
+      },
+      {
+        "id": "data.split-1759913498972",
+        "type": "customNode",
+        "position": {
+          "x": 24,
+          "y": -264
+        },
+        "data": {
+          "type": "data.split",
+          "label": "Train/Test Split",
+          "spec": {
+            "type": "data.split",
+            "label": "Train/Test Split",
+            "category": "transform",
+            "description": "Split dataset into training and testing sets",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "train",
+                "type": "table",
+                "label": "Training Set",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "test",
+                "type": "table",
+                "label": "Testing Set",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "test_size",
+                "type": "slider",
+                "label": "Test Size Ratio",
+                "default": 0.2,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 0.5,
+                "step": 0.05,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "stratify_column",
+                "type": "string",
+                "label": "Stratify by Column (optional)",
+                "default": "",
+                "required": false,
+                "description": "Column name for stratified split",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "seed",
+                "type": "integer",
+                "label": "Random Seed",
+                "default": 42,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\u2702\ufe0f",
+            "color": "#E91E63"
+          },
+          "params": {
+            "test_size": 0.2,
+            "stratify_column": "",
+            "seed": 42
+          },
+          "status": "success",
+          "executionTime": 0.0006492137908935547
+        },
+        "width": 700,
+        "height": 272,
+        "selected": false,
+        "positionAbsolute": {
+          "x": 24,
+          "y": -264
+        },
+        "dragging": false
+      },
+      {
+        "id": "plot.2d-1759913531919",
+        "type": "customNode",
+        "position": {
+          "x": 1008,
+          "y": -1632
+        },
+        "data": {
+          "type": "plot.2d",
+          "label": "2D Scatter Plot",
+          "spec": {
+            "type": "plot.2d",
+            "label": "2D Scatter Plot",
+            "category": "visualization",
+            "description": "Create interactive 2D scatter plot with color and size mapping",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Data Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "plot",
+                "type": "params",
+                "label": "Plot Config",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "x_column",
+                "type": "column",
+                "label": "X Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "y_column",
+                "type": "column",
+                "label": "Y Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "color_column",
+                "type": "column",
+                "label": "Color By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "size_column",
+                "type": "column",
+                "label": "Size By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "label": "Plot Title",
+                "default": "2D Scatter Plot",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "opacity",
+                "type": "slider",
+                "label": "Opacity",
+                "default": 0.7,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 1,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "marker_size",
+                "type": "slider",
+                "label": "Marker Size",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 20,
+                "step": 1,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\ud83d\udcca",
+            "color": "#FF5722"
+          },
+          "params": {
+            "x_column": "tempo",
+            "y_column": "numero_cellule",
+            "color_column": "tempo",
+            "size_column": "",
+            "title": "2D Scatter Plot",
+            "opacity": 0.7,
+            "marker_size": 5
+          },
+          "status": "success",
+          "executionTime": 0.02099752426147461
+        },
+        "width": 700,
+        "height": 677,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1008,
+          "y": -1632
+        }
+      },
+      {
+        "id": "plot.2d-1759913900363",
+        "type": "customNode",
+        "position": {
+          "x": 1008,
+          "y": -936
+        },
+        "data": {
+          "type": "plot.2d",
+          "label": "2D Scatter Plot",
+          "spec": {
+            "type": "plot.2d",
+            "label": "2D Scatter Plot",
+            "category": "visualization",
+            "description": "Create interactive 2D scatter plot with color and size mapping",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Data Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "plot",
+                "type": "params",
+                "label": "Plot Config",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "x_column",
+                "type": "column",
+                "label": "X Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "y_column",
+                "type": "column",
+                "label": "Y Axis",
+                "default": null,
+                "required": true,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "color_column",
+                "type": "column",
+                "label": "Color By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "size_column",
+                "type": "column",
+                "label": "Size By (optional)",
+                "default": "",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "label": "Plot Title",
+                "default": "2D Scatter Plot",
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "opacity",
+                "type": "slider",
+                "label": "Opacity",
+                "default": 0.7,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 0.1,
+                "max": 1,
+                "step": 0.1,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "marker_size",
+                "type": "slider",
+                "label": "Marker Size",
+                "default": 5,
+                "required": false,
+                "description": null,
+                "options": null,
+                "min": 1,
+                "max": 20,
+                "step": 1,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\ud83d\udcca",
+            "color": "#FF5722"
+          },
+          "params": {
+            "x_column": "tempo",
+            "y_column": "numero_cellule",
+            "color_column": "tempo",
+            "size_column": "",
+            "title": "2D Scatter Plot",
+            "opacity": 0.7,
+            "marker_size": 5
+          },
+          "status": "success",
+          "executionTime": 0.01721024513244629
+        },
+        "width": 700,
+        "height": 677,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 1008,
+          "y": -936
+        }
+      },
+      {
+        "id": "math.numeric_input-1759914034589",
+        "type": "customNode",
+        "position": {
+          "x": 2352,
+          "y": -1776
+        },
+        "data": {
+          "type": "math.numeric_input",
+          "label": "Numeric Input",
+          "spec": {
+            "type": "math.numeric_input",
+            "label": "Numeric Input",
+            "category": "mathematics",
+            "description": "Enter a numeric value to use in calculations",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Value",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "value",
+                "type": "number",
+                "label": "Value",
+                "default": 0,
+                "required": false,
+                "description": "Numeric value to output",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "label",
+                "type": "string",
+                "label": "Label",
+                "default": "",
+                "required": false,
+                "description": "Optional label for this value",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "manual",
+            "icon": "\ud83d\udd22",
+            "color": "#4ECDC4"
+          },
+          "params": {
+            "value": 49,
+            "label": "time"
+          },
+          "status": "success",
+          "executionTime": 0.00010538101196289062
+        },
+        "width": 700,
+        "height": 309,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 2352,
+          "y": -1776
+        }
+      },
+      {
+        "id": "data.custom_input-1759914236055",
+        "type": "customNode",
+        "position": {
+          "x": 3432,
+          "y": -1608
+        },
+        "data": {
+          "type": "data.custom_input",
+          "label": "Custom Table",
+          "spec": {
+            "type": "data.custom_input",
+            "label": "Custom Table",
+            "category": "sources",
+            "description": "Create table data visually - click 'Edit Table' to start. Numeric inputs are written to the first available columns (Input 1 \u2192 Column 1, Input 2 \u2192 Column 2, etc.). Each execution adds a new row.",
+            "inputs": [
+              {
+                "name": "input_1",
+                "type": "any",
+                "label": "Input 1",
+                "required": false,
+                "description": null
+              },
+              {
+                "name": "input_2",
+                "type": "any",
+                "label": "Input 2",
+                "required": false,
+                "description": null
+              },
+              {
+                "name": "input_3",
+                "type": "any",
+                "label": "Input 3",
+                "required": false,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "table_data",
+                "type": "string",
+                "label": "Table Data (Internal)",
+                "default": "{\"columns\":[\"Column1\",\"Column2\",\"Column3\"],\"data\":[]}",
+                "required": false,
+                "description": "Internal storage for table data",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "reset_on_execute",
+                "type": "boolean",
+                "label": "Reset on Execute",
+                "default": false,
+                "required": false,
+                "description": "Clear accumulated data when workflow is executed",
+                "options": null,
+                "min": null,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "never",
+            "icon": "\u270f\ufe0f",
+            "color": "#FF9800"
+          },
+          "params": {
+            "table_data": "{\"columns\":[\"time\"],\"data\":[{\"time\":49}]}",
+            "reset_on_execute": false
+          },
+          "status": "success",
+          "executionTime": 0.000823974609375
+        },
+        "width": 700,
+        "height": 309,
+        "selected": true,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 3432,
+          "y": -1608
+        }
+      },
+      {
+        "id": "data.slice-1759933170006",
+        "type": "customNode",
+        "position": {
+          "x": -1104,
+          "y": -912
+        },
+        "data": {
+          "type": "data.slice",
+          "label": "Slice Rows",
+          "spec": {
+            "type": "data.slice",
+            "label": "Slice Rows",
+            "category": "transform",
+            "description": "Select rows by index range (e.g., rows 10-20)",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Sliced Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "start",
+                "type": "integer",
+                "label": "Start Row",
+                "default": 0,
+                "required": false,
+                "description": "First row to include (0-indexed)",
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "end",
+                "type": "integer",
+                "label": "End Row",
+                "default": 10,
+                "required": false,
+                "description": "Last row to include (exclusive, like Python slicing)",
+                "options": null,
+                "min": 1,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "step",
+                "type": "integer",
+                "label": "Step",
+                "default": 1,
+                "required": false,
+                "description": "Take every Nth row (1 = all rows)",
+                "options": null,
+                "min": 1,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\u2702\ufe0f",
+            "color": "#9C27B0"
+          },
+          "params": {
+            "start": 0,
+            "end": 50,
+            "step": 1
+          },
+          "status": "success",
+          "executionTime": 0.00019073486328125
+        },
+        "width": 700,
+        "height": 452,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -1104,
+          "y": -912
+        },
+        "dragging": false
+      },
+      {
+        "id": "data.slice-1759933189981",
+        "type": "customNode",
+        "position": {
+          "x": -96,
+          "y": -912
+        },
+        "data": {
+          "type": "data.slice",
+          "label": "Slice Rows",
+          "spec": {
+            "type": "data.slice",
+            "label": "Slice Rows",
+            "category": "transform",
+            "description": "Select rows by index range (e.g., rows 10-20)",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Sliced Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "start",
+                "type": "integer",
+                "label": "Start Row",
+                "default": 0,
+                "required": false,
+                "description": "First row to include (0-indexed)",
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "end",
+                "type": "integer",
+                "label": "End Row",
+                "default": 10,
+                "required": false,
+                "description": "Last row to include (exclusive, like Python slicing)",
+                "options": null,
+                "min": 1,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "step",
+                "type": "integer",
+                "label": "Step",
+                "default": 1,
+                "required": false,
+                "description": "Take every Nth row (1 = all rows)",
+                "options": null,
+                "min": 1,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\u2702\ufe0f",
+            "color": "#9C27B0"
+          },
+          "params": {
+            "start": 50,
+            "end": 100,
+            "step": 1
+          },
+          "status": "success",
+          "executionTime": 0.00016427040100097656
+        },
+        "width": 700,
+        "height": 452,
+        "selected": false,
+        "positionAbsolute": {
+          "x": -96,
+          "y": -912
+        },
+        "dragging": false
+      },
+      {
+        "id": "data.slice-1759933394987",
+        "type": "customNode",
+        "position": {
+          "x": 2976,
+          "y": -240
+        },
+        "data": {
+          "type": "data.slice",
+          "label": "Slice Rows",
+          "spec": {
+            "type": "data.slice",
+            "label": "Slice Rows",
+            "category": "transform",
+            "description": "Select rows by index range (e.g., rows 10-20)",
+            "inputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Input Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "table",
+                "type": "table",
+                "label": "Sliced Table",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [
+              {
+                "name": "start",
+                "type": "integer",
+                "label": "Start Row",
+                "default": 0,
+                "required": false,
+                "description": "First row to include (0-indexed)",
+                "options": null,
+                "min": 0,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "end",
+                "type": "integer",
+                "label": "End Row",
+                "default": 10,
+                "required": false,
+                "description": "Last row to include (exclusive, like Python slicing)",
+                "options": null,
+                "min": 1,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              },
+              {
+                "name": "step",
+                "type": "integer",
+                "label": "Step",
+                "default": 1,
+                "required": false,
+                "description": "Take every Nth row (1 = all rows)",
+                "options": null,
+                "min": 1,
+                "max": null,
+                "step": null,
+                "accept": null,
+                "language": null
+              }
+            ],
+            "cache_policy": "auto",
+            "icon": "\u2702\ufe0f",
+            "color": "#9C27B0"
+          },
+          "params": {
+            "start": 55,
+            "end": 56,
+            "step": 1
+          },
+          "status": "success",
+          "executionTime": 0.00015020370483398438
+        },
+        "width": 700,
+        "height": 413,
+        "selected": false,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 2976,
+          "y": -240
+        }
+      },
+      {
+        "id": "ml.predict-1759933433673",
+        "type": "customNode",
+        "position": {
+          "x": 3816,
+          "y": -816
+        },
+        "data": {
+          "type": "ml.predict",
+          "label": "Predict",
+          "spec": {
+            "type": "ml.predict",
+            "label": "Predict",
+            "category": "machine_learning",
+            "description": "Apply a trained model to make predictions on new data",
+            "inputs": [
+              {
+                "name": "model",
+                "type": "model",
+                "label": "Trained Model",
+                "required": true,
+                "description": null
+              },
+              {
+                "name": "data",
+                "type": "table",
+                "label": "Input Data",
+                "required": true,
+                "description": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "predictions",
+                "type": "table",
+                "label": "Predictions",
+                "required": true,
+                "description": null
+              }
+            ],
+            "params": [],
+            "cache_policy": "auto",
+            "icon": "\ud83d\udd2e",
+            "color": "#009688"
+          },
+          "params": {},
+          "status": "error",
+          "error": "Failed to make predictions: \"None of [Index(['tempo'], dtype='object')] are in the [columns]\""
+        },
+        "width": 300,
+        "height": 165,
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "source": "ai.generate_dataset-1759913103017",
+        "sourceHandle": "table",
+        "target": "plot.2d-1759913216609",
+        "targetHandle": "table",
+        "id": "ai.generate_dataset-1759913103017-table-plot.2d-1759913216609-table",
+        "data": {
+          "targetCategory": "visualization"
+        },
+        "className": "edge-visualization"
+      },
+      {
+        "source": "ai.generate_dataset-1759913103017",
+        "sourceHandle": "table",
+        "target": "ml.kmeans_clustering-1759913356894",
+        "targetHandle": "table",
+        "id": "ai.generate_dataset-1759913103017-table-ml.kmeans_clustering-1759913356894-table",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
+      },
+      {
+        "source": "ai.generate_dataset-1759913103017",
+        "sourceHandle": "table",
+        "target": "data.split-1759913498972",
+        "targetHandle": "table",
+        "id": "ai.generate_dataset-1759913103017-table-data.split-1759913498972-table",
+        "data": {
+          "targetCategory": "transform"
+        },
+        "className": "edge-transform"
+      },
+      {
+        "source": "data.split-1759913498972",
+        "sourceHandle": "train",
+        "target": "ml.regression-1759913394836",
+        "targetHandle": "train",
+        "id": "data.split-1759913498972-train-ml.regression-1759913394836-train",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
+      },
+      {
+        "source": "data.split-1759913498972",
+        "sourceHandle": "train",
+        "target": "plot.2d-1759913531919",
+        "targetHandle": "table",
+        "id": "data.split-1759913498972-train-plot.2d-1759913531919-table",
+        "data": {
+          "targetCategory": "visualization"
+        },
+        "className": "edge-visualization"
+      },
+      {
+        "source": "data.split-1759913498972",
+        "sourceHandle": "test",
+        "target": "plot.2d-1759913900363",
+        "targetHandle": "table",
+        "id": "data.split-1759913498972-test-plot.2d-1759913900363-table",
+        "data": {
+          "targetCategory": "visualization"
+        },
+        "className": "edge-visualization"
+      },
+      {
+        "source": "math.numeric_input-1759914034589",
+        "sourceHandle": "value",
+        "target": "data.custom_input-1759914236055",
+        "targetHandle": "input_1",
+        "id": "math.numeric_input-1759914034589-value-data.custom_input-1759914236055-input_1",
+        "data": {
+          "targetCategory": "sources"
+        },
+        "className": "edge-sources"
+      },
+      {
+        "source": "ai.generate_dataset-1759913103017",
+        "sourceHandle": "table",
+        "target": "data.slice-1759933170006",
+        "targetHandle": "table",
+        "id": "ai.generate_dataset-1759913103017-table-data.slice-1759933170006-table",
+        "data": {
+          "targetCategory": "transform"
+        },
+        "className": "edge-transform"
+      },
+      {
+        "source": "ai.generate_dataset-1759913103017",
+        "sourceHandle": "table",
+        "target": "data.slice-1759933189981",
+        "targetHandle": "table",
+        "id": "ai.generate_dataset-1759913103017-table-data.slice-1759933189981-table",
+        "data": {
+          "targetCategory": "transform"
+        },
+        "className": "edge-transform"
+      },
+      {
+        "source": "ai.generate_dataset-1759913103017",
+        "sourceHandle": "table",
+        "target": "data.slice-1759933394987",
+        "targetHandle": "table",
+        "id": "ai.generate_dataset-1759913103017-table-data.slice-1759933394987-table",
+        "data": {
+          "targetCategory": "transform"
+        },
+        "className": "edge-transform"
+      },
+      {
+        "source": "ml.regression-1759913394836",
+        "sourceHandle": "model",
+        "target": "ml.predict-1759933433673",
+        "targetHandle": "model",
+        "id": "ml.regression-1759913394836-model-ml.predict-1759933433673-model",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
+      },
+      {
+        "source": "data.custom_input-1759914236055",
+        "sourceHandle": "table",
+        "target": "ml.predict-1759933433673",
+        "targetHandle": "data",
+        "id": "data.custom_input-1759914236055-table-ml.predict-1759933433673-data",
+        "data": {
+          "targetCategory": "machine_learning"
+        },
+        "className": "edge-machine_learning"
+      }
+    ],
+    "executionResults": {
+      "ai.generate_dataset-1759913103017": {
+        "outputs": {
+          "table": {
+            "numero_cellule": {
+              "0": 1,
+              "1": 2,
+              "2": 3,
+              "3": 5,
+              "4": 8,
+              "5": 12,
+              "6": 18,
+              "7": 25,
+              "8": 35,
+              "9": 48,
+              "10": 64,
+              "11": 83,
+              "12": 105,
+              "13": 130,
+              "14": 158,
+              "15": 189,
+              "16": 223,
+              "17": 260,
+              "18": 300,
+              "19": 343,
+              "20": 389,
+              "21": 438,
+              "22": 490,
+              "23": 545,
+              "24": 603,
+              "25": 664,
+              "26": 728,
+              "27": 795,
+              "28": 865,
+              "29": 938,
+              "30": 1014,
+              "31": 1093,
+              "32": 1175,
+              "33": 1259,
+              "34": 1346,
+              "35": 1436,
+              "36": 1529,
+              "37": 1625,
+              "38": 1724,
+              "39": 1826,
+              "40": 1931,
+              "41": 2040,
+              "42": 2152,
+              "43": 2267,
+              "44": 2385,
+              "45": 2506,
+              "46": 2630,
+              "47": 2757,
+              "48": 2887,
+              "49": 3020,
+              "50": 3156,
+              "51": 3295,
+              "52": 3437,
+              "53": 3582,
+              "54": 3730,
+              "55": 3881,
+              "56": 4035,
+              "57": 4192,
+              "58": 4352,
+              "59": 4515,
+              "60": 4681,
+              "61": 4850,
+              "62": 5022,
+              "63": 5197,
+              "64": 5375,
+              "65": 5556,
+              "66": 5740,
+              "67": 5927,
+              "68": 6117,
+              "69": 6309,
+              "70": 6504,
+              "71": 6702,
+              "72": 6903,
+              "73": 7107,
+              "74": 7314,
+              "75": 7524,
+              "76": 7737,
+              "77": 7953,
+              "78": 8172,
+              "79": 8394,
+              "80": 8619,
+              "81": 8847,
+              "82": 9078,
+              "83": 9312,
+              "84": 9550,
+              "85": 9791,
+              "86": 10035,
+              "87": 10282,
+              "88": 10532,
+              "89": 10785,
+              "90": 11041,
+              "91": 11300,
+              "92": 11562,
+              "93": 11827,
+              "94": 12105,
+              "95": 12386,
+              "96": 12670,
+              "97": 12957,
+              "98": 13247,
+              "99": 13540
+            },
+            "tempo": {
+              "0": 0,
+              "1": 1,
+              "2": 2,
+              "3": 3,
+              "4": 4,
+              "5": 5,
+              "6": 6,
+              "7": 7,
+              "8": 8,
+              "9": 9,
+              "10": 10,
+              "11": 11,
+              "12": 12,
+              "13": 13,
+              "14": 14,
+              "15": 15,
+              "16": 16,
+              "17": 17,
+              "18": 18,
+              "19": 19,
+              "20": 20,
+              "21": 21,
+              "22": 22,
+              "23": 23,
+              "24": 24,
+              "25": 25,
+              "26": 26,
+              "27": 27,
+              "28": 28,
+              "29": 29,
+              "30": 30,
+              "31": 31,
+              "32": 32,
+              "33": 33,
+              "34": 34,
+              "35": 35,
+              "36": 36,
+              "37": 37,
+              "38": 38,
+              "39": 39,
+              "40": 40,
+              "41": 41,
+              "42": 42,
+              "43": 43,
+              "44": 44,
+              "45": 45,
+              "46": 46,
+              "47": 47,
+              "48": 48,
+              "49": 49,
+              "50": 50,
+              "51": 51,
+              "52": 52,
+              "53": 53,
+              "54": 54,
+              "55": 55,
+              "56": 56,
+              "57": 57,
+              "58": 58,
+              "59": 59,
+              "60": 60,
+              "61": 61,
+              "62": 62,
+              "63": 63,
+              "64": 64,
+              "65": 65,
+              "66": 66,
+              "67": 67,
+              "68": 68,
+              "69": 69,
+              "70": 70,
+              "71": 71,
+              "72": 72,
+              "73": 73,
+              "74": 74,
+              "75": 75,
+              "76": 76,
+              "77": 77,
+              "78": 78,
+              "79": 79,
+              "80": 80,
+              "81": 81,
+              "82": 82,
+              "83": 83,
+              "84": 84,
+              "85": 85,
+              "86": 86,
+              "87": 87,
+              "88": 88,
+              "89": 89,
+              "90": 90,
+              "91": 91,
+              "92": 92,
+              "93": 93,
+              "94": 94,
+              "95": 95,
+              "96": 96,
+              "97": 97,
+              "98": 98,
+              "99": 99
+            }
+          }
+        },
+        "metadata": {
+          "rows": 100,
+          "columns": 2,
+          "column_names": [
+            "numero_cellule",
+            "tempo"
+          ],
+          "dtypes": {
+            "numero_cellule": "int64",
+            "tempo": "int64"
+          },
+          "generated_by": "OpenAI GPT-4o-mini",
+          "description": "crea un dataset di crescita cellulare nel tempo, che tenga in consiuderazione che la curva di cresci",
+          "cached": false,
+          "generation_timestamp": "2025-10-08T10:46:46.601275"
+        },
+        "preview": {
+          "head": [
+            {
+              "numero_cellule": 1,
+              "tempo": 0
+            },
+            {
+              "numero_cellule": 2,
+              "tempo": 1
+            },
+            {
+              "numero_cellule": 3,
+              "tempo": 2
+            },
+            {
+              "numero_cellule": 5,
+              "tempo": 3
+            },
+            {
+              "numero_cellule": 8,
+              "tempo": 4
+            },
+            {
+              "numero_cellule": 12,
+              "tempo": 5
+            },
+            {
+              "numero_cellule": 18,
+              "tempo": 6
+            },
+            {
+              "numero_cellule": 25,
+              "tempo": 7
+            },
+            {
+              "numero_cellule": 35,
+              "tempo": 8
+            },
+            {
+              "numero_cellule": 48,
+              "tempo": 9
+            }
+          ],
+          "shape": [
+            100,
+            2
+          ],
+          "columns": [
+            "numero_cellule",
+            "tempo"
+          ],
+          "dtypes": {
+            "numero_cellule": "int64",
+            "tempo": "int64"
+          }
+        },
+        "execution_time": 0.00046563148498535156
+      },
+      "math.numeric_input-1759914034589": {
+        "outputs": {
+          "value": {
+            "time": {
+              "0": 49
+            }
+          }
+        },
+        "metadata": {
+          "value": 49,
+          "label": "time",
+          "type": "numeric_input"
+        },
+        "preview": {
+          "type": "scalar",
+          "value": 49,
+          "label": "time",
+          "head": [
+            {
+              "time": 49
+            }
+          ]
+        },
+        "execution_time": 0.00010538101196289062
+      },
+      "plot.2d-1759913216609": {
+        "outputs": {
+          "plot": {
+            "type": "plotly",
+            "data": "{\"data\": [{\"hovertemplate\": \"tempo=%{x}<br>numero_cellule=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": \"#636efa\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"i1\", \"bdata\": \"AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiYw==\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"i2\", \"bdata\": \"AQACAAMABQAIAAwAEgAZACMAMABAAFMAaQCCAJ4AvQDfAAQBLAFXAYUBtgHqASECWwKYAtgCGwNhA6oD9gNFBJcE6wRCBZwF+QVZBrwGIgeLB/gHaAjbCFEJyglGCsUKRwvMC1QM3wxtDf4Nkg4pD8MPYBAAEaMRSRLyEp4TTRT/FLQVbBYnF+UXpRhoGS4a9xrDG5IcZB05HhEf7B/KIKshjyJ2I2AkTiU/JjMnKigkKSEqISskLCotMy5JL2IwfjGdMr8z5DQ=\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"tempo\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"numero_cellule\"}}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
+          }
+        },
+        "metadata": {
+          "x_column": "tempo",
+          "y_column": "numero_cellule",
+          "n_points": 100
+        },
+        "preview": {
+          "plot_type": "scatter_2d",
+          "x_column": "tempo",
+          "y_column": "numero_cellule",
+          "n_points": 100,
+          "plot_json": "{\"data\": [{\"hovertemplate\": \"tempo=%{x}<br>numero_cellule=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": \"#636efa\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"i1\", \"bdata\": \"AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiYw==\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"i2\", \"bdata\": \"AQACAAMABQAIAAwAEgAZACMAMABAAFMAaQCCAJ4AvQDfAAQBLAFXAYUBtgHqASECWwKYAtgCGwNhA6oD9gNFBJcE6wRCBZwF+QVZBrwGIgeLB/gHaAjbCFEJyglGCsUKRwvMC1QM3wxtDf4Nkg4pD8MPYBAAEaMRSRLyEp4TTRT/FLQVbBYnF+UXpRhoGS4a9xrDG5IcZB05HhEf7B/KIKshjyJ2I2AkTiU/JjMnKigkKSEqISskLCotMy5JL2IwfjGdMr8z5DQ=\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"tempo\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"numero_cellule\"}}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
+        },
+        "execution_time": 0.018018007278442383
+      },
+      "ml.kmeans_clustering-1759913356894": {
+        "outputs": {
+          "table": {
+            "numero_cellule": {
+              "0": 1,
+              "1": 2,
+              "2": 3,
+              "3": 5,
+              "4": 8,
+              "5": 12,
+              "6": 18,
+              "7": 25,
+              "8": 35,
+              "9": 48,
+              "10": 64,
+              "11": 83,
+              "12": 105,
+              "13": 130,
+              "14": 158,
+              "15": 189,
+              "16": 223,
+              "17": 260,
+              "18": 300,
+              "19": 343,
+              "20": 389,
+              "21": 438,
+              "22": 490,
+              "23": 545,
+              "24": 603,
+              "25": 664,
+              "26": 728,
+              "27": 795,
+              "28": 865,
+              "29": 938,
+              "30": 1014,
+              "31": 1093,
+              "32": 1175,
+              "33": 1259,
+              "34": 1346,
+              "35": 1436,
+              "36": 1529,
+              "37": 1625,
+              "38": 1724,
+              "39": 1826,
+              "40": 1931,
+              "41": 2040,
+              "42": 2152,
+              "43": 2267,
+              "44": 2385,
+              "45": 2506,
+              "46": 2630,
+              "47": 2757,
+              "48": 2887,
+              "49": 3020,
+              "50": 3156,
+              "51": 3295,
+              "52": 3437,
+              "53": 3582,
+              "54": 3730,
+              "55": 3881,
+              "56": 4035,
+              "57": 4192,
+              "58": 4352,
+              "59": 4515,
+              "60": 4681,
+              "61": 4850,
+              "62": 5022,
+              "63": 5197,
+              "64": 5375,
+              "65": 5556,
+              "66": 5740,
+              "67": 5927,
+              "68": 6117,
+              "69": 6309,
+              "70": 6504,
+              "71": 6702,
+              "72": 6903,
+              "73": 7107,
+              "74": 7314,
+              "75": 7524,
+              "76": 7737,
+              "77": 7953,
+              "78": 8172,
+              "79": 8394,
+              "80": 8619,
+              "81": 8847,
+              "82": 9078,
+              "83": 9312,
+              "84": 9550,
+              "85": 9791,
+              "86": 10035,
+              "87": 10282,
+              "88": 10532,
+              "89": 10785,
+              "90": 11041,
+              "91": 11300,
+              "92": 11562,
+              "93": 11827,
+              "94": 12105,
+              "95": 12386,
+              "96": 12670,
+              "97": 12957,
+              "98": 13247,
+              "99": 13540
+            },
+            "tempo": {
+              "0": 0,
+              "1": 1,
+              "2": 2,
+              "3": 3,
+              "4": 4,
+              "5": 5,
+              "6": 6,
+              "7": 7,
+              "8": 8,
+              "9": 9,
+              "10": 10,
+              "11": 11,
+              "12": 12,
+              "13": 13,
+              "14": 14,
+              "15": 15,
+              "16": 16,
+              "17": 17,
+              "18": 18,
+              "19": 19,
+              "20": 20,
+              "21": 21,
+              "22": 22,
+              "23": 23,
+              "24": 24,
+              "25": 25,
+              "26": 26,
+              "27": 27,
+              "28": 28,
+              "29": 29,
+              "30": 30,
+              "31": 31,
+              "32": 32,
+              "33": 33,
+              "34": 34,
+              "35": 35,
+              "36": 36,
+              "37": 37,
+              "38": 38,
+              "39": 39,
+              "40": 40,
+              "41": 41,
+              "42": 42,
+              "43": 43,
+              "44": 44,
+              "45": 45,
+              "46": 46,
+              "47": 47,
+              "48": 48,
+              "49": 49,
+              "50": 50,
+              "51": 51,
+              "52": 52,
+              "53": 53,
+              "54": 54,
+              "55": 55,
+              "56": 56,
+              "57": 57,
+              "58": 58,
+              "59": 59,
+              "60": 60,
+              "61": 61,
+              "62": 62,
+              "63": 63,
+              "64": 64,
+              "65": 65,
+              "66": 66,
+              "67": 67,
+              "68": 68,
+              "69": 69,
+              "70": 70,
+              "71": 71,
+              "72": 72,
+              "73": 73,
+              "74": 74,
+              "75": 75,
+              "76": 76,
+              "77": 77,
+              "78": 78,
+              "79": 79,
+              "80": 80,
+              "81": 81,
+              "82": 82,
+              "83": 83,
+              "84": 84,
+              "85": 85,
+              "86": 86,
+              "87": 87,
+              "88": 88,
+              "89": 89,
+              "90": 90,
+              "91": 91,
+              "92": 92,
+              "93": 93,
+              "94": 94,
+              "95": 95,
+              "96": 96,
+              "97": 97,
+              "98": 98,
+              "99": 99
+            },
+            "cluster": {
+              "0": "1",
+              "1": "1",
+              "2": "1",
+              "3": "1",
+              "4": "1",
+              "5": "1",
+              "6": "1",
+              "7": "1",
+              "8": "1",
+              "9": "1",
+              "10": "1",
+              "11": "1",
+              "12": "1",
+              "13": "1",
+              "14": "1",
+              "15": "1",
+              "16": "1",
+              "17": "1",
+              "18": "1",
+              "19": "1",
+              "20": "1",
+              "21": "1",
+              "22": "1",
+              "23": "1",
+              "24": "1",
+              "25": "1",
+              "26": "1",
+              "27": "1",
+              "28": "1",
+              "29": "1",
+              "30": "1",
+              "31": "1",
+              "32": "1",
+              "33": "1",
+              "34": "1",
+              "35": "1",
+              "36": "1",
+              "37": "1",
+              "38": "1",
+              "39": "1",
+              "40": "1",
+              "41": "2",
+              "42": "2",
+              "43": "2",
+              "44": "2",
+              "45": "2",
+              "46": "2",
+              "47": "2",
+              "48": "2",
+              "49": "2",
+              "50": "2",
+              "51": "2",
+              "52": "2",
+              "53": "2",
+              "54": "2",
+              "55": "2",
+              "56": "2",
+              "57": "2",
+              "58": "2",
+              "59": "2",
+              "60": "2",
+              "61": "2",
+              "62": "2",
+              "63": "2",
+              "64": "2",
+              "65": "2",
+              "66": "2",
+              "67": "2",
+              "68": "2",
+              "69": "2",
+              "70": "2",
+              "71": "2",
+              "72": "2",
+              "73": "0",
+              "74": "0",
+              "75": "0",
+              "76": "0",
+              "77": "0",
+              "78": "0",
+              "79": "0",
+              "80": "0",
+              "81": "0",
+              "82": "0",
+              "83": "0",
+              "84": "0",
+              "85": "0",
+              "86": "0",
+              "87": "0",
+              "88": "0",
+              "89": "0",
+              "90": "0",
+              "91": "0",
+              "92": "0",
+              "93": "0",
+              "94": "0",
+              "95": "0",
+              "96": "0",
+              "97": "0",
+              "98": "0",
+              "99": "0"
+            }
+          }
+        },
+        "metadata": {
+          "n_clusters": 3,
+          "silhouette_score": 0.5788491507131529,
+          "davies_bouldin_index": 0.5092152463323157,
+          "inertia": 23.05987792801176,
+          "feature_columns": [
+            "numero_cellule",
+            "tempo"
+          ],
+          "cluster_sizes": {
+            "0": 27,
+            "1": 41,
+            "2": 32
+          },
+          "auto_detected": false
+        },
+        "preview": {
+          "plot_json": "{\"data\":[{\"hovertemplate\":\"%{text}\\u003cextra\\u003e\\u003c\\u002fextra\\u003e\",\"marker\":{\"color\":\"#FF6B6B\",\"line\":{\"color\":\"white\",\"width\":1.5},\"opacity\":0.8,\"size\":10},\"mode\":\"markers\",\"name\":\"Cluster 0 (27 pts)\",\"text\":[\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 7107.00\\u003cbr\\u003etempo: 73.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 7314.00\\u003cbr\\u003etempo: 74.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 7524.00\\u003cbr\\u003etempo: 75.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 7737.00\\u003cbr\\u003etempo: 76.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 7953.00\\u003cbr\\u003etempo: 77.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 8172.00\\u003cbr\\u003etempo: 78.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 8394.00\\u003cbr\\u003etempo: 79.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 8619.00\\u003cbr\\u003etempo: 80.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 8847.00\\u003cbr\\u003etempo: 81.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 9078.00\\u003cbr\\u003etempo: 82.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 9312.00\\u003cbr\\u003etempo: 83.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 9550.00\\u003cbr\\u003etempo: 84.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 9791.00\\u003cbr\\u003etempo: 85.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 10035.00\\u003cbr\\u003etempo: 86.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 10282.00\\u003cbr\\u003etempo: 87.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 10532.00\\u003cbr\\u003etempo: 88.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 10785.00\\u003cbr\\u003etempo: 89.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 11041.00\\u003cbr\\u003etempo: 90.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 11300.00\\u003cbr\\u003etempo: 91.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 11562.00\\u003cbr\\u003etempo: 92.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 11827.00\\u003cbr\\u003etempo: 93.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 12105.00\\u003cbr\\u003etempo: 94.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 12386.00\\u003cbr\\u003etempo: 95.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 12670.00\\u003cbr\\u003etempo: 96.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 12957.00\\u003cbr\\u003etempo: 97.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 13247.00\\u003cbr\\u003etempo: 98.00\",\"\\u003cb\\u003eCluster 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 13540.00\\u003cbr\\u003etempo: 99.00\"],\"x\":{\"dtype\":\"i2\",\"bdata\":\"wxuSHGQdOR4RH+wfyiCrIY8idiNgJE4lPyYzJyooJCkhKiErJCwqLTMuSS9iMH4xnTK\\u002fM+Q0\"},\"y\":{\"dtype\":\"i1\",\"bdata\":\"SUpLTE1OT1BRUlNUVVZXWFlaW1xdXl9gYWJj\"},\"type\":\"scatter\"},{\"hovertemplate\":\"%{text}\\u003cextra\\u003e\\u003c\\u002fextra\\u003e\",\"marker\":{\"color\":\"#4ECDC4\",\"line\":{\"color\":\"white\",\"width\":1.5},\"opacity\":0.8,\"size\":10},\"mode\":\"markers\",\"name\":\"Cluster 1 (41 pts)\",\"text\":[\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1.00\\u003cbr\\u003etempo: 0.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2.00\\u003cbr\\u003etempo: 1.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3.00\\u003cbr\\u003etempo: 2.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 5.00\\u003cbr\\u003etempo: 3.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 8.00\\u003cbr\\u003etempo: 4.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 12.00\\u003cbr\\u003etempo: 5.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 18.00\\u003cbr\\u003etempo: 6.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 25.00\\u003cbr\\u003etempo: 7.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 35.00\\u003cbr\\u003etempo: 8.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 48.00\\u003cbr\\u003etempo: 9.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 64.00\\u003cbr\\u003etempo: 10.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 83.00\\u003cbr\\u003etempo: 11.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 105.00\\u003cbr\\u003etempo: 12.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 130.00\\u003cbr\\u003etempo: 13.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 158.00\\u003cbr\\u003etempo: 14.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 189.00\\u003cbr\\u003etempo: 15.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 223.00\\u003cbr\\u003etempo: 16.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 260.00\\u003cbr\\u003etempo: 17.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 300.00\\u003cbr\\u003etempo: 18.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 343.00\\u003cbr\\u003etempo: 19.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 389.00\\u003cbr\\u003etempo: 20.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 438.00\\u003cbr\\u003etempo: 21.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 490.00\\u003cbr\\u003etempo: 22.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 545.00\\u003cbr\\u003etempo: 23.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 603.00\\u003cbr\\u003etempo: 24.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 664.00\\u003cbr\\u003etempo: 25.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 728.00\\u003cbr\\u003etempo: 26.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 795.00\\u003cbr\\u003etempo: 27.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 865.00\\u003cbr\\u003etempo: 28.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 938.00\\u003cbr\\u003etempo: 29.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1014.00\\u003cbr\\u003etempo: 30.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1093.00\\u003cbr\\u003etempo: 31.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1175.00\\u003cbr\\u003etempo: 32.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1259.00\\u003cbr\\u003etempo: 33.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1346.00\\u003cbr\\u003etempo: 34.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1436.00\\u003cbr\\u003etempo: 35.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1529.00\\u003cbr\\u003etempo: 36.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1625.00\\u003cbr\\u003etempo: 37.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1724.00\\u003cbr\\u003etempo: 38.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1826.00\\u003cbr\\u003etempo: 39.00\",\"\\u003cb\\u003eCluster 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 1931.00\\u003cbr\\u003etempo: 40.00\"],\"x\":{\"dtype\":\"i2\",\"bdata\":\"AQACAAMABQAIAAwAEgAZACMAMABAAFMAaQCCAJ4AvQDfAAQBLAFXAYUBtgHqASECWwKYAtgCGwNhA6oD9gNFBJcE6wRCBZwF+QVZBrwGIgeLBw==\"},\"y\":{\"dtype\":\"i1\",\"bdata\":\"AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJyg=\"},\"type\":\"scatter\"},{\"hovertemplate\":\"%{text}\\u003cextra\\u003e\\u003c\\u002fextra\\u003e\",\"marker\":{\"color\":\"#FFE66D\",\"line\":{\"color\":\"white\",\"width\":1.5},\"opacity\":0.8,\"size\":10},\"mode\":\"markers\",\"name\":\"Cluster 2 (32 pts)\",\"text\":[\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2040.00\\u003cbr\\u003etempo: 41.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2152.00\\u003cbr\\u003etempo: 42.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2267.00\\u003cbr\\u003etempo: 43.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2385.00\\u003cbr\\u003etempo: 44.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2506.00\\u003cbr\\u003etempo: 45.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2630.00\\u003cbr\\u003etempo: 46.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2757.00\\u003cbr\\u003etempo: 47.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 2887.00\\u003cbr\\u003etempo: 48.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3020.00\\u003cbr\\u003etempo: 49.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3156.00\\u003cbr\\u003etempo: 50.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3295.00\\u003cbr\\u003etempo: 51.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3437.00\\u003cbr\\u003etempo: 52.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3582.00\\u003cbr\\u003etempo: 53.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3730.00\\u003cbr\\u003etempo: 54.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 3881.00\\u003cbr\\u003etempo: 55.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 4035.00\\u003cbr\\u003etempo: 56.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 4192.00\\u003cbr\\u003etempo: 57.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 4352.00\\u003cbr\\u003etempo: 58.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 4515.00\\u003cbr\\u003etempo: 59.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 4681.00\\u003cbr\\u003etempo: 60.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 4850.00\\u003cbr\\u003etempo: 61.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 5022.00\\u003cbr\\u003etempo: 62.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 5197.00\\u003cbr\\u003etempo: 63.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 5375.00\\u003cbr\\u003etempo: 64.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 5556.00\\u003cbr\\u003etempo: 65.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 5740.00\\u003cbr\\u003etempo: 66.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 5927.00\\u003cbr\\u003etempo: 67.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 6117.00\\u003cbr\\u003etempo: 68.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 6309.00\\u003cbr\\u003etempo: 69.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 6504.00\\u003cbr\\u003etempo: 70.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 6702.00\\u003cbr\\u003etempo: 71.00\",\"\\u003cb\\u003eCluster 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 6903.00\\u003cbr\\u003etempo: 72.00\"],\"x\":{\"dtype\":\"i2\",\"bdata\":\"+AdoCNsIUQnKCUYKxQpHC8wLVAzfDG0N\\u002fg2SDikPww9gEAARoxFJEvISnhNNFP8UtBVsFicX5RelGGgZLhr3Gg==\"},\"y\":{\"dtype\":\"i1\",\"bdata\":\"KSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0g=\"},\"type\":\"scatter\"},{\"hovertemplate\":\"\\u003cb\\u003eCentroid 0\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 10135.81\\u003cbr\\u003etempo: 86.00\\u003cextra\\u003e\\u003c\\u002fextra\\u003e\",\"marker\":{\"color\":\"#FF6B6B\",\"line\":{\"color\":\"black\",\"width\":3},\"size\":20,\"symbol\":\"diamond\"},\"mode\":\"markers+text\",\"name\":\"Centroid 0\",\"showlegend\":false,\"text\":[\"C0\"],\"textfont\":{\"color\":\"black\",\"family\":\"Arial Black\",\"size\":10},\"textposition\":\"middle center\",\"x\":[10135.814814814814],\"y\":[86.0],\"type\":\"scatter\"},{\"hovertemplate\":\"\\u003cb\\u003eCentroid 1\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 595.73\\u003cbr\\u003etempo: 20.00\\u003cextra\\u003e\\u003c\\u002fextra\\u003e\",\"marker\":{\"color\":\"#4ECDC4\",\"line\":{\"color\":\"black\",\"width\":3},\"size\":20,\"symbol\":\"diamond\"},\"mode\":\"markers+text\",\"name\":\"Centroid 1\",\"showlegend\":false,\"text\":[\"C1\"],\"textfont\":{\"color\":\"black\",\"family\":\"Arial Black\",\"size\":10},\"textposition\":\"middle center\",\"x\":[595.731707317073],\"y\":[19.999999999999996],\"type\":\"scatter\"},{\"hovertemplate\":\"\\u003cb\\u003eCentroid 2\\u003c\\u002fb\\u003e\\u003cbr\\u003enumero_cellule: 4240.69\\u003cbr\\u003etempo: 56.50\\u003cextra\\u003e\\u003c\\u002fextra\\u003e\",\"marker\":{\"color\":\"#FFE66D\",\"line\":{\"color\":\"black\",\"width\":3},\"size\":20,\"symbol\":\"diamond\"},\"mode\":\"markers+text\",\"name\":\"Centroid 2\",\"showlegend\":false,\"text\":[\"C2\"],\"textfont\":{\"color\":\"black\",\"family\":\"Arial Black\",\"size\":10},\"textposition\":\"middle center\",\"x\":[4240.6875],\"y\":[56.5],\"type\":\"scatter\"}],\"layout\":{\"template\":{\"data\":{\"barpolar\":[{\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"barpolar\"}],\"bar\":[{\"error_x\":{\"color\":\"#2a3f5f\"},\"error_y\":{\"color\":\"#2a3f5f\"},\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"bar\"}],\"carpet\":[{\"aaxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"baxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"type\":\"carpet\"}],\"choropleth\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"choropleth\"}],\"contourcarpet\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"contourcarpet\"}],\"contour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"contour\"}],\"heatmap\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"heatmap\"}],\"histogram2dcontour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2dcontour\"}],\"histogram2d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2d\"}],\"histogram\":[{\"marker\":{\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"histogram\"}],\"mesh3d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"mesh3d\"}],\"parcoords\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"parcoords\"}],\"pie\":[{\"automargin\":true,\"type\":\"pie\"}],\"scatter3d\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatter3d\"}],\"scattercarpet\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattercarpet\"}],\"scattergeo\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergeo\"}],\"scattergl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergl\"}],\"scattermapbox\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermapbox\"}],\"scattermap\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermap\"}],\"scatterpolargl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolargl\"}],\"scatterpolar\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolar\"}],\"scatter\":[{\"fillpattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2},\"type\":\"scatter\"}],\"scatterternary\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterternary\"}],\"surface\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"surface\"}],\"table\":[{\"cells\":{\"fill\":{\"color\":\"#EBF0F8\"},\"line\":{\"color\":\"white\"}},\"header\":{\"fill\":{\"color\":\"#C8D4E3\"},\"line\":{\"color\":\"white\"}},\"type\":\"table\"}]},\"layout\":{\"annotationdefaults\":{\"arrowcolor\":\"#2a3f5f\",\"arrowhead\":0,\"arrowwidth\":1},\"autotypenumbers\":\"strict\",\"coloraxis\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"colorscale\":{\"diverging\":[[0,\"#8e0152\"],[0.1,\"#c51b7d\"],[0.2,\"#de77ae\"],[0.3,\"#f1b6da\"],[0.4,\"#fde0ef\"],[0.5,\"#f7f7f7\"],[0.6,\"#e6f5d0\"],[0.7,\"#b8e186\"],[0.8,\"#7fbc41\"],[0.9,\"#4d9221\"],[1,\"#276419\"]],\"sequential\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"sequentialminus\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]]},\"colorway\":[\"#636efa\",\"#EF553B\",\"#00cc96\",\"#ab63fa\",\"#FFA15A\",\"#19d3f3\",\"#FF6692\",\"#B6E880\",\"#FF97FF\",\"#FECB52\"],\"font\":{\"color\":\"#2a3f5f\"},\"geo\":{\"bgcolor\":\"white\",\"lakecolor\":\"white\",\"landcolor\":\"white\",\"showlakes\":true,\"showland\":true,\"subunitcolor\":\"#C8D4E3\"},\"hoverlabel\":{\"align\":\"left\"},\"hovermode\":\"closest\",\"mapbox\":{\"style\":\"light\"},\"paper_bgcolor\":\"white\",\"plot_bgcolor\":\"white\",\"polar\":{\"angularaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"radialaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"}},\"scene\":{\"xaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"yaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"zaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"}},\"shapedefaults\":{\"line\":{\"color\":\"#2a3f5f\"}},\"ternary\":{\"aaxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"baxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"caxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"}},\"title\":{\"x\":0.05},\"xaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2},\"yaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2}}},\"title\":{\"text\":\"\\u003cb\\u003eK-Means Clustering 2D\\u003c\\u002fb\\u003e (K=3)\\u003cbr\\u003e\\u003csub\\u003e\\ud83d\\udfe2 Silhouette: 0.579 | Davies-Bouldin: 0.509 | Inertia: 23\\u003c\\u002fsub\\u003e\",\"x\":0.5,\"xanchor\":\"center\"},\"legend\":{\"title\":{\"font\":{\"size\":12},\"text\":\"\\u003cb\\u003eClusters\\u003c\\u002fb\\u003e\"},\"yanchor\":\"top\",\"y\":0.98,\"xanchor\":\"right\",\"x\":0.98,\"bgcolor\":\"rgba(255,255,255,0.95)\",\"bordercolor\":\"#ddd\",\"borderwidth\":1},\"xaxis\":{\"title\":{\"font\":{\"size\":14},\"text\":\"\\u003cb\\u003enumero_cellule\\u003c\\u002fb\\u003e\"},\"gridcolor\":\"#f0f0f0\",\"showgrid\":true},\"yaxis\":{\"title\":{\"font\":{\"size\":14},\"text\":\"\\u003cb\\u003etempo\\u003c\\u002fb\\u003e\"},\"gridcolor\":\"#f0f0f0\",\"showgrid\":true},\"hovermode\":\"closest\",\"height\":600,\"showlegend\":true,\"paper_bgcolor\":\"white\",\"plot_bgcolor\":\"#fafafa\"}}",
+          "head": [
+            {
+              "numero_cellule": 1,
+              "tempo": 0,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 2,
+              "tempo": 1,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 3,
+              "tempo": 2,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 5,
+              "tempo": 3,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 8,
+              "tempo": 4,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 12,
+              "tempo": 5,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 18,
+              "tempo": 6,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 25,
+              "tempo": 7,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 35,
+              "tempo": 8,
+              "cluster": "1"
+            },
+            {
+              "numero_cellule": 48,
+              "tempo": 9,
+              "cluster": "1"
+            }
+          ],
+          "columns": [
+            "numero_cellule",
+            "tempo",
+            "cluster"
+          ]
+        },
+        "execution_time": 0.024300575256347656
+      },
+      "data.split-1759913498972": {
+        "outputs": {
+          "train": {
+            "numero_cellule": {
+              "1": 2,
+              "2": 3,
+              "3": 5,
+              "5": 12,
+              "6": 18,
+              "7": 25,
+              "8": 35,
+              "9": 48,
+              "11": 83,
+              "13": 130,
+              "14": 158,
+              "15": 189,
+              "16": 223,
+              "17": 260,
+              "19": 343,
+              "20": 389,
+              "21": 438,
+              "23": 545,
+              "24": 603,
+              "25": 664,
+              "26": 728,
+              "27": 795,
+              "28": 865,
+              "29": 938,
+              "32": 1175,
+              "34": 1346,
+              "35": 1436,
+              "36": 1529,
+              "37": 1625,
+              "38": 1724,
+              "40": 1931,
+              "41": 2040,
+              "42": 2152,
+              "43": 2267,
+              "46": 2630,
+              "47": 2757,
+              "48": 2887,
+              "49": 3020,
+              "50": 3156,
+              "51": 3295,
+              "52": 3437,
+              "54": 3730,
+              "55": 3881,
+              "56": 4035,
+              "57": 4192,
+              "58": 4352,
+              "59": 4515,
+              "60": 4681,
+              "61": 4850,
+              "62": 5022,
+              "63": 5197,
+              "64": 5375,
+              "65": 5556,
+              "66": 5740,
+              "67": 5927,
+              "68": 6117,
+              "69": 6309,
+              "71": 6702,
+              "72": 6903,
+              "74": 7314,
+              "75": 7524,
+              "78": 8172,
+              "79": 8394,
+              "81": 8847,
+              "82": 9078,
+              "84": 9550,
+              "85": 9791,
+              "86": 10035,
+              "87": 10282,
+              "88": 10532,
+              "89": 10785,
+              "91": 11300,
+              "92": 11562,
+              "93": 11827,
+              "94": 12105,
+              "95": 12386,
+              "96": 12670,
+              "97": 12957,
+              "98": 13247,
+              "99": 13540
+            },
+            "tempo": {
+              "1": 1,
+              "2": 2,
+              "3": 3,
+              "5": 5,
+              "6": 6,
+              "7": 7,
+              "8": 8,
+              "9": 9,
+              "11": 11,
+              "13": 13,
+              "14": 14,
+              "15": 15,
+              "16": 16,
+              "17": 17,
+              "19": 19,
+              "20": 20,
+              "21": 21,
+              "23": 23,
+              "24": 24,
+              "25": 25,
+              "26": 26,
+              "27": 27,
+              "28": 28,
+              "29": 29,
+              "32": 32,
+              "34": 34,
+              "35": 35,
+              "36": 36,
+              "37": 37,
+              "38": 38,
+              "40": 40,
+              "41": 41,
+              "42": 42,
+              "43": 43,
+              "46": 46,
+              "47": 47,
+              "48": 48,
+              "49": 49,
+              "50": 50,
+              "51": 51,
+              "52": 52,
+              "54": 54,
+              "55": 55,
+              "56": 56,
+              "57": 57,
+              "58": 58,
+              "59": 59,
+              "60": 60,
+              "61": 61,
+              "62": 62,
+              "63": 63,
+              "64": 64,
+              "65": 65,
+              "66": 66,
+              "67": 67,
+              "68": 68,
+              "69": 69,
+              "71": 71,
+              "72": 72,
+              "74": 74,
+              "75": 75,
+              "78": 78,
+              "79": 79,
+              "81": 81,
+              "82": 82,
+              "84": 84,
+              "85": 85,
+              "86": 86,
+              "87": 87,
+              "88": 88,
+              "89": 89,
+              "91": 91,
+              "92": 92,
+              "93": 93,
+              "94": 94,
+              "95": 95,
+              "96": 96,
+              "97": 97,
+              "98": 98,
+              "99": 99
+            }
+          },
+          "test": {
+            "numero_cellule": {
+              "0": 1,
+              "4": 8,
+              "10": 64,
+              "12": 105,
+              "18": 300,
+              "22": 490,
+              "30": 1014,
+              "31": 1093,
+              "33": 1259,
+              "39": 1826,
+              "44": 2385,
+              "45": 2506,
+              "53": 3582,
+              "70": 6504,
+              "73": 7107,
+              "76": 7737,
+              "77": 7953,
+              "80": 8619,
+              "83": 9312,
+              "90": 11041
+            },
+            "tempo": {
+              "0": 0,
+              "4": 4,
+              "10": 10,
+              "12": 12,
+              "18": 18,
+              "22": 22,
+              "30": 30,
+              "31": 31,
+              "33": 33,
+              "39": 39,
+              "44": 44,
+              "45": 45,
+              "53": 53,
+              "70": 70,
+              "73": 73,
+              "76": 76,
+              "77": 77,
+              "80": 80,
+              "83": 83,
+              "90": 90
+            }
+          }
+        },
+        "metadata": {
+          "train_rows": 80,
+          "test_rows": 20,
+          "test_ratio": 0.2
+        },
+        "preview": {
+          "train_shape": [
+            80,
+            2
+          ],
+          "test_shape": [
+            20,
+            2
+          ],
+          "train_head": [
+            {
+              "numero_cellule": 3881,
+              "tempo": 55
+            },
+            {
+              "numero_cellule": 10532,
+              "tempo": 88
+            },
+            {
+              "numero_cellule": 728,
+              "tempo": 26
+            },
+            {
+              "numero_cellule": 2152,
+              "tempo": 42
+            },
+            {
+              "numero_cellule": 6309,
+              "tempo": 69
+            }
+          ],
+          "test_head": [
+            {
+              "numero_cellule": 9312,
+              "tempo": 83
+            },
+            {
+              "numero_cellule": 3582,
+              "tempo": 53
+            },
+            {
+              "numero_cellule": 6504,
+              "tempo": 70
+            },
+            {
+              "numero_cellule": 2506,
+              "tempo": 45
+            },
+            {
+              "numero_cellule": 2385,
+              "tempo": 44
+            }
+          ],
+          "columns": [
+            "numero_cellule",
+            "tempo"
+          ]
+        },
+        "execution_time": 0.0006492137908935547
+      },
+      "data.slice-1759933170006": {
+        "outputs": {
+          "table": {
+            "numero_cellule": {
+              "0": 1,
+              "1": 2,
+              "2": 3,
+              "3": 5,
+              "4": 8,
+              "5": 12,
+              "6": 18,
+              "7": 25,
+              "8": 35,
+              "9": 48,
+              "10": 64,
+              "11": 83,
+              "12": 105,
+              "13": 130,
+              "14": 158,
+              "15": 189,
+              "16": 223,
+              "17": 260,
+              "18": 300,
+              "19": 343,
+              "20": 389,
+              "21": 438,
+              "22": 490,
+              "23": 545,
+              "24": 603,
+              "25": 664,
+              "26": 728,
+              "27": 795,
+              "28": 865,
+              "29": 938,
+              "30": 1014,
+              "31": 1093,
+              "32": 1175,
+              "33": 1259,
+              "34": 1346,
+              "35": 1436,
+              "36": 1529,
+              "37": 1625,
+              "38": 1724,
+              "39": 1826,
+              "40": 1931,
+              "41": 2040,
+              "42": 2152,
+              "43": 2267,
+              "44": 2385,
+              "45": 2506,
+              "46": 2630,
+              "47": 2757,
+              "48": 2887,
+              "49": 3020
+            },
+            "tempo": {
+              "0": 0,
+              "1": 1,
+              "2": 2,
+              "3": 3,
+              "4": 4,
+              "5": 5,
+              "6": 6,
+              "7": 7,
+              "8": 8,
+              "9": 9,
+              "10": 10,
+              "11": 11,
+              "12": 12,
+              "13": 13,
+              "14": 14,
+              "15": 15,
+              "16": 16,
+              "17": 17,
+              "18": 18,
+              "19": 19,
+              "20": 20,
+              "21": 21,
+              "22": 22,
+              "23": 23,
+              "24": 24,
+              "25": 25,
+              "26": 26,
+              "27": 27,
+              "28": 28,
+              "29": 29,
+              "30": 30,
+              "31": 31,
+              "32": 32,
+              "33": 33,
+              "34": 34,
+              "35": 35,
+              "36": 36,
+              "37": 37,
+              "38": 38,
+              "39": 39,
+              "40": 40,
+              "41": 41,
+              "42": 42,
+              "43": 43,
+              "44": 44,
+              "45": 45,
+              "46": 46,
+              "47": 47,
+              "48": 48,
+              "49": 49
+            }
+          }
+        },
+        "metadata": {
+          "original_rows": 100,
+          "selected_rows": 50,
+          "start": 0,
+          "end": 50,
+          "step": 1
+        },
+        "preview": {
+          "shape": [
+            50,
+            2
+          ],
+          "head": [
+            {
+              "numero_cellule": 1,
+              "tempo": 0
+            },
+            {
+              "numero_cellule": 2,
+              "tempo": 1
+            },
+            {
+              "numero_cellule": 3,
+              "tempo": 2
+            },
+            {
+              "numero_cellule": 5,
+              "tempo": 3
+            },
+            {
+              "numero_cellule": 8,
+              "tempo": 4
+            },
+            {
+              "numero_cellule": 12,
+              "tempo": 5
+            },
+            {
+              "numero_cellule": 18,
+              "tempo": 6
+            },
+            {
+              "numero_cellule": 25,
+              "tempo": 7
+            },
+            {
+              "numero_cellule": 35,
+              "tempo": 8
+            },
+            {
+              "numero_cellule": 48,
+              "tempo": 9
+            }
+          ],
+          "original_rows": 100,
+          "selected_rows": 50
+        },
+        "execution_time": 0.00019073486328125
+      },
+      "data.slice-1759933189981": {
+        "outputs": {
+          "table": {
+            "numero_cellule": {
+              "50": 3156,
+              "51": 3295,
+              "52": 3437,
+              "53": 3582,
+              "54": 3730,
+              "55": 3881,
+              "56": 4035,
+              "57": 4192,
+              "58": 4352,
+              "59": 4515,
+              "60": 4681,
+              "61": 4850,
+              "62": 5022,
+              "63": 5197,
+              "64": 5375,
+              "65": 5556,
+              "66": 5740,
+              "67": 5927,
+              "68": 6117,
+              "69": 6309,
+              "70": 6504,
+              "71": 6702,
+              "72": 6903,
+              "73": 7107,
+              "74": 7314,
+              "75": 7524,
+              "76": 7737,
+              "77": 7953,
+              "78": 8172,
+              "79": 8394,
+              "80": 8619,
+              "81": 8847,
+              "82": 9078,
+              "83": 9312,
+              "84": 9550,
+              "85": 9791,
+              "86": 10035,
+              "87": 10282,
+              "88": 10532,
+              "89": 10785,
+              "90": 11041,
+              "91": 11300,
+              "92": 11562,
+              "93": 11827,
+              "94": 12105,
+              "95": 12386,
+              "96": 12670,
+              "97": 12957,
+              "98": 13247,
+              "99": 13540
+            },
+            "tempo": {
+              "50": 50,
+              "51": 51,
+              "52": 52,
+              "53": 53,
+              "54": 54,
+              "55": 55,
+              "56": 56,
+              "57": 57,
+              "58": 58,
+              "59": 59,
+              "60": 60,
+              "61": 61,
+              "62": 62,
+              "63": 63,
+              "64": 64,
+              "65": 65,
+              "66": 66,
+              "67": 67,
+              "68": 68,
+              "69": 69,
+              "70": 70,
+              "71": 71,
+              "72": 72,
+              "73": 73,
+              "74": 74,
+              "75": 75,
+              "76": 76,
+              "77": 77,
+              "78": 78,
+              "79": 79,
+              "80": 80,
+              "81": 81,
+              "82": 82,
+              "83": 83,
+              "84": 84,
+              "85": 85,
+              "86": 86,
+              "87": 87,
+              "88": 88,
+              "89": 89,
+              "90": 90,
+              "91": 91,
+              "92": 92,
+              "93": 93,
+              "94": 94,
+              "95": 95,
+              "96": 96,
+              "97": 97,
+              "98": 98,
+              "99": 99
+            }
+          }
+        },
+        "metadata": {
+          "original_rows": 100,
+          "selected_rows": 50,
+          "start": 50,
+          "end": 100,
+          "step": 1
+        },
+        "preview": {
+          "shape": [
+            50,
+            2
+          ],
+          "head": [
+            {
+              "numero_cellule": 3156,
+              "tempo": 50
+            },
+            {
+              "numero_cellule": 3295,
+              "tempo": 51
+            },
+            {
+              "numero_cellule": 3437,
+              "tempo": 52
+            },
+            {
+              "numero_cellule": 3582,
+              "tempo": 53
+            },
+            {
+              "numero_cellule": 3730,
+              "tempo": 54
+            },
+            {
+              "numero_cellule": 3881,
+              "tempo": 55
+            },
+            {
+              "numero_cellule": 4035,
+              "tempo": 56
+            },
+            {
+              "numero_cellule": 4192,
+              "tempo": 57
+            },
+            {
+              "numero_cellule": 4352,
+              "tempo": 58
+            },
+            {
+              "numero_cellule": 4515,
+              "tempo": 59
+            }
+          ],
+          "original_rows": 100,
+          "selected_rows": 50
+        },
+        "execution_time": 0.00016427040100097656
+      },
+      "data.slice-1759933394987": {
+        "outputs": {
+          "table": {
+            "numero_cellule": {
+              "55": 3881
+            },
+            "tempo": {
+              "55": 55
+            }
+          }
+        },
+        "metadata": {
+          "original_rows": 100,
+          "selected_rows": 1,
+          "start": 55,
+          "end": 56,
+          "step": 1
+        },
+        "preview": {
+          "shape": [
+            1,
+            2
+          ],
+          "head": [
+            {
+              "numero_cellule": 3881,
+              "tempo": 55
+            }
+          ],
+          "original_rows": 100,
+          "selected_rows": 1
+        },
+        "execution_time": 0.00015020370483398438
+      },
+      "data.custom_input-1759914236055": {
+        "outputs": {
+          "table": {
+            "time": {
+              "0": 49
+            },
+            "Column2": {
+              "0": ""
+            },
+            "Column3": {
+              "0": ""
+            }
+          }
+        },
+        "metadata": {
+          "n_rows": 1,
+          "n_cols": 3,
+          "columns": [
+            "time",
+            "Column2",
+            "Column3"
+          ],
+          "editable": true
+        },
+        "preview": {
+          "type": "table",
+          "columns": [
+            "time",
+            "Column2",
+            "Column3"
+          ],
+          "head": [
+            {
+              "time": 49,
+              "Column2": null,
+              "Column3": null
+            }
+          ],
+          "shape": [
+            1,
+            3
+          ],
+          "editable": true,
+          "message": "Click 'Edit Table' button to create/modify data"
+        },
+        "execution_time": 0.000823974609375
+      },
+      "ml.regression-1759913394836": {
+        "outputs": {
+          "model": "<class 'sklearn.linear_model._base.LinearRegression'>",
+          "metrics": {
+            "mae": 992.1418438873309,
+            "mse": 1296420.030596456,
+            "rmse": 1138.6044223506494,
+            "r2": 0.9252051539554094,
+            "cv_r2_mean": 0.9137090884419011,
+            "cv_r2_std": 0.015090392663629848
+          },
+          "predictions": {
+            "numero_cellule": {
+              "1": 2,
+              "2": 3,
+              "3": 5,
+              "5": 12,
+              "6": 18,
+              "7": 25,
+              "8": 35,
+              "9": 48,
+              "11": 83,
+              "13": 130,
+              "14": 158,
+              "15": 189,
+              "16": 223,
+              "17": 260,
+              "19": 343,
+              "20": 389,
+              "21": 438,
+              "23": 545,
+              "24": 603,
+              "25": 664,
+              "26": 728,
+              "27": 795,
+              "28": 865,
+              "29": 938,
+              "32": 1175,
+              "34": 1346,
+              "35": 1436,
+              "36": 1529,
+              "37": 1625,
+              "38": 1724,
+              "40": 1931,
+              "41": 2040,
+              "42": 2152,
+              "43": 2267,
+              "46": 2630,
+              "47": 2757,
+              "48": 2887,
+              "49": 3020,
+              "50": 3156,
+              "51": 3295,
+              "52": 3437,
+              "54": 3730,
+              "55": 3881,
+              "56": 4035,
+              "57": 4192,
+              "58": 4352,
+              "59": 4515,
+              "60": 4681,
+              "61": 4850,
+              "62": 5022,
+              "63": 5197,
+              "64": 5375,
+              "65": 5556,
+              "66": 5740,
+              "67": 5927,
+              "68": 6117,
+              "69": 6309,
+              "71": 6702,
+              "72": 6903,
+              "74": 7314,
+              "75": 7524,
+              "78": 8172,
+              "79": 8394,
+              "81": 8847,
+              "82": 9078,
+              "84": 9550,
+              "85": 9791,
+              "86": 10035,
+              "87": 10282,
+              "88": 10532,
+              "89": 10785,
+              "91": 11300,
+              "92": 11562,
+              "93": 11827,
+              "94": 12105,
+              "95": 12386,
+              "96": 12670,
+              "97": 12957,
+              "98": 13247,
+              "99": 13540
+            },
+            "tempo": {
+              "1": 1,
+              "2": 2,
+              "3": 3,
+              "5": 5,
+              "6": 6,
+              "7": 7,
+              "8": 8,
+              "9": 9,
+              "11": 11,
+              "13": 13,
+              "14": 14,
+              "15": 15,
+              "16": 16,
+              "17": 17,
+              "19": 19,
+              "20": 20,
+              "21": 21,
+              "23": 23,
+              "24": 24,
+              "25": 25,
+              "26": 26,
+              "27": 27,
+              "28": 28,
+              "29": 29,
+              "32": 32,
+              "34": 34,
+              "35": 35,
+              "36": 36,
+              "37": 37,
+              "38": 38,
+              "40": 40,
+              "41": 41,
+              "42": 42,
+              "43": 43,
+              "46": 46,
+              "47": 47,
+              "48": 48,
+              "49": 49,
+              "50": 50,
+              "51": 51,
+              "52": 52,
+              "54": 54,
+              "55": 55,
+              "56": 56,
+              "57": 57,
+              "58": 58,
+              "59": 59,
+              "60": 60,
+              "61": 61,
+              "62": 62,
+              "63": 63,
+              "64": 64,
+              "65": 65,
+              "66": 66,
+              "67": 67,
+              "68": 68,
+              "69": 69,
+              "71": 71,
+              "72": 72,
+              "74": 74,
+              "75": 75,
+              "78": 78,
+              "79": 79,
+              "81": 81,
+              "82": 82,
+              "84": 84,
+              "85": 85,
+              "86": 86,
+              "87": 87,
+              "88": 88,
+              "89": 89,
+              "91": 91,
+              "92": 92,
+              "93": 93,
+              "94": 94,
+              "95": 95,
+              "96": 96,
+              "97": 97,
+              "98": 98,
+              "99": 99
+            },
+            "prediction": {
+              "1": -2390.012890525401,
+              "2": -2251.2970535299155,
+              "3": -2112.58121653443,
+              "5": -1835.1495425434591,
+              "6": -1696.4337055479737,
+              "7": -1557.7178685524882,
+              "8": -1419.0020315570027,
+              "9": -1280.2861945615173,
+              "11": -1002.8545205705464,
+              "13": -725.4228465795754,
+              "14": -586.70700958409,
+              "15": -447.9911725886045,
+              "16": -309.27533559311905,
+              "17": -170.5594985976336,
+              "19": 106.87217539333733,
+              "20": 245.5880123888228,
+              "21": 384.30384938430825,
+              "23": 661.7355233752792,
+              "24": 800.4513603707646,
+              "25": 939.1671973662501,
+              "26": 1077.8830343617356,
+              "27": 1216.598871357221,
+              "28": 1355.3147083527065,
+              "29": 1494.030545348192,
+              "32": 1910.1780563346483,
+              "34": 2187.6097303256192,
+              "35": 2326.325567321105,
+              "36": 2465.04140431659,
+              "37": 2603.757241312075,
+              "38": 2742.473078307561,
+              "40": 3019.904752298532,
+              "41": 3158.620589294017,
+              "42": 3297.336426289503,
+              "43": 3436.052263284989,
+              "46": 3852.1997742714448,
+              "47": 3990.9156112669307,
+              "48": 4129.631448262416,
+              "49": 4268.347285257901,
+              "50": 4407.063122253387,
+              "51": 4545.7789592488725,
+              "52": 4684.4947962443575,
+              "54": 4961.926470235328,
+              "55": 5100.642307230814,
+              "56": 5239.358144226299,
+              "57": 5378.073981221784,
+              "58": 5516.78981821727,
+              "59": 5655.505655212756,
+              "60": 5794.221492208241,
+              "61": 5932.937329203726,
+              "62": 6071.653166199213,
+              "63": 6210.369003194698,
+              "64": 6349.084840190183,
+              "65": 6487.800677185668,
+              "66": 6626.516514181153,
+              "67": 6765.23235117664,
+              "68": 6903.948188172125,
+              "69": 7042.66402516761,
+              "71": 7320.095699158582,
+              "72": 7458.811536154067,
+              "74": 7736.243210145037,
+              "75": 7874.959047140524,
+              "78": 8291.10655812698,
+              "79": 8429.822395122465,
+              "81": 8707.254069113435,
+              "82": 8845.96990610892,
+              "84": 9123.401580099893,
+              "85": 9262.117417095378,
+              "86": 9400.833254090863,
+              "87": 9539.549091086348,
+              "88": 9678.264928081833,
+              "89": 9816.980765077318,
+              "91": 10094.412439068292,
+              "92": 10233.128276063777,
+              "93": 10371.844113059262,
+              "94": 10510.559950054747,
+              "95": 10649.275787050232,
+              "96": 10787.991624045717,
+              "97": 10926.707461041202,
+              "98": 11065.423298036687,
+              "99": 11204.139135032176
+            },
+            "residual": {
+              "1": 2392.012890525401,
+              "2": 2254.2970535299155,
+              "3": 2117.58121653443,
+              "5": 1847.1495425434591,
+              "6": 1714.4337055479737,
+              "7": 1582.7178685524882,
+              "8": 1454.0020315570027,
+              "9": 1328.2861945615173,
+              "11": 1085.8545205705464,
+              "13": 855.4228465795754,
+              "14": 744.70700958409,
+              "15": 636.9911725886045,
+              "16": 532.275335593119,
+              "17": 430.5594985976336,
+              "19": 236.12782460666267,
+              "20": 143.4119876111772,
+              "21": 53.69615061569175,
+              "23": -116.73552337527917,
+              "24": -197.45136037076463,
+              "25": -275.1671973662501,
+              "26": -349.88303436173555,
+              "27": -421.598871357221,
+              "28": -490.3147083527065,
+              "29": -556.0305453481919,
+              "32": -735.1780563346483,
+              "34": -841.6097303256192,
+              "35": -890.3255673211052,
+              "36": -936.0414043165902,
+              "37": -978.7572413120752,
+              "38": -1018.4730783075611,
+              "40": -1088.904752298532,
+              "41": -1118.620589294017,
+              "42": -1145.336426289503,
+              "43": -1169.0522632849888,
+              "46": -1222.1997742714448,
+              "47": -1233.9156112669307,
+              "48": -1242.6314482624157,
+              "49": -1248.3472852579007,
+              "50": -1251.0631222533866,
+              "51": -1250.7789592488725,
+              "52": -1247.4947962443575,
+              "54": -1231.9264702353285,
+              "55": -1219.6423072308144,
+              "56": -1204.3581442262994,
+              "57": -1186.0739812217844,
+              "58": -1164.7898182172703,
+              "59": -1140.5056552127562,
+              "60": -1113.2214922082412,
+              "61": -1082.9373292037262,
+              "62": -1049.653166199213,
+              "63": -1013.369003194698,
+              "64": -974.0848401901831,
+              "65": -931.8006771856681,
+              "66": -886.5165141811531,
+              "67": -838.2323511766399,
+              "68": -786.9481881721249,
+              "69": -733.6640251676099,
+              "71": -618.0956991585817,
+              "72": -555.8115361540667,
+              "74": -422.24321014503676,
+              "75": -350.9590471405236,
+              "78": -119.10655812697951,
+              "79": -35.82239512246451,
+              "81": 139.74593088656547,
+              "82": 232.03009389108047,
+              "84": 426.5984199001068,
+              "85": 528.8825829046218,
+              "86": 634.1667459091368,
+              "87": 742.4509089136518,
+              "88": 853.7350719181668,
+              "89": 968.0192349226818,
+              "91": 1205.5875609317081,
+              "92": 1328.8717239362231,
+              "93": 1455.1558869407381,
+              "94": 1594.4400499452531,
+              "95": 1736.7242129497681,
+              "96": 1882.008375954283,
+              "97": 2030.292538958798,
+              "98": 2181.576701963313,
+              "99": 2335.8608649678245
+            }
+          }
+        },
+        "metadata": {
+          "mae": 992.1418438873309,
+          "mse": 1296420.030596456,
+          "rmse": 1138.6044223506494,
+          "r2": 0.9252051539554094,
+          "cv_r2_mean": 0.9137090884419011,
+          "cv_r2_std": 0.015090392663629848
+        },
+        "preview": {
+          "algorithm": "linear",
+          "metrics": {
+            "mae": 992.1418438873309,
+            "mse": 1296420.030596456,
+            "rmse": 1138.6044223506494,
+            "r2": 0.9252051539554094,
+            "cv_r2_mean": 0.9137090884419011,
+            "cv_r2_std": 0.015090392663629848
+          },
+          "n_samples": 80,
+          "n_features": 1,
+          "residual_plot": "{\"data\":[{\"marker\":{\"color\":\"blue\",\"opacity\":0.6},\"mode\":\"markers\",\"name\":\"Residuals\",\"x\":{\"dtype\":\"f8\",\"bdata\":\"VSY\\u002fbqTss0Ci0ynpIefCQJjjKDqI15BA3A0RQKzCqUCbqo39qYK7QPjLydfb\\u002f3vAWnqxO8+Xp0AkZ4nt\\u002fhHFQAroLxAlAZTAPVnVwM8ivUAMguEO1laPwKL+\\u002f8rULa9AUvyFBw8XwkCcCuhCQi2VQNSP5QvsQcRAEjauIZmsnMD5+0U6hOK5QBkXLvnMV7lAlonCsKYsokDwfUvGZ1RzwBHJr+dYrLBA1L+SLjgXoUAOD+8Y31aYwLR0\\u002fUyjzMRAGneIPmUCk0CgsL240bdaQJAyVoWgAcFALKCSa1ZZjUB5aOY1p7e3QAQ0Y\\u002f1hq4bAKHnTYpwDiUCLrjaVKYGgwNBfmmnnUWXA2OZRN\\u002fJspUCMe48UAiyWwEBbsqONMcBAkKJOHbyBmsA5Mha4Fc24QFZT8jIVQqNAEsa1iX0sw0A1C1evW3e0QHY+Lc8R4sVAdEEnLe1hs0Ce10DCGtiqQPKtxygQN7FA2+BdezttukDgNNBIZhiuQLvFdbzy97pAl4PO9O8st0CUWRWOWlfFQLBNPkTpdsBAGkThvT2tqED21IYxyoy1QDHkl6ahIbBABEyhLracxUAV8G7wEgK1QN8HHYT1wr5ApFhmVLbYnUBEgnGsR4fEQNe5nnKBF7ZAWU3+dl5CuEDiCfpms9HBQBYdIrWDV6RAHp5HRx9Yl0ANQpaZBqyiwLN396p+TLJAOAgskdwEeEBMeGYXmJahwCRSFFrirYRAMuGdSMahwkD0qs3KNLfDQP0iBUM+OL5Awu4RqGpcwkAAJeIl\\u002fEbBQGB0W\\u002f\\u002fQsm5At562sziitkBddL1\\u002fGJi8QAANpPSnVYLAZJ1Za5D8w0DTkt9px8GxQA==\"},\"y\":{\"dtype\":\"f8\",\"bdata\":\"VJn8uJEOk8DgxWJt4a2KQGCOo+gg3nXAuBsigFjlkcDYVG3sT+2GwPzl5Ovt54NAtPRid54DkcDgxrSTCGidQAroLxAlwZRA6MmqBn5egcAGwXAHa\\u002feQQET9\\u002f5WpR5PA4Dqghw+HgEBwKqALCaV+wGCB06CfvJZAEjauIZncnEDI3y\\u002fSIbSLwMi4cMlnHo3AWCYKw5rSi8D4viXjM6KAQEQkv55jgZPAUP9KuuBMisAOD+8Y37qYQGBaFJjlIptAaNwh+pRZesCwJ6EjF4RtQABcc6red2FAWEAl16wyccDkoZnXnGaQwAQ0Y\\u002f1hu4pAoORNi3GuaMCLrjaVKYugQOgvzbTz6HpAYJtH3cjTj8CMe48UAriWQACgLdnRxl3AkKJOHbzJmkDIkbHArXCOwFhNyctUQI3A4J6jZCdAjkDULFy9btGSwCgGS8O4P6JA0AWdtLQ\\u002fk8A8r4GENUSSwMi3HqNAjJPA2Abv2tsxisDAaaCRzBiTwNgtruOVl4jAXA4607\\u002frkMBgM1WPK7mfQACwTT5E6UHANIjCe3t6kcDYUxvGKDOSwMSQX5qGapPA8M96RScLoUBUwLvBS4iSwPB90EFY73XASLHMqGz5hsDg7XOcwumYQFznesoF0pHAyGryt\\u002fOqj8DAw74gk6l6QFh0iNQOlo7APDyPjj5ggcANQpaZBrCiQMze3av6fZPAQL6fdhvZSkBMeGYXmJyhQCCRotASL13A4Owhdpszh0BgqJKpWdaSQNAvUjDkY3rA4BPhflXRg0AAwHaH9gBtQKCLpAAv7WFA3HrazuJkkcDoouv9w1CDwAANpPSnRYdA4BQzpXzDlEBMS36nHYuTwA==\"},\"type\":\"scatter\"}],\"layout\":{\"template\":{\"data\":{\"barpolar\":[{\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"barpolar\"}],\"bar\":[{\"error_x\":{\"color\":\"#2a3f5f\"},\"error_y\":{\"color\":\"#2a3f5f\"},\"marker\":{\"line\":{\"color\":\"white\",\"width\":0.5},\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"bar\"}],\"carpet\":[{\"aaxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"baxis\":{\"endlinecolor\":\"#2a3f5f\",\"gridcolor\":\"#C8D4E3\",\"linecolor\":\"#C8D4E3\",\"minorgridcolor\":\"#C8D4E3\",\"startlinecolor\":\"#2a3f5f\"},\"type\":\"carpet\"}],\"choropleth\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"choropleth\"}],\"contourcarpet\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"contourcarpet\"}],\"contour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"contour\"}],\"heatmap\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"heatmap\"}],\"histogram2dcontour\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2dcontour\"}],\"histogram2d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"histogram2d\"}],\"histogram\":[{\"marker\":{\"pattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2}},\"type\":\"histogram\"}],\"mesh3d\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"type\":\"mesh3d\"}],\"parcoords\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"parcoords\"}],\"pie\":[{\"automargin\":true,\"type\":\"pie\"}],\"scatter3d\":[{\"line\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatter3d\"}],\"scattercarpet\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattercarpet\"}],\"scattergeo\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergeo\"}],\"scattergl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattergl\"}],\"scattermapbox\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermapbox\"}],\"scattermap\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scattermap\"}],\"scatterpolargl\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolargl\"}],\"scatterpolar\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterpolar\"}],\"scatter\":[{\"fillpattern\":{\"fillmode\":\"overlay\",\"size\":10,\"solidity\":0.2},\"type\":\"scatter\"}],\"scatterternary\":[{\"marker\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"type\":\"scatterternary\"}],\"surface\":[{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"},\"colorscale\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"type\":\"surface\"}],\"table\":[{\"cells\":{\"fill\":{\"color\":\"#EBF0F8\"},\"line\":{\"color\":\"white\"}},\"header\":{\"fill\":{\"color\":\"#C8D4E3\"},\"line\":{\"color\":\"white\"}},\"type\":\"table\"}]},\"layout\":{\"annotationdefaults\":{\"arrowcolor\":\"#2a3f5f\",\"arrowhead\":0,\"arrowwidth\":1},\"autotypenumbers\":\"strict\",\"coloraxis\":{\"colorbar\":{\"outlinewidth\":0,\"ticks\":\"\"}},\"colorscale\":{\"diverging\":[[0,\"#8e0152\"],[0.1,\"#c51b7d\"],[0.2,\"#de77ae\"],[0.3,\"#f1b6da\"],[0.4,\"#fde0ef\"],[0.5,\"#f7f7f7\"],[0.6,\"#e6f5d0\"],[0.7,\"#b8e186\"],[0.8,\"#7fbc41\"],[0.9,\"#4d9221\"],[1,\"#276419\"]],\"sequential\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]],\"sequentialminus\":[[0.0,\"#0d0887\"],[0.1111111111111111,\"#46039f\"],[0.2222222222222222,\"#7201a8\"],[0.3333333333333333,\"#9c179e\"],[0.4444444444444444,\"#bd3786\"],[0.5555555555555556,\"#d8576b\"],[0.6666666666666666,\"#ed7953\"],[0.7777777777777778,\"#fb9f3a\"],[0.8888888888888888,\"#fdca26\"],[1.0,\"#f0f921\"]]},\"colorway\":[\"#636efa\",\"#EF553B\",\"#00cc96\",\"#ab63fa\",\"#FFA15A\",\"#19d3f3\",\"#FF6692\",\"#B6E880\",\"#FF97FF\",\"#FECB52\"],\"font\":{\"color\":\"#2a3f5f\"},\"geo\":{\"bgcolor\":\"white\",\"lakecolor\":\"white\",\"landcolor\":\"white\",\"showlakes\":true,\"showland\":true,\"subunitcolor\":\"#C8D4E3\"},\"hoverlabel\":{\"align\":\"left\"},\"hovermode\":\"closest\",\"mapbox\":{\"style\":\"light\"},\"paper_bgcolor\":\"white\",\"plot_bgcolor\":\"white\",\"polar\":{\"angularaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"radialaxis\":{\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\"}},\"scene\":{\"xaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"yaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"},\"zaxis\":{\"backgroundcolor\":\"white\",\"gridcolor\":\"#DFE8F3\",\"gridwidth\":2,\"linecolor\":\"#EBF0F8\",\"showbackground\":true,\"ticks\":\"\",\"zerolinecolor\":\"#EBF0F8\"}},\"shapedefaults\":{\"line\":{\"color\":\"#2a3f5f\"}},\"ternary\":{\"aaxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"baxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"},\"bgcolor\":\"white\",\"caxis\":{\"gridcolor\":\"#DFE8F3\",\"linecolor\":\"#A2B1C6\",\"ticks\":\"\"}},\"title\":{\"x\":0.05},\"xaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2},\"yaxis\":{\"automargin\":true,\"gridcolor\":\"#EBF0F8\",\"linecolor\":\"#EBF0F8\",\"ticks\":\"\",\"title\":{\"standoff\":15},\"zerolinecolor\":\"#EBF0F8\",\"zerolinewidth\":2}}},\"shapes\":[{\"line\":{\"color\":\"red\",\"dash\":\"dash\"},\"type\":\"line\",\"x0\":0,\"x1\":1,\"xref\":\"x domain\",\"y0\":0,\"y1\":0,\"yref\":\"y\"}],\"title\":{\"text\":\"Residual Plot\"},\"xaxis\":{\"title\":{\"text\":\"Predicted Values\"}},\"yaxis\":{\"title\":{\"text\":\"Residuals\"}}}}"
+        },
+        "execution_time": 0.015702486038208008
+      },
+      "plot.2d-1759913531919": {
+        "outputs": {
+          "plot": {
+            "type": "plotly",
+            "data": "{\"data\": [{\"hovertemplate\": \"tempo=%{marker.color}<br>numero_cellule=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": {\"dtype\": \"i1\", \"bdata\": \"N1gaKkUPKGAJSAsvVRxdBUJBIxAxIgdfGxNRGT4NGAMRJghOBkAkWThjNisyQy5EPWFPKTowYjlLIF47P1QlHQE0FQIXV1tKVlIUPEcOXDM=\"}, \"coloraxis\": \"coloraxis\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"i1\", \"bdata\": \"N1gaKkUPKGAJSAsvVRxdBUJBIxAxIgdfGxNRGT4NGAMRJghOBkAkWThjNisyQy5EPWFPKTowYjlLIF47P1QlHQE0FQIXV1tKVlIUPEcOXDM=\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"i2\", \"bdata\": \"KQ8kKdgCaAilGL0Aiwd+MTAA9xpTAMUKPyZhAzMuDABsFrQVnAXfAMwLQgUZAGIwGwNXAY8imAKeE4IAWwIFAAQBvAYjAOwfEgD/FPkFISrDD+Q0kg7bCFQMJxdGCuUX8hKdMsog+AcAEUcLvzNgEGQdlwRJL6MRTRROJVkGqgMCAG0NtgEDACECKigkLJIcMyd2I4UBSRIuGp4AKi3fDA==\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"tempo\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"numero_cellule\"}}, \"coloraxis\": {\"colorbar\": {\"title\": {\"text\": \"tempo\"}}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
+          }
+        },
+        "metadata": {
+          "x_column": "tempo",
+          "y_column": "numero_cellule",
+          "n_points": 80
+        },
+        "preview": {
+          "plot_type": "scatter_2d",
+          "x_column": "tempo",
+          "y_column": "numero_cellule",
+          "n_points": 80,
+          "plot_json": "{\"data\": [{\"hovertemplate\": \"tempo=%{marker.color}<br>numero_cellule=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": {\"dtype\": \"i1\", \"bdata\": \"N1gaKkUPKGAJSAsvVRxdBUJBIxAxIgdfGxNRGT4NGAMRJghOBkAkWThjNisyQy5EPWFPKTowYjlLIF47P1QlHQE0FQIXV1tKVlIUPEcOXDM=\"}, \"coloraxis\": \"coloraxis\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"i1\", \"bdata\": \"N1gaKkUPKGAJSAsvVRxdBUJBIxAxIgdfGxNRGT4NGAMRJghOBkAkWThjNisyQy5EPWFPKTowYjlLIF47P1QlHQE0FQIXV1tKVlIUPEcOXDM=\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"i2\", \"bdata\": \"KQ8kKdgCaAilGL0Aiwd+MTAA9xpTAMUKPyZhAzMuDABsFrQVnAXfAMwLQgUZAGIwGwNXAY8imAKeE4IAWwIFAAQBvAYjAOwfEgD/FPkFISrDD+Q0kg7bCFQMJxdGCuUX8hKdMsog+AcAEUcLvzNgEGQdlwRJL6MRTRROJVkGqgMCAG0NtgEDACECKigkLJIcMyd2I4UBSRIuGp4AKi3fDA==\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"tempo\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"numero_cellule\"}}, \"coloraxis\": {\"colorbar\": {\"title\": {\"text\": \"tempo\"}}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
+        },
+        "execution_time": 0.02099752426147461
+      },
+      "plot.2d-1759913900363": {
+        "outputs": {
+          "plot": {
+            "type": "plotly",
+            "data": "{\"data\": [{\"hovertemplate\": \"tempo=%{marker.color}<br>numero_cellule=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": {\"dtype\": \"i1\", \"bdata\": \"UzVGLSwnFlAKABIeSSFaBExNDB8=\"}, \"coloraxis\": \"coloraxis\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"i1\", \"bdata\": \"UzVGLSwnFlAKABIeSSFaBExNDB8=\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"i2\", \"bdata\": \"YCT+DWgZyglRCSIH6gGrIUAAAQAsAfYDwxvrBCErCAA5HhEfaQBFBA==\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"tempo\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"numero_cellule\"}}, \"coloraxis\": {\"colorbar\": {\"title\": {\"text\": \"tempo\"}}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
+          }
+        },
+        "metadata": {
+          "x_column": "tempo",
+          "y_column": "numero_cellule",
+          "n_points": 20
+        },
+        "preview": {
+          "plot_type": "scatter_2d",
+          "x_column": "tempo",
+          "y_column": "numero_cellule",
+          "n_points": 20,
+          "plot_json": "{\"data\": [{\"hovertemplate\": \"tempo=%{marker.color}<br>numero_cellule=%{y}<extra></extra>\", \"legendgroup\": \"\", \"marker\": {\"color\": {\"dtype\": \"i1\", \"bdata\": \"UzVGLSwnFlAKABIeSSFaBExNDB8=\"}, \"coloraxis\": \"coloraxis\", \"opacity\": 0.7, \"symbol\": \"circle\", \"size\": 5.0}, \"mode\": \"markers\", \"name\": \"\", \"orientation\": \"v\", \"showlegend\": false, \"x\": {\"dtype\": \"i1\", \"bdata\": \"UzVGLSwnFlAKABIeSSFaBExNDB8=\"}, \"xaxis\": \"x\", \"y\": {\"dtype\": \"i2\", \"bdata\": \"YCT+DWgZyglRCSIH6gGrIUAAAQAsAfYDwxvrBCErCAA5HhEfaQBFBA==\"}, \"yaxis\": \"y\", \"type\": \"scatter\"}], \"layout\": {\"template\": {\"data\": {\"barpolar\": [{\"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"barpolar\"}], \"bar\": [{\"error_x\": {\"color\": \"#2a3f5f\"}, \"error_y\": {\"color\": \"#2a3f5f\"}, \"marker\": {\"line\": {\"color\": \"white\", \"width\": 0.5}, \"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"bar\"}], \"carpet\": [{\"aaxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"baxis\": {\"endlinecolor\": \"#2a3f5f\", \"gridcolor\": \"#C8D4E3\", \"linecolor\": \"#C8D4E3\", \"minorgridcolor\": \"#C8D4E3\", \"startlinecolor\": \"#2a3f5f\"}, \"type\": \"carpet\"}], \"choropleth\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"choropleth\"}], \"contourcarpet\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"contourcarpet\"}], \"contour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"contour\"}], \"heatmap\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"heatmap\"}], \"histogram2dcontour\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2dcontour\"}], \"histogram2d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"histogram2d\"}], \"histogram\": [{\"marker\": {\"pattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}}, \"type\": \"histogram\"}], \"mesh3d\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"type\": \"mesh3d\"}], \"parcoords\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"parcoords\"}], \"pie\": [{\"automargin\": true, \"type\": \"pie\"}], \"scatter3d\": [{\"line\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatter3d\"}], \"scattercarpet\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattercarpet\"}], \"scattergeo\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergeo\"}], \"scattergl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattergl\"}], \"scattermapbox\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermapbox\"}], \"scattermap\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scattermap\"}], \"scatterpolargl\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolargl\"}], \"scatterpolar\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterpolar\"}], \"scatter\": [{\"fillpattern\": {\"fillmode\": \"overlay\", \"size\": 10, \"solidity\": 0.2}, \"type\": \"scatter\"}], \"scatterternary\": [{\"marker\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"type\": \"scatterternary\"}], \"surface\": [{\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"type\": \"surface\"}], \"table\": [{\"cells\": {\"fill\": {\"color\": \"#EBF0F8\"}, \"line\": {\"color\": \"white\"}}, \"header\": {\"fill\": {\"color\": \"#C8D4E3\"}, \"line\": {\"color\": \"white\"}}, \"type\": \"table\"}]}, \"layout\": {\"annotationdefaults\": {\"arrowcolor\": \"#2a3f5f\", \"arrowhead\": 0, \"arrowwidth\": 1}, \"autotypenumbers\": \"strict\", \"coloraxis\": {\"colorbar\": {\"outlinewidth\": 0, \"ticks\": \"\"}}, \"colorscale\": {\"diverging\": [[0, \"#8e0152\"], [0.1, \"#c51b7d\"], [0.2, \"#de77ae\"], [0.3, \"#f1b6da\"], [0.4, \"#fde0ef\"], [0.5, \"#f7f7f7\"], [0.6, \"#e6f5d0\"], [0.7, \"#b8e186\"], [0.8, \"#7fbc41\"], [0.9, \"#4d9221\"], [1, \"#276419\"]], \"sequential\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]], \"sequentialminus\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"colorway\": [\"#636efa\", \"#EF553B\", \"#00cc96\", \"#ab63fa\", \"#FFA15A\", \"#19d3f3\", \"#FF6692\", \"#B6E880\", \"#FF97FF\", \"#FECB52\"], \"font\": {\"color\": \"#2a3f5f\"}, \"geo\": {\"bgcolor\": \"white\", \"lakecolor\": \"white\", \"landcolor\": \"white\", \"showlakes\": true, \"showland\": true, \"subunitcolor\": \"#C8D4E3\"}, \"hoverlabel\": {\"align\": \"left\"}, \"hovermode\": \"closest\", \"mapbox\": {\"style\": \"light\"}, \"paper_bgcolor\": \"white\", \"plot_bgcolor\": \"white\", \"polar\": {\"angularaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"radialaxis\": {\"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\"}}, \"scene\": {\"xaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"yaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}, \"zaxis\": {\"backgroundcolor\": \"white\", \"gridcolor\": \"#DFE8F3\", \"gridwidth\": 2, \"linecolor\": \"#EBF0F8\", \"showbackground\": true, \"ticks\": \"\", \"zerolinecolor\": \"#EBF0F8\"}}, \"shapedefaults\": {\"line\": {\"color\": \"#2a3f5f\"}}, \"ternary\": {\"aaxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"baxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}, \"bgcolor\": \"white\", \"caxis\": {\"gridcolor\": \"#DFE8F3\", \"linecolor\": \"#A2B1C6\", \"ticks\": \"\"}}, \"title\": {\"x\": 0.05}, \"xaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}, \"yaxis\": {\"automargin\": true, \"gridcolor\": \"#EBF0F8\", \"linecolor\": \"#EBF0F8\", \"ticks\": \"\", \"title\": {\"standoff\": 15}, \"zerolinecolor\": \"#EBF0F8\", \"zerolinewidth\": 2}}}, \"xaxis\": {\"anchor\": \"y\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"tempo\"}}, \"yaxis\": {\"anchor\": \"x\", \"domain\": [0.0, 1.0], \"title\": {\"text\": \"numero_cellule\"}}, \"coloraxis\": {\"colorbar\": {\"title\": {\"text\": \"tempo\"}}, \"colorscale\": [[0.0, \"#0d0887\"], [0.1111111111111111, \"#46039f\"], [0.2222222222222222, \"#7201a8\"], [0.3333333333333333, \"#9c179e\"], [0.4444444444444444, \"#bd3786\"], [0.5555555555555556, \"#d8576b\"], [0.6666666666666666, \"#ed7953\"], [0.7777777777777778, \"#fb9f3a\"], [0.8888888888888888, \"#fdca26\"], [1.0, \"#f0f921\"]]}, \"legend\": {\"tracegroupgap\": 0}, \"title\": {\"text\": \"2D Scatter Plot\"}, \"hovermode\": \"closest\", \"dragmode\": \"pan\"}}"
+        },
+        "execution_time": 0.01721024513244629
+      }
+    }
+  }
+}

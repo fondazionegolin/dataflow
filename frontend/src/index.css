@@ -45,25 +45,25 @@
   }
 
   .dark {
-    --background: 220 15% 20%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --background: 0 0% 15%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
     --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 25%;
+    --input: 0 0% 20%;
+    --ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -79,7 +79,7 @@
 
 /* React Flow custom styles */
 .react-flow__node {
-  @apply rounded-lg shadow-md border-2;
+  @apply rounded-lg shadow-md;
 }
 
 .react-flow__node.selected {
@@ -87,7 +87,8 @@
 }
 
 .react-flow__handle {
-  @apply w-4 h-4 rounded-full border-2 border-white;
+  @apply w-4 h-4 rounded-full;
+  border: none !important;
   transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
   z-index: 10;
   box-shadow: 0 0 0 0px rgba(99, 102, 241, 1);
@@ -311,4 +312,88 @@ body.dark-mode [data-category="mathematics"] button.bg-green-500,
 [data-category="mathematics"] button.bg-green-500 {
   background-color: #10b981 !important;
   color: white !important;
+}
+
+/* LogPanel dark mode styles - barra minimizzata scura, contenuto espanso chiaro */
+body.dark-mode .log-panel {
+  background-color: rgb(30 41 59) !important; /* slate-800 - grigio/blu scuro */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Testo nella barra minimizzata - chiaro */
+body.dark-mode .log-panel > div:first-child .log-panel-text {
+  color: rgb(248 250 252) !important; /* slate-50 */
+}
+
+body.dark-mode .log-panel > div:first-child .log-panel-text-muted {
+  color: rgb(203 213 225) !important; /* slate-300 */
+}
+
+body.dark-mode .log-panel > div:first-child .log-panel-badge {
+  background-color: rgb(51 65 85) !important; /* slate-700 */
+  color: rgb(226 232 240) !important; /* slate-200 */
+}
+
+/* Contenuto espanso - mantiene sfondo chiaro */
+body.dark-mode .log-panel .max-h-64 {
+  background-color: white !important;
+}
+
+body.dark-mode .log-panel-header {
+  background-color: rgb(248 250 252) !important; /* slate-50 - chiaro */
+  border-color: rgb(226 232 240) !important; /* slate-200 */
+}
+
+/* Testi nel contenuto espanso - scuri (tema chiaro) */
+body.dark-mode .log-panel-header .log-panel-text-secondary {
+  color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+body.dark-mode .log-panel-header .log-panel-text-muted {
+  color: rgb(100 116 139) !important; /* slate-500 */
+}
+
+body.dark-mode .log-panel-header .log-panel-badge {
+  background-color: rgb(226 232 240) !important; /* slate-200 */
+  color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Log entries - tema chiaro */
+body.dark-mode .log-panel-text {
+  color: rgb(15 23 42) !important; /* slate-900 */
+}
+
+body.dark-mode .log-panel-text-muted {
+  color: rgb(100 116 139) !important; /* slate-500 */
+}
+
+body.dark-mode .log-panel-hover:hover {
+  background-color: rgb(248 250 252) !important; /* slate-50 */
+}
+
+body.dark-mode .log-panel-divider {
+  border-color: rgb(226 232 240) !important; /* slate-200 */
+}
+
+body.dark-mode .log-panel-details {
+  background-color: rgb(241 245 249) !important; /* slate-100 */
+  color: rgb(71 85 105) !important; /* slate-600 */
+}
+
+/* Tips - mantiene tema chiaro */
+body.dark-mode .log-panel-tip {
+  background-color: rgb(254 252 232) !important; /* yellow-50 */
+  border-color: rgb(254 240 138) !important; /* yellow-200 */
+}
+
+body.dark-mode .log-panel-tip-icon {
+  color: rgb(202 138 4) !important; /* yellow-600 */
+}
+
+body.dark-mode .log-panel-tip-title {
+  color: rgb(113 63 18) !important; /* yellow-900 */
+}
+
+body.dark-mode .log-panel-tip-text {
+  color: rgb(133 77 14) !important; /* yellow-800 */
 }

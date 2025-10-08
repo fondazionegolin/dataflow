@@ -9,9 +9,10 @@ import { useTranslation } from 'react-i18next';
 
 interface NodePaletteProps {
   nodeSpecs: NodeSpec[];
+  darkMode?: boolean;
 }
 
-export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
+export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs, darkMode = false }) => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
@@ -93,20 +94,35 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
   };
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 flex flex-col h-full">
+    <div className={`w-64 border-r flex flex-col h-full ${
+      darkMode 
+        ? 'border-gray-700' 
+        : 'bg-white border-gray-200'
+    }`} style={darkMode ? { backgroundColor: '#2d2d2d' } : {}}>
       {/* Header */}
-      <div className="p-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold mb-3">{t('palette.title')}</h2>
+      <div className={`p-4 border-b ${
+        darkMode ? 'border-gray-700' : 'border-gray-200'
+      }`}>
+        <h2 className={`text-lg font-semibold mb-3 ${
+          darkMode ? 'text-gray-100' : 'text-gray-900'
+        }`}>{t('palette.title')}</h2>
         
         {/* Search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
+            darkMode ? 'text-gray-500' : 'text-gray-400'
+          }`} />
           <input
             type="text"
             placeholder={t('palette.search')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-3 py-2 border-0 bg-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all"
+            className={`w-full pl-10 pr-3 py-2 border-0 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all ${
+              darkMode 
+                ? 'text-gray-100 placeholder-gray-400' 
+                : 'bg-gray-100 text-gray-900'
+            }`}
+            style={darkMode ? { backgroundColor: '#3d3d3d' } : {}}
           />
         </div>
       </div>
@@ -118,10 +134,18 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
             {/* Category Header */}
             <button
               onClick={() => toggleCategory(category)}
-              className="w-full flex items-center justify-between px-2 py-1.5 hover:bg-gray-100 rounded text-sm font-medium text-gray-700"
+              className={`w-full flex items-center justify-between px-2 py-1.5 rounded text-sm font-medium transition-colors ${
+                darkMode 
+                  ? 'hover:bg-[#3d3d3d] text-gray-200' 
+                  : 'hover:bg-gray-100 text-gray-700'
+              }`}
             >
               <div className="flex items-center gap-2">
-                {React.createElement(categoryIcons[category] || Database, { className: 'w-4 h-4 text-gray-700' })}
+                {React.createElement(categoryIcons[category] || Database, { 
+                  className: `w-4 h-4 ${
+                    darkMode ? 'text-gray-200' : 'text-gray-700'
+                  }` 
+                })}
                 <span>{getCategoryLabel(category)}</span>
               </div>
               {expandedCategories.has(category) ? (
@@ -167,7 +191,9 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs }) => {
         ))}
 
         {Object.keys(filteredCategories).length === 0 && (
-          <div className="text-center text-gray-500 text-sm mt-8">
+          <div className={`text-center text-sm mt-8 ${
+            darkMode ? 'text-gray-400' : 'text-gray-500'
+          }`}>
             {t('palette.noResults')}
           </div>
         )}

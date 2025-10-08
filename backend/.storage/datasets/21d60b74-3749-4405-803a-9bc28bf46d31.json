@@ -1,0 +1,421 @@
+{
+  "id": "21d60b74-3749-4405-803a-9bc28bf46d31",
+  "name": "cellule",
+  "created_at": "2025-10-08T10:46:46.694159",
+  "metadata": {
+    "rows": 100,
+    "columns": [
+      "numero_cellule",
+      "tempo"
+    ],
+    "description": "crea un dataset di crescita cellulare nel tempo, che tenga in consiuderazione che la curva di crescita tender\u00e0 ad un plateau",
+    "generated_by": "OpenAI GPT-4o-mini",
+    "column_types": {
+      "numero_cellule": "int64",
+      "tempo": "int64"
+    },
+    "auto_generated_name": false
+  },
+  "data": [
+    {
+      "numero_cellule": 1,
+      "tempo": 0
+    },
+    {
+      "numero_cellule": 2,
+      "tempo": 1
+    },
+    {
+      "numero_cellule": 3,
+      "tempo": 2
+    },
+    {
+      "numero_cellule": 5,
+      "tempo": 3
+    },
+    {
+      "numero_cellule": 8,
+      "tempo": 4
+    },
+    {
+      "numero_cellule": 12,
+      "tempo": 5
+    },
+    {
+      "numero_cellule": 18,
+      "tempo": 6
+    },
+    {
+      "numero_cellule": 25,
+      "tempo": 7
+    },
+    {
+      "numero_cellule": 35,
+      "tempo": 8
+    },
+    {
+      "numero_cellule": 48,
+      "tempo": 9
+    },
+    {
+      "numero_cellule": 64,
+      "tempo": 10
+    },
+    {
+      "numero_cellule": 83,
+      "tempo": 11
+    },
+    {
+      "numero_cellule": 105,
+      "tempo": 12
+    },
+    {
+      "numero_cellule": 130,
+      "tempo": 13
+    },
+    {
+      "numero_cellule": 158,
+      "tempo": 14
+    },
+    {
+      "numero_cellule": 189,
+      "tempo": 15
+    },
+    {
+      "numero_cellule": 223,
+      "tempo": 16
+    },
+    {
+      "numero_cellule": 260,
+      "tempo": 17
+    },
+    {
+      "numero_cellule": 300,
+      "tempo": 18
+    },
+    {
+      "numero_cellule": 343,
+      "tempo": 19
+    },
+    {
+      "numero_cellule": 389,
+      "tempo": 20
+    },
+    {
+      "numero_cellule": 438,
+      "tempo": 21
+    },
+    {
+      "numero_cellule": 490,
+      "tempo": 22
+    },
+    {
+      "numero_cellule": 545,
+      "tempo": 23
+    },
+    {
+      "numero_cellule": 603,
+      "tempo": 24
+    },
+    {
+      "numero_cellule": 664,
+      "tempo": 25
+    },
+    {
+      "numero_cellule": 728,
+      "tempo": 26
+    },
+    {
+      "numero_cellule": 795,
+      "tempo": 27
+    },
+    {
+      "numero_cellule": 865,
+      "tempo": 28
+    },
+    {
+      "numero_cellule": 938,
+      "tempo": 29
+    },
+    {
+      "numero_cellule": 1014,
+      "tempo": 30
+    },
+    {
+      "numero_cellule": 1093,
+      "tempo": 31
+    },
+    {
+      "numero_cellule": 1175,
+      "tempo": 32
+    },
+    {
+      "numero_cellule": 1259,
+      "tempo": 33
+    },
+    {
+      "numero_cellule": 1346,
+      "tempo": 34
+    },
+    {
+      "numero_cellule": 1436,
+      "tempo": 35
+    },
+    {
+      "numero_cellule": 1529,
+      "tempo": 36
+    },
+    {
+      "numero_cellule": 1625,
+      "tempo": 37
+    },
+    {
+      "numero_cellule": 1724,
+      "tempo": 38
+    },
+    {
+      "numero_cellule": 1826,
+      "tempo": 39
+    },
+    {
+      "numero_cellule": 1931,
+      "tempo": 40
+    },
+    {
+      "numero_cellule": 2040,
+      "tempo": 41
+    },
+    {
+      "numero_cellule": 2152,
+      "tempo": 42
+    },
+    {
+      "numero_cellule": 2267,
+      "tempo": 43
+    },
+    {
+      "numero_cellule": 2385,
+      "tempo": 44
+    },
+    {
+      "numero_cellule": 2506,
+      "tempo": 45
+    },
+    {
+      "numero_cellule": 2630,
+      "tempo": 46
+    },
+    {
+      "numero_cellule": 2757,
+      "tempo": 47
+    },
+    {
+      "numero_cellule": 2887,
+      "tempo": 48
+    },
+    {
+      "numero_cellule": 3020,
+      "tempo": 49
+    },
+    {
+      "numero_cellule": 3156,
+      "tempo": 50
+    },
+    {
+      "numero_cellule": 3295,
+      "tempo": 51
+    },
+    {
+      "numero_cellule": 3437,
+      "tempo": 52
+    },
+    {
+      "numero_cellule": 3582,
+      "tempo": 53
+    },
+    {
+      "numero_cellule": 3730,
+      "tempo": 54
+    },
+    {
+      "numero_cellule": 3881,
+      "tempo": 55
+    },
+    {
+      "numero_cellule": 4035,
+      "tempo": 56
+    },
+    {
+      "numero_cellule": 4192,
+      "tempo": 57
+    },
+    {
+      "numero_cellule": 4352,
+      "tempo": 58
+    },
+    {
+      "numero_cellule": 4515,
+      "tempo": 59
+    },
+    {
+      "numero_cellule": 4681,
+      "tempo": 60
+    },
+    {
+      "numero_cellule": 4850,
+      "tempo": 61
+    },
+    {
+      "numero_cellule": 5022,
+      "tempo": 62
+    },
+    {
+      "numero_cellule": 5197,
+      "tempo": 63
+    },
+    {
+      "numero_cellule": 5375,
+      "tempo": 64
+    },
+    {
+      "numero_cellule": 5556,
+      "tempo": 65
+    },
+    {
+      "numero_cellule": 5740,
+      "tempo": 66
+    },
+    {
+      "numero_cellule": 5927,
+      "tempo": 67
+    },
+    {
+      "numero_cellule": 6117,
+      "tempo": 68
+    },
+    {
+      "numero_cellule": 6309,
+      "tempo": 69
+    },
+    {
+      "numero_cellule": 6504,
+      "tempo": 70
+    },
+    {
+      "numero_cellule": 6702,
+      "tempo": 71
+    },
+    {
+      "numero_cellule": 6903,
+      "tempo": 72
+    },
+    {
+      "numero_cellule": 7107,
+      "tempo": 73
+    },
+    {
+      "numero_cellule": 7314,
+      "tempo": 74
+    },
+    {
+      "numero_cellule": 7524,
+      "tempo": 75
+    },
+    {
+      "numero_cellule": 7737,
+      "tempo": 76
+    },
+    {
+      "numero_cellule": 7953,
+      "tempo": 77
+    },
+    {
+      "numero_cellule": 8172,
+      "tempo": 78
+    },
+    {
+      "numero_cellule": 8394,
+      "tempo": 79
+    },
+    {
+      "numero_cellule": 8619,
+      "tempo": 80
+    },
+    {
+      "numero_cellule": 8847,
+      "tempo": 81
+    },
+    {
+      "numero_cellule": 9078,
+      "tempo": 82
+    },
+    {
+      "numero_cellule": 9312,
+      "tempo": 83
+    },
+    {
+      "numero_cellule": 9550,
+      "tempo": 84
+    },
+    {
+      "numero_cellule": 9791,
+      "tempo": 85
+    },
+    {
+      "numero_cellule": 10035,
+      "tempo": 86
+    },
+    {
+      "numero_cellule": 10282,
+      "tempo": 87
+    },
+    {
+      "numero_cellule": 10532,
+      "tempo": 88
+    },
+    {
+      "numero_cellule": 10785,
+      "tempo": 89
+    },
+    {
+      "numero_cellule": 11041,
+      "tempo": 90
+    },
+    {
+      "numero_cellule": 11300,
+      "tempo": 91
+    },
+    {
+      "numero_cellule": 11562,
+      "tempo": 92
+    },
+    {
+      "numero_cellule": 11827,
+      "tempo": 93
+    },
+    {
+      "numero_cellule": 12105,
+      "tempo": 94
+    },
+    {
+      "numero_cellule": 12386,
+      "tempo": 95
+    },
+    {
+      "numero_cellule": 12670,
+      "tempo": 96
+    },
+    {
+      "numero_cellule": 12957,
+      "tempo": 97
+    },
+    {
+      "numero_cellule": 13247,
+      "tempo": 98
+    },
+    {
+      "numero_cellule": 13540,
+      "tempo": 99
+    }
+  ]
+}

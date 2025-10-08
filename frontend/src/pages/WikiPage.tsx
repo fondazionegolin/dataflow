@@ -16,6 +16,7 @@ export const WikiPage: React.FC = () => {
     { id: 'visualization', label: t('wiki.sections.visualization'), icon: BarChart3 },
     { id: 'ml', label: t('wiki.sections.ml'), icon: Brain },
     { id: 'nlp', label: t('wiki.sections.nlp'), icon: FileText },
+    { id: 'testing', label: 'Testing & Sentiment', icon: Target },
     { id: 'examples', label: t('wiki.sections.examples'), icon: Search },
   ];
 
@@ -96,6 +97,7 @@ export const WikiPage: React.FC = () => {
             {activeSection === 'visualization' && <VisualizationSection />}
             {activeSection === 'ml' && <MLSection />}
             {activeSection === 'nlp' && <NLPSection />}
+            {activeSection === 'testing' && <TestingSection />}
             {activeSection === 'examples' && <ExamplesSection />}
           </div>
         </div>
@@ -528,6 +530,144 @@ const NLPSection: React.FC = () => {
       example="Discover main themes in customer feedback"
     />
   </div>
+  );
+};
+
+const TestingSection: React.FC = () => {
+  return (
+    <div className="space-y-8">
+      <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+        <Target className="w-8 h-8" /> Testing & Sentiment Analysis
+      </h2>
+      
+      <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+        <h3 className="text-xl font-bold text-blue-900 mb-2">🎯 Testing Modelli con Input Personalizzati</h3>
+        <p className="text-blue-800">
+          Hai un modello trainato e vuoi testarlo con un singolo valore personalizzato? Usa <strong>Custom Table</strong>!
+        </p>
+      </div>
+
+      <WorkflowExample
+        title="Quick Test: Input Personalizzato"
+        description="Testa un modello con un singolo valore custom in 3 step"
+        steps={[
+          { node: 'Custom Table', action: 'Click "Modifica Tabella"' },
+          { node: 'Rinomina Colonne', action: 'Column1 → "review_text" (stesso nome del training!)' },
+          { node: 'Aggiungi Dati', action: 'Inserisci: "Questo prodotto è fantastico!"' },
+          { node: 'ML Predict', action: 'Collega Custom Table + Model trainato' },
+          { node: 'Esegui', action: 'Vedi il risultato della predizione!' },
+        ]}
+        diagram="Custom Table → ML Predict (+ Model)"
+        tips={[
+          'I nomi delle colonne DEVONO essere identici al training',
+          'Puoi testare una sola riga o un batch di righe',
+          'Usa Numeric Input con label per creare colonne automaticamente'
+        ]}
+      />
+
+      <WorkflowExample
+        title="Sentiment Analysis Completo"
+        description="Workflow completo per analisi del sentiment"
+        steps={[
+          { node: 'AI Generate Dataset', action: 'Template: nlp_sentiment_reviews, 200 rows' },
+          { node: 'Train/Test Split', action: 'Split 80/20, stratify by sentiment' },
+          { node: 'ML Classification', action: 'Algorithm: Logistic Regression, Features: review_text, Target: sentiment' },
+          { node: 'ML Predict (Test)', action: 'Predici su test set automatico' },
+          { node: 'Custom Table', action: 'Crea input personalizzati per test custom' },
+          { node: 'ML Predict (Custom)', action: 'Testa con i tuoi input!' },
+        ]}
+        diagram="AI Dataset → Split → Classification → [Predict Test, Predict Custom]"
+        tips={[
+          'Usa AI Generate per creare dataset di training velocemente',
+          'Il test set automatico valida il modello',
+          'Custom Table per testare frasi specifiche'
+        ]}
+      />
+
+      <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg space-y-4">
+        <h3 className="text-xl font-bold text-green-900">💡 Tips per Testing Efficace</h3>
+        
+        <div className="space-y-3">
+          <div>
+            <h4 className="font-semibold text-green-800">1. Verifica Nomi Colonne</h4>
+            <p className="text-green-700 text-sm">
+              Training usa "review_text" → Test DEVE usare "review_text"<br/>
+              ❌ "text" → ✅ "review_text"
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-green-800">2. Usa Numeric Input per Features Numeriche</h4>
+            <p className="text-green-700 text-sm">
+              Numeric Input con label "temperature" → Colonna si chiama automaticamente "temperature"!
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-green-800">3. Slice Rows per Test Rapidi</h4>
+            <p className="text-green-700 text-sm">
+              Custom Table → Slice Rows (Start: 0, End: 1) → ML Predict<br/>
+              Testa solo la prima riga velocemente!
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-green-800">4. Salva Test Frequenti</h4>
+            <p className="text-green-700 text-sm">
+              Crea un CSV con i tuoi test standard e usa Load CSV invece di ricrearli ogni volta
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <WorkflowExample
+        title="Testing con Features Multiple"
+        description="Testa modelli con più features (testo + numeri)"
+        steps={[
+          { node: 'Numeric Input', action: 'Value: 150, Label: "review_length"' },
+          { node: 'Custom Table', action: 'Collega Numeric Input a Input 1' },
+          { node: 'Modifica Tabella', action: 'Aggiungi colonna "review_text" manualmente' },
+          { node: 'Aggiungi Dati', action: 'Inserisci testo e altri valori' },
+          { node: 'ML Predict', action: 'Predici con tutte le features!' },
+        ]}
+        diagram="Numeric Input → Custom Table (+ colonne manuali) → ML Predict"
+        tips={[
+          'Numeric Input con label crea automaticamente la colonna',
+          'Aggiungi altre colonne manualmente nel Custom Table',
+          'Perfetto per modelli con features miste (testo + numeri)'
+        ]}
+      />
+
+      <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg">
+        <h3 className="text-xl font-bold text-yellow-900 mb-3">⚠️ Errori Comuni</h3>
+        
+        <div className="space-y-2 text-yellow-800">
+          <div>
+            <strong>❌ "Column 'review_text' not found"</strong>
+            <p className="text-sm">→ Nome colonna diverso tra training e test</p>
+          </div>
+          
+          <div>
+            <strong>❌ "Shape mismatch"</strong>
+            <p className="text-sm">→ Numero di colonne diverso (training: 3 features, test: 2 features)</p>
+          </div>
+          
+          <div>
+            <strong>❌ "Invalid data type"</strong>
+            <p className="text-sm">→ Tipo di dato sbagliato (es. testo invece di numero)</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+        <h3 className="text-xl font-bold text-purple-900 mb-3">📚 Risorse Aggiuntive</h3>
+        <ul className="list-disc list-inside space-y-2 text-purple-800">
+          <li><strong>SENTIMENT_ANALYSIS_GUIDE.md</strong> - Guida completa con esempi dettagliati</li>
+          <li><strong>QUICK_TEST_CUSTOM_INPUT.md</strong> - Guida rapida per testing veloce</li>
+          <li>Entrambe le guide sono nella root del progetto</li>
+        </ul>
+      </div>
+    </div>
   );
 };
 

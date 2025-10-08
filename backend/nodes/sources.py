@@ -367,7 +367,7 @@ class CustomInputNode(NodeExecutor):
                     name="table_data",
                     type=ParamType.STRING,
                     label="Table Data (Internal)",
-                    default='{"columns":["Column1","Column2","Column3"],"data":[]}',
+                    default='{"columns":["Column1"],"data":[]}',
                     description="Internal storage for table data"
                 ),
                 ParamSpec(
@@ -387,44 +387,70 @@ class CustomInputNode(NodeExecutor):
         try:
             import json
             
-            node_id = id(self)  # Use object id as key
-            table_data_str = context.params.get("table_data", '{"columns":["Column1","Column2","Column3"],"data":[]}')
+            # Use the actual node ID from context to persist data across executions
+            node_id = context.node_id
+            table_data_str = context.params.get("table_data", '{"columns":["Column1"],"data":[]}')
             reset_on_execute = context.params.get("reset_on_execute", False)
             
             # Parse stored data
             table_data = json.loads(table_data_str)
-            columns = table_data.get("columns", ["Column1", "Column2", "Column3"])
+            stored_columns = table_data.get("columns", ["Column1"])
             base_data = table_data.get("data", [])
+            
+            print(f"\n🔍 Custom Table Debug:")
+            print(f"   Node ID: {node_id}")
+            print(f"   Stored columns: {stored_columns}")
+            print(f"   Stored data rows: {len(base_data)}")
+            print(f"   table_data param: {table_data_str[:100]}...")
             
             # Initialize or reset accumulated data
             if node_id not in self.accumulated_data or reset_on_execute:
                 # Start with base data from table_data parameter
                 self.accumulated_data[node_id] = base_data.copy() if base_data else []
             
-            # Process input connections - extract numeric values
+            # Use columns from stored data - these should be updated when table is edited
+            columns = stored_columns
+            
+            # Process input connections - extract numeric values and column names
             input_values = []
+            input_column_names = []
             for input_key in ["input_1", "input_2", "input_3"]:
                 if input_key in context.inputs:
                     input_data = context.inputs[input_key]
-                    # Extract value from input
+                    # Extract value and column name from input
                     if isinstance(input_data, pd.DataFrame):
                         # Get first value from first numeric column
                         numeric_cols = input_data.select_dtypes(include=[np.number]).columns
                         if len(numeric_cols) > 0:
-                            value = float(input_data[numeric_cols[0]].iloc[0])
+                            col_name = numeric_cols[0]
+                            value = float(input_data[col_name].iloc[0])
                             # Replace inf/nan with None
                             if np.isinf(value) or np.isnan(value):
                                 value = None
                             input_values.append(value)
+                            input_column_names.append(col_name)
                     elif isinstance(input_data, (int, float)):
                         value = float(input_data)
                         # Replace inf/nan with None
                         if np.isinf(value) or np.isnan(value):
                             value = None
                         input_values.append(value)
+                        input_column_names.append(f"value_{len(input_values)}")
             
             # Add input values as a new row to accumulated data
             if input_values:
+                # Update column names based on input column names
+                if input_column_names:
+                    # Replace the first N columns with the input column names
+                    new_columns = input_column_names + columns[len(input_column_names):]
+                    # Add columns only if needed (based on number of inputs)
+                    while len(new_columns) < len(input_column_names):
+                        new_columns.append(f"Column{len(new_columns) + 1}")
+                    columns = new_columns
+                    
+                    # Update stored columns for persistence
+                    stored_columns = columns
+                
                 # Use the first N columns for the N input values
                 target_columns = columns[:len(input_values)]
                 
@@ -439,15 +465,23 @@ class CustomInputNode(NodeExecutor):
                     if col not in new_row:
                         new_row[col] = ""
                 
-                # Add to accumulated data
-                self.accumulated_data[node_id].append(new_row)
+                # Only add if different from last row (avoid duplicates on re-execution)
+                if not self.accumulated_data[node_id] or self.accumulated_data[node_id][-1] != new_row:
+                    self.accumulated_data[node_id].append(new_row)
             
             # Create DataFrame from accumulated data
             if not self.accumulated_data[node_id] or len(self.accumulated_data[node_id]) == 0:
                 # Create empty DataFrame with one row for editing
                 df = pd.DataFrame([{col: "" for col in columns}], columns=columns)
             else:
-                df = pd.DataFrame(self.accumulated_data[node_id], columns=columns)
+                # Create DataFrame from accumulated data
+                # Ensure all rows have all columns with default empty string
+                normalized_data = []
+                for row in self.accumulated_data[node_id]:
+                    normalized_row = {col: row.get(col, "") for col in columns}
+                    normalized_data.append(normalized_row)
+                
+                df = pd.DataFrame(normalized_data, columns=columns)
             
             # Auto-convert numeric types
             for col in df.columns:
@@ -459,12 +493,18 @@ class CustomInputNode(NodeExecutor):
                 except:
                     pass
             
-            # Preview - replace NaN/inf with None for JSON
-            preview_df = df.head(100).replace([np.inf, -np.inf], np.nan).fillna(value=None)
+            # Preview - replace NaN/inf with empty string for JSON
+            preview_df = df.head(100).replace([np.inf, -np.inf], "").fillna("")
+            # Convert to dict and replace empty strings with None for JSON
+            preview_records = preview_df.to_dict(orient="records")
+            for record in preview_records:
+                for key, val in record.items():
+                    if val == "":
+                        record[key] = None
             preview = {
                 "type": "table",
                 "columns": list(df.columns),
-                "head": preview_df.to_dict(orient="records"),
+                "head": preview_records,
                 "shape": df.shape,
                 "editable": True,  # Flag to show edit button
                 "message": "Click 'Edit Table' button to create/modify data"
