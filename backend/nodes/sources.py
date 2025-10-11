@@ -355,6 +355,7 @@ class CustomInputNode(NodeExecutor):
             icon="✏️",
             color="#FF9800",
             inputs=[
+                PortSpec(name="table_input", type=PortType.TABLE, label="Table Input", required=False),
                 PortSpec(name="input_1", type=PortType.ANY, label="Input 1", required=False),
                 PortSpec(name="input_2", type=PortType.ANY, label="Input 2", required=False),
                 PortSpec(name="input_3", type=PortType.ANY, label="Input 3", required=False),
@@ -402,6 +403,32 @@ class CustomInputNode(NodeExecutor):
             print(f"   Stored columns: {stored_columns}")
             print(f"   Stored data rows: {len(base_data)}")
             print(f"   table_data param: {table_data_str[:100]}...")
+            
+            # Check if a table is connected to table_input
+            if "table_input" in context.inputs:
+                input_table = context.inputs["table_input"]
+                if isinstance(input_table, pd.DataFrame) and not input_table.empty:
+                    print(f"   📥 Table input connected: {input_table.shape[0]} rows × {input_table.shape[1]} columns")
+                    # Use the input table directly, preserving all columns and data
+                    columns = input_table.columns.tolist()
+                    data_rows = input_table.to_dict(orient="records")
+                    
+                    # Create DataFrame
+                    df = pd.DataFrame(data_rows, columns=columns)
+                    
+                    preview = {
+                        "head": df.head(10).to_dict(orient="records"),
+                        "shape": df.shape,
+                        "columns": columns,
+                        "dtypes": {col: str(dtype) for col, dtype in df.dtypes.items()},
+                        "editable": True
+                    }
+                    
+                    return NodeResult(
+                        outputs={"table": df},
+                        metadata={"rows": len(df), "columns": len(columns)},
+                        preview=preview
+                    )
             
             # Initialize or reset accumulated data
             if node_id not in self.accumulated_data or reset_on_execute:

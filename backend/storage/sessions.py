@@ -127,27 +127,59 @@ class DatasetStorage:
     """Manage AI-generated datasets."""
     
     @staticmethod
-    def save_dataset(name: str, data: dict, metadata: dict = None) -> dict:
-        """Save an AI-generated dataset."""
-        dataset_id = str(uuid.uuid4())
+    def save_dataset(name: str, data: dict, metadata: dict = None, dataset_id: str = None) -> dict:
+        """Save or update an AI-generated dataset.
+        
+        Args:
+            name: Dataset name
+            data: Dataset data
+            metadata: Optional metadata
+            dataset_id: Optional dataset ID. If provided, updates existing dataset. If None, creates new.
+        
+        Returns:
+            Dataset info dict with id, name, created_at, and metadata
+        """
         now = datetime.now().isoformat()
         
-        dataset = {
-            "id": dataset_id,
-            "name": name,
-            "created_at": now,
-            "metadata": metadata or {},
-            "data": data
-        }
+        # If dataset_id provided, try to update existing dataset
+        if dataset_id:
+            dataset_file = DATASETS_DIR / f"{dataset_id}.json"
+            
+            # Load existing dataset to preserve created_at
+            existing_dataset = None
+            if dataset_file.exists():
+                with open(dataset_file, 'r') as f:
+                    existing_dataset = json.load(f)
+            
+            dataset = {
+                "id": dataset_id,
+                "name": name,
+                "created_at": existing_dataset.get("created_at", now) if existing_dataset else now,
+                "updated_at": now,
+                "metadata": metadata or {},
+                "data": data
+            }
+        else:
+            # Create new dataset
+            dataset_id = str(uuid.uuid4())
+            dataset_file = DATASETS_DIR / f"{dataset_id}.json"
+            
+            dataset = {
+                "id": dataset_id,
+                "name": name,
+                "created_at": now,
+                "metadata": metadata or {},
+                "data": data
+            }
         
-        dataset_file = DATASETS_DIR / f"{dataset_id}.json"
         with open(dataset_file, 'w') as f:
             json.dump(dataset, f, indent=2)
         
         return {
             "id": dataset_id,
             "name": name,
-            "created_at": now,
+            "created_at": dataset.get("created_at", now),
+            "updated_at": dataset.get("updated_at"),
             "metadata": metadata
         }
     

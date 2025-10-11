@@ -1,14 +1,17 @@
 """FastAPI backend for DataFlow Platform."""
 
 import logging
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Set
 import uvicorn
 import numpy as np
 from dotenv import load_dotenv
 import os
+import asyncio
+import json
+from datetime import datetime
 
 # Load environment variables from .env file
 load_dotenv()
@@ -17,6 +20,7 @@ print(f"[Startup] Loaded .env file, OPENAI_API_KEY present: {'OPENAI_API_KEY' in
 from core.types import Workflow, NodeInstance, NodeSpec
 from core.registry import registry
 from core.executor import ExecutionEngine
+from core.log_handler import install_stdout_interceptor, set_broadcast_function
 from storage.sessions import SessionStorage, DatasetStorage
 
 
@@ -50,7 +54,10 @@ import nodes.clustering  # Clustering algorithms
 import nodes.llm  # Large Language Models
 import nodes.images  # Image generation
 import nodes.math  # Mathematical operations
+import nodes.math_equation  # Mathematical equations and function analysis
 import nodes.control_flow  # Control flow and logic
+import nodes.chatbot  # Visual chatbot nodes
+import nodes.terminal  # Terminal and system interaction
 
 # Configure logging
 logging.basicConfig(
@@ -58,6 +65,8 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# We'll add WebSocket handler after app is created
 
 # Create FastAPI app
 app = FastAPI(
@@ -77,6 +86,56 @@ app.add_middleware(
 
 # Global execution engine
 execution_engine = ExecutionEngine()
+
+# WebSocket connections for real-time logs
+active_connections: Set[WebSocket] = set()
+
+async def broadcast_log(message: str, level: str = "info"):
+    """Broadcast log message to all connected WebSocket clients."""
+    log_data = {
+        "timestamp": datetime.now().isoformat(),
+        "level": level,
+        "message": message
+    }
+    disconnected = set()
+    for connection in active_connections:
+        try:
+            await connection.send_json(log_data)
+        except Exception:
+            disconnected.add(connection)
+    # Remove disconnected clients
+    active_connections.difference_update(disconnected)
+
+# Set up WebSocket logging
+set_broadcast_function(broadcast_log)
+
+# Install stdout/stderr interceptor to capture print statements
+install_stdout_interceptor(broadcast_log)
+
+print("[Startup] 🚀 WebSocket log streaming enabled")
+
+# Background task to flush stdout periodically
+async def periodic_flush():
+    """Periodically flush stdout to ensure logs are sent."""
+    while True:
+        await asyncio.sleep(0.5)  # Flush every 500ms
+        try:
+            sys.stdout.flush()
+            sys.stderr.flush()
+        except Exception:
+            pass
+
+# Test log broadcasting
+@app.on_event("startup")
+async def startup_test():
+    """Send test log on startup and start periodic flush."""
+    await asyncio.sleep(1)
+    await broadcast_log("✅ Backend started successfully", "info")
+    print("[Startup] Test log sent via WebSocket")
+    
+    # Start periodic flush task
+    asyncio.create_task(periodic_flush())
+    print("[Startup] Periodic flush task started")
 
 
 # Request/Response models
@@ -246,12 +305,16 @@ async def execute_workflow(request: ExecuteWorkflowRequest):
     """Execute a workflow."""
     try:
         logger.info(f"Executing workflow: {request.workflow.name}")
+        print(f"[Workflow] 🚀 Starting execution: {request.workflow.name}")
         
-        # Execute workflow
+        # Execute workflow in a way that allows WebSocket to send messages
+        # We need to ensure the event loop can process other tasks
         results = await execution_engine.execute_workflow(
             request.workflow,
             set(request.changed_nodes) if request.changed_nodes else None
         )
+        
+        print(f"[Workflow] ✅ Execution completed: {request.workflow.name}")
         
         # Prepare response
         response_results = {}
@@ -455,6 +518,119 @@ async def delete_session(session_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/api/sessions/{session_id}/nodes/{node_id}/update_table")
+async def update_node_table(session_id: str, node_id: str, request: dict):
+    """Update table data for a node and save to dataset storage."""
+    try:
+        data = request.get("data", [])
+        columns = request.get("columns", [])
+        
+        logger.info(f"Updating table for node {node_id} in session {session_id}")
+        logger.info(f"Received {len(data)} rows with columns: {columns}")
+        
+        # Update the node's result in the execution engine
+        if hasattr(execution_engine, 'results') and node_id in execution_engine.results:
+            result = execution_engine.results[node_id]
+            
+            # Update preview
+            if hasattr(result, 'preview') and result.preview:
+                result.preview['head'] = data[:10]  # Keep only first 10 rows in preview
+                result.preview['columns'] = columns
+            
+            # Update outputs - convert to DataFrame format
+            import pandas as pd
+            df = pd.DataFrame(data, columns=columns)
+            result.outputs['table'] = df
+            
+            logger.info(f"Updated node result for {node_id}")
+            
+            # Save to dataset storage
+            try:
+                from datetime import datetime
+                
+                # Check if this node already has a saved dataset (from metadata)
+                existing_dataset_id = None
+                if hasattr(result, 'metadata') and result.metadata:
+                    existing_dataset_id = result.metadata.get('dataset_id')
+                
+                if existing_dataset_id:
+                    # Update existing dataset
+                    logger.info(f"Updating existing dataset: {existing_dataset_id}")
+                    existing_dataset = DatasetStorage.get_dataset(existing_dataset_id)
+                    
+                    if existing_dataset:
+                        # Update the dataset data
+                        updated_dataset = DatasetStorage.save_dataset(
+                            name=existing_dataset['name'],  # Keep original name
+                            data=data,
+                            metadata={
+                                **existing_dataset.get('metadata', {}),
+                                "rows": len(data),
+                                "columns": columns,
+                                "column_types": {col: str(df[col].dtype) for col in columns},
+                                "last_edited": datetime.now().isoformat(),
+                                "edited_by": "TableEditor"
+                            },
+                            dataset_id=existing_dataset_id  # Pass existing ID to update
+                        )
+                        
+                        logger.info(f"Updated dataset: {updated_dataset['id']}")
+                        
+                        return {
+                            "success": True,
+                            "dataset_id": updated_dataset['id'],
+                            "dataset_name": updated_dataset['name'],
+                            "updated": True
+                        }
+                
+                # Create new dataset if no existing one found
+                dataset_name = f"Edited_Dataset_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
+                
+                saved_dataset = DatasetStorage.save_dataset(
+                    name=dataset_name,
+                    data=data,
+                    metadata={
+                        "rows": len(data),
+                        "columns": columns,
+                        "description": f"Edited dataset from node {node_id}",
+                        "edited_by": "TableEditor",
+                        "column_types": {col: str(df[col].dtype) for col in columns},
+                        "source_node": node_id,
+                        "session_id": session_id,
+                        "created": datetime.now().isoformat()
+                    }
+                )
+                
+                # Update node metadata with new dataset ID
+                if hasattr(result, 'metadata') and result.metadata:
+                    result.metadata['dataset_id'] = saved_dataset['id']
+                    result.metadata['dataset_name'] = saved_dataset['name']
+                
+                logger.info(f"Saved new dataset: {saved_dataset['id']}")
+                
+                return {
+                    "success": True,
+                    "dataset_id": saved_dataset['id'],
+                    "dataset_name": saved_dataset['name'],
+                    "created": True
+                }
+            except Exception as e:
+                logger.error(f"Failed to save dataset: {e}")
+                import traceback
+                traceback.print_exc()
+                # Still return success for the update even if dataset save fails
+                return {"success": True, "warning": f"Table updated but dataset save failed: {str(e)}"}
+        else:
+            logger.warning(f"Node {node_id} not found in execution results")
+            return {"success": False, "error": "Node not found in execution results"}
+            
+    except Exception as e:
+        logger.error(f"Failed to update table: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ============================================================================
 # Dataset Management Endpoints
 # ============================================================================
@@ -513,6 +689,97 @@ async def delete_dataset(dataset_id: str):
     except Exception as e:
         logger.error(f"Failed to delete dataset: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.websocket("/ws/logs")
+async def websocket_logs(websocket: WebSocket):
+    """WebSocket endpoint for real-time logs."""
+    await websocket.accept()
+    active_connections.add(websocket)
+    logger.info(f"WebSocket client connected. Total connections: {len(active_connections)}")
+    
+    try:
+        # Send initial connection message
+        await websocket.send_json({
+            "timestamp": datetime.now().isoformat(),
+            "level": "info",
+            "message": "🔗 Connected to log stream"
+        })
+        
+        # Keep connection alive
+        while True:
+            # Wait for messages from client (ping/pong)
+            try:
+                data = await asyncio.wait_for(websocket.receive_text(), timeout=30.0)
+            except asyncio.TimeoutError:
+                # Send ping to keep connection alive
+                await websocket.send_json({
+                    "timestamp": datetime.now().isoformat(),
+                    "level": "ping",
+                    "message": "ping"
+                })
+    except WebSocketDisconnect:
+        logger.info("WebSocket client disconnected")
+    except Exception as e:
+        logger.error(f"WebSocket error: {e}")
+    finally:
+        active_connections.discard(websocket)
+        logger.info(f"WebSocket client removed. Total connections: {len(active_connections)}")
+
+
+# Chat WebSocket connections
+chat_connections: Set[WebSocket] = set()
+chat_pending_input: Dict[str, asyncio.Future] = {}  # session_id -> Future for user input
+
+
+@app.websocket("/ws/chat")
+async def websocket_chat(websocket: WebSocket):
+    """WebSocket endpoint for chatbot interaction."""
+    await websocket.accept()
+    chat_connections.add(websocket)
+    logger.info(f"Chat WebSocket client connected. Total chat connections: {len(chat_connections)}")
+    
+    try:
+        # Send initial connection message
+        await websocket.send_json({
+            "type": "connected",
+            "message": "Chat connected"
+        })
+        
+        # Keep connection alive and handle user responses
+        while True:
+            data = await websocket.receive_json()
+            
+            if data.get("type") == "user_response":
+                # User sent a response - resolve the pending future
+                session_id = data.get("session_id", "default")
+                message = data.get("message", "")
+                
+                if session_id in chat_pending_input:
+                    future = chat_pending_input[session_id]
+                    if not future.done():
+                        future.set_result(message)
+                        del chat_pending_input[session_id]
+                
+    except WebSocketDisconnect:
+        logger.info("Chat WebSocket client disconnected")
+    except Exception as e:
+        logger.error(f"Chat WebSocket error: {e}")
+    finally:
+        chat_connections.discard(websocket)
+        logger.info(f"Chat WebSocket client removed. Total chat connections: {len(chat_connections)}")
+
+
+async def broadcast_chat_message(message_type: str, data: dict):
+    """Broadcast a message to all chat clients."""
+    message = {"type": message_type, **data}
+    disconnected = set()
+    for connection in chat_connections:
+        try:
+            await connection.send_json(message)
+        except Exception:
+            disconnected.add(connection)
+    chat_connections.difference_update(disconnected)
 
 
 if __name__ == "__main__":

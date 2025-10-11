@@ -63,9 +63,15 @@ class ExecutionEngine:
                 if in_degree[neighbor] == 0:
                     queue.append(neighbor)
         
-        # Check for cycles
+        # Check for cycles - allow them if there are loop nodes
         if len(sorted_nodes) != len(workflow.nodes):
-            raise ValueError("Workflow contains cycles")
+            # Check if workflow has loop nodes (which create intentional cycles)
+            has_loop_nodes = any(node.type == "chatbot.loop_until" for node in workflow.nodes)
+            if not has_loop_nodes:
+                raise ValueError("Workflow contains cycles")
+            # If has loop nodes, return nodes in order found (cycles will be handled by loop logic)
+            logger.warning("Workflow contains cycles but has loop nodes - allowing execution")
+            return [node.id for node in workflow.nodes]
         
         return sorted_nodes
     
@@ -163,8 +169,14 @@ class ExecutionEngine:
             logger.info(f"Executing node {node.id} ({node.type})")
             node.status = NodeStatus.RUNNING
             
+            # Yield control to allow WebSocket to send messages
+            await asyncio.sleep(0)
+            
             result = await executor.run(context)
             result.execution_time = time.time() - start_time
+            
+            # Yield control again after execution
+            await asyncio.sleep(0)
             
             # Store result
             result_dict = result.model_dump()
@@ -189,15 +201,18 @@ class ExecutionEngine:
             node.execution_time = time.time() - start_time
             logger.error(f"Node {node.id} failed: {e}", exc_info=True)
             
-            return NodeResult(
-                error=str(e),
-                execution_time=time.time() - start_time
-            )
     
     async def execute_workflow(self, workflow: Workflow, 
-                               changed_nodes: Optional[Set[str]] = None) -> Dict[str, NodeResult]:
+                              changed_nodes: Optional[Set[str]] = None) -> Dict[str, NodeResult]:
         """Execute entire workflow or incrementally update changed nodes."""
         results = {}
+        
+        # Migrate old node types (simple_chatbot.* → chatbot.*)
+        for node in workflow.nodes:
+            if node.type.startswith("simple_chatbot."):
+                old_type = node.type
+                node.type = node.type.replace("simple_chatbot.", "chatbot.")
+                logger.info(f"Migrated node type: {old_type} → {node.type}")
         
         try:
             # Get execution order
@@ -232,9 +247,40 @@ class ExecutionEngine:
                 if not node:
                     continue
                 
+                # Check if this node should be skipped based on conditional branching
+                should_skip = False
+                for edge in workflow.edges:
+                    if edge.target_node == node_id:
+                        # Get the source node's result
+                        source_result = results.get(edge.source_node)
+                        if source_result and source_result.outputs:
+                            # Check if the output port has a boolean value
+                            output_value = source_result.outputs.get(edge.source_port)
+                            if isinstance(output_value, bool) and not output_value:
+                                # This branch is False, skip this node
+                                logger.info(f"Skipping node {node_id} (branch {edge.source_port} is False)")
+                                should_skip = True
+                                break
+                
+                if should_skip:
+                    continue
+                
+                # Broadcast node execution start
+                from main import broadcast_chat_message
+                await broadcast_chat_message("node_executing", {
+                    "node_id": node_id,
+                    "node_type": node.type,
+                    "node_label": node.label or ""
+                })
+                
                 force_recompute = node_id in nodes_to_execute
                 result = await self.execute_node(node, workflow, force_recompute)
                 results[node_id] = result
+                
+                # Broadcast node execution complete
+                await broadcast_chat_message("node_completed", {
+                    "node_id": node_id
+                })
             
             return results
             

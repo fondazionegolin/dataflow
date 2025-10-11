@@ -6,7 +6,6 @@ import ReactFlow, {
   MiniMap,
   ReactFlowProvider,
   ReactFlowInstance,
-  BackgroundVariant,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
@@ -14,8 +13,9 @@ import { useWorkflowStore } from '../store/workflowStore';
 import { ExpandableNode } from '../components/ExpandableNode';
 import { NodePalette } from '../components/NodePalette';
 import { LogPanel } from '../components/LogPanel';
+import { ChatPanel } from '../components/ChatPanel';
 import { ItalyFlag, UKFlag } from '../components/FlatFlags';
-import { ArrowLeft, Save, Check, FolderOpen, Download, Trash2, Settings, BookOpen } from 'lucide-react';
+import { ArrowLeft, Save, Check, FolderOpen, Download, Trash2, Settings, BookOpen, MessageSquare } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
 
@@ -55,7 +55,8 @@ const WorkflowEditorContent: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
-  const [hasChanges, setHasChanges] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [executingNodeId, setExecutingNodeId] = useState<string | null>(null);
   
   const PROXIMITY_RADIUS = 50; // pixels
 
@@ -75,6 +76,17 @@ const WorkflowEditorContent: React.FC = () => {
       loadNodeSpecs();
     }
   }, [nodeSpecsLoaded, loadNodeSpecs]);
+
+  // Auto-open chat if workflow has chatbot nodes
+  useEffect(() => {
+    const hasChatbotNodes = nodes.some(node => 
+      node.type?.startsWith('chatbot.')
+    );
+    if (hasChatbotNodes && !isChatOpen) {
+      setIsChatOpen(true);
+      addLog('info', 'Chat panel opened', 'Chatbot nodes detected');
+    }
+  }, [nodes, isChatOpen, addLog]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -243,11 +255,29 @@ const WorkflowEditorContent: React.FC = () => {
           ? 'border-gray-700' 
           : 'bg-white border-gray-200'
       }`} style={darkMode ? { backgroundColor: '#2d2d2d' } : {}}>
-        {/* Left: DataFlow + Workflow Name */}
+        {/* Left: Logo, Title and Workflow Name */}
         <div className="flex items-center gap-4">
-          <h1 className={`text-xl font-bold ${
-            darkMode ? 'text-gray-100' : 'text-gray-800'
-          }`}>{t('app.title')}</h1>
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="url(#gradient)" />
+              <path d="M12 20L18 14L24 20L30 14" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="18" cy="14" r="2.5" fill="white"/>
+              <circle cx="24" cy="20" r="2.5" fill="white"/>
+              <circle cx="30" cy="14" r="2.5" fill="white"/>
+              <circle cx="12" cy="20" r="2.5" fill="white"/>
+              <path d="M12 26H30" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              <defs>
+                <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#3b82f6"/>
+                  <stop offset="1" stopColor="#8b5cf6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <h1 className={`text-xl font-bold ${
+              darkMode ? 'text-gray-100' : 'text-gray-800'
+            }`}>{t('app.title')}</h1>
+          </div>
           
           <div className={`w-px h-6 ${
             darkMode ? 'bg-gray-600' : 'bg-gray-300'
@@ -257,8 +287,10 @@ const WorkflowEditorContent: React.FC = () => {
             type="text"
             value={workflowName}
             onChange={(e) => setWorkflowName(e.target.value)}
-            className={`text-lg font-semibold bg-transparent border-0 focus:outline-none focus:ring-0 min-w-[200px] ${
-              darkMode ? 'text-gray-100' : 'text-gray-800'
+            className={`text-lg font-semibold bg-transparent border rounded-full px-4 py-2 focus:outline-none focus:ring-2 min-w-[200px] transition-all ${
+              darkMode 
+                ? 'text-gray-100 border-gray-600/30 focus:ring-blue-500/30' 
+                : 'text-gray-800 border-gray-300/40 focus:ring-blue-400/30'
             }`}
             placeholder="Workflow Name"
           />
@@ -361,6 +393,25 @@ const WorkflowEditorContent: React.FC = () => {
           >
             <Trash2 className="w-4 h-4" />
             {t('toolbar.clear')}
+          </button>
+
+          <div className={`w-px h-6 ${
+            darkMode ? 'bg-gray-600' : 'bg-gray-300'
+          }`} />
+
+          <button
+            onClick={() => setIsChatOpen(!isChatOpen)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+              isChatOpen
+                ? 'bg-blue-500 text-white'
+                : darkMode 
+                  ? 'text-gray-300 hover:bg-[#3d3d3d]' 
+                  : 'text-gray-600 hover:bg-gray-100/80'
+            }`}
+            title="Open Chat"
+          >
+            <MessageSquare className="w-4 h-4" />
+            Chat
           </button>
         </div>
 
@@ -475,6 +526,44 @@ const WorkflowEditorContent: React.FC = () => {
           <LogPanel logs={logs} currentTip={currentTip || undefined} />
         </div>
       </div>
+
+      {/* Chat Panel */}
+      <ChatPanel 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)}
+        onNodeExecuting={(nodeId) => {
+          setExecutingNodeId(nodeId);
+          // Center node in view
+          if (reactFlowInstance) {
+            const node = nodes.find(n => n.id === nodeId);
+            if (node) {
+              reactFlowInstance.setCenter(node.position.x + 150, node.position.y + 75, {
+                zoom: 1,
+                duration: 500
+              });
+            }
+          }
+          // Highlight node
+          setNodes(nodes.map(n => ({
+            ...n,
+            data: {
+              ...n.data,
+              isExecuting: n.id === nodeId
+            }
+          })));
+        }}
+        onNodeCompleted={(nodeId) => {
+          setExecutingNodeId(null);
+          // Remove highlight
+          setNodes(nodes.map(n => ({
+            ...n,
+            data: {
+              ...n.data,
+              isExecuting: false
+            }
+          })));
+        }}
+      />
     </div>
   );
 };

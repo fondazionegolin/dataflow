@@ -119,8 +119,21 @@ class RegressionNode(NodeExecutor):
             if not feature_cols:
                 feature_cols = [col for col in df.columns if col != target_col]
             
-            X = df[feature_cols]
+            # Filter only numeric columns for features
+            numeric_cols = df[feature_cols].select_dtypes(include=[np.number]).columns.tolist()
+            non_numeric = set(feature_cols) - set(numeric_cols)
+            
+            if non_numeric:
+                print(f"⚠️  Excluding non-numeric columns from features: {non_numeric}")
+            
+            if not numeric_cols:
+                return NodeResult(error="No numeric feature columns available. Please select numeric columns or convert categorical columns to numeric.")
+            
+            X = df[numeric_cols]
             y = df[target_col]
+            
+            # Update feature_cols to only include numeric ones
+            feature_cols = numeric_cols
             
             # Select model
             if algorithm == "linear":
@@ -291,8 +304,21 @@ class ClassificationNode(NodeExecutor):
             if not feature_cols:
                 feature_cols = [col for col in df.columns if col != target_col]
             
-            X = df[feature_cols]
+            # Filter only numeric columns for features
+            numeric_cols = df[feature_cols].select_dtypes(include=[np.number]).columns.tolist()
+            non_numeric = set(feature_cols) - set(numeric_cols)
+            
+            if non_numeric:
+                print(f"⚠️  Excluding non-numeric columns from features: {non_numeric}")
+            
+            if not numeric_cols:
+                return NodeResult(error="No numeric feature columns available. Please select numeric columns or convert categorical columns to numeric.")
+            
+            X = df[numeric_cols]
             y = df[target_col]
+            
+            # Update feature_cols to only include numeric ones
+            feature_cols = numeric_cols
             
             # Select model
             if algorithm == "logistic":

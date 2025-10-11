@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { AlertCircle, Info, CheckCircle, XCircle, ChevronDown, Lightbulb } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { AlertCircle, Info, CheckCircle, XCircle, ChevronDown, Lightbulb, Wifi, WifiOff } from 'lucide-react';
 
-export type LogLevel = 'info' | 'success' | 'warning' | 'error';
+export type LogLevel = 'info' | 'success' | 'warning' | 'error' | 'debug';
 
 export interface LogEntry {
   id: string;
@@ -12,13 +12,99 @@ export interface LogEntry {
 }
 
 interface LogPanelProps {
-  logs: LogEntry[];
+  logs?: LogEntry[];
   currentTip?: string;
 }
 
-export const LogPanel: React.FC<LogPanelProps> = ({ logs, currentTip }) => {
+export const LogPanel: React.FC<LogPanelProps> = ({ logs: externalLogs, currentTip }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showTips, setShowTips] = useState(true);
+  const [realtimeLogs, setRealtimeLogs] = useState<LogEntry[]>([]);
+  const [isConnected, setIsConnected] = useState(false);
+  const wsRef = useRef<WebSocket | null>(null);
+  const reconnectTimeoutRef = useRef<NodeJS.Timeout>();
+  const logContainerRef = useRef<HTMLDivElement>(null);
+  const [autoScroll, setAutoScroll] = useState(true);
+  
+  // Combine external logs with realtime logs
+  const logs = [...(externalLogs || []), ...realtimeLogs];
+  
+  // Auto-scroll to bottom when new logs arrive
+  useEffect(() => {
+    if (autoScroll && logContainerRef.current && isHovered) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [logs, autoScroll, isHovered]);
+  
+  // Connect to WebSocket for realtime logs
+  useEffect(() => {
+    const connectWebSocket = () => {
+      try {
+        const ws = new WebSocket('ws://127.0.0.1:8765/ws/logs');
+        
+        ws.onopen = () => {
+          console.log('[LogPanel] WebSocket connected');
+          setIsConnected(true);
+        };
+        
+        ws.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            
+            // Skip ping messages
+            if (data.level === 'ping') return;
+            
+            // Add new log entry
+            const logEntry: LogEntry = {
+              id: `ws-${Date.now()}-${Math.random()}`,
+              timestamp: new Date(data.timestamp),
+              level: data.level as LogLevel,
+              message: data.message
+            };
+            
+            setRealtimeLogs(prev => {
+              // Keep only last 100 logs
+              const newLogs = [...prev, logEntry];
+              return newLogs.slice(-100);
+            });
+          } catch (error) {
+            console.error('[LogPanel] Failed to parse WebSocket message:', error);
+          }
+        };
+        
+        ws.onerror = (error) => {
+          console.error('[LogPanel] WebSocket error:', error);
+        };
+        
+        ws.onclose = () => {
+          console.log('[LogPanel] WebSocket disconnected');
+          setIsConnected(false);
+          
+          // Attempt to reconnect after 3 seconds
+          reconnectTimeoutRef.current = setTimeout(() => {
+            console.log('[LogPanel] Attempting to reconnect...');
+            connectWebSocket();
+          }, 3000);
+        };
+        
+        wsRef.current = ws;
+      } catch (error) {
+        console.error('[LogPanel] Failed to connect WebSocket:', error);
+      }
+    };
+    
+    connectWebSocket();
+    
+    // Cleanup on unmount
+    return () => {
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+    };
+  }, []);
 
   const getIcon = (level: LogLevel) => {
     switch (level) {
@@ -91,7 +177,16 @@ export const LogPanel: React.FC<LogPanelProps> = ({ logs, currentTip }) => {
 
       {/* Expanded view on hover */}
       {isHovered && (
-        <div className="max-h-64 overflow-y-auto">
+        <div 
+          ref={logContainerRef}
+          className="max-h-64 overflow-y-auto"
+          onScroll={(e) => {
+            // Disable auto-scroll if user scrolls up
+            const target = e.currentTarget;
+            const isAtBottom = target.scrollHeight - target.scrollTop <= target.clientHeight + 50;
+            setAutoScroll(isAtBottom);
+          }}
+        >
           {/* Header */}
           <div className="log-panel-header flex items-center justify-between px-4 py-2 bg-gray-50 border-b border-gray-200 sticky top-0 z-10">
             <div className="flex items-center gap-4">
@@ -103,6 +198,14 @@ export const LogPanel: React.FC<LogPanelProps> = ({ logs, currentTip }) => {
                     {logs.length}
                   </span>
                 )}
+                {/* Connection status indicator */}
+                <span title={isConnected ? "Connected to log stream" : "Disconnected from log stream"}>
+                  {isConnected ? (
+                    <Wifi className="w-3 h-3 text-green-500" />
+                  ) : (
+                    <WifiOff className="w-3 h-3 text-gray-400" />
+                  )}
+                </span>
               </div>
               
               {currentTip && (

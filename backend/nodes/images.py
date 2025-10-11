@@ -46,11 +46,12 @@ class ImageModelNode(NodeExecutor):
                         "stabilityai/stable-diffusion-3-medium",
                         "black-forest-labs/FLUX.1-dev",
                         "stabilityai/stable-diffusion-xl-base-1.0",
+                        "stabilityai/sdxl-turbo",
                         "runwayml/stable-diffusion-v1-5",
                         "Qwen/Qwen-VL"
                     ],
                     default="stabilityai/stable-diffusion-xl-base-1.0",
-                    description="Image generation model to use"
+                    description="Image generation model to use (SDXL Turbo is fastest)"
                 ),
                 ParamSpec(
                     name="device",
@@ -329,6 +330,166 @@ class PromptNode(NodeExecutor):
 
 
 @register_node
+class OptimizePromptNode(NodeExecutor):
+    """Optimize and translate prompts using AI for better image generation."""
+    
+    def __init__(self):
+        super().__init__(NodeSpec(
+            type="image.optimize_prompt",
+            label="Optimize Prompt",
+            category="images",
+            description="Translate Italian prompts to English and enhance them following prompt engineering best practices",
+            icon="✨",
+            color="#FFD700",
+            inputs=[],
+            outputs=[
+                PortSpec(name="prompt", type=PortType.PARAMS, label="Optimized Prompt"),
+                PortSpec(name="negative_prompt", type=PortType.PARAMS, label="Negative Prompt")
+            ],
+            params=[
+                ParamSpec(
+                    name="prompt",
+                    type=ParamType.STRING,
+                    label="Prompt (Italian or English)",
+                    default="Un paesaggio montano al tramonto con un lago cristallino",
+                    description="Describe what you want to generate in Italian or English"
+                ),
+                ParamSpec(
+                    name="style",
+                    type=ParamType.SELECT,
+                    label="Style Emphasis",
+                    options=["photorealistic", "artistic", "cinematic", "anime", "3d_render", "oil_painting"],
+                    default="photorealistic",
+                    description="Visual style to emphasize"
+                ),
+                ParamSpec(
+                    name="detail_level",
+                    type=ParamType.SELECT,
+                    label="Detail Level",
+                    options=["minimal", "moderate", "high", "extreme"],
+                    default="high",
+                    description="How detailed the prompt should be"
+                ),
+                ParamSpec(
+                    name="api_key",
+                    type=ParamType.STRING,
+                    label="OpenAI API Key",
+                    default="",
+                    description="Your OpenAI API key (or set OPENAI_API_KEY env variable)"
+                )
+            ],
+            cache_policy=CachePolicy.MANUAL
+        ))
+    
+    async def run(self, context: NodeContext) -> NodeResult:
+        """Optimize prompt using OpenAI."""
+        try:
+            import os
+            import openai
+            
+            prompt = context.params.get("prompt", "")
+            style = context.params.get("style", "photorealistic")
+            detail_level = context.params.get("detail_level", "high")
+            api_key = context.params.get("api_key", "").strip()
+            
+            if not api_key:
+                api_key = os.environ.get("OPENAI_API_KEY", "")
+            
+            if not api_key:
+                return NodeResult(error="OpenAI API key required. Set it in parameters or OPENAI_API_KEY environment variable.")
+            
+            print(f"[OptimizePrompt] 🎨 Optimizing prompt: {prompt[:50]}...")
+            print(f"[OptimizePrompt] Style: {style}, Detail: {detail_level}")
+            
+            # Style-specific guidelines
+            style_guidelines = {
+                "photorealistic": "ultra-realistic, photographic quality, natural lighting, high resolution, professional photography",
+                "artistic": "artistic interpretation, creative composition, expressive, painterly quality",
+                "cinematic": "cinematic lighting, dramatic atmosphere, movie-like quality, depth of field, color grading",
+                "anime": "anime style, manga aesthetic, vibrant colors, clean lines, Japanese animation",
+                "3d_render": "3D rendered, CGI, Octane render, Unreal Engine, ray tracing, volumetric lighting",
+                "oil_painting": "oil painting style, brushstrokes visible, classical art technique, rich textures"
+            }
+            
+            detail_instructions = {
+                "minimal": "Keep it concise and simple",
+                "moderate": "Add some descriptive details",
+                "high": "Include rich details about composition, lighting, and atmosphere",
+                "extreme": "Provide extensive details about every aspect: composition, lighting, colors, textures, mood, camera angle, and technical specifications"
+            }
+            
+            # Create optimization prompt
+            system_prompt = f"""You are an expert in prompt engineering for AI image generation (Stable Diffusion, FLUX, etc.).
+Your task is to:
+1. Translate Italian prompts to English (if needed)
+2. Enhance the prompt following best practices for {style} style
+3. Add technical details for {detail_level} detail level
+4. Structure the prompt with: [main subject], [setting/environment], [lighting], [style keywords], [quality tags]
+5. Keep it under 200 words
+
+Style emphasis: {style_guidelines[style]}
+Detail level: {detail_instructions[detail_level]}
+
+Return ONLY the optimized prompt, nothing else."""
+
+            user_prompt = f"""Original prompt: {prompt}
+
+Optimize this prompt for image generation."""
+
+            print(f"[OptimizePrompt] 🤖 Calling OpenAI API...")
+            
+            # Call OpenAI API
+            client = openai.OpenAI(api_key=api_key)
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                temperature=0.7,
+                max_tokens=300
+            )
+            
+            optimized_prompt = response.choices[0].message.content.strip()
+            
+            print(f"[OptimizePrompt] ✅ Optimized: {optimized_prompt[:100]}...")
+            
+            # Generate negative prompt
+            negative_prompt = "blurry, low quality, distorted, artifacts, ugly, bad anatomy, deformed, disfigured, poorly drawn, bad proportions, gross proportions, malformed limbs, missing limbs, extra limbs, mutated, mutation"
+            
+            result = {
+                "original_prompt": prompt,
+                "optimized_prompt": optimized_prompt,
+                "negative_prompt": negative_prompt,
+                "style": style,
+                "detail_level": detail_level,
+                "tokens_used": response.usage.total_tokens
+            }
+            
+            return NodeResult(
+                outputs={
+                    "prompt": optimized_prompt,
+                    "negative_prompt": negative_prompt
+                },
+                metadata=result,
+                preview={
+                    "type": "text",
+                    "data": {
+                        "Original": prompt,
+                        "Optimized": optimized_prompt,
+                        "Style": style,
+                        "Tokens": response.usage.total_tokens
+                    }
+                }
+            )
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return NodeResult(error=f"Failed to optimize prompt: {str(e)}")
+
+
+@register_node
 class StyleNode(NodeExecutor):
     """Apply artistic styles to image generation."""
     
@@ -510,7 +671,7 @@ class GenerateImageNode(NodeExecutor):
                     type=ParamType.INTEGER,
                     label="Inference Steps",
                     default=30,
-                    description="Number of denoising steps (higher = better quality)"
+                    description="Number of denoising steps (higher = better quality). SDXL Turbo uses 1-4 steps automatically."
                 ),
                 ParamSpec(
                     name="guidance_scale",
@@ -580,6 +741,21 @@ class GenerateImageNode(NodeExecutor):
             steps = int(context.params.get("steps", 30))
             guidance = float(context.params.get("guidance_scale", 7.5))
             seed = int(context.params.get("seed", -1))
+            
+            # Detect SDXL Turbo and adjust parameters automatically
+            model_config = pipeline.config if hasattr(pipeline, 'config') else {}
+            model_name = str(model_config.get('_name_or_path', ''))
+            is_turbo = 'turbo' in model_name.lower()
+            
+            if is_turbo:
+                print(f"[ImageGenerate] 🚀 SDXL Turbo detected - using optimized settings")
+                # SDXL Turbo works best with 1-4 steps and low guidance
+                if steps > 4:
+                    steps = 4
+                    print(f"[ImageGenerate] Adjusted steps to {steps} for Turbo model")
+                if guidance > 2.0:
+                    guidance = 0.0  # Turbo works best with guidance_scale=0
+                    print(f"[ImageGenerate] Adjusted guidance_scale to {guidance} for Turbo model")
             
             # Generate images for all prompts
             all_images = []

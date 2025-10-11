@@ -207,6 +207,9 @@ class KMeansClusteringNode(NodeExecutor):
             result_df['cluster'] = cluster_labels
             result_df['cluster'] = result_df['cluster'].astype(str)  # Convert to string for categorical
             
+            # Create output table with only feature columns + cluster
+            output_df = result_df[feature_columns + ['cluster']].copy()
+            
             # Create scatter plot (2D or 3D)
             # Determine if 3D plot
             is_3d = plot_z and plot_z in feature_columns
@@ -406,8 +409,10 @@ class KMeansClusteringNode(NodeExecutor):
             
             preview = {
                 "plot_json": plot_json,
-                "head": result_df.head(10).to_dict(orient="records"),
-                "columns": result_df.columns.tolist()
+                "head": output_df.head(10).to_dict(orient="records"),
+                "columns": output_df.columns.tolist(),
+                "shape": output_df.shape,
+                "show_table": True  # Flag to show table alongside plot
             }
             
             metadata = {
@@ -416,12 +421,12 @@ class KMeansClusteringNode(NodeExecutor):
                 "davies_bouldin_index": float(davies_bouldin),
                 "inertia": float(kmeans.inertia_),
                 "feature_columns": feature_columns,
-                "cluster_sizes": result_df['cluster'].value_counts().to_dict(),
+                "cluster_sizes": output_df['cluster'].value_counts().to_dict(),
                 "auto_detected": auto_k
             }
             
             return NodeResult(
-                outputs={"table": result_df},
+                outputs={"table": output_df},
                 metadata=metadata,
                 preview=preview
             )

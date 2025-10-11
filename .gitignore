@@ -134,3 +134,8 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Application specific
+backend/.storage/
+backend/outputs/
+frontend/node_modules/.vite/
+

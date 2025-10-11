@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Database, Wrench, BarChart3, Brain, Search, FileText, Folder, Sparkles, Table, Filter, Columns, Split, GitMerge, Trash, TrendingUp, Target, Wand2, CircleDot, MessageSquare, Smile, Tag, Library } from 'lucide-react';
+import { ArrowLeft, BookOpen, Database, Wrench, BarChart3, Brain, Search, FileText, Folder, Sparkles, Filter, Columns, Split, GitMerge, Trash, TrendingUp, Target, Wand2, CircleDot, MessageSquare, Smile, Tag, Library, Bot } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ItalyFlag, UKFlag } from '../components/FlatFlags';
 
@@ -16,6 +16,7 @@ export const WikiPage: React.FC = () => {
     { id: 'visualization', label: t('wiki.sections.visualization'), icon: BarChart3 },
     { id: 'ml', label: t('wiki.sections.ml'), icon: Brain },
     { id: 'nlp', label: t('wiki.sections.nlp'), icon: FileText },
+    { id: 'chatbot', label: 'Chatbot & Terminal', icon: Bot },
     { id: 'testing', label: 'Testing & Sentiment', icon: Target },
     { id: 'examples', label: t('wiki.sections.examples'), icon: Search },
   ];
@@ -97,6 +98,7 @@ export const WikiPage: React.FC = () => {
             {activeSection === 'visualization' && <VisualizationSection />}
             {activeSection === 'ml' && <MLSection />}
             {activeSection === 'nlp' && <NLPSection />}
+            {activeSection === 'chatbot' && <ChatbotSection />}
             {activeSection === 'testing' && <TestingSection />}
             {activeSection === 'examples' && <ExamplesSection />}
           </div>
@@ -530,6 +532,119 @@ const NLPSection: React.FC = () => {
       example="Discover main themes in customer feedback"
     />
   </div>
+  );
+};
+
+const ChatbotSection: React.FC = () => {
+  return (
+    <div className="space-y-8">
+      <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+        <Bot className="w-8 h-8" /> Chatbot & Terminal
+      </h2>
+      
+      <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+        <h3 className="text-2xl font-bold text-purple-900 mb-3">🤖 Chatbot Semplici</h3>
+        <p className="text-purple-800 text-lg mb-4">
+          Crea chatbot come un <strong>albero decisionale visuale</strong>. Niente codice, solo drag & drop!
+        </p>
+        <div className="bg-white/70 p-4 rounded-lg">
+          <div className="font-bold text-purple-900 mb-2">Come Funziona:</div>
+          <div className="text-sm text-purple-700 space-y-1">
+            <div>1️⃣ <strong>Bot Says</strong> → Il bot dice qualcosa</div>
+            <div>2️⃣ <strong>Ask User</strong> → Chiedi all'utente</div>
+            <div>3️⃣ <strong>If Contains</strong> → Se risposta contiene parole → branch</div>
+            <div>4️⃣ <strong>Yes/No</strong> → Domanda Sì/No → 2 path</div>
+            <div>5️⃣ <strong>Multi Choice</strong> → Menu con 4 opzioni</div>
+            <div>6️⃣ <strong>End</strong> → Fine conversazione</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 className="text-2xl font-bold text-gray-800 mt-8">📚 Esempi Pratici</h3>
+
+      <WorkflowExample
+        title="1. 🍕 Chatbot Pizzeria (SEMPLICE)"
+        description="Chatbot visuale per ordinare pizza - albero decisionale"
+        steps={[
+          { node: 'Bot Says', action: '"Benvenuto! 🍕"' },
+          { node: 'Yes/No', action: '"Vuoi ordinare?"' },
+          { node: 'Multi Choice (se Sì)', action: 'Scegli pizza: Margherita/Diavola/Capricciosa' },
+          { node: 'Multi Choice', action: 'Scegli dimensione: Piccola/Media/Grande' },
+          { node: 'Bot Says', action: '"Ordine confermato!"' },
+          { node: 'End', action: '"Grazie! 👋"' },
+        ]}
+        diagram="Benvenuto → Vuoi? → Pizza → Dimensione → Conferma → Fine"
+        tips={[
+          'Ogni scelta crea un branch visibile',
+          'If Contains per riconoscere parole chiave',
+          'Niente programmazione, solo collegamenti!'
+        ]}
+      />
+
+      <WorkflowExample
+        title="2. 🤖 AI Terminal Assistant"
+        description="L'AI suggerisce comandi Linux da eseguire"
+        steps={[
+          { node: 'Terminal Input', action: 'Chiedi: "Cosa vuoi fare?"' },
+          { node: 'OpenAI Chat', action: 'AI suggerisce comandi per la richiesta' },
+          { node: 'Command Selector', action: 'Utente sceglie il comando' },
+          { node: 'Execute Command', action: 'Esegui il comando selezionato' },
+          { node: 'Terminal Output', action: 'Mostra il risultato' },
+        ]}
+        diagram="Input → AI → Scegli → Esegui → Output"
+        tips={[
+          'Perfetto per chi non conosce bene Linux',
+          'L\'AI traduce richieste in comandi',
+          'Esempio: "trova PDF" → "find . -name *.pdf"'
+        ]}
+      />
+
+      <WorkflowExample
+        title="3. ❓ FAQ Bot con Branch"
+        description="Bot che risponde in base a parole chiave"
+        steps={[
+          { node: 'Bot Says', action: '"Ciao! Come posso aiutarti?"' },
+          { node: 'Ask User', action: 'Utente scrive la domanda' },
+          { node: 'If Contains', action: 'Parole: "prezzo, costo, quanto" → Sì/No' },
+          { node: 'Bot Says (Sì)', action: '"I prezzi partono da €10"' },
+          { node: 'Bot Says (No)', action: '"Scusa, non ho capito"' },
+          { node: 'End', action: '"Altro? Scrivi o esci"' },
+        ]}
+        diagram="Saluto → Domanda → If Contains → Risposta → Fine"
+        tips={[
+          'If Contains per keyword matching',
+          'Aggiungi più If Contains per più topic',
+          'Semplice e veloce da creare!'
+        ]}
+      />
+
+      <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+        <h3 className="text-xl font-bold text-green-900 mb-3">✅ Consigli Pratici</h3>
+        <div className="space-y-2 text-green-800">
+          <div><strong>💬 Chatbot:</strong> Usa lo stesso session_id in tutti i nodi per mantenere il context</div>
+          <div><strong>🎯 Intent:</strong> Inizia con keyword (gratis), poi attiva AI se serve</div>
+          <div><strong>🔒 Comandi:</strong> Usa Command Builder, non concatenare stringhe!</div>
+          <div><strong>⏱️ Timeout:</strong> Imposta sempre un timeout per i comandi</div>
+        </div>
+      </div>
+
+      <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+        <h3 className="text-xl font-bold text-blue-900 mb-3">📖 Nodi Disponibili</h3>
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <div>
+            <div className="font-bold text-blue-900">Chatbot:</div>
+            <div className="text-blue-700">• Bot Message<br/>• User Input<br/>• Intent Classifier<br/>• Context Manager<br/>• Router<br/>• Choice Buttons</div>
+          </div>
+          <div>
+            <div className="font-bold text-blue-900">Terminal:</div>
+            <div className="text-blue-700">• Execute Command<br/>• Command Builder<br/>• Command Selector<br/>• Terminal Input<br/>• Terminal Output</div>
+          </div>
+        </div>
+        <div className="mt-4 text-sm text-blue-700">
+          💡 Trova tutti i nodi nella palette sotto le categorie <strong>"chatbot"</strong> e <strong>"terminal"</strong>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -16,7 +16,7 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs, darkMode = 
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    new Set(['sources', 'transform'])
+    new Set() // Start with all categories collapsed
   );
 
   // Group nodes by category
@@ -28,13 +28,23 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs, darkMode = 
     return acc;
   }, {} as Record<string, NodeSpec[]>);
 
-  // Filter nodes based on search
+  // Filter nodes based on search - include Italian translations
   const filteredCategories = Object.entries(nodesByCategory).reduce((acc, [category, nodes]) => {
     const filtered = nodes.filter(
-      (node) =>
-        node.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        node.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        node.type.toLowerCase().includes(searchQuery.toLowerCase())
+      (node) => {
+        const query = searchQuery.toLowerCase();
+        const label = node.label.toLowerCase();
+        const description = node.description.toLowerCase();
+        const type = node.type.toLowerCase();
+        const translatedLabel = t(`nodes.${node.type}.label`, node.label).toLowerCase();
+        const translatedDesc = t(`nodes.${node.type}.description`, node.description).toLowerCase();
+        
+        return label.includes(query) ||
+               description.includes(query) ||
+               type.includes(query) ||
+               translatedLabel.includes(query) ||
+               translatedDesc.includes(query);
+      }
     );
     if (filtered.length > 0) {
       acc[category] = filtered;
@@ -157,29 +167,80 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ nodeSpecs, darkMode = 
 
             {/* Category Nodes */}
             {expandedCategories.has(category) && (
-              <div className="mt-1 space-y-1">
+              <div className="mt-1 space-y-1.5">
                 {nodes.map((spec) => {
                   const colors = categoryColors[category] || { bg: 'bg-gray-500', text: 'text-white' };
                   const IconComponent = categoryIcons[category] || Database;
+                  const hasInputs = spec.inputs && spec.inputs.length > 0;
+                  const hasOutputs = spec.outputs && spec.outputs.length > 0;
+                  
                   return (
                     <div
                       key={spec.type}
                       draggable
                       onDragStart={(e) => onDragStart(e, spec.type)}
-                      className={`px-4 py-3 ${colors.bg} hover:scale-105 rounded-xl cursor-move shadow-md transition-all hover:shadow-lg backdrop-blur-sm`}
-                      title={spec.description}
+                      className={`group relative px-3 py-2.5 backdrop-blur-sm border rounded-lg cursor-move shadow-sm transition-all hover:shadow-md ${
+                        darkMode 
+                          ? 'bg-white/10 border-white/20' 
+                          : 'bg-gray-100/80 border-gray-200'
+                      }`}
+                      style={{
+                        aspectRatio: '2.5 / 1',
+                      }}
+                      title={getNodeDescription(spec)}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 flex items-center justify-center bg-white/20 rounded-lg backdrop-blur-sm">
-                          <IconComponent className="w-5 h-5 text-white" />
+                      {/* Color overlay - subtle by default, full on hover */}
+                      <div 
+                        className={`absolute inset-0 ${colors.bg} opacity-20 group-hover:opacity-100 transition-opacity rounded-lg`}
+                        style={{ zIndex: -1 }}
+                      />
+                      
+                      <div className="relative h-full flex items-center gap-2.5">
+                        {/* Input indicator */}
+                        <div className="flex flex-col gap-1">
+                          {hasInputs && (
+                            <div className={`w-2 h-2 rounded-full transition-colors ${
+                              darkMode 
+                                ? 'bg-white/40 group-hover:bg-white/80' 
+                                : 'bg-gray-400 group-hover:bg-white/90'
+                            }`} />
+                          )}
                         </div>
+                        
+                        {/* Icon */}
+                        <div className={`w-7 h-7 flex items-center justify-center rounded-md backdrop-blur-sm transition-colors flex-shrink-0 ${
+                          darkMode 
+                            ? 'bg-white/20 group-hover:bg-white/30' 
+                            : 'bg-gray-300/50 group-hover:bg-white/40'
+                        }`}>
+                          <IconComponent className={`w-4 h-4 ${
+                            darkMode ? 'text-white' : 'text-gray-700 group-hover:text-white'
+                          }`} />
+                        </div>
+                        
+                        {/* Content */}
                         <div className="flex-1 min-w-0">
-                          <div className={`text-sm font-semibold ${colors.text} truncate`}>
+                          <div className={`text-xs font-semibold line-clamp-1 ${
+                            darkMode ? 'text-white' : 'text-gray-800 group-hover:text-white'
+                          }`}>
                             {getNodeLabel(spec)}
                           </div>
-                          <div className={`text-xs ${colors.text} opacity-75 truncate`}>
+                          <div className={`text-[10px] line-clamp-2 leading-tight mt-0.5 ${
+                            darkMode ? 'text-white/70' : 'text-gray-600 group-hover:text-white/90'
+                          }`}>
                             {getNodeDescription(spec)}
                           </div>
+                        </div>
+                        
+                        {/* Output indicator */}
+                        <div className="flex flex-col gap-1">
+                          {hasOutputs && (
+                            <div className={`w-2 h-2 rounded-full transition-colors ${
+                              darkMode 
+                                ? 'bg-white/40 group-hover:bg-white/80' 
+                                : 'bg-gray-400 group-hover:bg-white/90'
+                            }`} />
+                          )}
                         </div>
                       </div>
                     </div>

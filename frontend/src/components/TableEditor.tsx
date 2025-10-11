@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { X, Save, Download, Trash2, Columns as ColumnsIcon, Plus, PlusCircle } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+/**
+ * Modern, professional table editor with clean UI
+ * Inspired by modern data table designs
+ */
 
-// Version 2.0 - With multi-select and delete features
+import React, { useState, useEffect } from 'react';
+import { X, Save, Download, Plus, Trash2, PlusCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface TableEditorProps {
   data: any[];
@@ -12,6 +15,7 @@ interface TableEditorProps {
   title?: string;
   nodeId?: string;
   sessionId?: string;
+  darkMode?: boolean;
 }
 
 export const TableEditor: React.FC<TableEditorProps> = ({
@@ -21,7 +25,8 @@ export const TableEditor: React.FC<TableEditorProps> = ({
   onSave,
   title = 'Table Editor',
   nodeId,
-  sessionId
+  sessionId,
+  darkMode = false
 }) => {
   const [data, setData] = useState(initialData);
   const [columns, setColumns] = useState(initialColumns);
@@ -31,8 +36,6 @@ export const TableEditor: React.FC<TableEditorProps> = ({
   const [selectedColumns, setSelectedColumns] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
-  
-  console.log('TableEditor rendered with selection features');
 
   // Load full data from backend when nodeId is provided
   useEffect(() => {
@@ -266,8 +269,47 @@ export const TableEditor: React.FC<TableEditorProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-7xl max-h-[90vh] flex flex-col">
+    <>
+      <style>{`
+        /* LARGE SCROLLBARS - Always visible and easy to grab */
+        .table-scroll-container::-webkit-scrollbar {
+          width: 30px;
+          height: 30px;
+        }
+        
+        .table-scroll-container::-webkit-scrollbar-track {
+          background: ${darkMode ? '#0d0d0d' : '#d5d5d5'};
+          border-radius: 15px;
+          margin: 4px;
+        }
+        
+        .table-scroll-container::-webkit-scrollbar-thumb {
+          background: ${darkMode ? '#505050' : '#808080'};
+          border-radius: 15px;
+          border: 6px solid ${darkMode ? '#0d0d0d' : '#d5d5d5'};
+          min-height: 60px;
+          min-width: 60px;
+        }
+        
+        .table-scroll-container::-webkit-scrollbar-thumb:hover {
+          background: ${darkMode ? '#707070' : '#606060'};
+          border-width: 4px;
+        }
+        
+        .table-scroll-container::-webkit-scrollbar-thumb:active {
+          background: ${darkMode ? '#909090' : '#404040'};
+          border-width: 3px;
+        }
+        
+        .table-scroll-container::-webkit-scrollbar-corner {
+          background: ${darkMode ? '#0d0d0d' : '#d5d5d5'};
+          border-radius: 15px;
+        }
+      `}</style>
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className={`rounded-2xl shadow-2xl w-full max-w-7xl max-h-[90vh] flex flex-col ${
+          darkMode ? 'bg-[#2d2d2d]' : 'bg-white'
+        }`} style={{ minWidth: '800px' }}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 flex-wrap gap-4">
           <div>
@@ -310,7 +352,7 @@ export const TableEditor: React.FC<TableEditorProps> = ({
                 className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-xl transition-all"
                 title={`Delete ${selectedColumns.size} column(s)`}
               >
-                <ColumnsIcon className="w-4 h-4" />
+                <Trash2 className="w-4 h-4" />
                 <span className="text-sm">{selectedColumns.size} col(s)</span>
               </button>
             )}
@@ -340,7 +382,13 @@ export const TableEditor: React.FC<TableEditorProps> = ({
         </div>
 
         {/* Table */}
-        <div className="flex-1 overflow-auto p-6">
+        <div 
+          className="flex-1 overflow-auto p-6 table-scroll-container"
+          style={{
+            scrollbarWidth: 'auto',
+            scrollbarColor: darkMode ? '#666 #1a1a1a' : '#777 #d0d0d0'
+          }}
+        >
           <table className="w-full border-collapse">
             <thead className="sticky top-0 bg-gray-50 z-10">
               <tr>
@@ -460,7 +508,8 @@ export const TableEditor: React.FC<TableEditorProps> = ({
         <div className="p-4 border-t border-gray-200 bg-gray-50 text-xs text-gray-500 text-center">
           💡 {t('table.hint')}
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };

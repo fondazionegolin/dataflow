@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "DataFlow Platform",
+    "title": "Golinelli Data Playground",
     "subtitle": "Analisi Dati Visuale"
   },
   "toolbar": {
@@ -17,10 +17,15 @@
     "noResults": "Nessun nodo trovato",
     "categories": {
       "sources": "Sorgenti Dati",
+      "ai_sources": "Sorgenti AI",
       "transform": "Trasformazione",
       "visualization": "Visualizzazione",
       "machine_learning": "Machine Learning",
-      "mathematics": "Matematica"
+      "nlp": "Elaborazione Linguaggio",
+      "clustering": "Clustering",
+      "images": "Immagini",
+      "mathematics": "Matematica",
+      "control_flow": "Controllo Flusso"
     }
   },
   "node": {
@@ -101,6 +106,102 @@
     "ml.kmeans_clustering": {
       "label": "K-Means Clustering",
       "description": "Clustering K-Means con rilevamento automatico K ottimale"
+    },
+    "csv.load": {
+      "label": "Carica CSV",
+      "description": "Carica dati da file CSV con opzioni di parsing configurabili"
+    },
+    "data.custom_input": {
+      "label": "Tabella Personalizzata",
+      "description": "Crea dati tabellari manualmente con editor visuale"
+    },
+    "data.filter": {
+      "label": "Filtra Righe",
+      "description": "Filtra righe usando espressioni query pandas"
+    },
+    "math.operation": {
+      "label": "Operazione Matematica",
+      "description": "Esegui operazioni matematiche: addizione, sottrazione, moltiplicazione, divisione, potenza, radice, percentuale, ecc."
+    },
+    "math.numeric_input": {
+      "label": "Input Numerico",
+      "description": "Inserisci un valore numerico da usare nei calcoli"
+    },
+    "math.result": {
+      "label": "Risultato Matematico",
+      "description": "Estrai e visualizza risultati numerici dai calcoli"
+    },
+    "math.aggregate": {
+      "label": "Aggregazione Matematica",
+      "description": "Combina più input numerici e calcola statistiche"
+    },
+    "math.equation": {
+      "label": "Equazione",
+      "description": "Definisci equazioni matematiche con input visuale. Supporta f(x), derivate, integrali, ecc."
+    },
+    "math.plot_equation": {
+      "label": "Grafico Equazione",
+      "description": "Visualizza equazione matematica come grafico 2D"
+    },
+    "math.evaluate": {
+      "label": "Valuta Equazione",
+      "description": "Calcola f(x) per valori x specifici"
+    },
+    "math.function_analysis": {
+      "label": "Analisi Funzione",
+      "description": "Studio completo di funzione: dominio, derivate, integrali, punti critici, asintoti"
+    },
+    "math.regression_to_equation": {
+      "label": "Regressione a Equazione",
+      "description": "Converti coefficienti di regressione in formato equazione"
+    },
+    "control.loop": {
+      "label": "Ciclo",
+      "description": "Esegui operazioni ripetute in un ciclo"
+    },
+    "image.model": {
+      "label": "Modello Immagine",
+      "description": "Carica Stable Diffusion, Flux o altri modelli di generazione immagini"
+    },
+    "image.prompt": {
+      "label": "Prompt",
+      "description": "Crea prompt dettagliati per la generazione di immagini"
+    },
+    "image.style": {
+      "label": "Stile",
+      "description": "Applica stili artistici ed estetiche"
+    },
+    "image.generate": {
+      "label": "Genera Immagine",
+      "description": "Genera immagini dai prompt"
+    },
+    "image.save": {
+      "label": "Salva Immagine",
+      "description": "Salva immagini nella posizione specificata"
+    },
+    "llm.dataset": {
+      "label": "Dataset LLM",
+      "description": "Genera dataset conversazionali/istruzionali per fine-tuning LLM"
+    },
+    "llm.finetune": {
+      "label": "Fine-tune LLM",
+      "description": "Fine-tune GPT-2 o DistilGPT-2 su dataset personalizzato"
+    },
+    "llm.generate": {
+      "label": "Generatore di Testo",
+      "description": "Genera testo usando modello linguistico fine-tuned"
+    },
+    "llm.evaluate": {
+      "label": "Valutatore LLM",
+      "description": "Valuta modello linguistico con perplexity e loss"
+    },
+    "llm.model_loader": {
+      "label": "Modello LLM",
+      "description": "Carica modello linguistico pre-addestrato per chat e generazione testo"
+    },
+    "llm.chat": {
+      "label": "Chat LLM",
+      "description": "Interfaccia chat interattiva con modelli di linguaggio"
     }
   },
   "params": {

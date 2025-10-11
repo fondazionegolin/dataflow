@@ -511,3 +511,79 @@ class SliceRowsNode(NodeExecutor):
             
         except Exception as e:
             return NodeResult(error=f"Failed to slice rows: {str(e)}")
+
+
+@register_node
+class SortColumnsNode(NodeExecutor):
+    """Reorder table columns with drag & drop interface."""
+    
+    def __init__(self):
+        super().__init__(NodeSpec(
+            type="data.sort_columns",
+            label="Sort Columns",
+            category="transform",
+            description="Reorder table columns by dragging them in the desired order",
+            icon="↔️",
+            color="#9C27B0",
+            inputs=[
+                PortSpec(name="table", type=PortType.TABLE, label="Input Table")
+            ],
+            outputs=[
+                PortSpec(name="table", type=PortType.TABLE, label="Output Table")
+            ],
+            params=[
+                ParamSpec(
+                    name="column_order",
+                    type=ParamType.MULTI_SELECT,
+                    label="Column Order",
+                    default=[],
+                    description="Drag columns to reorder them (order from top to bottom)"
+                )
+            ],
+            cache_policy=CachePolicy.AUTO
+        ))
+    
+    async def run(self, context: NodeContext) -> NodeResult:
+        """Reorder columns based on specified order."""
+        try:
+            df = context.inputs.get("table")
+            if df is None or df.empty:
+                return NodeResult(error="No input table provided")
+            
+            column_order = context.params.get("column_order", [])
+            
+            # If no order specified, return original
+            if not column_order:
+                column_order = df.columns.tolist()
+            
+            # Validate all columns exist
+            missing_cols = set(column_order) - set(df.columns)
+            if missing_cols:
+                return NodeResult(error=f"Columns not found in input: {missing_cols}")
+            
+            # Add any columns not in the order list at the end
+            remaining_cols = [col for col in df.columns if col not in column_order]
+            final_order = column_order + remaining_cols
+            
+            # Reorder columns
+            result_df = df[final_order]
+            
+            preview = {
+                "head": result_df.head(10).to_dict(orient="records"),
+                "shape": result_df.shape,
+                "columns": result_df.columns.tolist(),
+                "dtypes": {col: str(dtype) for col, dtype in result_df.dtypes.items()}
+            }
+            
+            return NodeResult(
+                outputs={"table": result_df},
+                metadata={
+                    "original_order": df.columns.tolist(),
+                    "new_order": final_order,
+                    "columns_reordered": len(column_order)
+                },
+                preview=preview
+            )
+            
+        except Exception as e:
+            return NodeResult(error=f"Failed to sort columns: {str(e)}")

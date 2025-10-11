@@ -11,6 +11,8 @@ import { useWorkflowStore } from '@/store/workflowStore';
 import Plot from 'react-plotly.js';
 import { useTranslation } from 'react-i18next';
 import { TableEditor } from './TableEditor';
+import { EquationInput } from './EquationInput';
+import { DraggableColumnList } from './DraggableColumnList';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, selected }) => {
@@ -336,6 +338,19 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
       }
     }
 
+    // Special handling for equation input (math.equation node)
+    if (param.name === 'equation_str' && spec.type === 'math.equation') {
+      return (
+        <EquationInput
+          value={value || ''}
+          onChange={(val: string) => handleParamChange(param.name, val)}
+          placeholder={param.description || 'Enter equation...'}
+          darkMode={darkMode}
+          showLatex={true}
+        />
+      );
+    }
+
     switch (param.type) {
       case ParamType.STRING:
         return (
@@ -408,7 +423,24 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
         );
 
       case ParamType.MULTI_SELECT:
-        // For multi-select with available columns
+        // For column_order parameter, use draggable list
+        if (param.name === 'column_order' && availableColumns.length > 0) {
+          const selectedValues = Array.isArray(value) ? value : [];
+          return (
+            <div className="space-y-2">
+              <DraggableColumnList
+                columns={availableColumns}
+                value={selectedValues.length > 0 ? selectedValues : availableColumns}
+                onChange={(newOrder) => handleParamChange(param.name, newOrder)}
+              />
+              <div className="text-xs text-gray-500 text-center">
+                Drag columns to reorder • {availableColumns.length} columns
+              </div>
+            </div>
+          );
+        }
+        
+        // For other multi-select with available columns
         if (availableColumns.length > 0) {
           const selectedValues = Array.isArray(value) ? value : [];
           return (
@@ -594,6 +626,13 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
         const plotData = JSON.parse(result.preview.plot_json);
         const is2D = !plotData.data?.some((trace: any) => trace.type === 'scatter3d');
         
+        console.log('[ExpandableNode] Rendering plot:', { 
+          nodeType: spec.type, 
+          is2D, 
+          dataLength: plotData.data?.length,
+          hasLayout: !!plotData.layout 
+        });
+        
         if (!plotData.data || plotData.data.length === 0) {
           return <div className="p-4 text-red-500 text-sm">No plot data available</div>;
         }
@@ -706,9 +745,9 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
         }
         
         return (
-          <div className="space-y-2">
+          <div style={{ width: '100%', height: '700px', display: 'flex', flexDirection: 'column' }}>
             {is2D && plotData.data[0]?.x && plotData.data[0]?.y && (
-              <div className="flex items-center gap-2 px-4 pt-2">
+              <div className="flex items-center gap-2 px-4 pt-2 pb-2">
                 <label className="flex items-center gap-1 text-xs font-medium">
                   <input
                     type="checkbox"
@@ -733,28 +772,47 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
                 )}
               </div>
             )}
-            <div className="w-full h-[500px] px-2">
+            <div 
+              style={{ width: '100%', height: '100%', position: 'relative' }}
+              className="nodrag"
+            >
               <Plot
                 data={enhancedData}
                 layout={{
                   ...plotData.layout,
+                  width: undefined,
+                  height: undefined,
+                  autosize: true,
                   legend: {
                     orientation: 'h',
                     yanchor: 'top',
-                    y: -0.15,
+                    y: -0.08,
                     xanchor: 'center',
                     x: 0.5
                   },
-                  margin: { l: 60, r: 40, t: 40, b: 80 }
+                  margin: { l: 50, r: 50, t: 40, b: 60 },
+                  scene: !is2D ? {
+                    ...plotData.layout?.scene,
+                    camera: {
+                      eye: { x: 1.5, y: 1.5, z: 1.3 },
+                      center: { x: 0, y: 0, z: 0 },
+                      up: { x: 0, y: 0, z: 1 }
+                    },
+                    dragmode: 'turntable'
+                  } : undefined,
+                  dragmode: !is2D ? 'turntable' : 'zoom',
+                  hovermode: 'closest'
                 }}
                 config={{
                   responsive: true,
-                  displayModeBar: true,
+                  displayModeBar: false,
                   displaylogo: false,
-                  modeBarButtonsToRemove: ['toImage', 'lasso2d', 'select2d'],
+                  scrollZoom: true,
+                  doubleClick: 'reset'
                 }}
                 style={{ width: '100%', height: '100%' }}
                 useResizeHandler={true}
+                divId={`plot-${id}`}
               />
             </div>
             {showRegressionLine && regressionEquation && (
@@ -765,7 +823,8 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           </div>
         );
       } catch (e) {
-        return <div className="p-4 text-red-500 text-sm">Error rendering plot</div>;
+        console.error('[ExpandableNode] Error rendering plot:', e);
+        return <div className="p-4 text-red-500 text-sm">Error rendering plot: {e instanceof Error ? e.message : String(e)}</div>;
       }
     }
 
@@ -873,14 +932,8 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
     if (isExpanded && showPreview) {
       // Layout affiancato: Config (1/3) + Results (2/3)
       if (result?.preview?.plot_json) {
-        switch (previewSize) {
-          case 'large':
-            return 'w-[900px]';
-          case 'xlarge':
-            return 'w-[1200px]';
-          default:
-            return 'w-[700px]';
-        }
+        // Grafici sempre grandi con ampia colonna destra
+        return 'w-[1400px]';
       }
       // Tabelle - calcola larghezza in base al numero di colonne
       if (result?.preview?.head) {
@@ -970,12 +1023,15 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
     >
       {/* Main content area - no border */}
       <div 
-        className={`relative rounded-lg ${getStatusColor()} shadow-lg`}
+        className={`relative rounded-lg ${getStatusColor()} shadow-lg transition-all duration-300`}
         style={{
           pointerEvents: 'auto',
-          boxShadow: selected 
-            ? `0 0 0 3px ${darkMode ? '#ffffff' : '#000000'}`
-            : undefined,
+          boxShadow: data.isExecuting
+            ? '0 0 0 4px #3b82f6, 0 0 20px rgba(59, 130, 246, 0.5)'
+            : selected 
+              ? `0 0 0 3px ${darkMode ? '#ffffff' : '#000000'}`
+              : undefined,
+          transform: data.isExecuting ? 'scale(1.05)' : undefined,
         }}
       >
       {/* Input Handles */}
@@ -984,7 +1040,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           key={input.name}
           style={{
             position: 'absolute',
-            left: -32, // Outside, tangent to outer edge of colored border (border 16px + handle 16px = -32)
+            left: -26,
             top: `${((idx + 1) * 100) / (spec.inputs.length + 1)}%`,
             transform: 'translateY(-50%)',
           }}
@@ -1038,18 +1094,18 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
               <div className="text-xs text-white/70">{t(`palette.categories.${spec.category}`, spec.category)}</div>
             </div>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 nodrag">
             <div className="relative">
               <button
                 onMouseEnter={() => setShowTooltip(true)}
                 onMouseLeave={() => setShowTooltip(false)}
-                className="p-1.5 hover:bg-white/20 rounded-full transition-colors"
+                className="p-1.5 hover:bg-white/20 rounded-full transition-colors nodrag"
                 onClick={(e) => e.stopPropagation()}
               >
                 <HelpCircle className="w-4 h-4 text-white" />
               </button>
               {showTooltip && (
-                <div className="absolute right-0 top-6 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg shadow-xl z-50">
+                <div className="absolute right-0 top-6 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg shadow-xl z-50 nodrag">
                   <div className="font-semibold mb-1">{spec.label}</div>
                   <div className="mb-2 opacity-90">{spec.description}</div>
                   <div className="text-xs opacity-75 border-t border-gray-700 pt-2">
@@ -1060,7 +1116,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
             </div>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1.5 hover:bg-white/20 rounded-full transition-colors"
+              className="p-1.5 hover:bg-white/20 rounded-full transition-colors nodrag"
             >
               {isExpanded ? (
                 <ChevronUp className="w-4 h-4 text-white" />
@@ -1077,11 +1133,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
             e.stopPropagation();
             handleRunNode();
           }}
-          onMouseDown={(e) => {
-            // Prevent dragging when clicking run button
-            e.stopPropagation();
-          }}
-          className={`w-full mt-2 px-4 py-2 text-sm font-medium rounded-xl flex items-center justify-center gap-2 transition-all ${
+          className={`w-full mt-2 px-4 py-2 text-sm font-medium rounded-xl flex items-center justify-center gap-2 transition-all nodrag ${
             status === 'running'
               ? 'bg-gradient-to-r from-red-400 via-orange-400 to-red-400 bg-[length:200%_100%] animate-gradient text-white cursor-wait'
               : status === 'success'
@@ -1132,11 +1184,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           <div className={`flex ${showPreview ? 'divide-x divide-gray-200' : ''}`}>
             {/* Config Section - Always visible */}
             <div 
-              className={`p-3 ${showPreview ? 'w-1/3 min-w-[200px]' : 'flex-1'}`}
-              onMouseDown={(e) => {
-                // Prevent dragging when interacting with config inputs
-                e.stopPropagation();
-              }}
+              className={`p-3 nodrag ${showPreview ? 'w-1/3 min-w-[200px]' : 'flex-1'}`}
             >
               <div className="flex items-center gap-1 mb-2">
                 <Settings className="w-3 h-3 text-gray-600" />
@@ -1206,10 +1254,13 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
             {/* Preview Section - Side by side with config */}
             {showPreview && (
               <div 
-                className="flex-1 p-3"
+                className={`${result?.preview?.plot_json ? 'p-0' : 'p-3'}`}
+                style={result?.preview?.plot_json ? { width: '1000px', flexShrink: 0 } : { flex: 1 }}
                 onMouseDown={(e) => {
-                  // Prevent dragging when interacting with preview
-                  e.stopPropagation();
+                  // For plots, prevent node dragging but allow plot interaction
+                  if (result?.preview?.plot_json) {
+                    e.stopPropagation();
+                  }
                 }}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -1623,7 +1674,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           key={output.name}
           style={{
             position: 'absolute',
-            right: -32, // Outside, tangent to outer edge of colored border (border 16px + handle 16px = -32)
+            right: -26,
             top: `${((idx + 1) * 100) / (spec.outputs.length + 1)}%`,
             transform: 'translateY(-50%)',
           }}
@@ -1681,6 +1732,7 @@ export const ExpandableNode: React.FC<NodeProps<NodeData>> = ({ id, data, select
           nodeId={id}
           sessionId={sessionId}
           title={`${t(`nodes.${spec.type}.label`, data.label)} - ${t('table.view')}`}
+          darkMode={darkMode}
         />
       )}
       </div>
